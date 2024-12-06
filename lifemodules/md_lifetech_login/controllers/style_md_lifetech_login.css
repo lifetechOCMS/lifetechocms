@@ -1,0 +1,53 @@
+<style>
+    
+body {
+	font-size: 14px;
+	color: #4c5258;
+	letter-spacing: .5px;
+	background: #f7f7ff;
+	overflow-x: hidden;
+	font-family: Roboto, sans-serif
+}
+    
+   
+.h-custom {
+  height: calc(100% - 73px);
+}
+
+@media (max-width: 450px) {
+  .h-custom {
+   // height: 100%;
+  }
+}  
+    
+.auth-cover-left {
+	display: flex;
+	background-color: #f7f7ff;
+//	min-height: 100vh;
+	
+}
+
+.auth-cover-right {
+	display: flex;
+//	background-color: #fffff0;
+//	min-height: 100vh;
+}    
+
+.auth-img-cover-login {
+	-webkit-transform: scaleX(-1);
+	transform: scaleX(-1);
+}
+ 
+a {
+	text-decoration: none
+}  
+    
+    
+</style>
+      
+      
+      
+      
+      
+      
+      
