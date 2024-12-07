@@ -1,0 +1,92 @@
+{! import('md_lifetech_login', 'controllers_md_lifetech_login.php') !}
+{! import('md_lifetech_login', 'style_md_lifetech_login.css') !}
+
+ 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+</head>
+
+<body>
+  <!-- Start your project here-->
+
+  <section class="">
+    <div class="container-fluid h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+         <div class="col-12 col-xl-7 col-xxl-8 auth-cover-left align-items-center justify-content-center d-none d-xl-flex">
+            <div class="col-md-9 col-lg-6 col-xl-5">
+              <img src="<?=lifetech_site_host_address()?>/lifemodules/md_lifetech_login/images/login-cover-2.svg"; class="img-fluid" width="750" alt="" />
+            </div>
+        </div>
+        <div class="col-12 col-xl-5 col-xxl-4 auth-cover-right align-items-center justify-content-center">
+        <div class="col-md-8 col-lg-6 w-75">
+            
+          <form id ='logins'>
+         <div class="card p-3 m-2 shadow-lg  bg-body rounded" >
+           
+                 <div class="my-2" style="font-family: cursive;" data-aos="flip-left" data-aos-delay="300"><h2>Sign In</h2></div><br>
+             
+            <div class="col-12 mb-4">
+                <label for="inputEmailAddress/Username" class="form-label">Email/Username</label>
+                <input type="email" class="form-control" id="userName" name="userName" placeholder="Please enter your Username">
+            </div>
+            <div class="col-12 mb-4">
+                <label for="inputChoosePassword" class="form-label">Password</label>
+                <div class="input-group">
+                    <input type="password" class="form-control border-end-0" id="userPassW" name="userPassW"  placeholder="Please enter your password"> 
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <!-- Checkbox -->
+              <div class="form-check mb-0">
+                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
+                <label class="form-check-label" for="form2Example3">
+                  Remember me
+                </label>
+              </div>
+              <a href="#" class="text-body">Forgot password?</a>
+            </div>
+            <div class="col-12 my-2">
+                <div class="d-grid">
+                    <button type="button" id="logBtn" class="btn btn-success">Sign in</button>
+                </div>
+            </div>
+            <div class="col-md-6"> <p class="mb-2">Don't have an account yet? <a href="#">Sign up here</a>
+                    </p>
+            </div>
+            </div>
+          </form>
+        </div>
+    </div>
+      </div>
+    </div>
+
+  </section>
+ 
+</body>
+
+</html>
+
+
+
+
+      
+{! import('md_lifetech_login', 'script_md_lifetech_login.js') !}    
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      

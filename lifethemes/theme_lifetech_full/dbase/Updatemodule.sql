@@ -1,0 +1,1 @@
+UPDATE theme_tbl SET lifelayout='theme_lifetech_full.jpg',lifeblock='theme_lifetech_full.jpg',theme_name='theme_lifetech_full',themedesc='this is the new theme for version 2.0',status='Unpublish',dtreg='2024-04-13 00:16:24',lastup='2024-08-14 15:09:16'WHERE theme_name='theme_lifetech_full';;;;;_lifetechend;;;;;

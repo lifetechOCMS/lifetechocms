@@ -1,0 +1,248 @@
+/* Basic Style */
+body {
+	font-family: 'Orienta', sans-serif;
+	color: #252525;
+	position: relative;
+	padding:0;
+	margin: 0;
+}
+
+.container {
+	width:960px;
+	margin: 0 auto;
+	padding: 20px 0;
+}
+
+
+label.mobile_menu span {
+	margin-left: 10px;
+	color: white;
+	display: none;
+}
+
+.nav {
+ 
+	font-family: 'Orienta', sans-serif; 
+	font-weight: 400; /* 400 thinner */
+	font-size: 13px;
+	line-height: 13px;
+
+ 
+	position: relative;
+	padding: 0 0 0 4px; /* Fix for inline-block spacing*/
+	margin: 0;
+
+ 
+    background-color: #1abc9c;
+}
+
+
+.nav a, .nav a:link, .nav a:visited, .nav a:hover, .nav a:focus, span {
+	color: #fff;
+	text-decoration: none;
+}
+
+
+.nav > li {
+	display: inline-block;
+	text-align: center;
+	margin-left: -4px; /* For the inline-block spacing */
+}
+
+
+
+.nav > li > a {
+	padding:20px 18px;
+	display: block;
+}
+
+.nav > li:hover > a{
+	color: #fff;
+}
+
+.nav > li:hover {
+	background-color:#999999;
+}
+
+
+
+.nav > li > ul {
+	opacity: 0;
+	visibility: hidden;
+	position: absolute;
+	list-style: none;
+	top:33px;
+	background-color: #16a085;
+	width: 200px;
+	text-align: left;
+	margin-top:10px;
+	padding: 0px;
+	z-index: 99;
+}
+
+
+.nav > li:hover > ul {
+	opacity: 1;
+	visibility: visible;
+	margin-top: 0px;
+}
+
+
+.nav li > ul li {
+	font-size: 11px;
+	position: relative;
+	display: block;
+	padding: 15px 10px;
+	background-color:#999999;
+}
+
+.nav > li > ul  li:hover {
+	background-color: #006191;
+	
+}
+
+.nav ul  li:hover > a {
+	color: white;
+}
+
+.nav > li > ul li ul li:hover {
+background-color:#999999;
+	background-color: #004b6f;
+}input#mobile_menu { display: none; }
+
+.nav > li > ul li ul li ul {
+	background-color: #004b6f;
+	
+}
+
+.nav > li > ul li ul li ul li:hover {
+	
+	background-color: #00344d;
+}
+
+
+
+.nav > li > .fulldrop {
+	opacity: 0;
+	visibility: hidden;
+	position: absolute;
+	list-style: none;
+	top:53px;
+	left: 0px;
+	background-color:#999999; 
+	width: 100%;
+	min-height: 100px;
+	text-align: left;
+	margin-top:10px;
+	padding: 0;
+	z-index: 99;
+	overflow: hidden;
+}
+
+
+.nav > li:hover .fulldrop {
+	opacity: 1;
+	visibility: visible;
+	margin-top: 0px;
+}
+
+.nav ul li:hover:after {
+	color: white;
+}
+
+.nav > li:hover .coldrop {
+	opacity: 1;
+	visibility: visible;
+	margin-top: 0px;
+}
+
+.nav .coldrop .column {width: 130px;margin:0 9px;}
+
+
+
+.nav .column {
+	width: 76.1%;
+	float: left;
+	color:white;
+	margin: 0 0 0 2.2%;
+	margin-left:18px;
+}
+
+.nav .column ul {
+	padding: 0;
+	margin: 0;
+}
+
+.nav .column ul li {
+	padding: 0;
+	list-style: none;
+	font-size: 16px;
+}
+
+.nav .column h3 {
+	font-size: 14px;
+	padding: 14px 0;
+	font-weight: 400;
+	margin: 5px 0 5px 0;
+}
+
+.nav .column ul li a {
+	display: block;
+	padding: 0 0 15px 0;
+}
+
+/* Arrows */
+.nav > li.dropdown > a:after {
+	 content: " \f107";
+	 font-family: FontAwesome;
+	 color: #fff;
+}
+
+.nav ul li.dropdown:after {
+
+  position: absolute;
+  left: 170px;
+  font-family: FontAwesome;
+  display: inline-block;
+  color: #fff;
+  margin-left: 10px;
+  margin-top: 2px;
+}
+
+
+.nav > li.search {
+	border:none;
+	-webkit-box-shadow:  none;
+    box-shadow:  none;
+    float: right;
+    padding: 11px 6px;
+    position: relative;
+}
+
+.nav > li.search:hover {
+	background-color: transparent;
+}
+
+
+.nav > li  input {
+	padding: 7px 6px 6px 38px;
+	margin: 0 5px;
+	color:#fff;
+	border:none;
+	background-color: #16a085;
+	font-size: 14px;
+	border: 2px solid #16a085;
+}
+
+.nav > li  input:focus {
+	outline: none;
+	border-color: white;
+}
+
+.nav > li.search i {
+	position: absolute;
+	left: 20px;
+	top:20px;
+	color: #fff;
+	font-size: 17px;
+}

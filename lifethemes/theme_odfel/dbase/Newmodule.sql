@@ -1,0 +1,1 @@
+INSERT INTO theme_tbl(lifelayout, lifeblock, theme_name, themedesc, status, dtreg, lastup) VALUES('theme_odfel.jpg','theme_odfel.jpg','theme_odfel','this team is designed by ICT for odfel application','Unpublish' ,'2022-04-27 22:44:09','2023-01-15 03:13:18');;;;;_lifetechend;;;;;

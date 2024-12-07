@@ -1,0 +1,1 @@
+INSERT INTO theme_tbl(lifelayout, lifeblock, theme_name, themedesc, status, dtreg, lastup) VALUES('theme_lifetech.jpg','theme_lifetech.jpg','theme_lifetech','Lifetech home page theme','Unpublish' ,'2022-07-17 13:25:49','2024-04-13 23:10:57');;;;;_lifetechend;;;;;

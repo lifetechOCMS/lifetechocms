@@ -1,0 +1,1 @@
+<script src="<?=lifetech_plugin_path()?>/plg_vfs_fontsV0.9/vfs_fonts.js"></script>

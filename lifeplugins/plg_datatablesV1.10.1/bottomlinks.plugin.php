@@ -1,0 +1,1 @@
+ <script src="<?=lifetech_plugin_path()?>/plg_datatablesV1.10.1/datatables.min.js"></script>

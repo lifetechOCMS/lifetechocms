@@ -1,0 +1,97 @@
+{! import('md_lifetech_login', 'controllers_md_lifetech_login.php') !}
+{! import('md_lifetech_login', 'style_md_lifetech_login.css') !}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+</head>
+
+<body>
+  <!-- Start your project here-->
+
+  <section class="">
+    <div class="container-fluid h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+         <div class="col-12 col-xl-7 col-xxl-8 auth-cover-left align-items-center justify-content-center d-none d-xl-flex">
+            <div class="col-md-9 col-lg-6 col-xl-5">
+                <img src="<?=lifetech_site_host_address()?>/lifemodules/md_lifetech_login/images/login-cover.svg"; class="img-fluid" width="750" alt="" />
+            </div>
+        </div>
+        <div class="col-12 col-xl-5 col-xxl-4 auth-cover-right align-items-center justify-content-center">
+        <div class="col-md-8 col-lg-6 w-75">
+           
+          <form id ='registration'>
+         <div class="card p-3 m-2 shadow-lg  bg-body rounded" >
+           
+                 <div class="my-2" style="font-family: cursive;" data-aos="flip-left" data-aos-delay="300"><h2>Sign In</h2></div><br>
+         
+            <div class="col-12 mb-4">
+                <label for="lifetech_firstname" class="form-label">Firstname *</label>
+                <input type="text" class="form-control" id="lifetech_firstname" name="lifetech_firstname" placeholder="Please enter your Firstname">
+            </div>
+            <div class="col-12 mb-4">
+                <label for="lifetech_lastname" class="form-label">Lastname/Surname *</label>
+                <input type="text" class="form-control" id="lifetech_lastname" name="lifetech_lastname" placeholder="Please enter your Lastname">
+            </div> 
+            <div class="col-12 mb-4">
+                <label for="lifetech_email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="lifetech_email" name="lifetech_email" placeholder="Please enter your Email">
+            </div>
+            <div class="col-12 mb-4">
+                <label for="lifetech_username" class="form-label">Username</label>
+                <input type="email" class="form-control" id="lifetech_username" name="lifetech_username" placeholder="Please enter your Username">
+            </div>
+            <div class="col-12 mb-4">
+                <label for="lifetech_phone" class="form-label">Phone no</label>
+                <input type="number" class="form-control" id="lifetech_phone" name="lifetech_phone" placeholder="Please enter your phone number">
+            </div>
+            <div class="col-12 mb-4">
+                <label for="lifetech_password" class="form-label">Password *</label>
+                <div class="input-group">
+                    <input type="password" class="form-control border-end-0" id="lifetech_password" name="lifetech_password"  placeholder="Please enter your password"> 
+                </div>
+            </div>
+            <div class="col-12 mb-4">
+                <label for="confirm" class="form-label">Confirm Password</label>
+                <div class="input-group">
+                    <input type="password" class="form-control border-end-0" id="confirm" name="confirm"> 
+                </div>
+            </div>
+            <div class="col-12 mb-4">
+                <p id="error-message"  ><font color="Red"> </font></p>
+            </div>
+           
+            <div class="col-12 my-2">
+                <div class="d-grid">
+                    <button type="button" id="RegBtn" class="btn btn-success">Sign up</button>
+                </div>
+            </div>
+            <div class="col-md-6"> 
+            <p class="mb-0">Already have an account? <a href="login">Sign in here</a></p>
+            </div>
+        </div>
+          </form>
+        </div>
+    </div>
+      </div>
+    </div>
+
+  </section>
+ 
+</body>
+
+</html>
+
+      
+{! import('md_lifetech_login', 'script_md_lifetech_login.js') !}    
+   
+      
+      
+      
+      
+      
+      

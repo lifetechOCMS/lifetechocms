@@ -1,0 +1,1 @@
+<script src="<?=lifetech_plugin_path();?>/plg_bootstrapV5.0.1/bootstrap.bundle.min.js">     </script>

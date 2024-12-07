@@ -1,0 +1,1 @@
+<link href="<?=lifetech_plugin_path();?>/plg_bootstrapV5.0.1/bootstrap.min.css" rel="stylesheet">     
