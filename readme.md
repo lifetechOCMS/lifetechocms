@@ -4,10 +4,10 @@
  <b>Lifetech OCMS</b> is a modern PHP backend framework designed for building secure, scalable, and modular applications. It incorporates innovative features that differentiate it from traditional PHP frameworks. Here's an overview:
 Key Features:
 
-     ##Model-View-Controller (MVC) Architecture:<br>
+##Model-View-Controller (MVC) Architecture:<br>
          Promotes a clear separation of concerns for efficient development.
 
-     **Data Defacing Model (DDM)**:<br>
+**Data Defacing Model (DDM)**:<br>
         Encrypts all developer code formats (PHP, HTML, CSS, JavaScript, etc.) during deployment.
         Decrypts securely in memory during runtime to ensure robust security and prevent reverse engineering.
 
