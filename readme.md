@@ -1,7 +1,7 @@
 <p align="center"> 
     <img width="100px" height="100px" src="https://github.com/ajayi-abolore/LifetechOCMS/assets/111434189/89804ab9-9bb4-4d74-a1c2-d57ec7815d99" alt="Build Status"> 
 </p>
- Lifetech OCMS is a modern PHP backend framework designed for building secure, scalable, and modular applications. It incorporates innovative features that differentiate it from traditional PHP frameworks. Here's an overview:
+ <b>Lifetech OCMS</b> is a modern PHP backend framework designed for building secure, scalable, and modular applications. It incorporates innovative features that differentiate it from traditional PHP frameworks. Here's an overview:
 Key Features:
 
     Model-View-Controller (MVC) Architecture:
@@ -40,12 +40,12 @@ Key Features:
     Custom Response Handling:
         Provides a response() function with a structured json() method for clear API responses.
 
-Notable Origins and Dedication:
+##Notable Origins and Dedication:
 
     Lifetech OCMS was created in the Computer Science Department of Ogun State Institute of Technology (OGITECH), Igbesa.
     It is dedicated to a lecturer at OGITECH, the late Mr. Aluko Temitope.
     The framework was innovated by Mr. Ajayi Abolore Abdulgafaru.
 
-Vision:
+##Vision:
 
 Lifetech OCMS aims to become a globally used framework by offering a secure, developer-friendly, and flexible approach to web application development. It is particularly suited for enterprise applications, e-commerce platforms, and custom solutions.
