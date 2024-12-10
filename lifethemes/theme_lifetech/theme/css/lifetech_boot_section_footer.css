@@ -1,0 +1,22 @@
+ .nav-link {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #2a5;
+    text-decoration: none;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+}
+
+.nav-link:hover {
+    color: #fff;
+}
+
+.btn-outline-custom-btn:hover {
+    color: #fff;
+    background-color: #2a5;
+    border-color: #2a5;
+}
+
+.btn-outline-custom-btn {
+    color: #2a5;
+    border-color: #2a5;
+}

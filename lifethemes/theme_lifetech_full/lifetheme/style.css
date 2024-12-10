@@ -1,0 +1,304 @@
+/* TABLE OF CONTENTS  */
+/* ------------
+1 . General,
+2 . Navbar,
+3 . Banner,
+4 . How Work,
+5 . Use Cases,
+6 . Pricing,
+7 . Start Free,
+------------ */
+
+/* 1 .=============================== General Start ===============================*/
+
+* {
+    box-sizing: border-box;
+    margin    : 0;
+    padding   : 0;
+}
+
+:root {
+    /* Color */
+    --success-color: #198754;
+    --blue-color   : blue;
+    --bg-white     : #fff;
+    --bg-black     : #010101;
+    --btn-bg       : #08cf72;
+    /* Text Style  */
+    --primary-font : system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        'Segoe UI',
+        Roboto,
+        Oxygen,
+        Ubuntu,
+        Cantarell,
+        'Open Sans',
+        'Helvetica Neue',
+        sans-serif;
+    --text-white: #fff;
+    --text-black: #222;
+}
+
+body {
+    font-family        : var(--primary-font);
+    /* background-color: var(--bg-white); */
+}
+
+a {
+    text-decoration: none;
+}
+
+/* =============================== General End ===============================*/
+ .fixed-top {
+    position  : fixed !important;
+    top       : 0;
+    left      : 0;
+    width     : 100%;
+    z-index   : 999;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+} 
+
+.navbar a {
+    font-weight: 500;
+    color      : var(--text-white);
+}
+
+.docsbtn a {
+    background-color: var(--btn-bg);
+    color           : var(--text-white);
+    border          : 1px solid var(--btn-bg) !important;
+}
+
+.docsbtn a:hover {
+    background-color: var(--success-color);
+    color           : var(--text-white);
+    border          : 1px solid var(--btn-bg) !important;
+}
+
+.docsbtn a:active {
+    background-color: var(--success-color) !important;
+    color           : var(--text-white) !important;
+    border          : 1px solid var(--btn-bg) !important;
+}
+ 
+
+.carousel-control-prev-icon {
+    background-image: url("../images/icons/left-arrow.png");
+}
+
+.carousel-control-next-icon {
+    background-image: url("../images/icons/right-arrow.png");
+}
+
+.carousel-indicators [data-bs-target] {
+    background-color: var(--success-color);
+}
+
+/*----  Main Style  ----*/
+#cards_landscape_wrap-2 {
+    text-align: center;
+    background: var(--bg-white);
+}
+
+#cards_landscape_wrap-2 .container {
+    padding-bottom: 30px;
+}
+
+#cards_landscape_wrap-2 a {
+    text-decoration: none;
+    outline        : none;
+}
+
+#cards_landscape_wrap-2 .card-flyer {
+    border-radius: 10px;
+}
+
+#cards_landscape_wrap-2 .card-flyer2 {
+    border-radius: 20px !important;
+}
+
+#cards_landscape_wrap-2 .card-flyer .image-box {
+    background   : var(--bg-white);
+    overflow     : hidden;
+    box-shadow   : 0px 2px 15px rgba(0, 0, 0, 0.50);
+    border-radius: 10px;
+}
+
+#cards_landscape_wrap-2 .card-flyer .image-box2 {
+    border-radius: 20px 20px 5px 5px !important;
+}
+
+#cards_landscape_wrap-2 .card-flyer .image-box img {
+    -webkit-transition: all .9s ease;
+    -moz-transition   : all .9s ease;
+    -o-transition     : all .9s ease;
+    -ms-transition    : all .9s ease;
+    width             : 100%;
+    height            : 200px;
+}
+
+#cards_landscape_wrap-2 .card-flyer:hover .image-box img {
+    opacity          : 0.7;
+    -webkit-transform: scale(1.15);
+    -moz-transform   : scale(1.15);
+    -ms-transform    : scale(1.15);
+    -o-transform     : scale(1.15);
+    transform        : scale(1.15);
+}
+
+#cards_landscape_wrap-2 .card-flyer .text-box {
+    text-align: center;
+}
+
+#cards_landscape_wrap-2 .card-flyer .text-box .text-container {
+    padding: 20px 18px;
+}
+
+#cards_landscape_wrap-2 .card-flyer {
+    background        : var(--bg-white);
+    margin-top        : 50px;
+    -webkit-transition: all 0.2s ease-in;
+    -moz-transition   : all 0.2s ease-in;
+    -ms-transition    : all 0.2s ease-in;
+    -o-transition     : all 0.2s ease-in;
+    transition        : all 0.2s ease-in;
+    box-shadow        : 0px 3px 4px rgba(0, 0, 0, 0.40);
+}
+
+#cards_landscape_wrap-2 .card-flyer:hover {
+    background        : var(--bg-white);
+    box-shadow        : 0px 15px 26px rgba(0, 0, 0, 0.50);
+    -webkit-transition: all 0.2s ease-in;
+    -moz-transition   : all 0.2s ease-in;
+    -ms-transition    : all 0.2s ease-in;
+    -o-transition     : all 0.2s ease-in;
+    transition        : all 0.2s ease-in;
+    margin-top        : 50px;
+}
+
+#cards_landscape_wrap-2 .card-flyer .text-box p {
+    margin-top    : 10px;
+    margin-bottom : 0px;
+    padding-bottom: 0px;
+    font-size     : 14px;
+    letter-spacing: 1px;
+    color         : var(--bg-black);
+}
+
+#cards_landscape_wrap-2 .card-flyer .text-box h6 {
+    margin-top    : 0px;
+    margin-bottom : 4px;
+    font-size     : 18px;
+    font-weight   : bold;
+    text-transform: uppercase;
+    font-family   : 'Roboto Black', sans-serif;
+    letter-spacing: 1px;
+    color         : var(--text-black);
+}
+
+#cards_landscape_wrap-2 .btn,
+.modalbtn {
+    background      : var(--success-color);
+    border          : 0;
+    color           : var(--text-white);
+    /* width        : 60%; */
+    font-weight     : bold;
+    border-radius   : 20px;
+    height          : 40px;
+    transition      : all 0.2s ease-in-out;
+}
+
+.form_submit .btn {
+    background      : var(--success-color);
+    border          : 0;
+    color           : var(--text-white);
+    /* width        : 30%; */
+    font-weight     : bold;
+    border-radius   : 20px;
+    height          : 40px;
+    transition      : all 0.2s ease-in-out;
+}
+
+#cards_landscape_wrap-2 .btn:hover,
+.modalbtn:hover,
+.form_submit .btn:hover {
+    background: var(--btn-bg);
+    color     : var(--text-black);
+}
+
+#cards_landscape_wrap-2 .btn:focus,
+.form_submit .btn:focus {
+    background: #6c757d;
+    outline   : 0;
+}
+
+.maps iframe {
+    filter: drop-shadow(0px 0px 10.5px rgba(0, 0, 0, 0.26));
+}
+
+.form-label {
+    font-weight: 500;
+}
+
+.form-control {
+    border-color: var(--bg-white) !important;
+    box-shadow  : 0px 0px 14.5px rgba(0, 0, 0, 0.15) !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--success-color) !important;
+    box-shadow  : none;
+}
+
+.dt-buttons {
+    display: none;
+}
+
+.pagination .page-item .page-link {
+    filter    : drop-shadow(0px 0px 2.5px rgba(0, 0, 0, 0.26));
+    box-shadow: none;
+    color     : var(--success-color);
+}
+
+.active>.page-link,
+.page-link.active {
+    z-index         : 3;
+    background-color: var(--success-color);
+    border-color    : var(--success-color);
+    color           : var(--text-white) !important;
+}
+
+.footer a {
+    color          : inherit;
+    text-decoration: none;
+    transition     : all 0.3s;
+}
+
+.footer a:hover,
+.footer a:focus {
+    text-decoration: none;
+}
+
+.footer .form-control {
+    background  : #212529;
+    border-color: #545454 !important;
+    color       : var(--text-white);
+}
+
+.footer .form-control:focus {
+    background  : #212529;
+    border-color: var(--success-color) !important;
+}
+
+@media (max-width: 991px) and (min-width: 0px) {
+    .top_seccondhead {
+        margin-top: 0px;
+    }
+
+    .carousel_slider {
+        margin-top: 184px;
+    }
+
+}
