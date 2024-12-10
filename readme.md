@@ -5,7 +5,7 @@
 Key Features:<br><br>
 
 **Model-View-Controller (MVC) Architecture:**<br>
-         Promotes a clear separation of concerns for efficient development.
+         <\t>Promotes a clear separation of concerns for efficient development.
 
 **Data Defacing Model (DDM)**:<br>
         Encrypts all developer code formats (PHP, HTML, CSS, JavaScript, etc.) during deployment.
