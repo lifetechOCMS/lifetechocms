@@ -2,7 +2,7 @@
     <img width="100px" height="100px" src="https://github.com/ajayi-abolore/LifetechOCMS/assets/111434189/89804ab9-9bb4-4d74-a1c2-d57ec7815d99" alt="Build Status"> 
 </p>
  <b>Lifetech OCMS</b> is a modern PHP backend framework designed for building secure, scalable, and modular applications. It incorporates innovative features that differentiate it from traditional PHP frameworks. Here's an overview:
-Key Features:<br>
+Key Features:<br><br>
 
 **Model-View-Controller (MVC) Architecture:**<br>
          Promotes a clear separation of concerns for efficient development.
