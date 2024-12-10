@@ -7,11 +7,11 @@ Key Features:
      ##Model-View-Controller (MVC) Architecture:<br>
          Promotes a clear separation of concerns for efficient development.
 
-    ##Data Defacing Model (DDM):<br>
+     **Data Defacing Model (DDM)**:<br>
         Encrypts all developer code formats (PHP, HTML, CSS, JavaScript, etc.) during deployment.
         Decrypts securely in memory during runtime to ensure robust security and prevent reverse engineering.
 
-   **Software UNIQUE KEY:**
+   **Software UNIQUE KEY:**<br>
         Lifetech generate an unique key for your application so that no one can copy or rename your files with the activation of that key.
         The Unique key is free and can be regenerated. This give the developers confidence to release their software to shared domain or local servers
 
