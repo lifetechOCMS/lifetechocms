@@ -36,13 +36,13 @@ Key Features:
 **No Migrations for Models:**<br>
         Models are created directly from the database tables without a migration step.
 
-    **Unique Query Builder (Maplite):**<br>
+## Unique Query Builder (Maplite):
         Facilitates database operations like retrieval and deletion.
 
-    **Custom Templating Engine (Liferazor):**<br>
+## Custom Templating Engine (Liferazor): 
         Uses special syntax for rendering PHP variables and language blocks.
 
-    **Custom Response Handling:**<br>
+**Custom Response Handling:**<br>
         Provides a response() function with a structured json() method for clear API responses.
 
 ## Notable Origins and Dedication:<br>
