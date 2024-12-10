@@ -16,7 +16,7 @@ Key Features:
         Lifetech generate an unique key for your application so that no one can copy or rename your files with the activation of that key.
         The Unique key is free and can be regenerated. This give the developers confidence to release their software to shared domain or local servers
 
-   **Separation of Modules, Themes, and Plugins:**<br>
+**Separation of Modules, Themes, and Plugins:**<br>
         Enables fast development and easy customization.
         Modules encapsulate features, themes define UI, and plugins extend functionality.
 
@@ -36,10 +36,10 @@ Key Features:
 **No Migrations for Models:**<br>
         Models are created directly from the database tables without a migration step.
 
-## Unique Query Builder (Maplite):
+**Unique Query Builder (Maplite)**:<br>
         Facilitates database operations like retrieval and deletion.
 
-## Custom Templating Engine (Liferazor): 
+**Custom Templating Engine (Liferazor):**<br>
         Uses special syntax for rendering PHP variables and language blocks.
 
 **Custom Response Handling:**<br>
