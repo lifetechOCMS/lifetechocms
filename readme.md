@@ -4,7 +4,8 @@
  <b>Lifetech OCMS</b> is a modern PHP backend framework designed for building secure, scalable, and modular applications. It incorporates innovative features that differentiate it from traditional PHP frameworks. Here's an overview:
 Key Features:
 
-##Model-View-Controller (MVC) Architecture:<br>
+
+**Model-View-Controller (MVC) Architecture:**<br>
          Promotes a clear separation of concerns for efficient development.
 
 **Data Defacing Model (DDM)**:<br>
@@ -26,13 +27,13 @@ Key Features:
    **Jlon (JavaScript Lifetech Object Notation):**<br>
         A proprietary data model optimized for efficient communication between frontend and backend.
 
-   **Frontend Compatibility:**<br>
+**Frontend Compatibility:**<br>
         Compatible with popular frontend frameworks like React, Angular, and Vue.js.
 
-    **Security Focus:**
+**Security Focus:**
         Offers advanced protections, including token-based authentication and runtime code decryption.
 
-   **No Migrations for Models:**<br>
+**No Migrations for Models:**<br>
         Models are created directly from the database tables without a migration step.
 
     **Unique Query Builder (Maplite):**<br>
