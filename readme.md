@@ -20,29 +20,29 @@ Key Features:<br><br>
         Modules encapsulate features, themes define UI, and plugins extend functionality.
 
    **LW-Token System**:<br>
-        Implements a secure token exchange mechanism between frontend and backend.
+        &ensp;Implements a secure token exchange mechanism between frontend and backend.
         Supports both stateless (JWT) and stateful (database-backed) tokens with dynamic expiration.
 
    **Jlon (JavaScript Lifetech Object Notation):**<br>
-        A proprietary data model optimized for efficient communication between frontend and backend.
+        &ensp;A proprietary data model optimized for efficient communication between frontend and backend.
 
 **Frontend Compatibility:**<br>
-        Compatible with popular frontend frameworks like React, Angular, and Vue.js.
+        &ensp;Compatible with popular frontend frameworks like React, Angular, and Vue.js.
 
 **Security Focus:**
-        Offers advanced protections, including token-based authentication and runtime code decryption.
+        &ensp;Offers advanced protections, including token-based authentication and runtime code decryption.
 
 **No Migrations for Models:**<br>
-        Models are created directly from the database tables without a migration step.
+        &ensp;Models are created directly from the database tables without a migration step.
 
 **Unique Query Builder (Maplite)**:<br>
-        Facilitates database operations like retrieval and deletion.
+        &ensp;Facilitates database operations like retrieval and deletion.
 
 **Custom Templating Engine (Liferazor):**<br>
-        Uses special syntax for rendering PHP variables and language blocks.
+        &ensp;Uses special syntax for rendering PHP variables and language blocks.
 
 **Custom Response Handling:**<br>
-        Provides a response() function with a structured json() method for clear API responses.
+        &ensp;Provides a response() function with a structured json() method for clear API responses.
 
 ## Notable Origins and Dedication:<br>
 
