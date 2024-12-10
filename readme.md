@@ -8,15 +8,15 @@ Key Features:<br><br>
  &ensp; Promotes a clear separation of concerns for efficient development.
   
 **Data Defacing Model (DDM)**:<br>
-        Encrypts all developer code formats (PHP, HTML, CSS, JavaScript, etc.) during deployment.
-        Decrypts securely in memory during runtime to ensure robust security and prevent reverse engineering.
+        &ensp; Encrypts all developer code formats (PHP, HTML, CSS, JavaScript, etc.) during deployment.
+        &ensp; Decrypts securely in memory during runtime to ensure robust security and prevent reverse engineering.
 
    **Software UNIQUE KEY:**<br>
-        Lifetech generate an unique key for your application so that no one can copy or rename your files with the activation of that key.
+        &ensp; Lifetech generate an unique key for your application so that no one can copy or rename your files with the activation of that key.
         The Unique key is free and can be regenerated. This give the developers confidence to release their software to shared domain or local servers
 
 **Separation of Modules, Themes, and Plugins:**<br>
-        Enables fast development and easy customization.
+       &ensp;  Enables fast development and easy customization.
         Modules encapsulate features, themes define UI, and plugins extend functionality.
 
    **LW-Token System**:<br>
