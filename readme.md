@@ -40,12 +40,16 @@ Key Features:
     Custom Response Handling:
         Provides a response() function with a structured json() method for clear API responses.
 
-##Notable Origins and Dedication:
+## Notable Origins and Dedication:
 
     Lifetech OCMS was created in the Computer Science Department of Ogun State Institute of Technology (OGITECH), Igbesa.
     It is dedicated to a lecturer at OGITECH, the late Mr. Aluko Temitope.
     The framework was innovated by Mr. Ajayi Abolore Abdulgafaru.
+    
+## Security Vulnerabilities
 
-##Vision:
+For any security loopholes in **LifetechOCMS**, please kindly mail Ajayi Abolore through [abolorea@lifetech.host](mailto:abolorea@lifetech.host). We keep our security challenges to the high esteem.
+
+## Vision:
 
 Lifetech OCMS aims to become a globally used framework by offering a secure, developer-friendly, and flexible approach to web application development. It is particularly suited for enterprise applications, e-commerce platforms, and custom solutions.
