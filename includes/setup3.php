@@ -97,7 +97,7 @@ $kjsrjwfk2i_djse = $column[0] ;
               unlink("connect2db_setup.php"); 
                  
                  echo '<h1> Congratulations Lifetech Software Successfully Installed!!!<h1>';
-                 echo '<h1> You can now proceed to Secure your softare with UNIQUE KEY before usage  <a href="../admin/activator/index.php"> Go there</a>!!!<h1>';
+                 echo '<h1> You can now proceed to Secure your software with UNIQUE KEY before usage  <a href="../admin/activator/index.php"> Go there</a>!!!<h1>';
                  
                  exit();
                 }else{
@@ -127,7 +127,7 @@ $kjsrjwfk2i_djse = $column[0] ;
     
 $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ) ? "https://" : "http://";
  $djkasdgs = $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
- $djkasdgs=substr($djkasdgs,0,-11);
+ $djkasdgs=substr($djkasdgs,0,-19);
 
   $qry1= $connect2db->prepare("update site_tb set site_host_address='$djkasdgs'  where sn='1'");
 if($qry1->execute()){
@@ -135,7 +135,7 @@ if($qry1->execute()){
 unlink("setup.php");
 unlink("setup2.php");
 unlink("setup3.php");   
-unlink("connect2db.php");   
+unlink("connect2db_setup.php");   
   }
 
   
@@ -198,7 +198,7 @@ if($qry1->execute()){
 unlink("setup.php");
 unlink("setup2.php");
 unlink("setup3.php");   
-unlink("connect2db.php");   
+unlink("connect2db_setup.php");   
    
    echo '<h1> Congratulations Lifetech Software Successfully Installed!!!<h1>';
    echo '<h1> You can Login to your developer account to start developing your website  <a href="../developer/"> Go there</a>!!!<h1>';

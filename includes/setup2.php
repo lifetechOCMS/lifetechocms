@@ -69,7 +69,7 @@ if($connect2db){//global $connect2db;
         // Execute the CREATE DATABASE statement
         $pdo->exec($createDatabaseSQL);
        // echo "Database `$database` created successfully.\n";
-
+      if($newUser != "root" && empty($newPassword)){
         // Prepare and execute the CREATE USER statement
         $stmt = $pdo->prepare($createUserSQL);
         $stmt->execute([
@@ -89,7 +89,8 @@ if($connect2db){//global $connect2db;
 
         // Flush privileges to apply changes
         $pdo->exec('FLUSH PRIVILEGES');
-     // echo "Privileges flushed successfully.\n";
+        // echo "Privileges flushed successfully.\n";
+      }
     } catch (PDOException $e) {
        $errror = "Error: " . $e->getMessage();
     }
