@@ -1,0 +1,20 @@
+{
+    "name": "lifetechocms/lifetech",
+    "description": "Lifetech OCMS - A Secure and Modular PHP Framework",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "LifetechOCMS\\": "lifemodules/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ajayi Abolore Abdulgafaru",
+            "email": "abolorea@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.0"
+    }
+}
