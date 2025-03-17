@@ -3,6 +3,8 @@
     "description": "Lifetech OCMS - A Secure and Modular PHP Framework",
     "type": "library",
     "license": "MIT",
+    "keywords": ["php", "framework", "secure", "modular", "LifetechOCMS"],
+    "homepage": "https://www.lifetech.host", 
     "autoload": {
         "psr-4": {
             "LifetechOCMS\\": "lifemodules/"
@@ -11,10 +13,16 @@
     "authors": [
         {
             "name": "Ajayi Abolore Abdulgafaru",
-            "email": "abolorea@gmail.com"
+            "email": "abolorea@gmail.com",
+            "role": "Developer"
         }
     ],
     "require": {
         "php": ">=8.0"
-    }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
