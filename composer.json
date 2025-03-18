@@ -3,7 +3,7 @@
     "description": "Lifetech OCMS - A Secure and Modular PHP Framework",
     "type": "library",
     "license": "MIT",
-    "version": "2.3",
+    "version": "2.4",
     "keywords": ["php", "framework", "secure", "modular", "LifetechOCMS", "CMSUK"],
     "homepage": "https://www.lifetech.host", 
     "autoload": {
@@ -24,6 +24,6 @@
     "require-dev": {
         "phpunit/phpunit": "^9.5"
     },
-    "minimum-stability": "stable",
-    "prefer-stable": true
+    //"minimum-stability": "stable",
+    //"prefer-stable": true
 }
