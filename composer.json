@@ -1,6 +1,6 @@
 {
     "name": "lifetechocms/lifetechocms",
-    "description": "Lifetech OCMS - A Secure, Object and Modular PHP Framework",
+    "description": "Lifetech OCMS - A Secure and Modular PHP Framework",
     "type": "library",
     "license": "MIT",
     "version": "2.3",
