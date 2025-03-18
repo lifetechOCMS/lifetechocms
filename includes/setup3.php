@@ -97,7 +97,7 @@ $kjsrjwfk2i_djse = $column[0] ;
               unlink("connect2db_setup.php"); 
                  
                  echo '<h1> Congratulations Lifetech Software Successfully Installed!!!<h1>';
-                 echo '<h1> You can now proceed to Secure your software with UNIQUE KEY before usage  <a href="../admin/activator/index.php"> Go there</a>!!!<h1>';
+                 echo '<h1> You can now proceed to Secure your software with UNIQUE KEY before usage  <a href="../admin/activator/index.php?final_activate_page=activated"> Go there</a>!!!<h1>';
                  
                  exit();
                 }else{
@@ -122,7 +122,7 @@ $kjsrjwfk2i_djse = $column[0] ;
 //echo $kjsrjwfk2i_djse.'<br>';
 }
  echo '<h1> Congratulations Lifetech Software Successfully Installed!!!<h1>';
-   echo '<h1> You can now proceed to Secure your softare with UNIQUE KEY before usage  <a href="../admin/activator/index.php"> Go there</a>!!!<h1>';
+   echo '<h1> You can now proceed to Secure your software with UNIQUE KEY before usage  <a href="../admin/activator/index.php?final_activate_page=activated"> Go there</a>!!!<h1>';
    
     
 $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ) ? "https://" : "http://";
