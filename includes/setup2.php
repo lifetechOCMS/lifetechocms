@@ -1,45 +1,26 @@
 
-<?php /*
-$host = "localhost";
-$username = "root";
-$password = "";
-$dbname = "lifetechocms";
-
-include('connect2.php');
-  
-*/
-
-
-
-
- //$pageurl =lifetechrandom_string(150);
-  
-  
-      
-//rename ($pageurl, "$pageurl");
-
-
+<?php  
 
 
 if(isset($_POST['dbinfo'])){
-//echo 'welcome';
-$host = $_POST['hostname'];
-$username =  $_POST['username'];
-$password = $_POST['password'];
-$dbname = $_POST['database'];
-$errror ="";
-echo '<br /><br /><br /><br />';
-if( empty($host) || empty($username)      || empty($dbname) ){
-echo '<div  style="margin-left:100px"><font   color="#FF0000"><h2> Your elements must not be empty</h2></font></div>';
-}else{
+  //echo 'welcome';
+  $host = $_POST['hostname'];
+  $username =  $_POST['username'];
+  $password = $_POST['password'];
+  $dbname = $_POST['database'];
+  $errror ="";
+  echo '<br /><br /><br /><br />';
+  if( empty($host) || empty($username)      || empty($dbname) ){
+  echo '<div  style="margin-left:100px"><font   color="#FF0000"><h2> Your elements must not be empty</h2></font></div>';
+  }else{
 
-try{$connect2db = new PDO("mysql:dbname=$dbname; host=$host", $username, $password);
-$connect2db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);$connect2db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-if($connect2db){//global $connect2db;
+  try{$connect2db = new PDO("mysql:dbname=$dbname; host=$host", $username, $password);
+  $connect2db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);$connect2db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  if($connect2db){//global $connect2db;
 
-      
+        
 
-}
+  }
 
 }catch(PDOException $e){
     try {
@@ -236,43 +217,38 @@ function sh(){
 </script>
   
 <a href="setup.php"> <-Step1 </a>
-<h2><font color="#0000FF"><img width="100px"src="../lifemedia/lifetech_favicon.png" /></img>Step2: Database Configuration </font></h2>Provide your database information<br /><br />
+<h2><font color="#0000FF"><img width="100px"src="../lifemedia/lifetech_favicon.png" /></img>Step2: Database Configuration </font></h2><h3>Provide your database information</h3><br /><br />
  
-<br /><strong>Note:</strong> If you are creating a student account, then use this compulsory details so that you can be getting the general <strong><button class="btn btn-primary" type="button" onclick="sh();">software key :: click
-  </button> </strong><br />
-<div class="collapse wgood" id=""> 
-Database Name: <strong>lifetechocms</strong><br />
-Package Name: <strong>lifetech_ocms</strong><br />
-Host Name:<strong>localhost</strong><br />
-Username:<strong>root</strong><br />
-Password:<strong>Nill</strong><br /> 
-</div>
-<br /> 
-<br />
-<div class="row">
-  <div class="col-12 col-md-1"><label class="">Username:</label></div>  
-  <div class="col-12 col-md-5">
-    <input type="text" class="form-control " width="60px" name="username"/>   <br>
-  </div>
-</div> 
-<div class="row">
-  <div class="col-12 col-md-1"><label class="">Host Name:</label></div>  
-  <div class="col-12 col-md-5">
-    <input type="text" name="hostname"  value="localhost" class="form-control"/> <br>
-  </div>
-</div> 
-<div class="row">
-  <div class="col-12 col-md-1"><label class="">Password:</label></div>  
-  <div class="col-12 col-md-5">
-    <input type="password" name="password"  class="form-control"/> <br>
-  </div>
-</div>  
+ 
 <div class="row">
   <div class="col-12 col-md-1"><label class="">Database Name : </label></div>  
   <div class="col-12 col-md-5">
     <input type="text" name="database" class="form-control"/>  <br>
   </div>
 </div>
+<div class="collapse wgood" id="">  
+    <div class="row">
+      <div class="col-12 col-md-1"><label class="">Username:</label></div>  
+      <div class="col-12 col-md-5">
+        <input type="text" class="form-control " width="60px" name="username" value="root"/>   <br>
+      </div>
+    </div> 
+    <div class="row">
+      <div class="col-12 col-md-1"><label class="">Host Name:</label></div>  
+      <div class="col-12 col-md-5">
+        <input type="text" name="hostname"  value="localhost" class="form-control"/> <br>
+      </div>
+    </div> 
+    <div class="row">
+      <div class="col-12 col-md-1"><label class="">Password:</label></div>  
+      <div class="col-12 col-md-5">
+        <input type="password" name="password"  class="form-control"/> <br>
+      </div>
+    </div>  
+</div>  
+<strong> Advance Database Priviledge </strong><strong><button class="btn text-success" type="button" onclick="sh();"><strong>View</strong>
+  </button> </strong><br /><br /><br />
+
 <div class="row">
   <div class="col-12 col-md-1"><label class=""> </label></div>  
   <div class="col-12 col-md-5">
