@@ -246,7 +246,7 @@ function sh(){
       </div>
     </div>  
 </div>  
-<strong> Advance Database Priviledge </strong><strong><button class="btn text-success" type="button" onclick="sh();"><strong>View</strong>
+      <strong> Advance Database Priviledge </strong><strong><button class="btn text-success" type="button" onclick="sh();"><strong>View</strong>
   </button> </strong><br /><br /><br />
 
 <div class="row">
