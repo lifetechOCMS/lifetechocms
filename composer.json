@@ -4,7 +4,7 @@
     "type": "library",
     "license": "MIT",
     "version": "2.3.3",
-    "keywords": ["php", "framework", "secure", "modular", "LifetechOCMS", "CMSUK"],
+    "keywords": ["php", "framework", "secure", "modular", "LifetechOCMS", "CMSUK","Backend"],
     "homepage": "https://www.lifetech.host", 
     "autoload": {
         "psr-4": {
