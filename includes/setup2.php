@@ -112,17 +112,7 @@ if(isset($_POST['dbinfo'])){
         $fhdelete = fopen($pageurldelete,"w");
           
           $contentdelete='<?php 
-<<<<<<< HEAD
         
-=======
-       
-
-      $host = "'.$host.'";
-      $username =  "'.$username.'";
-      $password = "'.$password.'";
-      $dbname = "'.$dbname.'";
-
->>>>>>> f740fc0ea73663812c02b74633694ecf7b820f97
 
       class DbConnect {
           private $dbengine   = \'mysql\';
@@ -145,7 +135,6 @@ if(isset($_POST['dbinfo'])){
                   //$this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
               }
               catch (PDOException $e) {
-<<<<<<< HEAD
                   self::$dbDriver_nn = $e->getMessage();
                     $errorCode = $e->getCode();
                     if ($errorCode === 1049) { // Unknown database
@@ -157,10 +146,6 @@ if(isset($_POST['dbinfo'])){
                     } else {                              
                           echo $errorCode.\'-d \'.$e->getMessage();
                     }
-=======
-                  //echo $e->getMessage();
-                  self::$dbDriver_nn = $e->getMessage();
->>>>>>> f740fc0ea73663812c02b74633694ecf7b820f97
               }
           }
            static function dbDriver(){
@@ -168,47 +153,16 @@ if(isset($_POST['dbinfo'])){
             $akdfadskjsfdk = self::$dbDriver_nn;
             return $akdfadskjsfdk;
           }
-<<<<<<< HEAD
       }  
-=======
-      } 
-      $kk=new DbConnect;
-
-      include("connect2.php");
->>>>>>> f740fc0ea73663812c02b74633694ecf7b820f97
        
       ?>';
 
 
         fwrite($fhdelete,$contentdelete);
             fclose($fhdelete);
-<<<<<<< HEAD
             rename ($pageurldelete, "connect2.php");
             
 
-=======
-            rename ($pageurldelete, "connect2db.php");
-            
-
-        $pageurldelete= 'connect2dbdelete.php'; 
-        $fhdelete = fopen($pageurldelete,"w");
-          
-          $contentdelete='<?php 
-       
-
-      $host = "'.$host.'";
-      $username =  "'.$username.'";
-      $password = "'.$password.'";
-      $dbname = "'.$dbname.'";
-       
-       
-      ?>';
-
-
-        fwrite($fhdelete,$contentdelete);
-            fclose($fhdelete);
-            rename ($pageurldelete, "connect_config.php");
->>>>>>> f740fc0ea73663812c02b74633694ecf7b820f97
       echo '<div  style="margin-left:100px"><font color="#00CC33"><h2>Connection successful... 
       <br>Database is Loading..</h2> </font></div>';
       echo'<script>window.location= "setup3.php";</script>';  
