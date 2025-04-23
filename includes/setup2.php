@@ -1,45 +1,26 @@
 
-<?php /*
-$host = "localhost";
-$username = "root";
-$password = "";
-$dbname = "lifetechocms";
-
-include('connect2.php');
-  
-*/
-
-
-
-
- //$pageurl =lifetechrandom_string(150);
-  
-  
-      
-//rename ($pageurl, "$pageurl");
-
-
+<?php  
 
 
 if(isset($_POST['dbinfo'])){
-//echo 'welcome';
-$host = $_POST['hostname'];
-$username =  $_POST['username'];
-$password = $_POST['password'];
-$dbname = $_POST['database'];
-$errror ="";
-echo '<br /><br /><br /><br />';
-if( empty($host) || empty($username)      || empty($dbname) ){
-echo '<div  style="margin-left:100px"><font   color="#FF0000"><h2> Your elements must not be empty</h2></font></div>';
-}else{
+  //echo 'welcome';
+  $host = $_POST['hostname'];
+  $username =  $_POST['username'];
+  $password = $_POST['password'];
+  $dbname = $_POST['database'];
+  $errror ="";
+  echo '<br /><br /><br /><br />';
+  if( empty($host) || empty($username)      || empty($dbname) ){
+  echo '<div  style="margin-left:100px"><font   color="#FF0000"><h2> Your elements must not be empty</h2></font></div>';
+  }else{
 
-try{$connect2db = new PDO("mysql:dbname=$dbname; host=$host", $username, $password);
-$connect2db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);$connect2db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-if($connect2db){//global $connect2db;
+  try{$connect2db = new PDO("mysql:dbname=$dbname; host=$host", $username, $password);
+  $connect2db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);$connect2db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  if($connect2db){//global $connect2db;
 
-      
+        
 
-}
+  }
 
 }catch(PDOException $e){
     try {
@@ -131,13 +112,7 @@ if($connect2db){//global $connect2db;
         $fhdelete = fopen($pageurldelete,"w");
           
           $contentdelete='<?php 
-       
-
-      $host = "'.$host.'";
-      $username =  "'.$username.'";
-      $password = "'.$password.'";
-      $dbname = "'.$dbname.'";
-
+        
 
       class DbConnect {
           private $dbengine   = \'mysql\';
@@ -160,8 +135,17 @@ if($connect2db){//global $connect2db;
                   //$this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
               }
               catch (PDOException $e) {
-                  //echo $e->getMessage();
                   self::$dbDriver_nn = $e->getMessage();
+                    $errorCode = $e->getCode();
+                    if ($errorCode === 1049) { // Unknown database
+                        echo "Database not found. Please check your DB name.";
+                    } elseif ($errorCode == \'1045\') { // Access denied
+                          echo "Invalid database username or password.";
+                    } elseif ($errorCode == \'2002\') { // Can\'t connect to MySQL server
+                              echo "Unable to connect to the database server.";
+                    } else {                              
+                          echo $errorCode.\'-d \'.$e->getMessage();
+                    }
               }
           }
            static function dbDriver(){
@@ -169,37 +153,16 @@ if($connect2db){//global $connect2db;
             $akdfadskjsfdk = self::$dbDriver_nn;
             return $akdfadskjsfdk;
           }
-      } 
-      $kk=new DbConnect;
-
-      include("connect2.php");
+      }  
        
       ?>';
 
 
         fwrite($fhdelete,$contentdelete);
             fclose($fhdelete);
-            rename ($pageurldelete, "connect2db.php");
+            rename ($pageurldelete, "connect2.php");
             
 
-        $pageurldelete= 'connect2dbdelete.php'; 
-        $fhdelete = fopen($pageurldelete,"w");
-          
-          $contentdelete='<?php 
-       
-
-      $host = "'.$host.'";
-      $username =  "'.$username.'";
-      $password = "'.$password.'";
-      $dbname = "'.$dbname.'";
-       
-       
-      ?>';
-
-
-        fwrite($fhdelete,$contentdelete);
-            fclose($fhdelete);
-            rename ($pageurldelete, "connect_config.php");
       echo '<div  style="margin-left:100px"><font color="#00CC33"><h2>Connection successful... 
       <br>Database is Loading..</h2> </font></div>';
       echo'<script>window.location= "setup3.php";</script>';  
@@ -236,43 +199,38 @@ function sh(){
 </script>
   
 <a href="setup.php"> <-Step1 </a>
-<h2><font color="#0000FF"><img width="100px"src="../lifemedia/lifetech_favicon.png" /></img>Step2: Database Configuration </font></h2>Provide your database information<br /><br />
+<h2><font color="#0000FF"><img width="100px"src="../lifemedia/lifetech_favicon.png" /></img>Step2: Database Configuration </font></h2><h3>Provide your database information</h3><br /><br />
  
-<br /><strong>Note:</strong> If you are creating a student account, then use this compulsory details so that you can be getting the general <strong><button class="btn btn-primary" type="button" onclick="sh();">software key :: click
-  </button> </strong><br />
-<div class="collapse wgood" id=""> 
-Database Name: <strong>lifetechocms</strong><br />
-Package Name: <strong>lifetech_ocms</strong><br />
-Host Name:<strong>localhost</strong><br />
-Username:<strong>root</strong><br />
-Password:<strong>Nill</strong><br /> 
-</div>
-<br /> 
-<br />
-<div class="row">
-  <div class="col-12 col-md-1"><label class="">Username:</label></div>  
-  <div class="col-12 col-md-5">
-    <input type="text" class="form-control " width="60px" name="username"/>   <br>
-  </div>
-</div> 
-<div class="row">
-  <div class="col-12 col-md-1"><label class="">Host Name:</label></div>  
-  <div class="col-12 col-md-5">
-    <input type="text" name="hostname"  value="localhost" class="form-control"/> <br>
-  </div>
-</div> 
-<div class="row">
-  <div class="col-12 col-md-1"><label class="">Password:</label></div>  
-  <div class="col-12 col-md-5">
-    <input type="password" name="password"  class="form-control"/> <br>
-  </div>
-</div>  
+ 
 <div class="row">
   <div class="col-12 col-md-1"><label class="">Database Name : </label></div>  
   <div class="col-12 col-md-5">
     <input type="text" name="database" class="form-control"/>  <br>
   </div>
 </div>
+<div class="collapse wgood" id="">  
+    <div class="row">
+      <div class="col-12 col-md-1"><label class="">Username:</label></div>  
+      <div class="col-12 col-md-5">
+        <input type="text" class="form-control " width="60px" name="username" value="root"/>   <br>
+      </div>
+    </div> 
+    <div class="row">
+      <div class="col-12 col-md-1"><label class="">Host Name:</label></div>  
+      <div class="col-12 col-md-5">
+        <input type="text" name="hostname"  value="localhost" class="form-control"/> <br>
+      </div>
+    </div> 
+    <div class="row">
+      <div class="col-12 col-md-1"><label class="">Password:</label></div>  
+      <div class="col-12 col-md-5">
+        <input type="password" name="password"  class="form-control"/> <br>
+      </div>
+    </div>  
+</div>  
+      <strong> Advance Database Priviledge </strong><strong><button class="btn text-success" type="button" onclick="sh();"><strong>View</strong>
+  </button> </strong><br /><br /><br />
+
 <div class="row">
   <div class="col-12 col-md-1"><label class=""> </label></div>  
   <div class="col-12 col-md-5">

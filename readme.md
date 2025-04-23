@@ -12,7 +12,7 @@ Key Features:<br><br>
         &ensp; Decrypts securely in memory during runtime to ensure robust security and prevent reverse engineering.
 
    **Software UNIQUE KEY:**<br>
-        &ensp; Lifetech generate an unique key for your application so that no one can copy or rename your files with the activation of that key.
+        &ensp; Lifetech generate an unique key for your application so that no one can copy or rename your files without the activation of that key.
         The Unique key is free and can be regenerated. This give the developers confidence to release their software to shared domain or local servers
 
 **Separation of Modules, Themes, and Plugins:**<br>

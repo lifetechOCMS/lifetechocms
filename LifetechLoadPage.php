@@ -11,8 +11,7 @@ $qry->execute( );
 
 $row=$qry->fetch(PDO::FETCH_ASSOC);
   
-if($row){
-	echo '';
+if($row){ 
 	 
 	$dty='gfsegsf';
 	//echo sha1($dty);
@@ -20,8 +19,8 @@ if($row){
 	//echo '<br />'.md5($dty);
 	//echo '<br />'.md5($ke);
 	 
-	$lifetechsqlfunctionROWConten4tmmdtt=$row['uvalue']; 
-	$lifetechsqlfunctionROWConten4tmmdtt=loadStringArray2($lifetechsqlfunctionROWConten4tmmdtt);
+	$lifetechsqlfunctionROWConten4tmmdtt=$row['uvalue'];  
+	$lifetechsqlfunctionROWConten4tmmdtt=lifetechfunctionThemeGet($lifetechsqlfunctionROWConten4tmmdtt);
 				$lifetechsqlfunctionROWConten4tmmdtt=lifecodingReplacing($lifetechsqlfunctionROWConten4tmmdtt);
 				
 	//echo '<br />echos'.$mmd;
