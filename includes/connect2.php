@@ -1,7 +1,5 @@
 <?php 
-       
-
-     
+        
 
       class DbConnect {
           private $dbengine   = 'mysql';
@@ -15,11 +13,13 @@
           public function __construct() {
               try {
                   // since you are extending PDO, you have to call its constructor
-                  $connect2db_iii = new PDO($this->dbengine.":host=$this->dbhost;dbname=$this->dbname;  ", $this->dbuser, $this->dbpassword);
+                  $connect2db_iii = new PDO($this->dbengine.":host=$this->dbhost;dbname=$this->dbname; charset=latin1; ", $this->dbuser, $this->dbpassword);
                   $connect2db_iii->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
                   $connect2db_iii->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                   $this->dbh=$connect2db_iii;
                   self::$dbDriver_nn = $connect2db_iii;
+                  //return $connect2db_iii;
+                  //$this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
               }
               catch (PDOException $e) {
                   self::$dbDriver_nn = $e->getMessage();
@@ -40,8 +40,6 @@
             $akdfadskjsfdk = self::$dbDriver_nn;
             return $akdfadskjsfdk;
           }
-      } 
-     
+      }  
        
       ?>
-

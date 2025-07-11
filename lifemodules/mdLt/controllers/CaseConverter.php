@@ -33,19 +33,38 @@ class CaseConverter {
     }
     
     //snake to camel case from database records
-    public static function arrayToCamelCase(array $data): array {
+    public static function toCamelCaseArray(array $data): array {
         return array_map(function ($row) {
             $newRow = [];
             foreach ($row as $key => $value) {
                 $camelKey = lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $key))));
                 $newRow[$camelKey] = $value;
             }
-            return (object)  $newRow;
+            return $newRow;
+        }, $data);
+    }
+    
+    //snake to camel case from database records
+    public static function arrayToCamelCaseArray(array $data): array {
+        return array_map(function ($row) {
+            $newRow = [];
+            foreach ($row as $key => $value) {
+                $camelKey = lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $key))));
+                $newRow[$camelKey] = $value;
+            }
+            return $newRow;
+        }, $data);
+    }
+    public static function arrayToCamelCase(array $data): array {
+        return array_map(function ($row) {
+            $newRow = new stdClass();
+            foreach ($row as $key => $value) {
+                $camelKey = lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $key))));
+                $newRow->$camelKey = $value;
+            }
+            return $newRow;
         }, $data);
     }
 } 
-?>
-      
-      
-      
+?>   
       

@@ -205,7 +205,7 @@ function sh(){
 <div class="row">
   <div class="col-12 col-md-1"><label class="">Database Name : </label></div>  
   <div class="col-12 col-md-5">
-    <input type="text" name="database" class="form-control"/>  <br>
+    <input type="text" name="database"  readonly onfocus="this.removeAttribute('readonly');" autocomplete="off" class="form-control"/>  <br>
   </div>
 </div>
 <div class="collapse wgood" id="">  

@@ -1,0 +1,97 @@
+<style>
+.lifetech_button_loader {
+border: 16px solid #f3f3f3; /* Light grey */
+border-top: 16px solid #3498db; /* Blue */
+border-radius: 50%;
+width: 120px;
+height: 120px;
+animation: spin 1s linear infinite;
+position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -100px;
+}
+
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+
+.lifetech_page_overlay {
+    display:block;
+    background-color:#EFEFEF;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    top: 0px;
+    left: 0px;
+    opacity: .5; /* in FireFox */
+    filter: alpha(opacity=50); /* in IE */
+}
+</style>
+
+<style>
+  .div_session_out{
+    border: 5px solid; 
+    margin: auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    width: 50%;
+    padding: 10px;
+  }
+  .head_session_out{
+    font-weight: bolder;
+    font-size:30px;
+    box-sizing: border-box;
+  }
+  .text_session_out{
+    font-weight: bolder;
+    font-size:24px;
+    box-sizing: border-box;
+  }
+  .list_session_out{
+    font-weight: bold;
+    font-size:24px;
+    margin-left:30px;
+  }
+</style>
+<script> 
+function fx_lifetech_button_loader_open(){
+  $(".lifetech_button_loader").show();
+  // Overlay DIV
+  var div = document.createElement("div");
+    div.className += "lifetech_page_overlay";
+    document.body.appendChild(div);
+
+    var div2 = document.createElement("div");
+      div2.className += "lifetech_button_loader";
+      document.body.appendChild(div2);
+
+}
+function fx_lifetech_button_loader_close(){
+   $(".lifetech_button_loader").hide();
+     $(".lifetech_page_overlay").css("display","none");
+
+}
+
+function jlon_js_read(object, indexof, headerof){
+  var k =  indexof + '_' + headerof;
+   var kdfsjk = object[k]; 
+   return kdfsjk;
+
+}
+
+function jlon_js_write(object, indexof, headerof, value){
+  var k =  indexof + '_' + headerof;
+    object[k] = value; 
+    var asdkfjasd = object[k];
+   return asdkfjasd;
+
+}
+
+
+
+</script> 
+      
