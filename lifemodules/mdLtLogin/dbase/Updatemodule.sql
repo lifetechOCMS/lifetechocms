@@ -1,0 +1,1 @@
+UPDATE module_tbl SET module_name='mdLtLogin',module_image='N',status='Enabled',date_created='2025-07-18 03:34:04',last_update='2025-07-18 04:54:12'WHERE module_name='mdLtLogin';;;;;_lifetechend;;;;;

@@ -2,7 +2,7 @@
 
 class LtLWToken
 {
-  public static function insertLwtToken($userId, $user_role = "", $expireTime = "600")
+  public static function insertLwtToken($userId, $user_role = "", $expireTime = "1100")
     {
         $token = bin2hex(random_bytes(16));
 
@@ -21,7 +21,7 @@ class LtLWToken
     }
     
 
-    public static function isValid($token, $expireTime = "600")
+    public static function isValid($token, $expireTime = "1100")
     { 
         $tokenization_instance = new Tb_lwt_tokenization;
     
@@ -65,6 +65,7 @@ class LtLWToken
 }
 
 ?>
+      
       
       
       

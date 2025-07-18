@@ -27,7 +27,9 @@ class LtAuth
 
         $id = $user->user_id;
         self::setLtSession($user, $id);
-        LtLWToken::insertLwtToken($id, $user->role_encrypt);
+        //get api tokens timeout parameter
+        $toGetapiTokenExpiredTimeOut = ApiTokenDetails::apiTokenExpiredTimeOut();
+        LtLWToken::insertLwtToken($id, $user->role_encrypt,$toGetapiTokenExpiredTimeOut);
     }
 
     public static function login($username, $password = "")
@@ -200,7 +202,8 @@ class LtAuth
 
         self::setLtSession($user, $user_id);
         LtSession::set('lifetech_urid', $user->role_encrypt);
-        LtLWToken::insertLwtToken($user_id, $user->role_encrypt);
+        $toGetapiTokenExpiredTimeOut = ApiTokenDetails::apiTokenExpiredTimeOut();
+        LtLWToken::insertLwtToken($user_id, $user->role_encrypt,$toGetapiTokenExpiredTimeOut);
         self::updateLastAccess($user_id, $key);
     }
 
@@ -230,4 +233,5 @@ class LtAuth
     
 }
 ?>
+      
       

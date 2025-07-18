@@ -9,4 +9,15 @@
     'samesite' => 'Strict'   // optional: CSRF protection
     ]);
 
+    //ApiTokenDetails 
+    Class ApiTokenDetails
+    {
+        public static function apiTokenExpiredTimeOut(){
+            $apiTokenExpiredTimeOut = "1800"; //30 minutes
+            return $apiTokenExpiredTimeOut;
+        }
+    } 
+
+    //setting default time zone
+    date_default_timezone_set('Africa/Lagos');
 ?>

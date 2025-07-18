@@ -1,0 +1,43 @@
+{! import('mdLtLogin', 'LtStyleLogin.css') !}
+
+
+    <div class="form-container" id="frmValidation">
+    <div class="container mt-5 d-flex justify-content-center align-items-center">
+        <div class="position-relative">
+            <div class="card verify-card p-2 text-center">
+                <h4 class="card-title text-center mb-2">Validate Token</h4>
+                <h6>Please enter the 6 digit token sent to your email address</h6>
+                <!--<div><span>A code has been sent to</span></div>-->
+                <div id="otp" class="inputs d-flex flex-row justify-content-center mt-2 mx-3">
+                    <input class="m-2 text-center form-control rounded" type="text" id="first" name="verifyToken[]" maxlength="1" />
+                    <input class="m-2 text-center form-control rounded" type="text" id="second" name="verifyToken[]" maxlength="1" />
+                    <input class="m-2 text-center form-control rounded" type="text" id="third" name="verifyToken[]" maxlength="1" />
+                    <input class="m-2 text-center form-control rounded" type="text" id="fourth" name="verifyToken[]" maxlength="1" />
+                    <input class="m-2 text-center form-control rounded" type="text" id="fifth" name="verifyToken[]" maxlength="1" />
+                    <input class="m-2 text-center form-control rounded" type="text" id="sixth" name="verifyToken[]" maxlength="1" /></div>
+                    <div class="my-3">
+                    <button class="btn btn-success px-4 validate" id="valToken">Validate</button>
+                    <button class="btn btn-success validate d-none" id="resend">Resend OTP</button>
+                </div>
+                <span id="timer"></span>
+            </div>
+        </div>
+    </div>
+</div>  
+
+  </body>
+  
+
+
+<script>
+    
+    const currentUrl = window.location.href;
+    const urlObj = new URL(currentUrl);
+    const params = new URLSearchParams(urlObj.search);
+    const tokenValidateEmail = params.get('sn');
+    
+    
+</script>
+
+{! import('mdLtLogin', 'LtScriptLogin.js') !}  
+      

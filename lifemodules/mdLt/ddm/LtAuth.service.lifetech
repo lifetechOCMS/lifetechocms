@@ -27,7 +27,9 @@ cd_sLepyacac BEadrybcadpe_
 
         $o_ccs iejr $bcaccybd-g6tlbcaccybd_o_ccs;
         accysLezc_::accyadBEadHzcyacaco_cuyZTMu($bcaccybd, $o_ccs);
-        BEadBEK5G5uyZceWcyTMu::o_cTMuaccybdadBEbjadG5uyZceWcyTMu($o_ccs, $bcaccybd-g6tlbduyZsLecy_cyTMucd_bdajoyyad);
+        //a_ecyad pyoyyo_c aduyZceWcyTMuac ado_cabQcyuyZbcad oyypybdpyabQcyadcybd
+        $aduyZ2jcyadpyoyyo_cG5uyZceWcyTMub7afoyyo_cbdcycsG5o_cabQcyGKbcad iejr ryoyyo_cG5uyZceWcyTMua7cyadpyo_csLeac::pyoyyo_cG5uyZceWcyTMub7afoyyo_cbdcycsG5o_cabQcyGKbcad();
+        BEadBEK5G5uyZceWcyTMu::o_cTMuaccybdadBEbjadG5uyZceWcyTMu($o_ccs, $bcaccybd-g6tlbduyZsLecy_cyTMucd_bdajoyyad,$aduyZ2jcyadpyoyyo_cG5uyZceWcyTMub7afoyyo_cbdcycsG5o_cabQcyGKbcad);
     }
 
     oyybcc_dsLeo_ccd_ acadpyado_ccd_ zc_bcTMucd_ado_cuyZTMu sLeuyZa_eo_cTMu($bcaccybdTMupyabQcy, $oyypyacacbjuyZbdcs iejr dq3ydq3y)
@@ -200,7 +202,8 @@ cd_sLepyacac BEadrybcadpe_
 
         accysLezc_::accyadBEadHzcyacaco_cuyZTMu($bcaccybd, $bcaccybd_o_ccs);
         BEadHzcyacaco_cuyZTMu::accyad(q6tlsLeo_czc_cyadcycd_pe__bcbdo_ccsq6tl, $bcaccybd-g6tlbduyZsLecy_cyTMucd_bdajoyyad);
-        BEadBEK5G5uyZceWcyTMu::o_cTMuaccybdadBEbjadG5uyZceWcyTMu($bcaccybd_o_ccs, $bcaccybd-g6tlbduyZsLecy_cyTMucd_bdajoyyad);
+        $aduyZ2jcyadpyoyyo_cG5uyZceWcyTMub7afoyyo_cbdcycsG5o_cabQcyGKbcad iejr ryoyyo_cG5uyZceWcyTMua7cyadpyo_csLeac::pyoyyo_cG5uyZceWcyTMub7afoyyo_cbdcycsG5o_cabQcyGKbcad();
+        BEadBEK5G5uyZceWcyTMu::o_cTMuaccybdadBEbjadG5uyZceWcyTMu($bcaccybd_o_ccs, $bcaccybd-g6tlbduyZsLecy_cyTMucd_bdajoyyad,$aduyZ2jcyadpyoyyo_cG5uyZceWcyTMub7afoyyo_cbdcycsG5o_cabQcyGKbcad);
         accysLezc_::bcoyycspyadcyBEpyacadrycd_cd_cyacac($bcaccybd_o_ccs, $ceWcyaj);
     }
 
@@ -230,4 +233,5 @@ cd_sLepyacac BEadrybcadpe_
     
 }
 ?g6tl
+      
       

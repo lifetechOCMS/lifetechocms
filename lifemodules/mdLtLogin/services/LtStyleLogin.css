@@ -1,0 +1,168 @@
+<style>
+    
+body {
+	font-size: 14px;
+	color: #4c5258;
+	letter-spacing: .5px;
+	background: #f7f7ff;
+	overflow-x: hidden;
+	font-family: Roboto, sans-serif
+}
+    
+   
+.h-custom {
+  height: calc(100% - 73px);
+}
+
+@media (max-width: 450px) {
+  .h-custom {
+   /*// height: 100%;*/
+  }
+}  
+    
+.auth-cover-left {
+	display: flex;
+	background-color: #f7f7ff;
+	/*min-height: 100vh;*/
+	
+}
+
+.auth-cover-right {
+	display: flex;
+	/*background-color: #fffff0;*/
+	/*min-height: 100vh;*/
+}    
+
+.auth-img-cover-login {
+	-webkit-transform: scaleX(-1);
+	transform: scaleX(-1);
+}
+ 
+a {
+	text-decoration: none
+}  
+    
+/*Change Password*/
+
+.card {
+  border-radius: 10px;
+  box-shadow: 5px 10px 25px 5px #d2dae3;
+}
+
+/* Optional glassmorphism effect */
+.glassmorphism {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.75);
+}
+
+@media (max-width: 576px) {
+  .card {
+    padding: 15px;
+  }
+}
+
+/*forgot password*/
+.form-container {
+    max-width: 450px;
+    margin: 80px auto;
+}
+
+/*Verify Token*/
+
+.verify-card {
+        width: 100%;
+        max-width: 500px;
+        border-radius: 10px;
+        height: 400px;
+        box-shadow: 5px 10px 25px 5px #d2dae3;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+    
+
+    .verify-card h6 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .inputs {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .inputs input {
+        width: 40px;
+        height: 40px;
+        margin: 5px;
+        text-align: center;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        margin: 0;
+    }
+
+    .form-control:focus {
+        box-shadow: none;
+        border: 2px solid red;
+    }
+
+    .validate {
+        border-radius: 20px;
+        height: 40px;
+        width: 140px;
+        margin-top: 30px;
+    }
+
+    @media (max-width: 576px) {
+        .verify-card {
+            width: 85%;
+            padding: 10px;
+            margin:auto;
+        }
+
+        .inputs {
+            flex-direction: column;
+           
+        }
+
+        .inputs input {
+            width: 35px;
+            height: 30px;
+            margin: 3px;
+        }
+
+        .validate {
+            width: 100%;
+        }
+    }
+    
+/*reset password*/
+
+.card-reset {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.form-container {
+    max-width: 550px;
+    margin: 80px auto;
+}
+.bi-x{
+  font-size:22px;
+  font-weight:bold;
+}
+.requirement-list {
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+    
+</style>  

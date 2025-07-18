@@ -78,6 +78,8 @@ function ltSiteYoutube(){
    return getSiteInfo()->youtube; 
 }
 function ltSiteHostAddress(){
-   return getSiteInfo()->siteHostAddress; 
+    $adet  =  rtrim(getSiteInfo()->siteHostAddress, "/");
+    return  $adet;
 } 
 ?>
+      
