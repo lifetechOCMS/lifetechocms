@@ -1,0 +1,14 @@
+[
+    {
+        "ltId": "177670428098329",
+        "packageName": "PlgMail",
+        "menuLevel": 1,
+        "menuName": "PlgMail",
+        "contentName": null,
+        "parentMenuId": null,
+        "routePath": "#",
+        "slug": null,
+        "target": "self",
+        "sortOrder": 8
+    }
+]

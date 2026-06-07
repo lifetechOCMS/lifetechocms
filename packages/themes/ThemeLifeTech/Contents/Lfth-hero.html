@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        .carousel-slide {
+            opacity: 0;
+            transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
+            transform: scale(1.02);
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+
+    <section id="home" class="relative">
+        <div id="heroCarousel" class="relative h-screen min-h-[600px] overflow-hidden">
+            <!-- Carousel Indicators -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex space-x-3">
+                <button
+                    class="carousel-indicator w-3 h-3 rounded-full bg-white/50 border-2 border-transparent transition-all duration-300 active"
+                    data-slide="0"></button>
+                <button
+                    class="carousel-indicator w-3 h-3 rounded-full bg-white/50 border-2 border-transparent transition-all duration-300"
+                    data-slide="1"></button>
+                <button
+                    class="carousel-indicator w-3 h-3 rounded-full bg-white/50 border-2 border-transparent transition-all duration-300"
+                    data-slide="2"></button>
+            </div>
+
+            <!-- Slide 1 -->
+            <div
+                class="carousel-slide absolute inset-0 bg-gradient-to-br from-emerald-500 via-teal-600 to-cyan-700 flex items-center justify-center">
+                <div class="absolute inset-0 bg-black/40"></div>
+                <div class="container mx-auto px-4 relative z-10">
+                    <div class="max-w-2xl">
+                        <div class="hero-content text-white">
+                            <h1 class="text-5xl md:text-6xl font-bold mb-6 drop-shadow-lg">Build Beautiful Websites with
+                                Ease</h1>
+                            <p class="text-xl mb-8 drop-shadow-md">LifeTech empowers you to create stunning, responsive
+                                websites without the complexity. Start building your dream site today.</p>
+                            <div class="flex flex-wrap gap-4">
+                                <a href="#features"
+                                    class="btn-primary px-8 py-4 rounded-full font-semibold text-lg hover:shadow-lg transition-all duration-300">Get
+                                    Started</a>
+                                <a href="#about"
+                                    class="btn-outline-light px-8 py-4 rounded-full font-semibold text-lg border-2 border-white/30 hover:bg-white/20 transition-all duration-300">Learn
+                                    More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div
+                class="carousel-slide absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center">
+                <div class="absolute inset-0 bg-black/40"></div>
+                <div class="container mx-auto px-4 relative z-10">
+                    <div class="max-w-2xl">
+                        <div class="hero-content text-white">
+                            <h1 class="text-5xl md:text-6xl font-bold mb-6 drop-shadow-lg">Powerful Content Management
+                            </h1>
+                            <p class="text-xl mb-8 drop-shadow-md">Manage your content effortlessly with our intuitive
+                                CMS. Update, edit, and publish with just a few clicks.</p>
+                            <div class="flex flex-wrap gap-4">
+                                <a href="#services"
+                                    class="btn-primary px-8 py-4 rounded-full font-semibold text-lg hover:shadow-lg transition-all duration-300">Explore
+                                    Services</a>
+                                <a href="#api-docs"
+                                    class="btn-outline-light px-8 py-4 rounded-full font-semibold text-lg border-2 border-white/30 hover:bg-white/20 transition-all duration-300">View
+                                    API Docs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div
+                class="carousel-slide absolute inset-0 bg-gradient-to-br from-orange-500 via-red-500 to-rose-600 flex items-center justify-center">
+                <div class="absolute inset-0 bg-black/40"></div>
+                <div class="container mx-auto px-4 relative z-10">
+                    <div class="max-w-2xl">
+                        <div class="hero-content text-white">
+                            <h1 class="text-5xl md:text-6xl font-bold mb-6 drop-shadow-lg">Join Our Growing Community
+                            </h1>
+                            <p class="text-xl mb-8 drop-shadow-md">Connect with developers, share ideas, and get support
+                                from our active community of LifeTech users.</p>
+                            <div class="flex flex-wrap gap-4">
+                                <a href="#forum"
+                                    class="btn-primary px-8 py-4 rounded-full font-semibold text-lg hover:shadow-lg transition-all duration-300">Join
+                                    Forum</a>
+                                <a href="#team"
+                                    class="btn-outline-light px-8 py-4 rounded-full font-semibold text-lg border-2 border-white/30 hover:bg-white/20 transition-all duration-300">Meet
+                                    the Team</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carousel Controls -->
+            <button id="prevBtn"
+                class="absolute left-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/20 hover:bg-primary text-white flex items-center justify-center transition-all duration-300">
+                <i class="bi bi-chevron-left text-2xl"></i>
+            </button>
+            <button id="nextBtn"
+                class="absolute right-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/20 hover:bg-primary text-white flex items-center justify-center transition-all duration-300">
+                <i class="bi bi-chevron-right text-2xl"></i>
+            </button>
+        </div>
+    </section>
+    <script>
+            (function () {
+                'use strict';
+
+                function initCarousel() {
+                    const slides = document.querySelectorAll('.carousel-slide');
+                    const indicators = document.querySelectorAll('.carousel-indicator');
+                    const prevBtn = document.getElementById('prevBtn');
+                    const nextBtn = document.getElementById('nextBtn');
+                    let currentSlide = 0;
+                    let carouselInterval;
+
+                    if (slides.length === 0) return;
+
+                    function showSlide(index) {
+                        slides.forEach(slide => slide.classList.remove('active'));
+                        indicators.forEach(indicator => indicator.classList.remove('active'));
+
+                        slides[index].classList.add('active');
+                        indicators[index].classList.add('active');
+                        currentSlide = index;
+                    }
+
+                    function nextSlide() {
+                        const next = (currentSlide + 1) % slides.length;
+                        showSlide(next);
+                    }
+
+                    function prevSlide() {
+                        const prev = (currentSlide - 1 + slides.length) % slides.length;
+                        showSlide(prev);
+                    }
+
+                    if (nextBtn) {
+                        nextBtn.addEventListener('click', () => {
+                            nextSlide();
+                            resetCarouselInterval();
+                        });
+                    }
+
+                    if (prevBtn) {
+                        prevBtn.addEventListener('click', () => {
+                            prevSlide();
+                            resetCarouselInterval();
+                        });
+                    }
+
+                    indicators.forEach((indicator, index) => {
+                        indicator.addEventListener('click', () => {
+                            showSlide(index);
+                            resetCarouselInterval();
+                        });
+                    });
+
+                    function startCarousel() {
+                        carouselInterval = setInterval(nextSlide, 5000);
+                    }
+
+                    function resetCarouselInterval() {
+                        clearInterval(carouselInterval);
+                        startCarousel();
+                    }
+
+                    const carousel = document.getElementById('heroCarousel');
+                    if (carousel) {
+                        carousel.addEventListener('mouseenter', () => {
+                            clearInterval(carouselInterval);
+                        });
+
+                        carousel.addEventListener('mouseleave', () => {
+                            startCarousel();
+                        });
+                    }
+
+                    document.addEventListener('keydown', function (e) {
+                        if (e.key === 'ArrowLeft') {
+                            prevSlide();
+                            resetCarouselInterval();
+                        } else if (e.key === 'ArrowRight') {
+                            nextSlide();
+                            resetCarouselInterval();
+                        }
+                    });
+
+                    showSlide(0);
+                    startCarousel();
+                }
+
+                // Initialize when module is loaded
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', initCarousel);
+                } else {
+                    initCarousel();
+                }
+            })();
+    </script>

@@ -1,0 +1,5 @@
+[
+    {
+        "tableData": "CREATE TABLE IF NOT EXISTS `tb_form_role` (\n  `lt_id` bigint(16) NOT NULL,\n  `form_name` varchar(250) COLLATE utf8_unicode_ci NOT NULL,\n  `form_role` varchar(250) COLLATE utf8_unicode_ci NOT NULL,\n  `created_at` datetime DEFAULT NULL,\n  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  PRIMARY KEY (`lt_id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci"
+    }
+]

@@ -1,0 +1,237 @@
+<div id="snackbar" class="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 px-6 py-3 rounded-lg shadow-lg text-white text-sm font-medium transition-all duration-300 flex items-center hidden"></div>
+<div class="mx-6 max-w-5xl md:mx-auto bg-white/95 rounded-2xl shadow-2xl overflow-hidden flex flex-col lg:flex-row min-h-[600px] my-14">
+   
+  <div class="lg:w-1/2 bg-gradient-to-br from-emerald-500 to-teal-700 p-12 flex flex-col justify-center items-center text-white relative">
+    <div class="absolute top-0 left-0 w-32 h-32 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2 blur-2xl"></div>
+    
+    <div class="relative z-10 text-center">
+      <svg class="w-48 h-48 mx-auto mb-8 drop-shadow-2xl" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"></path>
+      </svg>
+      
+      <h2 class="text-4xl font-bold mb-4">Join the Ecosystem</h2>
+      <p class="text-emerald-50 max-w-sm mx-auto leading-relaxed">
+        Get access to professional-grade tools, secure data management, and community forums.
+      </p>
+    </div>
+    
+    <div class="mt-12 flex space-x-6 text-sm text-emerald-100">
+      <div class="flex items-center"><i class="fas fa-check-circle mr-2"></i> Free Tier</div>
+      <div class="flex items-center"><i class="fas fa-check-circle mr-2"></i> Cloud Sync</div>
+    </div>
+  </div>
+
+  <div class="lg:w-1/2 p-8 lg:p-12 bg-white">
+    <div class="mb-8">
+      <h3 class="text-3xl font-bold text-gray-800">Create Account</h3>
+      <p class="text-gray-500 mt-2">Start your journey with Lifetech today.</p>
+    </div>
+
+    <form id="signUpForm" class="space-y-4">
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+          <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-user text-gray-400"></i>
+                </div>
+          <input type="text" id="firstname" name="firstName" class="w-full border border-gray-300 px-4 py-2 py-2 pl-10 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none pr-4" placeholder="John" required>
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+           <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-user-tag text-gray-400"></i>
+              </div>
+              <input type="text" id="surname" name="surname" class="w-full border border-gray-300 px-4 py-2 pl-10 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="Doe" required>
+           </div>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-at text-gray-400"></i>
+                </div>
+                <input type="username" id="username" name="username" class="w-full border border-gray-300 px-4 py-2 pl-10 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="john@example.com" required>
+            </div>
+        </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-envelope text-gray-400"></i>
+                </div>
+                <input type="email" id="email" name="email" class="w-full border border-gray-300 px-4 py-2 pl-10 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="john@example.com" required>
+            </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-key text-gray-400"></i>
+                </div>
+                <input type="password" name="password" id="passwordInput" class="w-full border border-gray-300 px-4 py-2 pl-10 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="••••••••" required>
+                <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </div>
+      </div>
+
+      <div class="flex items-start py-2">
+        <input type="checkbox" id="terms" class="mt-1 h-4 w-4 text-emerald-600 border-gray-300 rounded" required>
+        <label for="terms" class="ml-2 text-sm text-gray-500">
+          I agree to the <a href="#" class="text-emerald-600 underline">Terms of Service</a> and <a href="#" class="text-emerald-600 underline">Privacy Policy</a>.
+        </label>
+      </div>
+
+      <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-lg shadow-lg transform transition active:scale-95" id="submitBtn">
+        Create My Account
+      </button>
+    </form>
+
+    <div class="mt-8 text-center">
+      <p class="text-gray-500 text-sm">
+        Already have an account? 
+        <a href="<?= ltSiteUrl() ?>/sign-in" class="text-emerald-600 font-bold hover:underline">Sign In</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+ <?php ltImport('mdLtTheme','LtThemeService.js') ?>
+ <script>
+  
+  
+    // State management
+    const state = {
+      form: {
+        username: '',
+        password: '',
+      },
+      loading: false,
+      showPassword: false
+    };
+
+    // DOM elements
+    const elements = {};
+    
+    let inputElements = ['signUpForm', 'username', 'email', 'firstname', 'surname', 'togglePassword', 'passwordInput', 'submitBtn', 'snackbar'
+    ]
+    
+    for(const value of inputElements){
+        elements[value] = document.getElementById(value);
+    }
+  
+  elements.togglePassword.addEventListener('click', function(e){
+      state.showPassword = !state.showPassword;
+      let el = e.target;
+       if (state.showPassword) {
+        elements.passwordInput.type = 'text';
+        el.classList.replace('fa-eye', 'fa-eye-slash');
+        el.setAttribute('aria-label', `Hide Password`);
+      } else {
+        elements.passwordInput.type = 'password';
+        el.classList.replace('fa-eye-slash', 'fa-eye');
+        el.setAttribute('aria-label', `Show Password`);
+      }
+
+  })
+
+    
+    // Initialize the application
+    function init() {
+    //   // Add event listeners
+      elements.signUpForm.addEventListener('submit', handleSubmit);
+    }
+
+    // Event handlers
+    function handleInputChange(e) {
+      const { name, value } = e.target;
+      state.form[name] = value;
+    }
+
+
+    function showSnackbar(message, color = 'green') {
+      elements.snackbar.textContent = message;
+      elements.snackbar.className = `fixed top-6 left-1/2 transform -translate-x-1/2 z-50 px-6 py-3 rounded-lg shadow-lg text-white text-sm font-medium transition-all duration-300 flex items-center ${color === 'green' ? 'bg-green-600' : color === 'yellow' ? 'bg-yellow-600':'bg-red-600'}`;
+      
+      const icon = document.createElement('i');
+      icon.className = `fas ${color === 'green' ? 'fa-check-circle' : 'fa-exclamation-circle'} mr-2`;
+      elements.snackbar.prepend(icon);
+      
+      elements.snackbar.classList.remove('hidden');
+      
+      // Auto-hide after appropriate time
+      const hideTime = color === 'green' ? 2000 : 3000;
+      setTimeout(() => {
+        elements.snackbar.classList.add('fade-out');
+        setTimeout(() => {
+          elements.snackbar.classList.add('hidden');
+          elements.snackbar.classList.remove('fade-out');
+        }, 300);
+      }, hideTime);
+    }
+
+    async function handleSubmit(e) {
+      e.preventDefault();
+      
+      let rawFormData = new FormData(elements.signUpForm);
+      formData = Object.fromEntries(rawFormData.entries());
+      
+      if (!formData.username && !formData.email) {
+              showSnackbar(`Email or Username field is required`, 'yellow');
+              return;
+        }
+        
+      if(!formData.password){
+            showSnackbar(`Password must not be empty`, 'yellow');
+            return;
+        }
+      
+      // Set loading state
+      state.loading = true;
+      elements.submitBtn.disabled = true;
+      elements.submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i><span class="animate-pulse">Processing...</span>';
+      
+  
+
+      try {
+          const options = {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(formData)
+          };
+        
+          const res = await fetch(`${BASE_URL}/users`, options);
+          const data = await res.json();
+          const { responseData, responseCategory, responseResult } = data;
+        
+          if (responseCategory === "200") {
+                showSnackbar('Registration Successfully', 'green');
+            
+                setTimeout(() => {
+                    window.location.href = `${siteHostAddress}/sign-in`;
+                }, 1000);
+          } else {
+            showSnackbar(`failed: ${responseResult || 'Invalid credentials'}`, 'red');
+          }
+        } catch (err) {
+          showSnackbar(`error: ${err.message || 'Something went wrong'}`, 'red');
+        }
+
+      
+      // Reset loading state
+      state.loading = false;
+      elements.submitBtn.disabled = false;
+      elements.submitBtn.textContent = 'Sign Up';
+    }
+
+    // Initialize the app when DOM is loaded
+    document.addEventListener('DOMContentLoaded', init);
+  </script>

@@ -1,0 +1,487 @@
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lifetech A - Editor Management</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+
+  <header class="bg-white shadow-sm fixed w-full z-20 top-0" style="border: solid 2px whitesmoke !important;">
+    <div class="flex items-center justify-between px-4 py-1">
+      <div class="flex gap-1 ml-12 md:ml-0 space-x-4 ">
+        <div class="flex items-center">
+          <img src="" alt="Lifetech Logo" class="h-6 w-6 rounded-full siteLogo">
+          <span class="ml-2 text-xl font-semibold text-blue-600" id="siteAlias"></span>
+        </div>
+        <!--To be copied -->
+        <div class="flex">
+            <!--toggle btn-->
+            <button id="openBtn">
+                <svg class="w-6 h-6 tarnsistion-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" id="open">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            <!--close btn-->
+            <button id="closeBtn">
+                <svg class="w-6 h-6 hidden transistion-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" id="close">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <!--To be copied -->
+      </div>
+      <!--To be copied -->
+      <div id="main-nav" class="flex item-center space-x-6">
+      </div>
+        <!--To be copied -->
+      <div class="flex items-center space-x-4">
+        <button aria-label="Notifications" class="relative p-1 text-gray-600 hover:text-blue-600 focus:outline-none">
+          <i class="fas fa-bell text-xl"></i>
+          <!--<span class="absolute top-0 right-0 h-4 w-4 bg-red-500 rounded-full text-xs text-white flex items-center justify-center">1</span>-->
+        </button>
+        <button aria-label="Messages" class="relative p-1 text-gray-600 hover:text-blue-600 focus:outline-none">
+          <i class="fas fa-comment-alt text-xl"></i>
+          <!--<span class="absolute top-0 right-0 h-4 w-4 bg-green-500 rounded-full text-xs text-white flex items-center justify-center">3</span>-->
+        </button>
+        <button aria-label="Profile" class="focus:outline-none ">
+          <img src="" alt="User Profile"
+            class="h-8 w-8 rounded-full border-2 border-blue-500 siteLogo">
+        </button>
+         <!--To be copied -->
+        <button class="block"  id="rightSideBar">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+         <!--To be copied -->
+      </div>
+    </div>
+  </header>
+  <div class="pt-3 opacity-0">hello</div>
+  
+   <!--To be copied -->
+  <!-- Side Drawer for menu -->
+  <div id="add-theme-drawer" class="fixed top-0 right-0 h-full w-auto max-w-md bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col overflow-y-auto" style="display:none;">
+    <div class="flex items-center justify-end px-6 py-4">
+      <!--<h2 class="text-lg font-semibold">Add New Theme</h2>-->
+      <button id="close-drawer-btn" class="text-gray-500 hover:text-red-600 text-2xl focus:outline-none">
+           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+      </button>
+    </div>
+    <aside>
+        <nav class="px-2">
+
+        <ul id="rightSidebar">
+             
+        </ul>
+        
+      </nav>
+    </aside>
+  </div>
+   <!--To be copied -->
+  
+<!--</html>-->
+
+ <?php  ltImport('mdLtTheme','LtThemeService.js')  ?>
+ 
+ <script>
+ console.log('hello');
+/**
+ * 
+ * to be copied 
+ * 
+ */
+  let rightSideBarMenus = [];
+ 
+const addThemeBtn = document.getElementById('rightSideBar');
+const addThemeDrawer = document.getElementById('add-theme-drawer');
+const closeRightSidebarBtn = document.getElementById('close-drawer-btn');
+const rightSidebar = document.getElementById('rightSidebar');
+const mainNav = document.getElementById('main-nav');
+const openBtn = document.getElementById("openBtn");
+const open = document.getElementById("open");
+const close = document.getElementById("close");
+const closeBtn = document.getElementById("closeBtn");
+
+let collapseRightSideBar = false;
+
+// Open drawer
+addThemeBtn.addEventListener('click', () => {
+  addThemeDrawer.style.display = 'flex';
+  requestAnimationFrame(() => {
+    addThemeDrawer.classList.remove('translate-x-full');
+  });
+  renderRightSideBarMenu();
+});
+
+// Close drawer function (reusable)
+function closeDrawer() {
+  addThemeDrawer.classList.add('translate-x-full');
+  setTimeout(() => {
+    addThemeDrawer.style.display = 'none';
+  }, 300);
+}
+
+// Close button
+closeRightSidebarBtn.addEventListener('click', closeDrawer);
+
+// Close on ESC key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeDrawer();
+  }
+});
+
+// Close on outside click
+document.addEventListener('click', (e) => {
+  if (
+    addThemeDrawer.style.display === 'flex' &&
+    !addThemeDrawer.contains(e.target) &&
+    !addThemeBtn.contains(e.target)
+  ) {
+    closeDrawer();
+  }
+});
+
+
+
+ 
+ function renderRightSideBarMenu() {
+  rightSidebar.innerHTML = '';
+  rightSidebar.appendChild(createSidebarMenuList(rightSideBarMenus));
+  attachRightAccordionHandlers();
+}
+
+function createSidebarMenuList(items, level = 0) {
+  const ul = document.createElement('ul');
+  if (level > 0) ul.className = `ml-${level * 4} mt-1 overflow-hidden transition-all duration-300 max-h-0`;
+
+  items.forEach((item, idx) => {
+    const li = document.createElement('li');
+    const hasSub = item.children && Array.isArray(item.children) && item.children.length > 0;
+
+    if (hasSub) {
+      li.innerHTML = `
+        <button type="button"
+                class="sidebar-item flex items-center w-full py-3 px-4 text-gray-700 rounded-lg mb-1 group focus:outline-none transition${collapseRightSideBar ? ' justify-center px-2' : ''}"
+                data-rightAccordion="${item.ltId}" ${collapseRightSideBar ? 'disabled' : ''}>
+          <i class="${item.icon || 'fa-duotone fa-solid fa-layer-group'} w-5"></i>
+          ${collapseRightSideBar ? '' : `<span class="ml-3 flex-1 text-left sidebar-text font-medium">${item.menuName}</span>`}
+          ${collapseRightSideBar ? '' : `<i class="fas fa-chevron-down ml-auto text-xs transition-transform duration-200" data-rightChevron="${item.ltId}"></i>`}
+        </button>
+      `;
+      const subList = createSidebarMenuList(item.children, level + 1);
+      subList.setAttribute('data-rightPanel', item.ltId);
+      li.appendChild(subList);
+    } else {
+      li.innerHTML = `
+        <a href="<?=ltSiteHostAddress()?>${item.routePath}"
+           class="sidebar-item flex items-center py-3 px-4 text-gray-700 rounded-lg mb-1${collapseRightSideBar ? ' justify-center px-2' : ''}">
+          <i class="${item.icon || 'fa-solid fa-box'} w-5 text-gray-500"></i>
+          ${collapseRightSideBar ? '' : `<span class="ml-3 flex-1 text-left sidebar-text font-medium">${item.menuName}</span>`}
+        </a>
+      `;
+    }
+
+    ul.appendChild(li);
+  });
+
+  return ul;
+}
+
+function attachRightAccordionHandlers() {
+  document.querySelectorAll('[data-rightAccordion]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (collapseRightSideBar) return;
+
+      const id = btn.getAttribute('data-rightAccordion');
+      const panel = document.querySelector(`[data-rightPanel="${id}"]`);
+      const chev = document.querySelector(`[data-rightChevron="${id}"]`);
+      if (!panel) return;
+
+      const parentLi = btn.closest('li');
+      const parentUl = parentLi?.parentElement;
+
+      const open = panel.style.maxHeight && panel.style.maxHeight !== '0px';
+
+      // Close sibling panels within the same parent <ul>
+      parentUl?.querySelectorAll(':scope > li > [data-rightAccordion]').forEach(siblingBtn => {
+        const siblingId = siblingBtn.getAttribute('data-rightAccordion');
+        if (siblingId !== id) {
+          const siblingPanel = document.querySelector(`[data-rightPanel="${siblingId}"]`);
+          const siblingChev = document.querySelector(`[data-rightChevron="${siblingId}"]`);
+          if (siblingPanel) {
+            siblingPanel.style.maxHeight = '0px';
+            // Recursively collapse nested children
+            siblingPanel.querySelectorAll('[data-rightPanel]').forEach(nested => {
+              nested.style.maxHeight = '0px';
+              const nestedId = nested.getAttribute('data-rightPanel');
+              const nestedChev = document.querySelector(`[data-rightChevron="${nestedId}"]`);
+              if (nestedChev) nestedChev.classList.remove('rotate-180');
+            });
+          }
+          if (siblingChev) siblingChev.classList.remove('rotate-180');
+        }
+      });
+
+      // Toggle current panel
+      if (open) {
+          panel.style.maxHeight = '0px';
+          chev?.classList.remove('rotate-180');
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+          chev?.classList.add('rotate-180');
+          updateParentHeights(panel);
+        }
+
+    });
+  });
+}
+
+
+function attachRightAccordionHandlers() {
+  document.querySelectorAll('[data-rightAccordion]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (collapseRightSideBar) return;
+
+      const id = btn.getAttribute('data-rightAccordion');
+      const panel = document.querySelector(`[data-rightPanel="${id}"]`);
+      const chev = document.querySelector(`[data-rightChevron="${id}"]`);
+      if (!panel) return;
+
+      const parentLi = btn.closest('li');
+      const parentUl = parentLi?.parentElement;
+      const isOpen = panel.style.maxHeight && panel.style.maxHeight !== '0px';
+
+      // 🔒 Close sibling panels at same level
+      parentUl?.querySelectorAll(':scope > li > [data-rightAccordion]').forEach(siblingBtn => {
+        const siblingId = siblingBtn.getAttribute('data-rightAccordion');
+        if (siblingId !== id) {
+          const siblingPanel = document.querySelector(`[data-rightPanel="${siblingId}"]`);
+          const siblingChev = document.querySelector(`[data-rightChevron="${siblingId}"]`);
+          if (siblingPanel) {
+            siblingPanel.style.maxHeight = '0px';
+            // Collapse all nested panels
+            siblingPanel.querySelectorAll('[data-rightPanel]').forEach(nested => {
+              nested.style.maxHeight = '0px';
+              const nestedId = nested.getAttribute('data-rightPanel');
+              const nestedChev = document.querySelector(`[data-rightChevron="${nestedId}"]`);
+              nestedChev?.classList.remove('rotate-180');
+            });
+          }
+          siblingChev?.classList.remove('rotate-180');
+        }
+      });
+
+      // 🔄 Toggle current panel
+      if (isOpen) {
+        panel.style.maxHeight = '0px';
+        chev?.classList.remove('rotate-180');
+        collapseDescendants(panel);
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        chev?.classList.add('rotate-180');
+        updateParentHeights(panel);
+      }
+    });
+  });
+}
+
+// 🧹 Collapse nested submenus
+function collapseDescendants(panel) {
+  panel.querySelectorAll('[data-rightPanel]').forEach(sub => {
+    sub.style.maxHeight = '0px';
+  });
+}
+
+// 🪜 Recalculate only visible height for each ancestor
+function updateParentHeights(panel) {
+  let parent = panel.parentElement?.closest('[data-rightPanel]');
+  while (parent) {
+    let visibleHeight = 0;
+
+    // Add heights of only visible children
+    parent.querySelectorAll(':scope > li > [data-rightPanel]').forEach(childPanel => {
+      const currentHeight = parseFloat(childPanel.style.maxHeight) || 0;
+      visibleHeight += currentHeight > 0 ? childPanel.scrollHeight : 0;
+    });
+
+    parent.style.maxHeight = parent.scrollHeight + visibleHeight + 'px';
+    parent = parent.parentElement?.closest('[data-rightPanel]');
+  }
+}
+ 
+ 
+ openBtn.addEventListener('click', function(e){
+     open.classList.add('hidden');
+     close.classList.remove('hidden');
+     renderNav();
+     
+ })
+ closeBtn.addEventListener('click', function(e){
+     close.classList.add('hidden');
+     open.classList.remove('hidden');
+     mainNav.innerHTML = "";
+ })
+ 
+ 
+ 
+   function renderNav() {
+    //   const currentPage = getCurrentPage();
+      const menuTree = rightSideBarMenus;
+      mainNav.innerHTML = renderDesktopMenu(menuTree, menuTree);
+      
+    }
+    
+    //  callback to render desktop
+ 
+ function renderDesktopMenu(items, currentPage) {
+  return items.map(item => {
+    const isActive = currentPage === item.routePath;
+    const hasChildren = Array.isArray(item.children) && item.children.length > 0;
+
+    return `
+      <div class="relative group">
+        
+        <a
+          href="<?= ltSiteHostAddress() ?>${item.routePath}"
+          class="flex items-center gap-1 text-sm font-bold uppercase tracking-wider py-2
+            transition-colors duration-200
+            ${isActive ? 'nav-link-active' : 'text-gray-600 hover:text-[#007c3a]'}"
+        >
+          <span>${item.menuName}</span>
+
+          ${hasChildren ? `
+            <i class="fas fa-chevron-down text-xs
+               transition-transform duration-200
+               group-hover:rotate-180"></i>
+          ` : ''}
+        </a>
+
+        ${hasChildren ? `
+          <div
+            class="absolute left-0 top-full mt-1 hidden group-hover:block
+                   bg-white shadow-lg min-w-48 z-50 rounded-md border border-gray-100"
+          >
+            ${item.children.map(child => `
+              <a
+                href="<?= ltSiteHostAddress() ?>${child.routePath}"
+                class="block px-4 py-3 text-sm font-semibold whitespace-nowrap
+                  transition-colors duration-150
+                  ${currentPage === child.routePath
+                    ? 'text-[#007c3a] bg-gray-50'
+                    : 'text-gray-600 hover:bg-gray-100 hover:text-[#007c3a]'}"
+              >
+                ${child.menuName}
+              </a>
+            `).join('')}
+          </div>
+        ` : ''}
+
+      </div>
+    `;
+  }).join('');
+}
+
+/**
+ * 
+ * to be copied 
+ * 
+ */
+ 
+
+
+    document.addEventListener('DOMContentLoaded', function(){
+        let siteInfo = localStorage.getItem('siteInfo');
+        let url = new URL(BASE_URL);
+          let origin = url.origin;
+          
+/**
+ * 
+ * to be copied 
+ * 
+ */
+                async function loadMenus(){
+                       try{
+                    
+                            const menus = await fetch(`${BASE_URL}/menus/is-navigation`, {
+                                    method: "GET",
+                                    headers: {
+                                        'Authorization': `Bearer ${LW_TOKEN}`,
+                                        'Accept': 'application/json'
+                                    }
+                                });
+                
+                            const { responseData, responseResult, responseCategory } = await menus.json();
+                             
+                             if(responseCategory == 200){
+                                
+                                rightSideBarMenus = [...rightSideBarMenus, ...responseData];
+                             }
+                                //  console.log(menus);
+         
+                        }catch(error){
+                            console.log(error);
+                        }
+                    }
+            loadMenus();
+            
+/**
+ * 
+ * to be copied 
+ * 
+ */
+            async function onLoadSiteInfo(){
+
+                try{
+                    
+                    const siteInfoRecord = await fetch(`${BASE_URL}/site-info`, {
+                            method: "GET",
+                            headers: {
+                                'Authorization': `Bearer ${LW_TOKEN}`,
+                                'Accept': 'application/json'
+                            }
+                        });
+
+                    const { responseData, responseResult, responseCategory } = await siteInfoRecord.json();
+                     
+                     if(responseCategory == 200){
+                        
+                        localStorage.setItem('siteInfo', JSON.stringify(responseData));
+                        updateDom(responseData);
+                     }
+                        //  console.log(menus);
+ 
+                }catch(error){
+                    let err = error;
+                }
+                 
+            }
+        // console.log(BASE_URL2, stringToRemove);
+        function updateDom(data){
+            if(!data) return;
+            document.getElementById('siteAlias').textContent = data.siteAliass;
+            document.querySelectorAll('.siteLogo').forEach(item =>{
+                item.setAttribute('src', `${origin + data.siteHostAddress}/storage/media/${data.logo}`);
+            })
+            console.log(`${origin + data.siteHostAddress}/storage/media/${data.logo}`);
+        }
+        
+        
+        
+        if(!siteInfo){
+             onLoadSiteInfo();
+        }
+            updateDom(JSON.parse(siteInfo));
+
+    });
+     
+ </script>
+      

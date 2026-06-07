@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Not Published</title>
+    <style> 
+    .noContent-body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff7ed;
+  color: #431407;
+
+  align-items: center !important;
+  justify-content: center !important; 
+  padding: 20px;
+}
+
+.noContent-container {
+  text-align: center;
+  
+  //max-width: 1500px;
+  background: white;
+  padding: 50px 30px;
+  border-radius: 12px;
+  border: 1px solid #fed7aa;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.noContent-iconBox {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 25px;
+}
+
+.noContent-title {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #c2410c;
+}
+
+.noContent-separator {
+  color: #7c2d12;
+  margin-bottom: 25px;
+}
+
+.noContent-statusBadge {
+  display: inline-block;
+  background-color: #ffedd5;
+  color: #c2410c;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.noContent-gearBig {
+  width: 60px;
+  position: absolute;
+  top: 0;
+  left: 10px;
+  animation: noContent-spin 8s linear infinite;
+}
+
+.noContent-gearSmall {
+  width: 40px;
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  animation: noContent-spinReverse 8s linear infinite;
+}
+
+.noContent-btn {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 10px 20px;
+  background-color: #ea580c;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+@keyframes noContent-spin {
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes noContent-spinReverse {
+  100% { transform: rotate(-360deg); }
+}
+    </style>
+</head>
+<body class="noContent-body align:center">
+  <div class="noContent-container">
+      
+    <div class="noContent-iconBox">
+      
+      <svg class="noContent-gearBig" viewBox="0 0 24 24" fill="none"
+           stroke="#ea580c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83
+                 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33
+                 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2
+                 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4
+                 a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0
+                 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82
+                 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2
+                 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9
+                 a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83
+                 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9
+                 a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2
+                 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51
+                 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0
+                 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9
+                 a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2
+                 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+        </path>
+      </svg>
+
+      <svg class="noContent-gearSmall" viewBox="0 0 24 24" fill="none"
+           stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83
+                 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33
+                 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2
+                 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4
+                 a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0
+                 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82
+                 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2
+                 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9
+                 a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83
+                 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9
+                 a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2
+                 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51
+                 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0
+                 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9
+                 a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2
+                 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+        </path>
+      </svg>
+
+    </div>
+
+    <div class="noContent-statusBadge">Unpublished</div>
+    <h1 class="noContent-title">No Content is published to this page</h1>
+    <p class="noContent-separator">or</p>
+    <h1 class="noContent-title">The Session has Timed Out</h1>
+
+    <a href="<?= ltSiteUrl(); ?>" class="noContent-btn">Go Back Home</a>
+  </div>
+
+</body>
+</html>

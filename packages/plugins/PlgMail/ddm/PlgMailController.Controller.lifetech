@@ -1,0 +1,9 @@
+<?php
+namespace Lt\Modules\PlgMail\Controllers;
+           
+           
+class PlgMailController
+{
+
+}
+

@@ -1,0 +1,115 @@
+<!-- Forum/Community Section Module -->
+<section id="forum" class="py-20">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="section-title text-4xl font-bold mb-4 text-gray-900">Community Forum</h2>
+            <p class="text-xl text-gray-600">Join the conversation and connect with other LifeTech users</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="forum-post bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 h-full border-l-4 border-transparent hover:border-primary border-0">
+                <div class="flex items-center mb-4">
+                    <div class="forum-avatar w-12 h-12 text-primary text-3xl flex items-center justify-center mr-4">
+                        <i class="bi bi-person-circle"></i>
+                    </div>
+                    <div>
+                        <h6 class="font-bold text-gray-900">Alex Chen</h6>
+                        <small class="text-gray-500">2 hours ago</small>
+                    </div>
+                </div>
+                <h5 class="text-xl font-bold mb-3 text-gray-900">Getting Started with Custom Themes</h5>
+                <p class="text-gray-600 mb-4">Just started using LifeTech and I'm loving the customization options. Here's my experience creating a custom theme from scratch...</p>
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">Themes</span>
+                        <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">Beginner</span>
+                    </div>
+                    <div class="flex items-center gap-4 text-gray-500">
+                        <small class="flex items-center"><i class="bi bi-chat mr-1"></i> 12</small>
+                        <small class="flex items-center"><i class="bi bi-heart mr-1"></i> 8</small>
+                    </div>
+                </div>
+            </div>
+            <div class="forum-post bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 h-full border-l-4 border-transparent hover:border-primary border-0">
+                <div class="flex items-center mb-4">
+                    <div class="forum-avatar w-12 h-12 text-primary text-3xl flex items-center justify-center mr-4">
+                        <i class="bi bi-person-circle"></i>
+                    </div>
+                    <div>
+                        <h6 class="font-bold text-gray-900">Maria Garcia</h6>
+                        <small class="text-gray-500">5 hours ago</small>
+                    </div>
+                </div>
+                <h5 class="text-xl font-bold mb-3 text-gray-900">API Integration Best Practices</h5>
+                <p class="text-gray-600 mb-4">Sharing some tips and tricks for integrating the LifeTech API into your applications. What patterns have worked best for you?</p>
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">API</span>
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">Advanced</span>
+                    </div>
+                    <div class="flex items-center gap-4 text-gray-500">
+                        <small class="flex items-center"><i class="bi bi-chat mr-1"></i> 24</small>
+                        <small class="flex items-center"><i class="bi bi-heart mr-1"></i> 15</small>
+                    </div>
+                </div>
+            </div>
+            <div class="forum-post bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 h-full border-l-4 border-transparent hover:border-primary border-0">
+                <div class="flex items-center mb-4">
+                    <div class="forum-avatar w-12 h-12 text-primary text-3xl flex items-center justify-center mr-4">
+                        <i class="bi bi-person-circle"></i>
+                    </div>
+                    <div>
+                        <h6 class="font-bold text-gray-900">David Kim</h6>
+                        <small class="text-gray-500">1 day ago</small>
+                    </div>
+                </div>
+                <h5 class="text-xl font-bold mb-3 text-gray-900">Performance Optimization Tips</h5>
+                <p class="text-gray-600 mb-4">My website was loading slowly, but after implementing these optimization techniques, I've seen a 60% improvement in load times...</p>
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">Performance</span>
+                        <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-medium">Intermediate</span>
+                    </div>
+                    <div class="flex items-center gap-4 text-gray-500">
+                        <small class="flex items-center"><i class="bi bi-chat mr-1"></i> 18</small>
+                        <small class="flex items-center"><i class="bi bi-heart mr-1"></i> 22</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-12">
+            <a href="forum.html" class="btn-primary px-8 py-4 rounded-full font-semibold text-lg hover:shadow-lg transition-all duration-300 mr-4">View All Posts</a>
+            <a href="forum.html" class="btn-outline-primary px-8 py-4 rounded-full font-semibold text-lg border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300">Start a Discussion</a>
+        </div>
+    </div>
+</section>
+<script>
+(function() {
+    'use strict';
+    
+    function initScrollAnimations() {
+        const posts = document.querySelectorAll('#forum .forum-post');
+        if (posts.length === 0) return;
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    entry.target.style.opacity = '1';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        
+        posts.forEach(post => {
+            post.style.opacity = '0';
+            observer.observe(post);
+        });
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initScrollAnimations);
+    } else {
+        initScrollAnimations();
+    }
+})();
+</script>

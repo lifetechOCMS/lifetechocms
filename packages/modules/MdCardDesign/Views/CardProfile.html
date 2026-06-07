@@ -1,0 +1,1944 @@
+
+<link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
+      <div class="w-2/3 mx-auto my-14 shadow-md" id="root">
+        <main class="pt-2 flex-1 p-1 py-2 transition-all duration-300 overflow-y-auto h-full">
+
+          <!-- Breadcrumb + Add -->
+            <div class="mb-1 rounded-xl p-4 bg-white">
+                <div class="flex flex-row items-center justify-between">
+                  <div>
+                    <h1 class="text-xl md:text-2xl font-bold text-gray-800 mb-1">Card Profile</h1>
+                  </div>
+                  <div class="flex space-x-2">
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg flex items-center text-xs md:text-sm font-medium" id="addProfileBtn">
+                      <i class="fas fa-plus mr-2"></i>
+                      Add New Profile
+                    </button>
+                  </div>
+                </div>
+                <nav class="flex" aria-label="Breadcrumb">
+                  <ol class="inline-flex items-center space-x-3 bg-gray-50 px-4 py-2 rounded-lg shadow-sm text-sm">
+                    <li>
+                      <a href="<?=ltSiteUrl() ?>/LtDashboard" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors duration-200">
+                        <i class="fas fa-home text-gray-400 mr-2"></i>
+                        <span class="font-medium">Dashboard</span>
+                      </a>
+                    </li>
+                    <li class="flex items-center">
+                      <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path>
+                      </svg>
+                      <a href="#" class="ml-2 text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200">Card Profile</a>
+                    </li>
+                  </ol>
+                </nav>
+            </div>
+          <!-- Filter Bar -->
+            <div class="bg-white rounded-xl shadow-md p-4 mb-1 hidden" id="filterBar">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                    <div class="flex flex-1 flex-col md:flex-row md:items-center gap-2">
+                        <div class="relative w-full md:w-auto">
+                            <input type="search" placeholder="Search..." class="w-full md:w-64 pl-10 pr-4 py-2 bg-gray-100 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" id="searchInput" />
+                            <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                        </div>
+                        <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-gray-500" id="clearFiltersBtn">Clear</button>
+                    </div>
+                </div>
+            </div>
+
+          <!-- Table -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-4 border-b border-gray-200">
+                    <div class="flex flex-row items-center justify-between">
+                        <div class="flex items-center">
+                            <label class="text-sm text-gray-600 mr-2">Show</label>
+                            <select class="bg-gray-100 border border-gray-300 text-gray-700 py-1 px-3 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" id="entriesPerPageSelect">
+                                <option value="10">10</option>
+                                <option value="20">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <button class="flex items-center justify-center w-10 h-10 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 ml-4" id="toggleFiltersBtn">
+                                <i class="fas fa-filter text-gray-600"></i>
+                            </button>
+                        </div>
+                        <div class="flex-1 flex justify-end">
+                          <nav class="inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination" id="paginationNav">
+                            <!-- Pagination will be populated here -->
+                          </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="theme-table-container overflow-x-auto">
+                    <table class="theme-table w-full min-w-[700px] text-sm">
+                        <thead>
+                            <tr class="bg-gray-50 text-left">
+                                
+                                <th class="py-3 px-4 font-medium text-gray-600 border-b border-gray-200 w-16">
+                                  <div class="flex items-center">SN<button class="ml-1 text-gray-400 hover:text-gray-600 focus:outline-none" data-sort="id"><i class="fas fa-sort"></i></button></div>
+                                </th>
+                                <th class="py-3 px-4 font-medium text-gray-600 border-b border-gray-200 w-32">Full Name</th>
+                                <th class="py-3 px-4 font-medium text-gray-600 border-b border-gray-200 w-32">
+                                  Title
+                                </th>
+                                <th class="py-3 px-4 font-medium text-gray-600 border-b border-gray-200 w-32">Bio</th>
+                                <th class="py-3 px-4 font-medium text-gray-600 border-b border-gray-200 w-32">Email</th>
+                                <th class="py-3 px-4 font-medium text-gray-600 border-b border-gray-200 w-32">Phone No</th>
+                                <th class="py-3 px-4 font-medium text-gray-600 border-b border-gray-200 w-32">
+                                  <div class="flex items-center">Status<button class="ml-1 text-gray-400 hover:text-gray-600 focus:outline-none" data-sort="status"><i class="fas fa-sort"></i></button></div>
+                                </th>
+                                <th class="py-3 px-4 font-medium text-gray-600 border-b border-gray-200 w-32">Section</th>
+                                <th class="py-3 px-4 font-medium text-gray-600 border-b border-gray-200 w-24 text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                          <!-- Table rows will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-sm text-gray-500 p-2" id="tableInfo">Showing 0 to 0 of 0 entries</div>
+            </div>
+
+            <div id="profileDrawer" class="fixed inset-0 bg-black/40 flex items-center justify-center z-50 hidden">
+                    <div class="bg-white rounded-lg shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-y-auto">
+                        <div class="bg-blue-600 p-4 flex justify-between items-center">
+                              <div>
+                                <h2 class="text-2xl font-bold text-white flex items-center" id="modalLabel">
+                                  <i class="fas fa-plus mr-2"></i>
+                                  New Profile
+                                </h2>
+                              </div>
+                              <button type="button" class="text-white hover:text-red-200 text-3xl focus:outline-none transition-colors" id="closeDrawerBtn">
+                                <i class="fas fa-times-circle"></i>
+                              </button>
+                        </div>
+                    <!--<form  class="bg-white p-6 rounded shadow-lg w-full  flex flex-col h-auto max-h-[90vh]" id="responseForm">-->
+                    <form  class="bg-white p-6 w-full" id="responseForm">
+        
+                <!-- Tabs Header -->
+                        <div class="mb-6">
+                            <nav class="flex gap-6 text-sm font-medium" id="tabs">
+                              <button class="tab-btn bg-blue-300 border-b-3 hover:bg-blue-400 border-blue-700 p-2 rounded-lg shadow-lg hover:shadow-xl transition-all" data-tab="0">
+                                User Info
+                              </button>
+                              <button class="tab-btn bg-gray-300 hover:bg-gray-400 p-2 rounded-lg shadow-lg hover:shadow-xl transition-all" data-tab="1">
+                                Media
+                              </button>
+                              <button class="tab-btn bg-gray-300 hover:bg-gray-400 p-2 rounded-lg shadow-lg hover:shadow-xl transition-all" data-tab="2">
+                                Social Media
+                              </button>
+                              <button class="tab-btn bg-gray-300 hover:bg-gray-400 p-2 rounded-lg shadow-lg hover:shadow-xl transition-all" data-tab="3">
+                                Extra
+                              </button>
+                            </nav>
+                          </div>
+        
+                        <div class="flex-1 overflow-y-auto px-1">
+                          <div class="tab-content block">
+                              <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                                <div>
+                                  <label class="mb-1 block text-sm font-medium text-gray-700">Fullname</label>
+                                  <input type="text" name="fullName" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-blue-500" placeholder="Full name"  id="fullName" />
+                                </div>
+                                <div>
+                                  <label class="mb-1 block text-sm font-medium text-gray-700">Title</label>
+                                  <input type="text" name="title" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-blue-500" placeholder="Title" id="title" />
+                                </div>
+                                <div>
+                                  <label class="mb-1 block text-sm font-medium text-gray-700">Email 1</label>
+                                  <input type="email" name="email1" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-blue-500" placeholder="Email" id="email1" />
+                                </div>
+                                <div>
+                                  <label class="mb-1 block text-sm font-medium text-gray-700">Email 2</label>
+                                  <input type="email2" name="email2" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-blue-500" placeholder="Email 2" id="email2" />
+                                </div>
+                                <div>
+                                  <label class="mb-1 block text-sm font-medium text-gray-700">Phone 1</label>
+                                  <input type="tel" name="phone1" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-blue-500" placeholder="phone" id="phone1" />
+                                </div>
+                                <div>
+                                  <label class="mb-1 block text-sm font-medium text-gray-700">Phone 2</label>
+                                  <input type="tel" name="phone2" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-blue-500" placeholder="Phone 2" id="phone2" />
+                                </div>
+                                <div>
+                                  <label class="mb-1 block text-sm font-medium text-gray-700">Company</label>
+                                  <input type="text" name="company" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-blue-500" placeholder="Company Name" id="company" />
+                                </div>
+                                <div>
+                                  <label class="mb-1 block text-sm font-medium text-gray-700">Location</label>
+                                  <input type="text" name="location" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-blue-500" placeholder="Location" id="location" />
+                                </div>
+                                <div class="md:col-span-2">
+                                  <label class="mb-1 block text-sm font-medium text-gray-700">Bio</label>
+                                  <input type="hidden" name="bio" id="hiddenInput">
+                                <div class="border border-gray-300 rounded-md overflow-hidden">
+                                    <div id="editor" style="height: 200px;"></div>
+                                </div>
+                                </div>
+                                <div>
+                                  <label class="mb-1 block text-sm font-medium text-gray-700">Short Bio</label>
+                                  <textarea name="shortBio" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-blue-500" placeholder="Biography" id="shortBio"></textarea>
+                                </div>
+                                <div>
+                                    <label for="dob" class="mb-1 block text-sm font-medium text-gray-700">Date</label>
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                            <i class="fas fa-calendar-alt text-gray-400"></i>
+                                        </div>
+                                        <input type="date" id="date" name="date" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-blue-500" />
+                                </div>
+                                <div>
+                                  <label class="mb-1 block text-sm font-medium text-gray-700">Category</label>
+                                  <input type="text" name="category" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-blue-500" placeholder="Profile Category" id="category" />
+                                </div>
+                                <div>
+                                  <label class="mb-1 block text-sm font-medium text-gray-700">Icon</label>
+                                  <input type="text" name="icon" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-blue-500" placeholder="fas fa-user" id="icon" />
+                                </div>
+                                <div id="enableStatusDisplay">
+                                  <label class="mb-1 block text-sm font-medium text-gray-700">Status</label>
+                                  <select name="isEnabled" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-blue-500" id="isEnabled">
+                                    <option value="1">Enabled</option>
+                                    <option value="0">Disabled</option>
+                                  </select>
+                                </div>
+                                <div>
+                                  <label class="mb-1 block text-sm font-medium text-gray-700">Asign To</label>
+                                  <select name="assignTo" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-blue-500" id="assignTo">
+                                  </select>
+                                </div>
+                                
+                              </div>
+                            </div>
+                
+                          <!-- Media -->
+                          <div class="tab-content hidden">
+                            <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    
+                              <div class="group">
+                                <label class="mb-2 flex items-center gap-2 text-sm font-semibold text-gray-700">
+                                  <i class="fas fa-image text-blue-500"></i> Image 1
+                                </label>
+                                <input type="file" name="image1" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 focus:outline-none border border-gray-300 rounded-md bg-gray-50 cursor-pointer shadow-sm transition-all" />
+                              </div>
+                    
+                              <div class="group">
+                                <label class="mb-2 flex items-center gap-2 text-sm font-semibold text-gray-700">
+                                  <i class="fas fa-image text-blue-500"></i> Image 2
+                                </label>
+                                <input type="file" name="image2" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 focus:outline-none border border-gray-300 rounded-md bg-gray-50 cursor-pointer shadow-sm transition-all" />
+                              </div>
+                    
+                              <div class="group">
+                                <label class="mb-2 flex items-center gap-2 text-sm font-semibold text-gray-700">
+                                  <i class="fas fa-image text-blue-500"></i> Image 3
+                                </label>
+                                <input type="file" name="image3" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 focus:outline-none border border-gray-300 rounded-md bg-gray-50 cursor-pointer shadow-sm transition-all" />
+                              </div>
+                    
+                              <div class="group">
+                                <label class="mb-2 flex items-center gap-2 text-sm font-semibold text-gray-700">
+                                  <i class="fas fa-image text-blue-500"></i> Image 4
+                                </label>
+                                <input type="file" name="image4" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 focus:outline-none border border-gray-300 rounded-md bg-gray-50 cursor-pointer shadow-sm transition-all" />
+                              </div>
+                    
+                              <div class="group">
+                                <label class="mb-2 flex items-center gap-2 text-sm font-semibold text-gray-700">
+                                  <i class="fas fa-video text-red-500"></i> Video 1
+                                </label>
+                                <input type="file" name="video1" accept="video/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100 focus:outline-none border border-gray-300 rounded-md bg-gray-50 cursor-pointer shadow-sm transition-all" />
+                                <p class="mt-1 text-xs text-gray-400">MP4, MOV or WebM (Max 5MB)</p>
+                              </div>
+                    
+                              <div class="group">
+                                <label class="mb-2 flex items-center gap-2 text-sm font-semibold text-gray-700">
+                                  <i class="fas fa-video text-red-500"></i> Video 2
+                                </label>
+                                <input type="file" name="video2" accept="video/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100 focus:outline-none border border-gray-300 rounded-md bg-gray-50 cursor-pointer shadow-sm transition-all" />
+                                <p class="mt-1 text-xs text-gray-400">MP4, MOV or WebM (Max 5MB)</p>
+                              </div>
+                    
+                            </div>
+                          </div>
+                
+                          <!-- Social Media -->
+                          <div class="tab-content hidden">
+                             <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                                 <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Facebook</label>
+                                    <div class="relative">
+                                      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fab fa-facebook text-blue-600"></i>
+                                      </div>
+                                      <input type="url" name="facebook" class="w-full border border-gray-300 pl-10 pr-3 py-2 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm placeholder-gray-400" placeholder="https://facebook.com/your-page" />
+                                    </div>
+                                  </div>
+                                
+                                  <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Twitter / X</label>
+                                    <div class="relative">
+                                      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fab fa-twitter text-sky-500"></i>
+                                      </div>
+                                      <input type="text" name="twitter" class="w-full border border-gray-300 pl-10 pr-3 py-2 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm placeholder-gray-400" placeholder="@username" />
+                                    </div>
+                                  </div>
+                                
+                                  <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Instagram</label>
+                                    <div class="relative">
+                                      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fab fa-instagram text-pink-600"></i>
+                                      </div>
+                                      <input type="url" name="instagram" class="w-full border border-gray-300 pl-10 pr-3 py-2 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm placeholder-gray-400" placeholder="https://instagram.com/your-username" />
+                                    </div>
+                                  </div>
+                                  
+                                  <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">LinkedIn</label>
+                                    <div class="relative">
+                                      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fab fa-linkedin text-blue-700"></i>
+                                      </div>
+                                      <input type="url" name="linkedin" class="w-full border border-gray-300 pl-10 pr-3 py-2 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm placeholder-gray-400" placeholder="LinkedIn Profile URL" />
+                                    </div>
+                                  </div>
+                                  
+                                  <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">YouTube</label>
+                                    <div class="relative">
+                                      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fab fa-youtube text-red-600"></i>
+                                      </div>
+                                      <input type="url" name="youtube" class="w-full border border-gray-300 pl-10 pr-3 py-2 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm placeholder-gray-400" placeholder="YouTube Channel URL" />
+                                    </div>
+                                  </div>
+                                  
+                                  <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">WhatsApp</label>
+                                    <div class="relative">
+                                      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fab fa-whatsapp text-green-500"></i>
+                                      </div>
+                                      <input type="tel" name="whatsapp" class="w-full border border-gray-300 pl-10 pr-3 py-2 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm placeholder-gray-400" placeholder="WhatsApp Number (e.g., +1234567890)" />
+                                    </div>
+                                  </div>
+                                  
+                                  <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">GitHub</label>
+                                    <div class="relative">
+                                      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fab fa-github text-gray-800"></i>
+                                      </div>
+                                      <input type="url" name="github" class="w-full border border-gray-300 pl-10 pr-3 py-2 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm placeholder-gray-400" placeholder="GitHub Profile URL" />
+                                    </div>
+                                  </div>
+                                  
+                                  <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">TikTok</label>
+                                    <div class="relative">
+                                      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fab fa-tiktok text-black"></i>
+                                      </div>
+                                      <input type="url" name="tiktok" class="w-full border border-gray-300 pl-10 pr-3 py-2 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm placeholder-gray-400" placeholder="TikTok Profile URL" />
+                                    </div>
+                                  </div>
+                                  
+                                  <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Website</label>
+                                    <div class="relative">
+                                      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-globe text-gray-500"></i>
+                                      </div>
+                                      <input type="url" name="website" class="w-full border border-gray-300 pl-10 pr-3 py-2 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm placeholder-gray-400" placeholder="https://yourwebsite.com" />
+                                    </div>
+                                  </div>
+
+                            </div>
+                          </div>
+                
+                          <!-- Extra -->
+                            <div class="tab-content hidden" id="step-extras">
+  
+                              <div class="flex items-center gap-2 mb-4 border-b pb-2">
+                                <i class="fas fa-list text-gray-600"></i>
+                                <h3 class="font-semibold text-gray-800">Additional Details</h3>
+                              </div>
+                            
+                              <div class="flex gap-3 mb-2 px-1">
+                                <div class="flex-1 text-xs font-semibold text-gray-500 uppercase tracking-wider">Key</div>
+                                <div class="flex-1 text-xs font-semibold text-gray-500 uppercase tracking-wider">Value</div>
+                                <div class="w-8"></div> </div>
+                            
+                              <div class="space-y-3" id="fieldsContainer">
+                                
+                                <div class="flex items-start gap-3 field-row">
+                                  <div class="flex-1">
+                                    <input type="text" data-name="extra_key[]" class="w-full border border-gray-300 px-3 py-2 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm bg-gray-50" placeholder="eg. Address" />
+                                  </div>
+                                  <div class="flex-1">
+                                    <input type="text" data-name="extra_value[]" class="w-full border border-gray-300 px-3 py-2 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm g-gray-50" placeholder="P.O.Box. 125. p.o.box. Garki" />
+                                  </div>
+                                  <div class="w-8 flex justify-center py-2">
+                                    <i class="fas fa-lock text-gray-300" title="Default field cannot be deleted"></i>
+                                  </div>
+                                </div>
+                            
+                                </div>
+                            
+                              <button type="button" class="mt-4 flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors" id="addFieldBtn">
+                                <i class="fas fa-plus"></i>
+                                <span>Add Field</span>
+                              </button>
+                            
+                            </div>
+                          <!-- Extra -->
+                          
+                        </div>
+                 </form>       
+                        <div class="bg-gradient-to-r from-gray-100 to-gray-200 px-6 py-4 border-t border-gray-300 flex justify-between items-center">
+                          <button type="button" class="px-4 py-2 rounded bg-gray-200 text-gray-600 hover:text-gray-800" id="cancelBtn">Cancel</button>
+                
+                          <div class="flex gap-2">
+                            <button type="button" class="px-4 py-2 rounded bg-gray-400 text-white hover:bg-gray-500 hidden" id="prevBtn">Previous</button>
+                
+                            <button type="button" class="px-4 py-2 rounded bg-blue-400 text-white hover:bg-blue-500" id="nextBtn">Next </button>
+                
+                            <button type="submit" class="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700" id="submitBtn"> Submit </button>
+                          </div>
+                          
+                        </div>
+        
+                 </div>
+            </div>
+            
+            <div id="viewProfileDrawer" class="fixed inset-0 bg-black/40 flex items-center justify-center z-50 hidden"></div>
+         
+            <!--View Section Modal-->
+                <div id="sectionModal" class="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-2 hidden">
+                  <div class="bg-white rounded-lg shadow-2xl w-full max-w-6xl max-h-[90vh] overflow-hidden flex flex-col">
+                    <div class="bg-blue-500 p-4 flex justify-between items-center">
+                      <div class="text-xl font-bold text-white flex items-center">
+                            <span id="modalTitle"></span>
+                      </div>
+                      <button type="button" class="text-white hover:text-red-200 text-3xl focus:outline-none transition-colors" onclick="closeTableDrawer()">
+                        <i class="fas fa-times-circle"></i>
+                      </button>
+                    </div>
+                    
+                    <div class="overflow-y-auto flex-1 p-6 bg-gray-50">
+                      <div class="space-y-4">
+                          <div class="bg-white rounded-xl shadow-md p-4 mb-1">
+                                    <div class="flex flex-1 flex-col md:flex-row md:items-center gap-2">
+                                        <div class="relative w-full md:w-84">
+                                            <label class="mb-1 block text-sm font-medium text-gray-700">Assign Section</label>
+                                            <select class="bg-white border border-gray-300 text-gray-700 py-2 px-3 rounded-md text-sm w-full focus:outline-none focus:ring-2 focus:ring-blue-500" id="sectionAssignSelect">
+                                            </select>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                        <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-gray-500 md:mt-6" id="assignToProfileBtn">Assign</button>
+                                        <span id="assignLoader" class="md:mt-6"></span>
+                                        </div>
+                                    </div>
+                          </div>
+                          <div class="bg-white rounded-xl shadow-md p-4 mb-1 hidden" id="filterBarPublish"></div>
+                          <div id="sectionTableData" class="border-2 border-gray-200 rounded-lg hover:shadow-xl transition-all duration-200 bg-white"></div>
+                      </div>
+                    </div>
+                    
+                    <div class="flex justify-end m-2">
+                      <button type="button" class="px-6 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-medium transition-colors" onclick="closeTableDrawer()">
+                        <i class="fas fa-times mr-2"></i>Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
+         
+         
+        </main>
+      </div>
+
+    <!-- Footer -->
+
+</div>
+<?php  ltImport('MdLtTheme','LtThemeService.js')  ?>
+<script src="https://cdn.quilljs.com/1.3.7/quill.js"></script>
+<script>
+
+
+    // State variables
+    let cardProfiles = [];
+    let cardSection = [];
+    let search = '';
+    let entriesPerPage = 10;
+    let page = 1;
+    let sort = { key: '', dir: 'asc' };
+    let editId = null;
+    let showFilters = false;
+    let packages = [];
+    let contents = [];
+    let drawer = false;
+    
+    const elements = {
+        assignTo: document.getElementById('assignTo'),
+        drawer: document.getElementById('profileDrawer'),
+        submitBtn: document.getElementById('submitBtn'),
+        tableInfo: document.getElementById('tableInfo'),
+        paginationNav: document.getElementById('paginationNav'),
+        filterBar: document.getElementById('filterBar'),
+        tableBody: document.getElementById('tableBody'),
+        editor: document.getElementById('editor'),
+        hiddenInput: document.getElementById('hiddenInput'),
+    }
+    const tab = {
+        tabAll: document.querySelectorAll(".tab-btn"),
+        contents: document.querySelectorAll(".tab-content"),
+        btnNext: document.getElementById("nextBtn"),
+        btnPrev: document.getElementById("prevBtn"),
+        btnSubmit : document.getElementById("submitBtn"),
+        currentTab : 0,
+        fieldsContainer : document.getElementById('fieldsContainer'),
+        addFieldBtn : document.getElementById('addFieldBtn')
+    }
+    
+    
+    var quill = new Quill('#editor', {
+      theme: 'snow',
+      modules: {
+        toolbar: [
+          ['bold', 'italic', 'underline'],        // toggled buttons
+          ['blockquote', 'code-block'],
+    
+          [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+          [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+          [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+          [{ 'direction': 'rtl' }],                         // text direction
+    
+          [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+          [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+    
+          [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults
+          [{ 'font': [] }],
+          [{ 'align': [] }],
+    
+          ['clean']                                         // remove formatting button
+        ]
+      }
+    });
+    
+    if (window.innerWidth < 768) {
+      quill.root.style.minHeight = '150px';
+    } else {
+      quill.root.style.minHeight = '220px';
+    }
+    
+
+    // Filter data based on search
+    function filterData() {
+      return cardProfiles.filter(p => {
+        return (
+            !search 
+            || p.fullName.toLowerCase().includes(search.toLowerCase())
+            || p.title.toLowerCase().includes(search.toLowerCase())
+            );
+      });
+    }
+    
+    function populateSection(value){
+        let html = '<option value="">-- Select Section --</option>';
+        
+         html += cardSection.map(s => `<option value="${s.ltId}" ${s.ltId == value ? 'selected' : ''}> ${s.name} </option>`).join('');
+        return html;
+    }
+    
+    function getSectionTitle(id){
+        let section = cardSection.find(c => c.ltId == id);
+        if(!section) return '';
+        return section.name;
+    }
+
+    // Paginate data
+    function paginateData(data) {
+      const start = (page - 1) * entriesPerPage;
+      const end = start + entriesPerPage;
+      return data.slice(start, end);
+    }
+
+    // Update table with current data
+    function updateTable() {
+      const filtered = filterData();
+      const paginated = paginateData(filtered);
+      const total = filtered.length;
+      const totalPages = Math.max(1, Math.ceil(total / entriesPerPage));
+
+      // Update table body
+      elements.tableBody.innerHTML = '';
+      if (paginated.length === 0) {
+        elements.tableBody.innerHTML = '<tr><td colspan="8" class="text-center py-6 text-gray-400">No profile found.</td></tr>';
+      } else {
+        paginated.forEach((p, i) => {
+          const tr = document.createElement('tr');
+          tr.className = `hover:bg-blue-50 transition duration-150 cursor-pointer`;
+          tr.innerHTML = `
+            <td class="py-3 px-4 border-b border-gray-200 text-center">${(page - 1) * entriesPerPage + i + 1}</td>
+            <td class="py-3 px-4 border-b border-gray-200">
+                <div class="flex items-center gap-1">
+                    <div class="font-medium text-blue-700" data-id="${p.ltId}" id="viewAvailableSection">${p.fullName}</div>
+                    <span id="viewLoader"></span>
+                </div>
+            </td>
+            <td class="py-3 px-4 border-b border-gray-200">${p.title}</td>
+            <td class="py-3 px-4 border-b border-gray-200"><textarea readonly>${p.shortBio}</textarea></td>
+            <td class="py-3 px-4 border-gray-200">
+                ${p.email1 ? `<div class="font-bold text-center border-b mb-1"><a href="mailto:${p.email1}" class="text-blue-600 text-base">${p.email1}</a></div>` : ''}
+                ${p.email2 ? `<div class="font-bold text-center text-indigo-400"><a href="mailto:${p.email2}" class="text-blue-600 text-base">${p.email2}</a></div>` : ''}
+            </td>
+            <td class="py-3 px-4 border-b border-gray-200">
+                ${p.phone1 ? `<div class="border-b mb-1"> ${p.phone1}</div>` : ''}
+                ${p.phone2 ? `<div> ${p.phone2}</div>` : ''}
+            </td>
+            <td class="py-3 px-4 border-b border-gray-200">
+              <span id="isEnabledStatus" data-id="${p.ltId}" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${p.isEnabled == '1' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">
+                <span class="w-2 h-2 ${p.isEnabled == '1' ? 'bg-green-500' : 'bg-yellow-500'} rounded-full mr-1.5"></span>
+                ${p.isEnabled == '1' ? 'Enabled' : 'Disabled'}
+              </span>
+            </td>
+            <td class="py-3 px-4 border-b border-gray-200">${getSectionTitle(p.sectionId)}</td>
+            <td class="py-3 px-4 border-b border-gray-200">
+              <div class="flex justify-center">
+                <div class="flex items-center gap-1">
+                    <span id="viewLoader"></span>
+                    <button aria-label="view-section" class="text-gray-500 hover:text-blue-600 mx-1 focus:outline-none" title="View assigned section" data-title="${p.fullName}" data-id="${p.ltId}" id="viewAvailableSectionBtn">
+                      <i class="fas fa-th text-xl text-green-500"></i>
+                    </button>
+                </div>
+                <button aria-label="Edit" class="text-gray-500 hover:text-blue-600 mx-1 focus:outline-none" title="Edit Profile" data-id="${p.ltId}" >
+                  <i class="fas fa-edit text-xl text-green-500"></i>
+                </button>
+                <button aria-label="View" class="text-gray-500 hover:text-blue-600 mx-1 focus:outline-none" title="View Profile record" data-id="${p.ltId}">
+                  <i class="fas fa-eye text-xl text-yellow-500"></i>
+                </button>
+                <button aria-label="Delete" class="text-gray-500 hover:text-red-600 mx-1 focus:outline-none" title="Delete Profile" data-id="${p.ltId}">
+                  <i class="fas fa-trash-alt text-xl text-red-400"></i>
+                </button>
+              </div>
+            </td>
+          `;
+          elements.tableBody.appendChild(tr);
+        });
+      }
+
+      // Update pagination
+      updatePagination(total, totalPages);
+
+      // Update table info
+      const start = total === 0 ? 0 : (page - 1) * entriesPerPage + 1;
+      const end = Math.min(page * entriesPerPage, total);
+      elements.tableInfo.textContent = `Showing ${start} to ${end} of ${total} entries`;
+
+      // Add event listeners to table elements
+      addTableEventListeners();
+    }
+
+function updatePagination(total, totalPages) {
+  elements.paginationNav.innerHTML = `
+    <button class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50" id="prevPageBtn" ${page === 1 ? 'disabled' : ''}>
+      <i class="fas fa-chevron-left text-xs"></i>
+    </button>
+  `;
+
+  const maxButtons = 5;
+  let startPage, endPage;
+
+  if (totalPages <= maxButtons) {
+    startPage = 1;
+    endPage = totalPages;
+  } else if (page <= 3) {
+    startPage = 1;
+    endPage = 5;
+  } else if (page >= totalPages - 2) {
+    startPage = totalPages - 4;
+    endPage = totalPages;
+  } else {
+    startPage = page - 2;
+    endPage = page + 2;
+  }
+
+  for (let i = startPage; i <= endPage; i++) {
+    const btn = document.createElement('button');
+    btn.className = `relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium ${page === i ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-100'}`;
+    btn.textContent = i;
+    btn.disabled = page === i;
+    btn.addEventListener('click', () => {
+      page = i;
+      updateTable();
+    });
+    elements.paginationNav.appendChild(btn);
+  }
+
+  const nextBtn = document.createElement('button');
+  nextBtn.className = `relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50`;
+  nextBtn.id = 'nextPageBtn';
+  nextBtn.innerHTML = '<i class="fas fa-chevron-right text-xs"></i>';
+  nextBtn.disabled = page === totalPages;
+  nextBtn.addEventListener('click', () => {
+    if (page < totalPages) {
+      page++;
+      updateTable();
+    }
+  });
+  elements.paginationNav.appendChild(nextBtn);
+
+  document.getElementById('prevPageBtn').addEventListener('click', () => {
+    if (page > 1) {
+      page--;
+      updateTable();
+    }
+  });
+}
+
+    // Add event listeners to table elements
+    function addTableEventListeners() {
+      // Select all checkbox
+
+      // Sort buttons
+    //   document.querySelectorAll('[data-sort]').forEach(btn => {
+    //     btn.addEventListener('click', (e) => {
+    //       const sortKey = e.currentTarget.getAttribute('data-sort');
+    //       handleSort(sortKey);
+    //     });
+    //   });
+
+      // View buttons
+      document.querySelectorAll('button[aria-label="View"]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const ltId = e.currentTarget.getAttribute('data-id');
+          handleViewProfile(ltId);
+        });
+      });
+      
+      // Edit buttons
+      document.querySelectorAll('button[aria-label="Edit"]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const ltId = e.currentTarget.getAttribute('data-id');
+          handleEdit(ltId);
+        });
+      });
+
+      // Delete buttons
+      document.querySelectorAll('button[aria-label="Delete"]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const ltId = e.currentTarget.getAttribute('data-id');
+          deleteProfile(ltId);
+        });
+      });
+      
+      
+    }
+
+    function handleisEnabled(ltId){
+        
+        cardProfiles = cardProfiles.map(profile => profile.ltId === +ltId ? {...profile, isEnabled: profile.isEnabled ? 0 : 1} : profile);
+        updateTable();
+    }
+
+    async function handleDelete(ltId) {
+        cardProfiles = cardProfiles.filter(r => r.ltId !== +ltId);
+        updateTable();
+   
+    }
+    
+      function domParser(content){
+        let c = new DOMParser().parseFromString(content, "text/html").body.textContent;
+        return c;
+    }
+    
+
+    // package drawer functions
+    function openProfileDrawer() {
+    const modalLabel = document.getElementById('modalLabel');
+    const status = document.getElementById('enableStatusDisplay');
+ 
+    // 1. Find the profile
+      const profile = cardProfiles.find(p => p.ltId == editId);
+        // update the title 
+        modalLabel.innerHTML = editId ? `<i class="fas fa-edit mr-2"></i>Edit <span class="mx-1 text-amber-400"> ${profile?.title} </span> Profile` : ` <i class="fas fa-plus mr-2"></i> New Profile/Card`; 
+        
+      if(editId === null){
+          status.classList.remove('hidden');
+          const fieldsContainer = document.getElementById('fieldsContainer');
+          const rowsToDelete = fieldsContainer.querySelectorAll('.field-row:not(:first-child)');
+          rowsToDelete.forEach(row => row.remove());
+      }else{
+          status.classList.remove('add');
+      }
+         
+      elements.drawer.classList.remove('hidden');
+    };
+
+    function closeProfileDrawer() {
+      elements.drawer.classList.add('hidden');
+      document.getElementById('modalLabel').innerHTML = '';
+      document.getElementById('responseForm').reset();
+      editId = null;
+      tab.currentTab = 0;
+      quill.root.innerHTML = '';
+      updateUI();
+    };
+    
+    function getJsonData(){
+        let rows = document.querySelectorAll('#fieldsContainer .field-row');
+        let dataObject = {};
+        
+        rows.forEach(row => {
+            let keyInput = row.querySelector('input[data-name="extra_key[]"]');
+            let valueInput = row.querySelector('input[data-name="extra_value[]"]');
+            
+            
+            let key = keyInput.value.trim();
+            let value = valueInput.value.trim();
+            
+            // Only key if is not empty
+            if(key){
+                dataObject[key] = value;
+            }
+            
+            
+        })
+            return JSON.stringify(dataObject);
+    }
+    
+
+    async function handleFormSubmit(e) {
+      e.preventDefault();
+      
+      let formData = new FormData(document.getElementById('responseForm'));
+
+      formData.append('extra', getJsonData());
+      if(!formData.get('fullName') || formData.get('fullName').trim() == ''){
+          Swal.fire('Notice!!!', `Fullname field is required`, 'warning');
+          return;
+      }
+    
+       formData.set('bio', quill.root.innerHTML);
+    
+        if (editId) {
+            
+            // update the formdata with method patch
+            formData.append('ltId', editId);
+            formData.append('_method', 'PATCH');
+            formData.delete('isEnabled');
+            
+          // Update Package
+            Swal.fire({
+                title: 'Notice!',
+                text: 'Are you sure you want to update this profile?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, Update',
+                cancelButtonText: 'No, Cancel'
+            }).then(async result => {
+                if (result.isConfirmed) {
+                    
+                        elements.submitBtn.innerHTML = '<span class="animate-pulse">processing...</span>';
+                    try{
+                        
+                        const response = await fetch(`${BASE_URL}/cards/profiles/${editId}`, {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${LW_TOKEN}`,
+                                'Accept': 'application/json'
+    
+                            },
+                            body: formData
+                        });
+                          // 5. Parse the JSON response
+                        const result = await response.json();
+                        const {responseData, responseCategory, responseResult} = result;
+                        
+                        if(responseCategory == 200){
+                              // update the table
+
+                            cardProfiles = cardProfiles.map(cp => cp.ltId === +editId ? {
+                                ...cp,
+                                ...responseData
+                              } : cp);
+                
+                            Swal.fire('Notice!!!', 'Updated Successfully', 'success').then(function(){
+                                elements.submitBtn.innerHTML = 'Update';
+                                    updateTable();
+                                 closeProfileDrawer();
+                            });
+                        }else{
+                            Swal.fire('Error!!!', `${responseResult}`, 'warning').then(function(){
+                                elements.submitBtn.innerHTML = 'Update';
+                             
+                            })
+                            
+                        }
+    
+                    }catch(error){
+                        Swal.fire('Error!!!', `${error}`, 'warning');
+                         elements.submitBtn.innerHTML = 'Update';
+                      
+                    }
+                }
+            });
+
+        } else {
+              
+            Swal.fire({
+                title: 'Notice!',
+                text: 'Are you sure you want to add this profile?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, Add',
+                cancelButtonText: 'No, Cancel'
+            }).then(async result => {
+                if (result.isConfirmed) {
+                    
+                    try {
+                        elements.submitBtn.innerHTML = '<span class="animate-pulse">processing...</span>';
+                        // 4. The Direct Fetch Call
+                        const response = await fetch(`${BASE_URL}/cards/profiles`, {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${LW_TOKEN}`,
+                                'Accept': 'application/json'
+    
+                            },
+                            body: formData
+                        });
+                    
+                        // 5. Parse the JSON response
+                        const result = await response.json();
+                         const {responseData, responseCategory, responseResult} = result;
+                    
+                        if(responseCategory == 200){
+                            cardProfiles = [...cardProfiles, responseData];
+
+                            Swal.fire('Notice!!!', 'Profile Added successfully', 'success').then(function(){
+                                 elements.submitBtn.innerHTML = 'Submit';
+                                    closeProfileDrawer();
+                                    updateTable();
+                            });
+    
+                        }else{
+                            Swal.fire('Error!!!', `${responseResult}`, 'warning').then(function(){
+                                elements.submitBtn.innerHTML = 'Submit';
+                            })
+                        }
+                    
+                    } catch (error) {
+                        // 7. Handle Network Errors (e.g., DNS issues, offline)
+                        console.error('Network Error:', error);
+                        Swal.fire('Error', 'Network error occurred', 'error');
+                    }
+            
+                }
+            }); 
+
+        }
+        
+
+    }
+
+   function handleEdit(ltId) {
+       
+       
+    const modalLabel = document.getElementById('modalLabel');
+    document.getElementById('enableStatusDisplay').classList.add('hidden');
+       
+       
+    // 1. Find the profile
+    const profile = cardProfiles.find(p => p.ltId == ltId);
+    if (!profile) return;
+       // storing the ID somewhere for Updating
+    editId = ltId;
+    
+     
+    // update the title 
+    modalLabel.innerHTML = `<i class="fas fa-edit mr-2"></i>Edit <span class="mx-1 text-amber-400"> ${profile?.title} </span> Profile`;
+
+    const form = document.getElementById('responseForm');
+
+    // ---------------------------------------------------------
+    // A. Standard Fields (Text, Email, Select, Textarea)
+    // ---------------------------------------------------------
+    const fields = [
+        'fullName', 'title', 'email1', 'email2', 'phone1', 'phone2',
+        'company', 'location', 'bio', 'shortBio', 'isEnabled', 'assignTo',
+        'facebook', 'twitter', 'instagram', 'linkedin', 'youtube','date',
+        'whatsapp', 'github', 'tiktok', 'website', 'category', 'icon'
+    ];
+
+    fields.forEach(field => {
+        const input = form.querySelector(`[name="${field}"]`);
+        // Check if input exists and profile has data for it
+        if (input && profile[field] !== undefined && profile[field] !== null) {
+            input.value = profile[field];
+        } else if (input) {
+            input.value = ''; // Clear if data is null
+        }
+    });
+    let html = populateSection(profile['sectionId']);
+    elements.assignTo.innerHTML = html;
+    
+    elements.hiddenInput = profile.bio;
+    quill.root.innerHTML = '';
+    quill.root.innerHTML = domParser(profile.bio) || '';
+
+    // ---------------------------------------------------------
+    // B. Handle Extras (Dynamic JSON Fields)
+    // ---------------------------------------------------------
+    const fieldsContainer = document.getElementById('fieldsContainer');
+    
+    // 1. Parse Extra Data (Handle if it's string or object)
+    let extras = profile.extra || {};
+    if (typeof extras === 'string') {
+        try { extras = JSON.parse(extras); } catch (e) { extras = {}; }
+    }
+
+    // 2. Clear ONLY the dynamic rows (keep the locked "Notes" row)
+    // We assume the first row (index 0) is your locked "Notes" field
+    const rowsToDelete = fieldsContainer.querySelectorAll('.field-row:not(:first-child)');
+    rowsToDelete.forEach(row => row.remove());
+
+    // 3. Reset the Locked "Notes" Field
+   
+    const notesInput = fieldsContainer.querySelector('.field-row:first-child');
+    if (notesInput) {
+        const notesValue = notesInput.closest('.field-row').querySelector('input[data-name="extra_value[]"]');
+        const notesKey = notesInput.closest('.field-row').querySelector('input[data-name="extra_key[]"]');
+        if (notesKey) {
+            notesKey.value = Object.keys(extras)[0] || ''; // Set value or clear
+            notesValue.value = Object.values(extras)[0] || ''; // Set value or clear
+        }
+    }
+
+    // 4. Loop through extras and create rows for everything else
+    Object.entries(extras).slice(1).forEach(([key, value]) => {
+
+            addExtraFieldToForm(key, value); 
+    });
+
+    // D. Open the Drawer / Modal
+    openProfileDrawer();
+    
+ 
+}
+
+/**
+ * Helper function to create the HTML for extra fields
+ */
+function addExtraFieldToForm(key = '', value = '') {
+    const container = document.getElementById('fieldsContainer');
+    const newRow = document.createElement('div');
+    newRow.className = 'flex items-start gap-3 field-row group';
+    newRow.innerHTML = `
+        <div class="flex-1">
+            <input type="text" data-name="extra_key[]" value="${key}" class="w-full border border-gray-300 px-3 py-2 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm" placeholder="Key" />
+        </div>
+        <div class="flex-1">
+            <input type="text" data-name="extra_value[]" value="${value}" class="w-full border border-gray-300 px-3 py-2 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm" placeholder="Value" />
+        </div>
+        <button type="button" class="w-8 flex justify-center py-2 text-red-400 hover:text-red-600 transition-colors focus:outline-none delete-row-btn">
+            <i class="fas fa-trash-alt"></i>
+        </button>
+    `;
+    
+    // Add delete functionality to the new button
+    newRow.querySelector('.delete-row-btn').addEventListener('click', function() {
+        newRow.remove();
+    });
+
+    container.appendChild(newRow);
+}
+
+    
+    //// Delete event Listener
+     function deleteProfile(ltId){
+        let res = cardProfiles.find(r => r.ltId == ltId);
+
+        Swal.fire({
+            title: 'Notice!',
+            text: `Are you sure you want to delete this card profile?`,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, Delete',
+            cancelButtonText: 'No, Cancel'
+        }).then(async result => {
+            if (result.isConfirmed) {
+   
+                try{
+                    
+                    const data = await ajaxRequest(`/cards/profiles/${ltId}`,'', 'DELETE');
+                    
+                    const {responseData, responseResult, responseCategory} = data;
+                    if(responseCategory == '200'){
+                        let msg = `Profile Deleted successfully ✌️`;
+                        Swal.fire('Notice!!!',msg,'success').then(function(){
+                            handleDelete(ltId);
+                        });
+                         
+                    }else{
+                        Swal.fire('Error!!!', `${responseResult}`, 'warning');
+                    }
+                    
+                }catch(error){
+                    Swal.fire('Error!!!', `${error}`, 'warning');
+                }
+            }
+        }); 
+    
+    };
+  
+
+function viewProfile(data) {
+
+    // --- Helper 1: Handle Extra Fields (JSON) ---
+    const renderExtras = () => {
+
+        let extras = JSON.parse(data.extra) || {};
+        if (Object.keys(extras).length === 0) return '<div class="p-4 text-sm text-gray-400 italic">No additional details</div>';
+
+        return Object.entries(extras).map(([key, value]) => `
+            <div class="grid grid-cols-3 p-3">
+                <div class="col-span-1 text-sm font-semibold text-gray-600 capitalize">${key}</div>
+                <div class="col-span-2 text-sm text-gray-800">${value}</div>
+            </div>
+        `).join('');
+    };
+
+    // --- Helper 2: Social Media Link Generator ---
+    const renderSocial = (platform, url, iconClass, colorClass, textClass) => {
+        if (!url) {
+            // Return faded empty state
+            return `
+            <div class="flex items-center gap-3 p-3 rounded-lg border border-dashed border-gray-200 opacity-60">
+                <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-400">
+                    <i class="${iconClass} text-lg"></i>
+                </div>
+                <div>
+                    <p class="text-xs text-gray-500">${platform}</p>
+                    <p class="text-sm text-gray-400 italic">Not connected</p>
+                </div>
+            </div>`;
+        }
+        // Return active link
+        return `
+        <a href="${url}" target="_blank" class="flex items-center gap-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-all group">
+            <div class="w-10 h-10 rounded-full ${colorClass} flex items-center justify-center ${textClass} group-hover:text-white transition-colors">
+                <i class="${iconClass} text-lg"></i>
+            </div>
+            <div>
+                <p class="text-xs text-gray-500">${platform}</p>
+                <p class="text-sm font-medium text-gray-900 truncate max-w-[150px]">${url.replace(/^https?:\/\//, '')}</p>
+            </div>
+            <i class="fas fa-external-link-alt ml-auto text-gray-300 group-hover:text-gray-400"></i>
+        </a>`;
+    };
+
+    // --- Helper 3: Media Renderer ---
+    const renderImage = (url) => {
+        if (url) {
+            return `
+            <div class="relative group aspect-square bg-gray-100 rounded-lg overflow-hidden border">
+                <img src="${siteHostAddress}/storage/media/${url}" class="w-full h-full object-cover" alt="${url}">
+            </div>`;
+        }
+        return `
+        <div class="relative aspect-square bg-gray-50 rounded-lg border border-dashed border-gray-300 flex items-center justify-center hover:scale-100">
+            <span class="text-xs text-gray-400">No Image</span>
+        </div>`;
+    };
+
+    const renderVideo = (url) => {
+        if (url) {
+            return `
+            <div class="bg-black rounded-lg overflow-hidden aspect-video relative flex items-center justify-center group">
+                <video src="${siteHostAddress}/storage/media/${url}" controls class="w-full h-full"></video>
+            </div>`;
+        }
+        return `
+        <div class="bg-gray-100 rounded-lg border border-dashed border-gray-300 aspect-video flex items-center justify-center">
+            <span class="text-sm text-gray-400">No Video</span>
+        </div>`;
+    };
+
+    // --- MAIN HTML TEMPLATE ---
+    let html = `
+    <div class="bg-white rounded-lg shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-hidden flex flex-col relative">
+        
+        <div class="bg-blue-600 p-4 flex justify-between items-center shrink-0">
+            <div>
+                <h2 class="text-xl font-bold text-white flex items-center">
+                    <i class="fas fa-user-circle mr-2"></i>
+                    Profile Preview
+                </h2>
+            </div>
+            <button type="button" class="text-white hover:text-red-200 text-2xl focus:outline-none transition-colors" onclick="closeViewDrawer()">
+                <i class="fas fa-times-circle"></i>
+            </button>
+        </div>
+
+        <div class="bg-white p-6 w-full shadow-sm rounded-lg flex-1 overflow-hidden flex flex-col" id="viewModeContainer">
+            
+            <div class="mb-6 shrink-0">
+                <nav class="flex gap-6 text-sm font-medium" id="viewTabs">
+                    <button class="view-tab-btn text-blue-600 border-b-2 border-blue-600 pb-2 transition-colors" onclick="switchViewTab('view-info', this)">User Info</button>
+                    <button class="view-tab-btn text-gray-500 hover:text-gray-700 pb-2 transition-colors" onclick="switchViewTab('view-media', this)">Media</button>
+                    <button class="view-tab-btn text-gray-500 hover:text-gray-700 pb-2 transition-colors" onclick="switchViewTab('view-social', this)">Social Media</button>
+                    <button class="view-tab-btn text-gray-500 hover:text-gray-700 pb-2 transition-colors" onclick="switchViewTab('view-extra', this)">Extra</button>
+                </nav>
+                <div class="h-px bg-gray-200 w-full mt-[-1px]"></div>
+            </div>
+
+            <div class="flex-1 overflow-y-auto px-1 pr-2 custom-scrollbar">
+                
+                <div class="view-content block" id="view-info">
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                        <div class="border-b border-gray-100 pb-2">
+                            <label class="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Fullname</label>
+                            <p class="text-gray-900 font-medium text-base">${data.fullName || '-'}</p>
+                        </div>
+                        <div class="border-b border-gray-100 pb-2">
+                            <label class="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Title</label>
+                            <p class="text-gray-900 font-medium text-base">${data.title || '-'}</p>
+                        </div>
+                        <div class="border-b border-gray-100 pb-2">
+                            <label class="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Email 1</label>
+                            ${data.email1 ? `<a href="mailto:${data.email1}" class="text-blue-600 hover:underline text-base">${data.email1}</a>` : '<p class="text-gray-500 italic">Not provided</p>'}
+                        </div>
+                        <div class="border-b border-gray-100 pb-2">
+                            <label class="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Email 2</label>
+                            ${data.email2 ? `<a href="mailto:${data.email2}" class="text-blue-600 hover:underline text-base">${data.email2}</a>` : '<p class="text-gray-500 italic">Not provided</p>'}
+                        </div>
+                        <div class="border-b border-gray-100 pb-2">
+                            <label class="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Phone 1</label>
+                            <p class="text-gray-900 text-base">${data.phone1 || '-'}</p>
+                        </div>
+                        <div class="border-b border-gray-100 pb-2">
+                            <label class="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Phone 2</label>
+                            <p class="text-gray-900 text-base">${data.phone2 || '-'}</p>
+                        </div>
+                        <div class="border-b border-gray-100 pb-2">
+                            <label class="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Company</label>
+                            <p class="text-gray-900 font-medium text-base">${data.company || '-'}</p>
+                        </div>
+                        <div class="border-b border-gray-100 pb-2">
+                            <label class="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Location</label>
+                            <p class="text-gray-900 text-base">${data.location || '-'}</p>
+                        </div>
+                        <div class="border-b border-gray-100 pb-2">
+                            <label class="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Category</label>
+                            <p class="text-gray-900 text-base">${data.category || '-'}</p>
+                        </div>
+                        <div class="border-b border-gray-100 pb-2">
+                            <label class="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Date</label>
+                            <p class="text-gray-900 text-base">${data.date || '-'}</p>
+                        </div>
+                        <div class="border-b border-gray-100 pb-2">
+                            <label class="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Icon</label>
+                            <p class="text-gray-900 text-base">${data.icon || '-'}</p>
+                        </div>
+                        <div class="md:col-span-2 border-b border-gray-100 pb-2">
+                            <label class="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Bio</label>
+                            <p class="text-gray-700 leading-relaxed">${data.bio || 'No Biography provided.'}</p>
+                        </div>
+                        <div class="md:col-span-2 border-b border-gray-100 pb-2">
+                            <label class="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Short Bio</label>
+                            <p class="text-gray-700 leading-relaxed">${data.shortBio || 'No short Biography provided.'}</p>
+                        </div>
+                        <div class="border-b border-gray-100 pb-2">
+                            <label class="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Status</label>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${data.isEnabled == 1 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+                                ${data.isEnabled == 1 ? 'Enabled' : 'Disabled'}
+                            </span>
+                        </div>
+                        <div class="border-b border-gray-100 pb-2">
+                            <label class="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Assigned To</label>
+                            <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-gray-100 text-gray-700 text-sm">
+                                <i class="fas fa-columns text-xs"></i> 
+                                <span>${data.assignTo || 'General'}</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="view-content hidden" id="view-media">
+                    <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">Images</h4>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                        ${renderImage(data.image1)}
+                        ${renderImage(data.image2)}
+                        ${renderImage(data.image3)}
+                        ${renderImage(data.image4)}
+                    </div>
+                    <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">Videos</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        ${renderVideo(data.video1)}
+                        ${renderVideo(data.video2)}
+                    </div>
+                </div>
+
+                <div class="view-content hidden" id="view-social">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        ${renderSocial('Facebook', data.facebook, 'fab fa-facebook', 'bg-blue-100 group-hover:bg-blue-600', 'text-blue-600')}
+                        ${renderSocial('Twitter / X', data.twitter, 'fab fa-twitter', 'bg-sky-100 group-hover:bg-sky-500', 'text-sky-500')}
+                        ${renderSocial('Instagram', data.instagram, 'fab fa-instagram', 'bg-pink-100 group-hover:bg-pink-600', 'text-pink-600')}
+                        ${renderSocial('LinkedIn', data.linkedin, 'fab fa-linkedin', 'bg-blue-100 group-hover:bg-blue-700', 'text-blue-700')}
+                        ${renderSocial('YouTube', data.youtube, 'fab fa-youtube', 'bg-red-100 group-hover:bg-red-600', 'text-red-600')}
+                        ${renderSocial('WhatsApp', data.whatsapp, 'fab fa-whatsapp', 'bg-green-100 group-hover:bg-green-500', 'text-green-500')}
+                        ${renderSocial('GitHub', data.github, 'fab fa-github', 'bg-gray-200 group-hover:bg-gray-800', 'text-gray-800')}
+                        ${renderSocial('TikTok', data.tiktok, 'fab fa-tiktok', 'bg-gray-200 group-hover:bg-black', 'text-black')}
+                        ${renderSocial('Website', data.website, 'fas fa-globe', 'bg-gray-100 group-hover:bg-gray-600', 'text-gray-600')}
+                    </div>
+                </div>
+
+                <div class="view-content hidden" id="view-extra">
+                    <div class="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
+                        <i class="fas fa-list text-gray-400"></i>
+                        <h3 class="font-semibold text-gray-700">Additional Details</h3>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg border border-gray-200 divide-y divide-gray-200">
+                        ${renderExtras()}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    `;
+
+    return html;
+}
+
+// --- REQUIRED: Global Function to Switch Tabs ---
+window.switchViewTab = function(targetId, btn) {
+    // 1. Reset all tabs
+    document.querySelectorAll('.view-tab-btn').forEach(t => {
+        t.classList.remove('text-blue-600', 'border-b-2', 'border-blue-600');
+        t.classList.add('text-gray-500');
+    });
+
+    // 2. Hide all contents
+    document.querySelectorAll('.view-content').forEach(c => c.classList.add('hidden'));
+
+    // 3. Activate clicked button
+    btn.classList.remove('text-gray-500');
+    btn.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
+
+    // 4. Show target content
+    document.getElementById(targetId).classList.remove('hidden');
+};
+    
+    
+function handleViewProfile(ltId){
+    let res = cardProfiles.find(res => res.ltId == ltId);
+    // 1. Generate the HTML
+    const drawerHTML = viewProfile(res);
+    
+    // 2. Inject it into your overlay/drawer container
+    const container = document.getElementById('viewProfileDrawer');
+    container.innerHTML = drawerHTML;
+    container.classList.remove('hidden'); // Show the container
+}
+
+    function closeViewDrawer(){
+     let drawer = document.getElementById('viewProfileDrawer');
+     drawer.innnerHTML = '';
+     drawer.classList.add('hidden');
+    }
+
+
+
+         function updateUI() {
+          // Tabs style
+          tab.tabAll.forEach((t, index) => {
+            t.classList.remove(
+              "bg-blue-300",
+              "border-b-3",
+              "hover:bg-blue-400",
+              "border-blue-700",
+            );
+            t.classList.add("bg-gray-300", "hover:bg-gray-400");
+
+            tab.contents[index].classList.add("hidden");
+
+            if (index === tab.currentTab) {
+              t.classList.remove("bg-gray-300", "hover:bg-gray-400");
+              t.classList.add(
+                "bg-blue-300",
+                "border-b-3",
+                "hover:bg-blue-400",
+                "border-blue-700",
+              );
+              tab.contents[index].classList.remove("hidden");
+            }
+          });
+
+          // Buttons logic
+          tab.btnPrev.classList.toggle("hidden", tab.currentTab === 0);
+          tab.btnNext.classList.toggle(
+            "hidden",
+            tab.currentTab === tab.contents.length - 1,
+          );
+
+        }
+      
+      // Tab click
+        tab.tabAll.forEach((t) => {
+          t.addEventListener("click", (e) => {
+              e.preventDefault();
+            tab.currentTab = Number(t.dataset.tab);
+            updateUI();
+          });
+        });
+
+        // Next
+        tab.btnNext.addEventListener("click", () => {
+          if (tab.currentTab < tab.contents.length - 1) {
+            tab.currentTab++;
+            updateUI();
+          }
+        });
+
+        // Previous
+        tab.btnPrev.addEventListener("click", () => {
+          if (tab.currentTab > 0) {
+            tab.currentTab--;
+            updateUI();
+          }
+        });
+
+        // const container = document.getElementById('fieldsContainer');
+        // const addBtn = document.getElementById('addFieldBtn');
+    
+        // 1. Function to add a new row
+        tab.addFieldBtn.addEventListener('click', () => {
+            const newRow = document.createElement('div');
+            newRow.className = 'flex items-start gap-3 field-row group';
+            newRow.innerHTML = `
+                <div class="flex-1">
+                    <input type="text" data-name="extra_key[]" class="w-full border border-gray-300 px-3 py-2 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm" placeholder="e.g. Color" />
+                </div>
+                <div class="flex-1">
+                    <input type="text" data-name="extra_value[]" class="w-full border border-gray-300 px-3 py-2 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm" placeholder="e.g. Red" />
+                </div>
+                <button type="button" class="w-8 flex justify-center py-2 text-red-400 hover:text-red-600 transition-colors focus:outline-none delete-row-btn">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            `;
+            tab.fieldsContainer.appendChild(newRow);
+        });
+    
+        // 2. Function to handle Deletion (Event Delegation)
+        tab.fieldsContainer.addEventListener('click', (e) => {
+            // Check if the clicked element or its parent is the delete button
+            const btn = e.target.closest('.delete-row-btn');
+            if (btn) {
+                // Remove the specific row
+                const row = btn.closest('.field-row');
+                if (row) row.remove();
+            }
+        });
+
+    // Initialize event listeners
+    function initEventListeners() {
+        
+    //      ///  is Enabled Event Listenere
+    document.addEventListener('click', function(e){
+        let btn = e.target.closest('#isEnabledStatus');
+        if(!btn) return;
+        let ltId = btn.dataset.id;
+        
+        let res = cardProfiles.find(res => res.ltId == ltId);
+        let resStatusText = res.isEnabled  ? 'disable' : 'enable';
+
+        Swal.fire({
+            title: 'Notice!',
+            text: `Are you sure you want to ${resStatusText} this profile?`,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: `Yes, ${resStatusText}`,
+            cancelButtonText: 'No, Cancel'
+        }).then(async result => {
+            if (result.isConfirmed) {
+                try{
+
+                    const data = await ajaxRequest(`/cards/profiles/${ltId}/toggle-enabled`, '', 'PATCH');
+
+                     const {responseData, responseResult, responseCategory} = data;
+
+                    if(responseCategory == '200'){
+                         Swal.fire('Notice!!!', `Profile successfully ${resStatusText}d `, 'success').then(function(){
+                            handleisEnabled(ltId);
+                         
+                         });
+                         
+                    }else{
+                        Swal.fire('Error!!!', `${responseResult}`, 'warning');
+                    }
+                    
+                }catch(error){
+                    console.log(error);
+                }
+            }
+        });
+        
+       
+        
+    })
+  
+      // Search
+      document.getElementById('searchInput')?.addEventListener('input', (e) => {
+        search = e.target.value;
+        page = 1;
+        updateTable();
+      });
+
+      // Clear filters
+      document.getElementById('clearFiltersBtn')?.addEventListener('click', () => {
+        search = '';
+        document.getElementById('searchInput').value = '';
+        page = 1;
+        updateTable();
+      });
+
+    //   // Entries per page
+      document.getElementById('entriesPerPageSelect')?.addEventListener('change', (e) => {
+        entriesPerPage = parseInt(e.target.value);
+        page = 1;
+        updateTable();
+      });
+
+    //   // Toggle filters
+      document.getElementById('toggleFiltersBtn')?.addEventListener('click', () => {
+        showFilters = !showFilters;
+        elements.filterBar.classList.toggle('hidden', !showFilters);
+      });
+
+    //   // Add Package
+      document.getElementById('addProfileBtn')?.addEventListener('click', () => {
+        editId = null;
+        let html = populateSection();
+        elements.assignTo.innerHTML = html;
+        openProfileDrawer();
+      });
+
+    
+
+    //   // Drawer buttons
+      document.getElementById('closeDrawerBtn')?.addEventListener('click', closeProfileDrawer);
+      document.getElementById('cancelBtn')?.addEventListener('click', closeProfileDrawer);
+      elements.submitBtn?.addEventListener('click', handleFormSubmit);
+      
+        
+        
+    }
+    
+    
+    // Initialize the application
+    function init() {
+        
+        async function onLoadPackage(){
+              
+            fx_lifetech_button_loader_open();
+            try{
+                
+                const [cardProfile, sections] = await Promise.all([
+                    ajaxRequest('/cards/profiles'),
+                    ajaxRequest('/cards/sections?isEnabled=1')
+                ]);
+                 
+                const { responseData, responseResult, responseCategory } = cardProfile;
+                 
+                 if(responseCategory == 200){
+                    cardSection = sections.responseData
+                     if (Array.isArray(responseData) && responseData.length > 0) {
+                            cardProfiles = [...responseData];
+                     }
+        
+                     updateTable();
+                 }else{
+                     Swal.fire('Notice!!!', `${responseResult}`, 'warning')
+                 }
+                 
+                 fx_lifetech_button_loader_close(); 
+            }catch(error){
+                 
+                 console.log(error);
+    
+            }
+             
+         }
+         
+        onLoadPackage();    
+        
+        
+      initEventListeners();
+    //   updateTable();
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+    
+    /**
+     * View Section
+     */
+     
+    let state = {
+      section: [],
+      entriesPerPage: 10,
+      page: 1,
+      profileId: null,
+      search:'',
+      showFilters:false,
+      showFilterOptions : false,
+      publishedFilter: '',
+      pageTypeFilter: '',
+      packagesFilter: ''
+    };
+     let sectionAssignSelect = document.getElementById('sectionAssignSelect');
+     
+    function getFilteredPages() {
+      return state.section.filter(p => {
+        const matchesSearch = !state.search || p.pageName.toLowerCase().includes(state.search.toLowerCase());
+        // const matchPackages = !state.packagesFilter || p.packageName?.toLowerCase().includes(state.packagesFilter?.toLowerCase());
+        // const matchPublish = !state.publishedFilter || (p.isPublished ==  state.publishedFilter);
+        // const matchPageType = !state.pageTypeFilter || p.pageType.toLowerCase().includes(state.pageTypeFilter.toLowerCase());
+        
+        return matchesSearch;
+        // return matchPublish && matchPageType && matchPackages && matchesSearch;
+      });
+    }
+
+    function getPaginatedPages() {
+      const filtered = getFilteredPages();
+      const start = (state.page - 1) * state.entriesPerPage;
+      const end = start + state.entriesPerPage;
+      return filtered.slice(start, end);
+    }
+
+    function getTotalPages() {
+      const total = getFilteredPages().length;
+      return Math.max(1, Math.ceil(total / state.entriesPerPage));
+    }
+    
+    // function handlePublishFilterOption(){
+    //      state.showFilterOptions = !state.showFilterOptions;
+    //      filterTemplate();
+    // }
+    
+    // function handleTogglePublishFilter(){
+    //     let filterBarPublish = document.getElementById('filterBarPublish');
+    //     state.showFilters = !state.showFilters;
+    //     filterTemplate();
+    //     filterBarPublish.classList.toggle('hidden', !state.showFilters);
+    // }
+    
+    // function handlePublishSearch(value){
+    //     state.search = value;
+    //     state.page = 1;
+    //     displayViewSectionTable();
+    // }
+    
+    
+    // function handleClearPublishFilter(){
+    //     resetFilter();
+    //     filterTemplate();
+    //     displayViewSectionTable();
+    // }
+    
+    // function resetFilter(){
+    //     state.search= '';
+    //     state.pageTypeFilter= '';
+    //     state.publishedFilter= '';
+    //     state.packagesFilter = '';
+    //     state.page = 1;
+    // }
+    
+    document.getElementById('assignToProfileBtn').addEventListener('click', async function(e){
+        e.preventDefault();
+        let btnLoader = this.nextElementSibling;
+        let selectSectionId = sectionAssignSelect.value;
+        if(!selectSectionId) return;
+        let profileId = state.profileId;
+        btnLoader.innerHTML = '<div class="w-6 h-6 rounded-full border-b-2 border-blue-500 animate-spin"></div>';
+        data ={
+            sectionId:selectSectionId,
+            profileId
+        }
+        try{
+            
+            const response = await ajaxRequest(`/cards/sections/profiles`, data, 'POST');
+            
+            const {responseData, responseResult, responseCategory} = response;
+            if(responseCategory == '200'){
+                  Swal.fire('Notice!!!', `Section added successfully`, 'success').then(function(){
+                    state.section = [...state.section, responseData];
+                    displayViewSectionTable();
+                 });
+            }else{
+                Swal.fire('Oops!!!', `${responseResult}`, 'warning');
+            }
+            
+        }catch(error){
+            
+            console.log(error);
+        }finally{
+            btnLoader.innerHTML = '';
+        }
+    })
+    
+    // delete section
+    document.addEventListener('click', async function(e){
+        let btn = e.target.closest('#deleteSection');
+        if(!btn) return;
+        let ltId = btn.dataset.id;
+        let btnLoader = btn.nextElementSibling;
+        btnLoader.innerHTML = '<div class="w-5 h-5 rounded-full border-b-2 border-blue-500 animate-spin"></div>';
+        try{
+            
+            const response = await ajaxRequest(`/cards/sections/profiles/${ltId}`, '', 'DELETE');
+            
+            const {responseData, responseResult, responseCategory} = response;
+            if(responseCategory == '200'){
+                  Swal.fire('Notice!!!', `Section deleted successfully`, 'success').then(function(){
+                    state.section = state.section.filter(s=> +s.ltId !== +ltId);
+                    displayViewSectionTable();
+                 });
+            }else{
+                Swal.fire('Oops!!!', `${responseResult}`, 'warning');
+            }
+            
+        }catch(error){
+            
+            console.log(error);
+        }finally{
+            btnLoader.innerHTML = '';
+        }
+    })
+    
+    document.addEventListener('click', function(e){
+        let btn = e.target.closest('#viewAvailableSectionBtn');
+        
+        if(!btn) return;
+        let ltId = btn.dataset.id;
+        let btnLoader = btn.previousElementSibling;
+        let title = btn.dataset.title;
+        // console.log(btnLoader);
+        
+        // calling the function
+        viewSection(ltId, title, btnLoader);
+    });
+    
+    document.addEventListener('click', function(e){
+        let btn = e.target.closest('#viewAvailableSection');
+        if(!btn) return;
+        let ltId = btn.dataset.id;
+        let title = btn.textContent;
+        let btnLoader = btn.nextElementSibling;
+        // calling the function
+        viewSection(ltId, title, btnLoader);
+
+    })
+    
+   async function viewSection(ltId, title, btnLoader){
+        document.getElementById('modalTitle').textContent = `Available Section for: ${title}`;
+        btnLoader.innerHTML = '<div class="w-5 h-5 rounded-full border-b-2 border-blue-500 animate-spin"></div>';
+        try{
+            
+            const [data] = await Promise.all([
+                    ajaxRequest(`/cards/sections/profiles?profileId=${ltId}`)
+                ]);
+                
+            const {responseData, responseResult, responseCategory} = data;
+            
+            if(responseCategory == '200'){
+                
+                if (Array.isArray(responseData) && responseData.length > 0) {
+                            state.section = [...responseData];
+                    }else{
+                        state.section = [];
+                    }
+                state.profileId = ltId;
+                
+                let html = populateSection();
+                sectionAssignSelect.innerHTML = html;
+                displayViewSectionTable();
+                openTableDrawer();
+                
+            }else{
+                Swal.fire('Oops!!', `${responseResult}`, 'warning');
+            }
+            
+            
+        }catch(error){
+            console.log(error)
+        }finally{
+            btnLoader.innerHTML = '';
+        }
+    }
+     
+    function displayViewSectionTable(){
+        const sectionModalBody = document.getElementById('sectionTableData');
+        const filtered = getFilteredPages();
+        const paginated = getPaginatedPages();
+        const totalPages = getTotalPages();
+        const total = filtered.length;
+        sectionModalBody.innerHTML =`
+            <div class="bg-white rounded-xl shadow-md overflow-y-auto flex-1 p-6 bg-gray-50 border-gray-200">
+                <div class="p-4 border-b border-gray-200 flex flex-row items-center justify-between">
+                  <div class="flex items-center">
+                    <label class="text-sm text-gray-600 mr-2">Show</label>
+                    <select
+                      class="bg-gray-100 border border-gray-300 text-gray-700 py-1 px-3 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      value="${state.entriesPerPage}"
+                      onchange="handleEntriesChange(this.value)"
+                    >
+                      ${[10, 25, 50, 100].map(n => `<option value="${n}" ${state.entriesPerPage === n ? 'selected' : ''}>${n}</option>`).join('')}
+                    </select>
+                      <button class="flex items-center justify-center w-10 h-10 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 ml-4" onclick="handleTogglePublishFilter()">
+                        <i class="fas fa-filter text-gray-600"></i>
+                      </button>
+                  </div>
+                  <div>
+                    <span class="font-bold text-2xl text-gray-500">${paginated[0].fullName}</span>
+                  </div>
+                  <div class="flex justify-end">
+                    <nav class="inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                      <button
+                        class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                        onclick="handlePageChange(${Math.max(1, state.page - 1)})"
+                        ${state.page === 1 ? 'disabled' : ''}
+                      >
+                        <span class="sr-only">Previous</span>
+                        <i class="fas fa-chevron-left text-xs"></i>
+                      </button>
+                      ${Array.from({ length: Math.min(totalPages, 5) }, (_, idx) => {
+                        let pageNum;
+                        if (totalPages <= 5) {
+                          pageNum = idx + 1;
+                        } else if (state.page <= 3) {
+                          pageNum = idx + 1;
+                        } else if (state.page >= totalPages - 2) {
+                          pageNum = totalPages - 4 + idx;
+                        } else {
+                          pageNum = state.page - 2 + idx;
+                        }
+                        return `
+                        <button
+                          class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium focus:outline-none ${state.page === pageNum ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-100'}"
+                          onclick="handlePageChange(${pageNum})"
+                          ${state.page === pageNum ? 'disabled' : ''}
+                        >
+                          ${pageNum}
+                        </button>
+                      `}).join('')}
+                      <button
+                        class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                        onclick="handlePageChange(${Math.min(totalPages, state.page + 1)})"
+                        ${state.page === totalPages ? 'disabled' : ''}
+                      >
+                        <span class="sr-only">Next</span>
+                        <i class="fas fa-chevron-right text-xs"></i>
+                      </button>
+                    </nav>
+                  </div>
+                </div>
+                <div class="theme-table-container overflow-x-auto">
+                  <table class="theme-table w-full min-w-[1000px] text-sm">
+                    <thead>
+                      <tr class="bg-gray-50 text-left">
+                        <th class="py-3 px-2 border-b border-gray-200 text-center">SN</th>
+                        <th class="py-3 px-2 font-medium text-gray-600 border-b border-gray-200">Card Section</th>
+                        <th class="py-3 px-2 font-medium text-gray-600 border-b border-gray-200">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      ${paginated.length === 0 ? `
+                        <tr>
+                          <td colspan="11" class="text-center py-6 text-gray-400">No section found.</td>
+                        </tr>
+                      ` : paginated.map((p, i) => `
+                        <tr class="hover:bg-blue-50 transition duration-150 cursor-pointer">
+                            <td class="py-3 px-4 border-b border-gray-200 text-center">${(state.page - 1) * state.entriesPerPage + i + 1}</td>
+                            <td class="py-3 px-4 border-b border-gray-200 font-medium">
+                              <span class="px-1 py-0.2 text-[15px]">${p.sectionName ?? ''}</span>
+                            </td>
+                            <td class="py-3 px-4 border-b border-gray-200">
+                                <div class="flex items-center gap-1">
+                                    <button id="deleteSection" aria-label="Delete" class="text-gray-500 hover:text-red-600 mx-1 focus:outline-none" data-id="${p.ltId}">
+                                      <i class="fas fa-trash-alt text-lg text-red-400"></i>
+                                    </button>
+                                    <span id="deleteLoader"></span>
+                                </div>  
+                            </td>
+                        </tr>
+                      `).join('')}
+                    </tbody>
+                  </table>
+                </div>
+                <div class="text-sm text-gray-500 p-2">
+                  Showing ${total === 0 ? 0 : (state.page - 1) * state.entriesPerPage + 1} to ${Math.min(state.page * state.entriesPerPage, total)} of ${total} entries
+                </div>
+            </div>
+          `;
+        
+        }
+
+    
+    function openTableDrawer(){
+        document.getElementById('sectionModal').classList.remove('hidden');
+        displayViewSectionTable();
+    }
+    
+    function closeTableDrawer(){
+        // resetFilter();
+        state.entriesPerPage = 10;
+        state.editId = null;
+        document.getElementById('sectionModal').classList.add('hidden');
+        // state.showFilterOptions = !state.showFilterOptions;
+        // state.showFilters = !state.showFilters; 
+        // document.getElementById('filterBarPublish').classList.add('hidden');
+    }
+    
+    function handleEntriesChange(value) {
+      state.entriesPerPage = parseInt(value);
+      state.page = 1;
+      displayViewSectionTable();
+    }
+
+    function handlePageChange(newPage) {
+      state.page = newPage;
+      displayViewSectionTable();
+    }
+     
+     
+     
+    /**
+     * View Section
+     */
+
+    
+  </script>
+  </body>
+      
+    
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      

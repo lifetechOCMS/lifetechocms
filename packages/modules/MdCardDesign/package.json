@@ -1,0 +1,10 @@
+{
+    "ltId": "177503799261771",
+    "packageName": "MdCardDesign",
+    "packageType": "module",
+    "version": "1.1",
+    "dependsOn": "mdLt",
+    "isPublished": "1",
+    "readme": "card design in lifetechocms is crucial to our front-end page, this will let the dynamic content to autoload on all the card designs",
+    "languageUsed": "html, tailwind\/css, javascript, php"
+}

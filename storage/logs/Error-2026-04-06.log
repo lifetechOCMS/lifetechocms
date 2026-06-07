@@ -1,0 +1,9 @@
+[2026-04-06 11:34:14] [ERR_69d38c2665cbb] Call to a member function select() on null on line 37 /home4/uxdri30e/public_html/abaj/packages/modules/MdDocs/Services/TbDocumentationContentService.php
+[2026-04-06 11:34:23] [ERR_69d38c2f419f5] Call to a member function select() on null on line 37 /home4/uxdri30e/public_html/abaj/packages/modules/MdDocs/Services/TbDocumentationContentService.php
+[2026-04-06 12:50:16] [ERR_69d39df8a4ffc] Call to a member function rowCount() on true on line 113 /home4/uxdri30e/public_html/abaj/packages/modules/MdDocs/Services/TbDocumentationVersionsService.php
+[2026-04-06 12:50:41] [ERR_69d39e1106c19] Class "LtResponse" not found on line 44 /home4/uxdri30e/public_html/abaj/includes/connect2db.php(44) : eval()'d code(88) : eval()'d code(464) : eval()'d code
+[2026-04-06 14:45:10] [ERR_69d3b8e63224d] PDO::prepare(): Argument #1 ($query) cannot be empty on line 106 /home4/uxdri30e/public_html/abaj/packages/modules/MdDocs/Services/TbDocumentationVersionsService.php
+[2026-04-06 14:46:19] [ERR_69d3b92bb3771] Call to a member function execute() on true on line 106 /home4/uxdri30e/public_html/abaj/packages/modules/MdDocs/Services/TbDocumentationVersionsService.php
+[2026-04-06 14:50:04] [ERR_69d3ba0c9d379] Object of class stdClass could not be converted to string on line 975 /home4/uxdri30e/public_html/abaj/includes/connect2db.php(44) : eval()'d code(88) : eval()'d code(464) : eval()'d code
+[2026-04-06 14:52:33] [ERR_69d3baa125972] Class "LtResponse" not found on line 44 /home4/uxdri30e/public_html/abaj/includes/connect2db.php(44) : eval()'d code(88) : eval()'d code(464) : eval()'d code
+[2026-04-06 17:19:56] [ERR_69d3dd2cd3132] Attempt to assign property "children" on array on line 63 /home4/uxdri30e/public_html/abaj/packages/modules/MdDocs/Services/TbDocumentationContentService.php

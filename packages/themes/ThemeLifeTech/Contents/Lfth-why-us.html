@@ -1,0 +1,98 @@
+<!-- Why Choose LifeTech Section Module -->
+<section id="why-choose" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <div id="why-choose-header" class="text-center mb-16">
+            <h2 class="section-title text-4xl font-bold mb-4 text-gray-900">Loading...</h2>
+            <p class="text-xl text-gray-600">Please wait</p>
+        </div>
+        
+        <div id="why-choose-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            </div>
+    </div>
+</section>
+
+<script>
+(function() {
+    'use strict';
+    
+    // Extracted target IDs for easy reference
+    const DOM = {
+        header: document.getElementById('why-choose-header'),
+        grid: document.getElementById('why-choose-grid')
+    };
+    
+    function initScrollAnimations() {
+        const cards = document.querySelectorAll('#why-choose .feature-card');
+        if (cards.length === 0) return;
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    entry.target.style.opacity = '1';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            observer.observe(card);
+        });
+    }
+    
+    function updateUI(data) {
+        if (!data) return;
+
+        // 1. Update the Section Title and Description
+        if (DOM.header) {
+            DOM.header.innerHTML = `
+                <h2 class="section-title text-4xl font-bold mb-4 text-gray-900">${data.name || 'Why Choose Us?'}</h2>
+                <p class="text-xl text-gray-600">${data.description || ''}</p>
+            `;
+        }
+
+        // 2. Loop through profiles and build the cards
+        if (DOM.grid && data.profiles && Array.isArray(data.profiles)) {
+            DOM.grid.innerHTML = data.profiles.map(profile => `
+                <div class="feature-card bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 text-center h-full">
+                    <div class="feature-icon w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center text-white text-4xl">
+                        <i class="${profile.icon || 'bi bi-star-fill'}"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4 text-gray-900">${profile.title || ''}</h4>
+                    <p class="text-gray-600">${profile.short_bio || ''}</p>
+                </div>
+            `).join('');
+        }
+
+        // 3. CRITICAL: Initialize the scroll observer *after* the cards are injected into the DOM
+        initScrollAnimations();
+    }
+    
+    async function init() {
+        try {
+            let contentName = 'Lfth-why-us.html';
+            let packageName = 'ThemeLifeTech';
+            let url = `/render/cards/${packageName}/${contentName}`;
+            
+            // Assuming fetchRequest is a global utility function you have defined elsewhere
+            const res = await fetchRequest(url);
+            
+            // Check if responseData exists before updating
+            if (res && res.responseData) {
+                updateUI(res.responseData);
+            }
+            
+        } catch(error) {
+            console.error("Failed to load Why Choose Us content:", error);
+            // Optional: Handle error UI here (e.g., show a default fallback message)
+        }
+    }
+
+    // Only need to call init() on DOMContentLoaded. 
+    // init() will eventually trigger initScrollAnimations() via updateUI().
+    document.addEventListener('DOMContentLoaded', init);
+
+})();
+
+</script>

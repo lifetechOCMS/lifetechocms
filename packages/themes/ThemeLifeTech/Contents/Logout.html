@@ -1,0 +1,39 @@
+
+{% ltImport('mdLtTheme','LtThemeService.js') %}
+  <script>
+ 
+     function init() {
+        
+        async function logout(){
+              
+            try{
+
+                const responseRecord = await ajaxRequest(`/users/logout`,{token:LW_TOKEN}, "POST");
+                 
+                const { responseData, responseResult, responseCategory } = responseRecord;
+                 
+                 if(responseCategory === 200){
+                     localStorage.clear();
+                    Swal.fire('Bravo!!', `${responseResult}`, 'success').then(function(){
+                        window.location.href = `${siteHostAddress}/`;
+                    })
+        
+                 }else{
+                     Swal.fire('Notice!!!', `${responseResult}`, 'warning')
+                 }
+                 
+            }catch(error){
+                 
+                 console.log(error);
+            }
+             
+         }
+         // Un-commenting this will logout when preview 
+        // logout();    
+
+    //   updateTable();
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>

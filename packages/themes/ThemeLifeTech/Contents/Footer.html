@@ -1,0 +1,106 @@
+<!-- Footer Module -->
+<footer class="bg-gray-900 text-white py-16">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div>
+                <h5 class="text-xl font-bold mb-4 flex items-center">
+                        <a href="#home" class="flex items-center text-2xl font-bold text-primary">
+                            <img src="<?=  ltSiteHostAddress()  ?>/storage/media/<?=  ltSiteLogo()  ?>" class="rounded-md w-10 h-10 mr-1" />
+                           <?=  ltSiteName()  ?>
+                        </a>
+                </h5>
+                <p class="text-gray-400 mb-6">Building websites made easy. Modern, powerful, and user-friendly CMS platform.</p>
+                <div class="social-links flex space-x-4">
+                    <a href="<?=  ltSiteFacebook()  ?>" class="text-gray-400 hover:text-primary transition-colors text-2xl" target="_blank"><i class="bi bi-facebook"></i></a>
+                    <a href="<?=  ltSiteTwitter()  ?>" class="text-gray-400 hover:text-primary transition-colors text-2xl" target="_blank"><i class="bi bi-twitter"></i></a>
+                    <a href="<?=  ltSiteLinkedln()  ?>" class="text-gray-400 hover:text-primary transition-colors text-2xl" target="_blank"><i class="bi bi-linkedin"></i></a>
+                    <a href="https://github.com/lifetechOCMS" class="text-gray-400 hover:text-primary transition-colors text-2xl" target="_blank"><i class="bi bi-github"></i></a>
+                </div>
+            </div>
+            <div>
+                <h5 class="text-xl font-bold mb-4">Quick Links</h5>
+                <ul id="quick-links-list" class="list-none space-y-2">
+                    <li><span class="text-gray-600 animate-pulse">Loading...</span></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-xl font-bold mb-4">Services</h5>
+                <ul id="services-list" class="list-none space-y-2">
+                    <li><span class="text-gray-600 animate-pulse">Loading...</span></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-xl font-bold mb-4">Contact</h5>
+                <ul class="list-none space-y-3 text-gray-400">
+                    <li class="flex items-center"><i class="bi bi-envelope mr-3 text-primary"></i><?=  ltSiteAddress()  ?></li>
+                    <li class="flex items-center"><i class="bi bi-telephone mr-3 text-primary"></i><?=  ltSitePhone()  ?></li>
+                    <li class="flex items-center"><i class="bi bi-geo-alt mr-3 text-primary"></i><?=  ltSiteAddress()  ?></li>
+                </ul>
+            </div>
+        </div>
+        <hr class="my-8 border-gray-800">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-400 mb-4 md:mb-0"><?=  ltSiteCopyright()  ?></p>
+            <div class="flex space-x-6">
+                <a href="#" class="text-gray-400 hover:text-primary transition-colors">Privacy Policy</a>
+                <a href="#" class="text-gray-400 hover:text-primary transition-colors">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+<?php ltImport('ThemeLifeTech', 'Script.js') ?>
+<script>
+    function init() {
+        async function onloadMenuContent() {
+            try {
+                const [quickLinkRes, servicesRes] = await Promise.all([
+                    fetch(`${BASE_URL}/menus/is-quicklink`, {
+                        method: "GET",
+                        headers: { 'Accept': 'application/json' }
+                    }),
+                    fetch(`${BASE_URL}/menus/is-service`, {
+                        method: "GET",
+                        headers: { 'Accept': 'application/json' }
+                    })
+                ]);
+
+                const quickLinksData = await quickLinkRes.json();
+                const servicesData = await servicesRes.json();
+
+                // Helper function to build the HTML lists
+                function renderLinks(elementId, apiData) {
+                    const ul = document.getElementById(elementId);
+                    if (!ul) return;
+
+                    // Assuming your API returns data inside a 'responseResult' array 
+                    // based on your previous backend setup. Adjust if it's just the raw array.
+                    const items = apiData.responseData || apiData;
+            
+                    if (Array.isArray(items) && items.length > 0) {
+                        ul.innerHTML = items.map(item => `
+                            <li>
+                                <a href="${siteHostAddress}${item.route_path || '#'}" class="text-gray-400 hover:text-primary transition-colors" target="${item.target}">
+                                    ${item.menu_name}
+                                </a>
+                            </li>
+                        `).join('');
+                    } else {
+                        ul.innerHTML = `<li><span class="text-gray-600">No links available</span></li>`;
+                    }
+                }
+
+                // Render the data into the respective DOM elements
+                renderLinks('quick-links-list', quickLinksData);
+                renderLinks('services-list', servicesData);
+
+            } catch (error) {
+                console.error("Footer Menu Load Error:", error);
+            }
+        }
+
+        onloadMenuContent();
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+</script>

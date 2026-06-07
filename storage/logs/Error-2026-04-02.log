@@ -1,0 +1,7 @@
+[2026-04-02 08:10:47] [ERR_69ce167729af9] Call to undefined method Lt\Modules\MdLt\Services\LtRoute::name() on line 6 /home4/uxdri30e/public_html/abaj/packages/modules/MdCardDesign/Services/MdCardDesignRoutes.php
+[2026-04-02 08:11:19] [ERR_69ce1697c30d4] Call to undefined method Lt\Modules\MdLt\Services\LtRoute::name() on line 6 /home4/uxdri30e/public_html/abaj/packages/modules/MdCardDesign/Services/MdCardDesignRoutes.php
+[2026-04-02 12:49:34] [ERR_69ce57ce2a14f] Class "Lt\Modules\MdCardDesign\Controllers\TbCardSection" not found on line 21 /home4/uxdri30e/public_html/abaj/packages/modules/MdCardDesign/Controllers/TbCardSectionController.php
+[2026-04-02 12:49:44] [ERR_69ce57d803b40] Class "Lt\Modules\MdCardDesign\Controllers\TbCardSection" not found on line 21 /home4/uxdri30e/public_html/abaj/packages/modules/MdCardDesign/Controllers/TbCardSectionController.php
+[2026-04-02 12:55:08] [ERR_69ce591c38840] Class "Lt\Modules\MdCardDesign\Services\DbConnect" not found on line 33 /home4/uxdri30e/public_html/abaj/packages/modules/MdCardDesign/Services/TbCardSectionProfileService.php
+[2026-04-02 12:56:41] [ERR_69ce59797e703] Class "Lt\Modules\MdCardDesign\Services\PDO" not found on line 70 /home4/uxdri30e/public_html/abaj/packages/modules/MdCardDesign/Services/TbCardSectionProfileService.php
+[2026-04-02 12:59:21] [ERR_69ce5a1930001] Class "Lt\Modules\MdCardDesign\Controllers\TbCardProfile" not found on line 21 /home4/uxdri30e/public_html/abaj/packages/modules/MdCardDesign/Controllers/TbCardProfileController.php

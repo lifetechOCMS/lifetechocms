@@ -1,0 +1,606 @@
+ <section class="pt-32 pb-16 bg-gradient-to-br from-primary via-primary-dark to-teal-700 text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6">API Documentation</h1>
+                <p class="text-xl md:text-2xl text-gray-100 mb-8">Integrate LifeTech into your applications with our powerful RESTful API</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#getting-started" class="btn-primary px-8 py-4 rounded-full font-semibold text-lg hover:shadow-lg transition-all duration-300">Get Started</a>
+                    <a href="#endpoints" class="btn-outline-light px-8 py-4 rounded-full font-semibold text-lg border-2 border-white/30 hover:bg-white/20 transition-all duration-300">View Endpoints</a>
+                </div>
+            </div>
+        </div>
+    </section>    
+    <div class="container mx-auto px-4 py-16">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Sidebar Navigation -->
+            <aside class="lg:w-64 flex-shrink-0">
+                <div class="sticky top-24 bg-white rounded-2xl shadow-md p-6">
+                    <h3 class="font-bold text-lg mb-4 text-gray-900">Quick Links</h3>
+                    <nav class="space-y-2">
+                        <a href="#getting-started" class="block text-gray-600 hover:text-primary transition-colors py-2">Getting Started</a>
+                        <a href="#authentication" class="block text-gray-600 hover:text-primary transition-colors py-2">Authentication</a>
+                        <a href="#endpoints" class="block text-gray-600 hover:text-primary transition-colors py-2">Endpoints</a>
+                        <a href="#posts" class="block text-gray-600 hover:text-primary transition-colors py-2 pl-4">Posts</a>
+                        <a href="#users" class="block text-gray-600 hover:text-primary transition-colors py-2 pl-4">Users</a>
+                        <a href="#media" class="block text-gray-600 hover:text-primary transition-colors py-2 pl-4">Media</a>
+                        <a href="#rate-limiting" class="block text-gray-600 hover:text-primary transition-colors py-2">Rate Limiting</a>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Main Documentation -->
+            <main class="flex-1">
+                <!-- Getting Started -->
+                <section id="getting-started" class="bg-white rounded-2xl shadow-md p-8 mb-8">
+                    <h2 class="text-3xl font-bold mb-6 text-gray-900">Getting Started</h2>
+                    <p class="text-gray-700 mb-4">LifeTech provides a comprehensive RESTful API that allows you to interact with your content programmatically. Build custom integrations, mobile apps, or automate content management tasks.</p>
+                    
+                    <div class="bg-gray-50 rounded-lg p-6 my-6 border-l-4 border-primary">
+                        <h3 class="font-bold text-lg mb-3 text-gray-900">Base URL</h3>
+                        <code class="text-primary font-mono text-lg">https://api.lifetech.com/v1</code>
+                    </div>
+
+                    <h3 class="text-xl font-bold mb-4 text-gray-900">Key Features</h3>
+                    <ul class="list-none space-y-3 mb-6">
+                        <li class="flex items-start"><i class="bi bi-check-circle-fill text-primary mr-3 text-xl mt-1"></i><span class="text-gray-700">RESTful API with JSON responses</span></li>
+                        <li class="flex items-start"><i class="bi bi-check-circle-fill text-primary mr-3 text-xl mt-1"></i><span class="text-gray-700">OAuth 2.0 authentication</span></li>
+                        <li class="flex items-start"><i class="bi bi-check-circle-fill text-primary mr-3 text-xl mt-1"></i><span class="text-gray-700">Rate limiting and throttling</span></li>
+                        <li class="flex items-start"><i class="bi bi-check-circle-fill text-primary mr-3 text-xl mt-1"></i><span class="text-gray-700">Comprehensive error handling</span></li>
+                        <li class="flex items-start"><i class="bi bi-check-circle-fill text-primary mr-3 text-xl mt-1"></i><span class="text-gray-700">Interactive API explorer</span></li>
+                    </ul>
+                </section>
+
+                <!-- Authentication -->
+                <section id="authentication" class="bg-white rounded-2xl shadow-md p-8 mb-8">
+                    <h2 class="text-3xl font-bold mb-6 text-gray-900">Authentication</h2>
+                    <p class="text-gray-700 mb-6">All API requests require authentication using OAuth 2.0. You'll need to obtain an access token before making requests.</p>
+                    
+                    <div class="bg-gray-900 rounded-lg p-6 my-6">
+                        <pre class="text-green-400 font-mono text-sm overflow-x-auto"><code>POST /oauth/token
+Content-Type: application/json
+
+{
+  "grant_type": "client_credentials",
+  "client_id": "your_client_id",
+  "client_secret": "your_client_secret"
+}</code></pre>
+                    </div>
+
+                    <div class="bg-blue-50 rounded-lg p-6 my-6 border-l-4 border-blue-500">
+                        <h4 class="font-bold mb-2 text-gray-900"><i class="bi bi-info-circle mr-2"></i>Response</h4>
+                        <pre class="text-gray-700 font-mono text-sm overflow-x-auto"><code>{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "token_type": "Bearer",
+  "expires_in": 3600
+}</code></pre>
+                    </div>
+                </section>
+
+                <!-- Endpoints -->
+                <section id="endpoints" class="bg-white rounded-2xl shadow-md p-8 mb-8">
+                    <h2 class="text-3xl font-bold mb-6 text-gray-900">API Endpoints</h2>
+                    
+                    <!-- Posts Endpoints -->
+                    <div id="posts" class="mb-12">
+                        <h3 class="text-2xl font-bold mb-6 text-gray-900">Posts</h3>
+                        
+                        <div class="space-y-8">
+                            <!-- GET /posts -->
+                            <div class="border-l-4 border-primary bg-gray-50 p-6 rounded-r-lg">
+                                <div class="flex items-center mb-4">
+                                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">GET</span>
+                                    <code class="text-primary font-mono font-semibold text-lg">/posts</code>
+                                </div>
+                                <p class="text-gray-700 mb-4">Retrieve all posts with pagination support.</p>
+                                
+                                <div class="mb-4">
+                                    <p class="text-sm font-semibold text-gray-700 mb-2">Query Parameters:</p>
+                                    <div class="bg-white rounded p-4">
+                                        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                            <li><code class="text-primary">page</code> - Page number (default: 1)</li>
+                                            <li><code class="text-primary">per_page</code> - Items per page (default: 20, max: 100)</li>
+                                            <li><code class="text-primary">status</code> - Filter by status (published, draft, archived)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <p class="text-sm font-semibold text-gray-700 mb-2">Sample Request:</p>
+                                    <div class="bg-gray-900 rounded-lg p-4">
+                                        <code class="text-green-400 font-mono text-sm">GET https://api.lifetech.com/v1/posts?page=1&per_page=20&status=published</code>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <p class="text-sm font-semibold text-gray-700 mb-2">Sample Response:</p>
+                                    <div class="bg-gray-900 rounded-lg p-4">
+                                        <pre class="text-green-400 font-mono text-sm overflow-x-auto"><code>{
+  "data": [
+    {
+      "id": 1,
+      "title": "Welcome to LifeTech",
+      "content": "This is the content...",
+      "status": "published",
+      "created_at": "2024-01-15T10:30:00Z",
+      "updated_at": "2024-01-15T10:30:00Z"
+    }
+  ],
+  "meta": {
+    "current_page": 1,
+    "per_page": 20,
+    "total": 100
+  }
+}</code></pre>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <p class="text-sm font-semibold text-gray-700 mb-2">Code Examples:</p>
+                                    <div class="space-y-3">
+                                        <div>
+                                            <p class="text-xs text-gray-600 mb-1">JavaScript (Fetch)</p>
+                                            <div class="bg-gray-900 rounded-lg p-4">
+                                                <pre class="text-green-400 font-mono text-xs overflow-x-auto"><code>fetch('https://api.lifetech.com/v1/posts?page=1&per_page=20', {
+  headers: {
+    'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+    'Content-Type': 'application/json'
+  }
+})
+.then(res => res.json())
+.then(data => console.log(data));</code></pre>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-gray-600 mb-1">Python (Requests)</p>
+                                            <div class="bg-gray-900 rounded-lg p-4">
+                                                <pre class="text-green-400 font-mono text-xs overflow-x-auto"><code>import requests
+
+headers = {
+    'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+    'Content-Type': 'application/json'
+}
+
+response = requests.get(
+    'https://api.lifetech.com/v1/posts',
+    params={'page': 1, 'per_page': 20},
+    headers=headers
+)
+print(response.json())</code></pre>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-gray-600 mb-1">cURL</p>
+                                            <div class="bg-gray-900 rounded-lg p-4">
+                                                <pre class="text-green-400 font-mono text-xs overflow-x-auto"><code>curl -X GET "https://api.lifetech.com/v1/posts?page=1&per_page=20" \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
+  -H "Content-Type: application/json"</code></pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- POST /posts -->
+                            <div class="border-l-4 border-primary bg-gray-50 p-6 rounded-r-lg">
+                                <div class="flex items-center mb-4">
+                                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">POST</span>
+                                    <code class="text-primary font-mono font-semibold text-lg">/posts</code>
+                                </div>
+                                <p class="text-gray-700 mb-4">Create a new post.</p>
+
+                                <div class="mb-4">
+                                    <p class="text-sm font-semibold text-gray-700 mb-2">Request Body:</p>
+                                    <div class="bg-gray-900 rounded-lg p-4">
+                                        <pre class="text-green-400 font-mono text-sm overflow-x-auto"><code>{
+  "title": "My New Post",
+  "content": "Post content here...",
+  "status": "published",
+  "categories": [1, 2],
+  "tags": ["web", "development"]
+}</code></pre>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <p class="text-sm font-semibold text-gray-700 mb-2">Sample Response:</p>
+                                    <div class="bg-gray-900 rounded-lg p-4">
+                                        <pre class="text-green-400 font-mono text-sm overflow-x-auto"><code>{
+  "data": {
+    "id": 123,
+    "title": "My New Post",
+    "content": "Post content here...",
+    "status": "published",
+    "created_at": "2024-01-15T10:30:00Z",
+    "updated_at": "2024-01-15T10:30:00Z"
+  }
+}</code></pre>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <p class="text-sm font-semibold text-gray-700 mb-2">Code Examples:</p>
+                                    <div class="space-y-3">
+                                        <div>
+                                            <p class="text-xs text-gray-600 mb-1">JavaScript (Fetch)</p>
+                                            <div class="bg-gray-900 rounded-lg p-4">
+                                                <pre class="text-green-400 font-mono text-xs overflow-x-auto"><code>fetch('https://api.lifetech.com/v1/posts', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    title: 'My New Post',
+    content: 'Post content here...',
+    status: 'published',
+    categories: [1, 2]
+  })
+})
+.then(res => res.json())
+.then(data => console.log(data));</code></pre>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-gray-600 mb-1">Python (Requests)</p>
+                                            <div class="bg-gray-900 rounded-lg p-4">
+                                                <pre class="text-green-400 font-mono text-xs overflow-x-auto"><code>import requests
+
+headers = {
+    'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+    'Content-Type': 'application/json'
+}
+
+data = {
+    'title': 'My New Post',
+    'content': 'Post content here...',
+    'status': 'published',
+    'categories': [1, 2]
+}
+
+response = requests.post(
+    'https://api.lifetech.com/v1/posts',
+    json=data,
+    headers=headers
+)
+print(response.json())</code></pre>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-gray-600 mb-1">cURL</p>
+                                            <div class="bg-gray-900 rounded-lg p-4">
+                                                <pre class="text-green-400 font-mono text-xs overflow-x-auto"><code>curl -X POST "https://api.lifetech.com/v1/posts" \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "My New Post",
+    "content": "Post content here...",
+    "status": "published",
+    "categories": [1, 2]
+  }'</code></pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- GET /posts/:id -->
+                            <div class="border-l-4 border-primary bg-gray-50 p-6 rounded-r-lg">
+                                <div class="flex items-center mb-4">
+                                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">GET</span>
+                                    <code class="text-primary font-mono font-semibold text-lg">/posts/:id</code>
+                                </div>
+                                <p class="text-gray-700 mb-4">Get a specific post by ID.</p>
+
+                                <div class="mb-4">
+                                    <p class="text-sm font-semibold text-gray-700 mb-2">Sample Request:</p>
+                                    <div class="bg-gray-900 rounded-lg p-4">
+                                        <code class="text-green-400 font-mono text-sm">GET https://api.lifetech.com/v1/posts/123</code>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <p class="text-sm font-semibold text-gray-700 mb-2">Sample Response:</p>
+                                    <div class="bg-gray-900 rounded-lg p-4">
+                                        <pre class="text-green-400 font-mono text-sm overflow-x-auto"><code>{
+  "data": {
+    "id": 123,
+    "title": "Welcome to LifeTech",
+    "content": "Full post content...",
+    "status": "published",
+    "author": {
+      "id": 1,
+      "name": "John Doe"
+    },
+    "created_at": "2024-01-15T10:30:00Z",
+    "updated_at": "2024-01-15T10:30:00Z"
+  }
+}</code></pre>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <p class="text-sm font-semibold text-gray-700 mb-2">Code Examples:</p>
+                                    <div class="space-y-3">
+                                        <div>
+                                            <p class="text-xs text-gray-600 mb-1">JavaScript</p>
+                                            <div class="bg-gray-900 rounded-lg p-4">
+                                                <pre class="text-green-400 font-mono text-xs overflow-x-auto"><code>fetch('https://api.lifetech.com/v1/posts/123', {
+  headers: {
+    'Authorization': 'Bearer YOUR_ACCESS_TOKEN'
+  }
+})
+.then(res => res.json())
+.then(data => console.log(data));</code></pre>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-gray-600 mb-1">Python</p>
+                                            <div class="bg-gray-900 rounded-lg p-4">
+                                                <pre class="text-green-400 font-mono text-xs overflow-x-auto"><code>response = requests.get(
+    'https://api.lifetech.com/v1/posts/123',
+    headers={'Authorization': 'Bearer YOUR_ACCESS_TOKEN'}
+)
+print(response.json())</code></pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PUT /posts/:id -->
+                            <div class="border-l-4 border-primary bg-gray-50 p-6 rounded-r-lg">
+                                <div class="flex items-center mb-4">
+                                    <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">PUT</span>
+                                    <code class="text-primary font-mono font-semibold text-lg">/posts/:id</code>
+                                </div>
+                                <p class="text-gray-700 mb-4">Update an existing post.</p>
+
+                                <div class="mb-4">
+                                    <p class="text-sm font-semibold text-gray-700 mb-2">Request Body:</p>
+                                    <div class="bg-gray-900 rounded-lg p-4">
+                                        <pre class="text-green-400 font-mono text-sm overflow-x-auto"><code>{
+  "title": "Updated Post Title",
+  "content": "Updated content...",
+  "status": "published"
+}</code></pre>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <p class="text-sm font-semibold text-gray-700 mb-2">Code Examples:</p>
+                                    <div class="space-y-3">
+                                        <div>
+                                            <p class="text-xs text-gray-600 mb-1">JavaScript</p>
+                                            <div class="bg-gray-900 rounded-lg p-4">
+                                                <pre class="text-green-400 font-mono text-xs overflow-x-auto"><code>fetch('https://api.lifetech.com/v1/posts/123', {
+  method: 'PUT',
+  headers: {
+    'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    title: 'Updated Post Title',
+    content: 'Updated content...'
+  })
+})
+.then(res => res.json())
+.then(data => console.log(data));</code></pre>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-gray-600 mb-1">Python</p>
+                                            <div class="bg-gray-900 rounded-lg p-4">
+                                                <pre class="text-green-400 font-mono text-xs overflow-x-auto"><code>response = requests.put(
+    'https://api.lifetech.com/v1/posts/123',
+    json={'title': 'Updated Post Title'},
+    headers={'Authorization': 'Bearer YOUR_ACCESS_TOKEN'}
+)
+print(response.json())</code></pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- DELETE /posts/:id -->
+                            <div class="border-l-4 border-primary bg-gray-50 p-6 rounded-r-lg">
+                                <div class="flex items-center mb-4">
+                                    <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">DELETE</span>
+                                    <code class="text-primary font-mono font-semibold text-lg">/posts/:id</code>
+                                </div>
+                                <p class="text-gray-700 mb-4">Delete a post.</p>
+
+                                <div class="mb-4">
+                                    <p class="text-sm font-semibold text-gray-700 mb-2">Sample Response:</p>
+                                    <div class="bg-gray-900 rounded-lg p-4">
+                                        <pre class="text-green-400 font-mono text-sm overflow-x-auto"><code>{
+  "message": "Post deleted successfully"
+}</code></pre>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <p class="text-sm font-semibold text-gray-700 mb-2">Code Examples:</p>
+                                    <div class="space-y-3">
+                                        <div>
+                                            <p class="text-xs text-gray-600 mb-1">JavaScript</p>
+                                            <div class="bg-gray-900 rounded-lg p-4">
+                                                <pre class="text-green-400 font-mono text-xs overflow-x-auto"><code>fetch('https://api.lifetech.com/v1/posts/123', {
+  method: 'DELETE',
+  headers: {
+    'Authorization': 'Bearer YOUR_ACCESS_TOKEN'
+  }
+})
+.then(res => res.json())
+.then(data => console.log(data));</code></pre>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-gray-600 mb-1">Python</p>
+                                            <div class="bg-gray-900 rounded-lg p-4">
+                                                <pre class="text-green-400 font-mono text-xs overflow-x-auto"><code>response = requests.delete(
+    'https://api.lifetech.com/v1/posts/123',
+    headers={'Authorization': 'Bearer YOUR_ACCESS_TOKEN'}
+)
+print(response.json())</code></pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Users Endpoints -->
+                    <div id="users" class="mb-12">
+                        <h3 class="text-2xl font-bold mb-6 text-gray-900">Users</h3>
+                        <div class="border-l-4 border-primary bg-gray-50 p-6 rounded-r-lg">
+                            <div class="flex items-center mb-4">
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">GET</span>
+                                <code class="text-primary font-mono font-semibold text-lg">/users</code>
+                            </div>
+                            <p class="text-gray-700 mb-4">Retrieve all users.</p>
+
+                            <div class="mb-4">
+                                <p class="text-sm font-semibold text-gray-700 mb-2">Sample Response:</p>
+                                <div class="bg-gray-900 rounded-lg p-4">
+                                    <pre class="text-green-400 font-mono text-sm overflow-x-auto"><code>{
+  "data": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john@example.com",
+      "role": "admin",
+      "created_at": "2024-01-01T10:00:00Z"
+    }
+  ]
+}</code></pre>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <p class="text-sm font-semibold text-gray-700 mb-2">Code Examples:</p>
+                                <div class="space-y-3">
+                                    <div>
+                                        <p class="text-xs text-gray-600 mb-1">JavaScript</p>
+                                        <div class="bg-gray-900 rounded-lg p-4">
+                                            <pre class="text-green-400 font-mono text-xs overflow-x-auto"><code>fetch('https://api.lifetech.com/v1/users', {
+  headers: {
+    'Authorization': 'Bearer YOUR_ACCESS_TOKEN'
+  }
+})
+.then(res => res.json())
+.then(data => console.log(data));</code></pre>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-gray-600 mb-1">Python</p>
+                                        <div class="bg-gray-900 rounded-lg p-4">
+                                            <pre class="text-green-400 font-mono text-xs overflow-x-auto"><code>response = requests.get(
+    'https://api.lifetech.com/v1/users',
+    headers={'Authorization': 'Bearer YOUR_ACCESS_TOKEN'}
+)
+print(response.json())</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Media Endpoints -->
+                    <div id="media" class="mb-8">
+                        <h3 class="text-2xl font-bold mb-6 text-gray-900">Media</h3>
+                        <div class="border-l-4 border-primary bg-gray-50 p-6 rounded-r-lg">
+                            <div class="flex items-center mb-4">
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">POST</span>
+                                <code class="text-primary font-mono font-semibold text-lg">/media/upload</code>
+                            </div>
+                            <p class="text-gray-700 mb-4">Upload media files (images, videos, documents).</p>
+
+                            <div class="mb-4">
+                                <p class="text-sm font-semibold text-gray-700 mb-2">Request (Form Data):</p>
+                                <div class="bg-gray-900 rounded-lg p-4">
+                                    <pre class="text-green-400 font-mono text-sm overflow-x-auto"><code>Content-Type: multipart/form-data
+
+file: [binary file data]
+title: "My Image"
+description: "Image description"</code></pre>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <p class="text-sm font-semibold text-gray-700 mb-2">Sample Response:</p>
+                                <div class="bg-gray-900 rounded-lg p-4">
+                                    <pre class="text-green-400 font-mono text-sm overflow-x-auto"><code>{
+  "data": {
+    "id": 456,
+    "filename": "image.jpg",
+    "url": "https://cdn.lifetech.com/media/image.jpg",
+    "size": 1024000,
+    "mime_type": "image/jpeg",
+    "created_at": "2024-01-15T10:30:00Z"
+  }
+}</code></pre>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <p class="text-sm font-semibold text-gray-700 mb-2">Code Examples:</p>
+                                <div class="space-y-3">
+                                    <div>
+                                        <p class="text-xs text-gray-600 mb-1">JavaScript</p>
+                                        <div class="bg-gray-900 rounded-lg p-4">
+                                            <pre class="text-green-400 font-mono text-xs overflow-x-auto"><code>const formData = new FormData();
+formData.append('file', fileInput.files[0]);
+formData.append('title', 'My Image');
+
+fetch('https://api.lifetech.com/v1/media/upload', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer YOUR_ACCESS_TOKEN'
+  },
+  body: formData
+})
+.then(res => res.json())
+.then(data => console.log(data));</code></pre>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-gray-600 mb-1">Python</p>
+                                        <div class="bg-gray-900 rounded-lg p-4">
+                                            <pre class="text-green-400 font-mono text-xs overflow-x-auto"><code>files = {'file': open('image.jpg', 'rb')}
+data = {'title': 'My Image'}
+
+response = requests.post(
+    'https://api.lifetech.com/v1/media/upload',
+    files=files,
+    data=data,
+    headers={'Authorization': 'Bearer YOUR_ACCESS_TOKEN'}
+)
+print(response.json())</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Rate Limiting -->
+                <section id="rate-limiting" class="bg-white rounded-2xl shadow-md p-8 mb-8">
+                    <h2 class="text-3xl font-bold mb-6 text-gray-900">Rate Limiting</h2>
+                    <p class="text-gray-700 mb-4">API requests are rate-limited to ensure fair usage and system stability.</p>
+                    <div class="bg-yellow-50 rounded-lg p-6 border-l-4 border-yellow-500">
+                        <p class="text-gray-700"><strong>Rate Limit:</strong> 1000 requests per hour per API key</p>
+                        <p class="text-gray-700 mt-2">Rate limit headers are included in all responses:</p>
+                        <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
+                            <li><code>X-RateLimit-Limit</code> - Total requests allowed</li>
+                            <li><code>X-RateLimit-Remaining</code> - Requests remaining</li>
+                            <li><code>X-RateLimit-Reset</code> - Time when limit resets</li>
+                        </ul>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>

@@ -1,0 +1,11 @@
+<?php
+
+namespace Lt\Modules\MdCardDesign\Services;
+
+use Lt\Modules\MdCardDesign\Models\TbCardSectionService;
+        
+class TbCardSectionService
+{
+
+}
+

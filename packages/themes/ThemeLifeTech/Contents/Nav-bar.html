@@ -1,0 +1,243 @@
+<style>
+    /* This ensures the click state overrides the hidden state */
+.dropdown-menu.is-active {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+}
+</style>
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm shadow-lg">
+    <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between h-20">
+            <a href="#home" class="flex items-center text-2xl font-bold text-primary">
+                <img src="<?=  ltSiteHostAddress()  ?>/storage/media/<?=  ltSiteLogo()  ?>" class="rounded-md w-10 h-10 mr-1" />
+               <?=  ltSiteName()  ?>
+            </a>
+            
+            <button id="mobileMenuBtn" class="lg:hidden text-white p-2">
+                <i class="bi bi-list text-2xl"></i>
+            </button>
+
+            <div id="desktop-nav" class="hidden lg:flex lg:items-center lg:space-x-8">
+                </div>
+        </div>
+    </div>
+    
+    <div id="mobileMenuDropdown" class="hidden lg:hidden bg-gray-900 border-t border-gray-800">
+        <div class="container mx-auto px-6 py-6 flex flex-col space-y-4" id="mobile-nav-container">
+            </div>
+    </div>
+
+</nav>
+
+<?php ltImport('ThemeLifeTech', 'Script.js') ?>;
+<script>
+(function() {
+    'use strict';
+    
+    let navLinks = [];
+
+    function initMobileMenu() {
+        const btn = document.getElementById('mobileMenuBtn');
+        const menu = document.getElementById('mobileMenuDropdown');
+        if (!btn || !menu) return;
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            const icon = btn.querySelector('i');
+            icon.classList.toggle('bi-list');
+            icon.classList.toggle('bi-x');
+        });
+    }
+
+    function renderNav() {
+        const desktopContainer = document.getElementById('desktop-nav');
+        const mobileContainer = document.getElementById('mobile-nav-container');
+        const currentPath = window.location.pathname;
+
+        if (desktopContainer) {
+            desktopContainer.innerHTML = renderDesktopMenu(navLinks, currentPath);
+        }
+        if (mobileContainer) {
+            mobileContainer.innerHTML = renderMobileMenu(navLinks, currentPath);
+        }
+        
+        // Re-init smooth scroll for newly injected anchors
+        initSmoothScrolling();
+        initDropdownClick();
+    }
+
+    function renderDesktopMenu(items, currentPage) {
+        return items.map(item => {
+            const hasChildren = item.children && item.children.length > 0;
+            const url = item.routePath.startsWith('#') ? item.routePath : `${siteHostAddress}${item.routePath}`;
+            
+            return `
+                <div class="relative group">
+                    <a href="${item.menuName == 'Documentation' ? item.routePath : url}" class="nav-link text-white ${item.menuName == 'Documentation' ? 'bg-[#08cf72] py-2 px-3 rounded-md hover:bg-[white]': ''} hover:text-primary transition-colors duration-200 font-medium" ${item.menuName == 'Documentation' ? "target = '_blank'": ''}>
+                        ${item.menuName}
+                    </a>
+                    ${hasChildren ? `
+                        <div class="dropdown-menu absolute mt-3 left-0 top-full bg-white shadow-lg min-w-48 py-2 opacity-0 invisible translate-y-2 transition-all duration-200 z-50 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0">
+                            ${item.children.map(child => `
+                                <a href="${siteHostAddress}${child.routePath}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:text-primary text-sm">
+                                    ${child.menuName}
+                                </a>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                </div>`;
+        }).join('');
+    }
+
+    // function renderMobileMenu(items, currentPage) {
+    //     return items.map(item => {
+    //         const url = item.routePath.startsWith('#') ? item.routePath : `${siteHostAddress}${item.routePath}`;
+    //         return `<a href="${url}" class="block text-white hover:text-primary transition-colors">${item.menuName}</a>`;
+    //     }).join('');
+    // }
+    
+    function renderMobileMenu(items, currentPage) {
+    return items.map((item, index) => {
+        const hasChildren = item.children && item.children.length > 0;
+        const url = item.routePath.startsWith('#') ? item.routePath : `${siteHostAddress}${item.routePath}`;
+        const menuId = `mobile-sub-${index}`;
+
+        if (hasChildren) {
+            return `
+                <div class="space-y-2">
+                    <button 
+                        class="flex items-center justify-between w-full text-white hover:text-primary transition-colors font-medium"
+                        id="toggleMobileSub"
+                        data-menu-id="${menuId}"
+                    >
+                        <span>${item.menuName}</span>
+                        <i class="bi bi-chevron-down transition-transform duration-200"></i>
+                    </button>
+                    <div id="${menuId}" class="hidden flex flex-col space-y-2 pl-4 border-l border-gray-700">
+                        ${item.children.map(child => `
+                            <a href="${siteHostAddress}${child.routePath}" class="text-gray-400 hover:text-primary text-sm transition-colors py-1">
+                                ${child.menuName}
+                            </a>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Default single link if no children
+        return `<a href="${url}" class="block text-white hover:text-primary transition-colors font-medium">${item.menuName}</a>`;
+    }).join('');
+}
+
+    async function onloadMenuContent() {
+        try {
+            const response = await fetch(`${BASE_URL}/menus/is-navigation`, {
+                headers: { 'Accept': 'application/json' }
+            });
+            const { responseData } = await response.json();
+            
+            if (Array.isArray(responseData)) {
+                // Combine default links with API links
+                navLinks = [
+                    { menuName: 'Home', routePath: `` },
+                    ...responseData,
+                    { menuName: 'Documentation', routePath: `https://www.lifetech.host/hubs/Docs` }
+                ];
+                renderNav();
+            }
+        } catch (error) {
+            console.error('Menu Load Error:', error);
+        }
+    }
+    
+    document.addEventListener('click', function(e){
+        let btn = e.target.closest('#toggleMobileSub');
+        if(!btn)return;
+        let menuId = btn.dataset.menuId;
+        toggleMobileSubmenu(menuId, btn);
+    })
+    
+    function toggleMobileSubmenu(id, btn) {
+        const menu = document.getElementById(id);
+        const icon = btn.querySelector('i');
+        
+        if (menu) {
+            const isHidden = menu.classList.contains('hidden');
+            
+            // Toggle menu visibility
+            menu.classList.toggle('hidden');
+            
+            // Rotate the chevron icon
+            if (isHidden) {
+                icon.classList.add('rotate-180');
+            } else {
+                icon.classList.remove('rotate-180');
+            }
+        }
+    }
+    
+    function initDropdownClick() {
+        // Target all navigation items that have children
+        const dropdownParents = document.querySelectorAll('.group');
+    
+        dropdownParents.forEach(parent => {
+            const link = parent.querySelector('a');
+            const menu = parent.querySelector('.dropdown-menu');
+    
+            if (menu) {
+                link.addEventListener('click', function(e) {
+                    // If it's a touch device or we want click-to-open
+                    // Prevent navigation if the menu isn't open yet
+                    if (!menu.classList.contains('is-active')) {
+                        e.preventDefault();
+                        
+                        // Close other open menus
+                        document.querySelectorAll('.dropdown-menu').forEach(m => {
+                            if (m !== menu) m.classList.remove('is-active', 'opacity-100', 'visible', 'translate-y-0');
+                        });
+    
+                        // Open this menu
+                        menu.classList.add('is-active', 'opacity-100', 'visible', 'translate-y-0');
+                    }
+                });
+            }
+        });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.group')) {
+            document.querySelectorAll('.dropdown-menu').forEach(m => {
+                m.classList.remove('is-active', 'opacity-100', 'visible', 'translate-y-0');
+            });
+        }
+    });
+}
+    
+
+    function initSmoothScrolling() {
+        const anchors = document.querySelectorAll('a[href^="#"]');
+        anchors.forEach(anchor => {
+            anchor.onclick = function(e) {
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                const targetElem = document.querySelector(targetId);
+                if (targetElem) {
+                    e.preventDefault();
+                    const offset = document.getElementById('navbar').offsetHeight;
+                    window.scrollTo({
+                        top: targetElem.offsetTop - offset,
+                        behavior: 'smooth'
+                    });
+                }
+            };
+        });
+    }
+
+    // Execution
+    document.addEventListener('DOMContentLoaded', () => {
+        initMobileMenu();
+        onloadMenuContent();
+    });
+})();
+</script>

@@ -1,0 +1,10 @@
+{
+    "ltId": "177670428085052",
+    "packageName": "PlgMail",
+    "packageType": "plugin",
+    "version": "1.0",
+    "dependsOn": "mdLt",
+    "isPublished": "1",
+    "readme": "this is the plugin for the mailer",
+    "languageUsed": "php"
+}

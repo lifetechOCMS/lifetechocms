@@ -1,0 +1,7 @@
+.git
+.gitignore
+node_modules
+vendor/bin/.phpunit*
+storage/logs/*
+media/logs/*
+error_log

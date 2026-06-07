@@ -1,0 +1,194 @@
+<!-- About Us Section Module -->
+<!--<section id="about" class="py-20">-->
+<!--    <div class="container mx-auto px-4">-->
+<!--        <div class="flex flex-col lg:flex-row items-center gap-12">-->
+<!--            <div class="flex-1">-->
+<!--                <h2 class="section-title text-4xl font-bold mb-6 text-gray-900">About LifeTech</h2>-->
+<!--                <p class="text-xl text-gray-700 mb-4">LifeTech is a modern content management system designed to make website building accessible to everyone.</p>-->
+<!--                <p class="text-gray-600 mb-4">Whether you're a seasoned developer or just starting out, LifeTech provides the tools and flexibility you need to create stunning websites. Our platform combines the power of enterprise-level CMS with the simplicity of modern web design.</p>-->
+<!--                <p class="text-gray-600 mb-6">We believe that building a website shouldn't require extensive technical knowledge. That's why we've created an intuitive interface that allows you to focus on your content and creativity, while we handle the technical complexities behind the scenes.</p>-->
+<!--                <div class="space-y-4">-->
+<!--                    <div class="flex items-center">-->
+<!--                        <i class="bi bi-check-circle-fill text-primary text-2xl mr-4"></i>-->
+<!--                        <span class="text-gray-700">Easy-to-use interface for all skill levels</span>-->
+<!--                    </div>-->
+<!--                    <div class="flex items-center">-->
+<!--                        <i class="bi bi-check-circle-fill text-primary text-2xl mr-4"></i>-->
+<!--                        <span class="text-gray-700">Fully customizable themes and templates</span>-->
+<!--                    </div>-->
+<!--                    <div class="flex items-center">-->
+<!--                        <i class="bi bi-check-circle-fill text-primary text-2xl mr-4"></i>-->
+<!--                        <span class="text-gray-700">Comprehensive documentation and support</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="flex-1">-->
+<!--                <div class="about-image rounded-2xl overflow-hidden shadow-xl">-->
+<!--                    <div class="bg-gradient-to-br from-gray-100 to-gray-300 p-20 text-center">-->
+<!--                        <i class="bi bi-laptop text-8xl text-primary"></i>-->
+<!--                        <p class="mt-6 text-gray-600 text-lg">About LifeTech</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+
+<style>
+  @keyframes infinite-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+  }
+  .animate-infinite-scroll {
+    animation: infinite-scroll 25s linear infinite;
+  }
+  /* Pauses the animation when the user hovers over the container */
+  .pause-on-hover:hover .animate-infinite-scroll {
+    animation-play-state: paused;
+  }
+</style>
+
+<section id="about" class="py-1 bg-gray-50 overflow-hidden">
+  
+  <!-- SINGLE UNIFIED CONTAINER FOR EVERYTHING -->
+  <div class="container mx-auto px-4 mt-12" data-aos="fade-up" data-aos-delay="100">
+    
+    <!-- Top Content: Text and Grid -->
+    <div class="flex flex-col xl:flex-row items-center gap-12 mb-12">
+
+      <div class="xl:w-1/3 space-y-6">
+        <h3 class="text-[26px] font-medium leading-[19px] px-5 py-3 bg-red-500/10 text-[#e84545] rounded-[7px] inline-block">
+          About Us
+        </h3>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+          Welcome to Lifetech OCMS. The leading CMS platform for web development
+        </h2>
+        <p class="text-justify text-gray-600 leading-relaxed">
+          Our story started in 2016 when Ajayi Abolore, the founder of Lifetech OCMS, was triggered by the rate at which websites were being blocklisted or hijacked by hackers. He decided to embark on developing a framework that allows developers to construct secured websites after series of researches and testing had been carried out at Ogun State Institute of Technology (OGITECH), Igbesa. This project birthed Lifetech OCMS, which became popular immediately after the release of its first version in 2021. Lifetech OCMS is a platform made for developers to build unlimited websites easily, quickly and efficiently.
+        </p>
+      </div>
+
+      <div class="xl:w-2/3">
+        <div class="about-image grid grid-cols-1 md:grid-cols-2 gap-6">
+
+          <div class="group" data-aos="fade-up" data-aos-delay="200">
+            <div class="p-10 bg-green-600/85 text-white rounded-xl shadow-lg transition-transform duration-300 hover:-translate-y-2">
+              <i class="bi bi-buildings w-20 h-20 rounded-full flex items-center justify-center mb-6 text-3xl bg-white/10 text-white transition-all duration-400 group-hover:bg-[#e84545] group-hover:text-white"></i>
+              <h3 class="mb-2.5 text-2xl font-bold">Dedication</h3>
+              <p class="m-0 opacity-90">This framework is dedicated to Late Mr Aluko Temitope Sunday from Comp Sci. Dept, OGITECH, Igbesa.</p>
+            </div>
+          </div>
+
+          <div class="group md:mt-[-40px]" data-aos="fade-up" data-aos-delay="300">
+            <div class="p-10 bg-cyan-500/85 text-gray-900 rounded-xl shadow-lg transition-transform duration-300 hover:-translate-y-2">
+              <i class="bi bi-clipboard-pulse w-20 h-20 rounded-full flex items-center justify-center mb-6 text-3xl bg-red-500/10 text-[#e84545] transition-all duration-400 group-hover:bg-[#e84545] group-hover:text-white"></i>
+              <h3 class="mb-2.5 text-2xl font-bold">Origination</h3>
+              <p class="m-0 opacity-90">This framework is designed from Computer Science Department at Ogun State Institute of Technology, Igbesa.</p>
+            </div>
+          </div>
+
+          <div class="group" data-aos="fade-up" data-aos-delay="400">
+            <div class="p-10 bg-cyan-500/85 text-gray-900 rounded-xl shadow-lg transition-transform duration-300 hover:-translate-y-2">
+              <i class="bi bi-command w-20 h-20 rounded-full flex items-center justify-center mb-6 text-3xl bg-red-500/10 text-[#e84545] transition-all duration-400 group-hover:bg-[#e84545] group-hover:text-white"></i>
+              <h3 class="mb-2.5 text-2xl font-bold">Start-up Platform</h3>
+              <p class="m-0 opacity-90">Asst. Prof. Olufunke Akinkurolere gave us the CBE platform to start with and to improve the scalability of the Framework.</p>
+            </div>
+          </div>
+
+          <div class="group md:mt-[-20px]" data-aos="fade-up" data-aos-delay="500">
+            <div class="p-10 bg-green-600/85 text-white rounded-xl shadow-lg transition-transform duration-300 hover:-translate-y-2">
+              <i class="fas fa-rocket w-20 h-20 rounded-full flex items-center justify-center mb-6 text-3xl bg-white/10 text-white transition-all duration-400 group-hover:bg-[#e84545] group-hover:text-white"></i>
+              <h3 class="mb-2.5 text-2xl font-bold">Current Innovation</h3>
+              <p class="m-0 opacity-90">An AI system to be named li-li is under development, li-li will be developing 70% completion modules for developers.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Content: Marquee Links Container -->
+    <!-- Wrapped in a white box to look integrated with the section above -->
+    <div class="w-full relative overflow-hidden pause-on-hover flex group bg-white rounded-2xl shadow-sm border border-gray-100 py-4 px-2">
+      
+      <!-- Left Gradient Fade (Matches the white container background) -->
+      <div class="absolute left-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none rounded-l-2xl"></div>
+
+      <!-- Marquee Track Wrapper -->
+      <div class="flex w-full items-center">
+        
+        <!-- First Track of Buttons -->
+        <div class="flex whitespace-nowrap gap-4 px-2 animate-infinite-scroll flex-shrink-0">
+          <a href="https://github.com/lifetechOCMS?tab=repositories" target="_blank" class="px-5 py-2.5 bg-gray-50 rounded-full border border-gray-200 text-sm font-medium text-gray-700 hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-colors shadow-sm flex items-center gap-2">
+            <i class="fab fa-github text-lg"></i> GitHub Repository
+          </a>
+          <a href="https://github.com/lifetechOCMS/lifetechocms/issues" target="_blank" class="px-5 py-2.5 bg-gray-50 rounded-full border border-gray-200 text-sm font-medium text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition-colors shadow-sm flex items-center gap-2">
+            <i class="fas fa-bug text-lg"></i> Create Issue
+          </a>
+          <a href="https://github.com/lifetechOCMS/docs/blob/master/contributing.md" target="_blank" class="px-5 py-2.5 bg-gray-50 rounded-full border border-gray-200 text-sm font-medium text-gray-700 hover:bg-green-50 hover:text-green-600 hover:border-green-200 transition-colors shadow-sm flex items-center gap-2">
+            <i class="fas fa-code-branch text-lg"></i> Contribution Guide
+          </a>
+          <a href="https://www.lifetech.host/hub/forum" target="_blank" class="px-5 py-2.5 bg-gray-50 rounded-full border border-gray-200 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-colors shadow-sm flex items-center gap-2">
+            <i class="fas fa-comments text-lg"></i> Join Community Forum
+          </a>
+          <a href="https://lifetech.host/hubs/Docs" target="_blank" class="px-5 py-2.5 bg-gray-50 rounded-full border border-gray-200 text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 hover:border-purple-200 transition-colors shadow-sm flex items-center gap-2">
+            <i class="fas fa-book text-lg"></i> Documentation
+          </a>
+        </div>
+
+        <!-- Second Track of Buttons (Duplicate for seamless loop) -->
+        <div class="flex whitespace-nowrap gap-4 px-2 animate-infinite-scroll flex-shrink-0" aria-hidden="true">
+          <a href="https://github.com/lifetechOCMS?tab=repositories" target="_blank" class="px-5 py-2.5 bg-gray-50 rounded-full border border-gray-200 text-sm font-medium text-gray-700 hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-colors shadow-sm flex items-center gap-2">
+            <i class="fab fa-github text-lg"></i> GitHub Repository
+          </a>
+          <a href="https://github.com/lifetechOCMS/lifetechocms/issues" target="_blank" class="px-5 py-2.5 bg-gray-50 rounded-full border border-gray-200 text-sm font-medium text-gray-700 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition-colors shadow-sm flex items-center gap-2">
+            <i class="fas fa-bug text-lg"></i> Create Issue
+          </a>
+          <a  href="https://github.com/lifetechOCMS/docs/blob/master/contributing.md" target="_blank" class="px-5 py-2.5 bg-gray-50 rounded-full border border-gray-200 text-sm font-medium text-gray-700 hover:bg-green-50 hover:text-green-600 hover:border-green-200 transition-colors shadow-sm flex items-center gap-2">
+            <i class="fas fa-code-branch text-lg"></i> Contribution Guide
+          </a>
+          <a href="https://www.lifetech.host/hub/forum" target="_blank" class="px-5 py-2.5 bg-gray-50 rounded-full border border-gray-200 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-colors shadow-sm flex items-center gap-2">
+            <i class="fas fa-comments text-lg"></i> Join Community Forum
+          </a>
+          <a href="https://lifetech.host/hubs/Docs" target="" class="px-5 py-2.5 bg-gray-50 rounded-full border border-gray-200 text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 hover:border-purple-200 transition-colors shadow-sm flex items-center gap-2">
+            <i class="fas fa-book text-lg"></i> Documentation
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Right Gradient Fade (Matches the white container background) -->
+      <div class="absolute right-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none rounded-r-2xl"></div>
+    </div>
+
+  </div>
+</section>
+<script>
+(function() {
+    'use strict';
+    
+    function initScrollAnimation() {
+        const aboutImage = document.querySelector('.about-image');
+        if (!aboutImage) return;
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    entry.target.style.opacity = '1';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        
+        aboutImage.style.opacity = '0';
+        observer.observe(aboutImage);
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initScrollAnimation);
+    } else {
+        initScrollAnimation();
+    }
+})();
+</script>

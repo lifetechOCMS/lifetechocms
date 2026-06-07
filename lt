@@ -1,0 +1,41 @@
+#!/usr/bin/env php
+<?php
+
+session_start();
+$action = $argv[1] ?? null;
+$port = $argv[2] ?? null;
+
+
+// Prompt helper
+function getUserInput($prompt) {
+    echo $prompt . ": ";
+    return trim(fgets(STDIN));
+}
+
+switch ($action) {
+    case 'start':
+        $host = 'localhost'; 
+        $port = (is_null($port)) ? '8000':$port;
+        $root = getcwd(); // Current folder, or change manually
+
+        echo "Starting Lifetechocms framework server at http://$host:$port\n";       
+        echo "Admin Login at http://$host:$port/admin \n";  
+        passthru("php -S $host:$port -t \"$root\"");
+        break;
+
+    case 'list':
+        if (isset($_SESSION['users'])) {
+            $name = getUserInput("Enter user name");
+            $email = getUserInput("Enter user email");
+            echo 'list ' . $name;
+        } else {
+            $name = getUserInput("Login first");
+            $_SESSION['users'] = $name;
+            echo "Welcome " . $name;
+        }
+        break;
+
+    default:
+        echo "We are  currently working on li-li AI to improve the system\n";
+        break;
+}

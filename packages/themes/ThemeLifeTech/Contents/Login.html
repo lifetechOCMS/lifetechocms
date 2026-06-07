@@ -1,0 +1,285 @@
+
+  <style>
+    .snackbar {
+      transition: all 0.3s ease-in-out;
+    }
+    .fade-out {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+
+  </style>
+ 
+  <div id="snackbar" class="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 px-6 py-3 rounded-lg shadow-lg text-white text-sm font-medium transition-all duration-300 flex items-center hidden"></div>
+    <div class="mx-6 max-w-5xl md:mx-auto bg-white/95 rounded-2xl shadow-2xl overflow-hidden flex flex-col lg:flex-row min-h-[600px] my-14">
+    
+    <div class="lg:w-1/2 bg-gradient-to-br from-emerald-200 to-teal-300 p-8 flex flex-col items-center justify-center border-b lg:border-b-0 lg:border-r border-gray-100">
+        <div class="relative mb-8">
+            <svg class="w-32 h-32 text-emerald-500 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+            </svg>
+            <div class="absolute inset-0 bg-emerald-400 rounded-full blur-2xl opacity-20 animate-ping"></div>
+        </div>
+        
+        <h2 class="text-4xl font-black text-gray-800 mb-4 tracking-tight">Lifetech</h2>
+        <p class="text-gray-500 text-center mb-10 max-w-xs leading-relaxed">
+            Secure digital ecosystem for your professional growth and life management.
+        </p>
+        
+        <div class="flex space-x-4 text-emerald-600 font-medium text-sm">
+            <span><i class="fas fa-shield-alt mr-1"></i> Secure</span>
+            <span>•</span>
+            <span><i class="fas fa-bolt mr-1"></i> Fast</span>
+            <span>•</span>
+            <span><i class="fas fa-globe mr-1"></i> Global</span>
+        </div>
+    </div>
+
+    <div class="lg:w-1/2 p-8 lg:p-12 bg-white flex flex-col justify-center">
+        <div class="flex flex-col items-center mb-8">
+            <div class="bg-gradient-to-r from-green-500 to-emerald-600 rounded-full p-4 mb-4 shadow-lg">
+                <i class="fas fa-user-lock text-white text-3xl"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800">Sign in</h2>
+            <p class="text-gray-500 text-sm mt-2">Welcome back! Please enter your details.</p>
+        </div>
+
+        <form id="loginForm" class="space-y-5">
+            <div>
+                <label for="username" class="block text-gray-700 mb-2 font-medium">Username or Email</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-user text-gray-400"></i>
+                    </div>
+                    <input 
+                        id="username"
+                        name="username" 
+                        class="w-full border border-gray-300 pl-10 pr-4 py-3 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition text-base" 
+                        placeholder="Enter your username or email"
+                        required 
+                        autofocus 
+                    />
+                </div>
+            </div>
+            
+            <div>
+                <label for="password" class="block text-gray-700 mb-2 font-medium">Password</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-lock text-gray-400"></i>
+                    </div>
+                    <input 
+                        id="password"
+                        name="password" 
+                        type="password" 
+                        class="w-full border border-gray-300 pl-10 pr-12 py-3 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition text-base" 
+                        placeholder="Enter your password"
+                        required 
+                    />
+                    <button 
+                        type="button"
+                        id="togglePassword"
+                        class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+                    >
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <input 
+                        id="rememberMe"
+                        name="rememberMe" 
+                        type="checkbox" 
+                        class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded"
+                    />
+                    <label for="rememberMe" class="ml-2 block text-sm text-gray-700">
+                        Remember me
+                    </label>
+                </div>
+                <a href="<?= ltSiteUrl() ?>/forgot-password" class="text-sm text-emerald-600 font-medium hover:underline">Forgot password?</a>
+            </div>
+            
+            <button 
+                type="submit" 
+                id="submitBtn"
+                class="w-full bg-gradient-to-r from-green-600 to-emerald-700 text-white py-3 rounded-lg font-semibold text-lg shadow-md hover:from-green-700 hover:to-emerald-800 transform transition active:scale-[0.98] flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed" 
+            >
+                Login
+            </button>
+        </form>
+
+        <div class="mt-8 pt-6 border-t border-gray-100 text-center">
+            <p class="text-gray-500 text-sm">Don't have an account? <a href="<?=  ltSiteUrl() ?>/sign-up" class="text-emerald-600 font-bold hover:underline">Sign up</a></p>
+        </div>
+    </div>
+</div>
+  
+ <?php ltImport('mdLtTheme','LtThemeService.js') ?>
+  <script>
+  
+    // State management
+    const state = {
+      form: {
+        username: '',
+        password: '',
+        rememberMe: false
+      },
+      loading: false,
+      showPassword: false
+    };
+
+    // DOM elements
+    const elements = {
+      loginForm: document.getElementById('loginForm'),
+      username: document.getElementById('username'),
+      password: document.getElementById('password'),
+      rememberMe: document.getElementById('rememberMe'),
+      togglePassword: document.getElementById('togglePassword'),
+      submitBtn: document.getElementById('submitBtn'),
+      snackbar: document.getElementById('snackbar')
+    };
+    
+
+    // Initialize the application
+    function init() {
+      // Load remembered username if exists
+      const rememberedUsername = localStorage.getItem('lifetechRememberedUsername');
+      if (rememberedUsername) {
+        state.form.username = rememberedUsername;
+        state.form.rememberMe = true;
+        elements.username.value = rememberedUsername;
+        elements.rememberMe.checked = true;
+      }
+
+      // Add event listeners
+      elements.loginForm.addEventListener('submit', handleSubmit);
+      elements.username.addEventListener('input', handleInputChange);
+      elements.password.addEventListener('input', handleInputChange);
+      elements.rememberMe.addEventListener('change', handleCheckboxChange);
+      elements.togglePassword.addEventListener('click', togglePasswordVisibility);
+     // onLoadInfo();
+    }
+
+    // Event handlers
+    function handleInputChange(e) {
+      const { name, value } = e.target;
+      state.form[name] = value;
+    }
+
+    function handleCheckboxChange(e) {
+      const { name, checked } = e.target;
+      state.form[name] = checked;
+    }
+
+    function togglePasswordVisibility() {
+      state.showPassword = !state.showPassword;
+      const passwordField = elements.password;
+      const toggleIcon = elements.togglePassword.querySelector('i');
+      
+      if (state.showPassword) {
+        passwordField.type = 'text';
+        toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
+        elements.togglePassword.setAttribute('aria-label', 'Hide password');
+      } else {
+        passwordField.type = 'password';
+        toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
+        elements.togglePassword.setAttribute('aria-label', 'Show password');
+      }
+    }
+
+    function showSnackbar(message, color = 'green') {
+      elements.snackbar.textContent = message;
+      elements.snackbar.className = `fixed top-6 left-1/2 transform -translate-x-1/2 z-50 px-6 py-3 rounded-lg shadow-lg text-white text-sm font-medium transition-all duration-300 flex items-center ${color === 'green' ? 'bg-green-600' : 'bg-red-600'}`;
+      
+      const icon = document.createElement('i');
+      icon.className = `fas ${color === 'green' ? 'fa-check-circle' : 'fa-exclamation-circle'} mr-2`;
+      elements.snackbar.prepend(icon);
+      
+      elements.snackbar.classList.remove('hidden');
+      
+      // Auto-hide after appropriate time
+      const hideTime = color === 'green' ? 2000 : 3000;
+      setTimeout(() => {
+        elements.snackbar.classList.add('fade-out');
+        setTimeout(() => {
+          elements.snackbar.classList.add('hidden');
+          elements.snackbar.classList.remove('fade-out');
+        }, 300);
+      }, hideTime);
+    }
+
+    async function handleSubmit(e) {
+      e.preventDefault();
+      
+      // Update state with current form values
+      state.form.username = elements.username.value;
+      state.form.password = elements.password.value;
+      state.form.rememberMe = elements.rememberMe.checked;
+      
+      // Set loading state
+      state.loading = true;
+      elements.submitBtn.disabled = true;
+      elements.submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Logging in...';
+      let formData = {
+          username:state.form.username,
+          password:state.form.password
+      }
+      try {
+          const options = {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(formData)
+          };
+        
+          const res = await fetch(`${BASE_URL}/users/login`, options);
+          const data = await res.json();
+          const { responseData, responseCategory, responseResult } = data;
+        
+          if (responseCategory === "200") {
+            showSnackbar('Login Successfully', 'green');
+        
+            // Store token
+            const getTokenName = "<?= ApiTokenDetails::tokenName(); ?>";
+             localStorage.setItem(`${getTokenName}`, responseData[getTokenName]);
+        
+            // Remember username if checkbox is checked
+            if (state.form.rememberMe) {
+              localStorage.setItem('lifetechRememberedUsername', state.form.username);
+            } else {
+              localStorage.removeItem('lifetechRememberedUsername');
+            }
+            localStorage.removeItem('siteInfo');
+            
+            // // Optional: Redirect after login
+            setTimeout(() => {
+                //  window.history.back();
+                window.location.href = `${siteHostAddress}/LtDashboard`;
+            }, 1000);
+          } else {
+            showSnackbar(`Login failed: ${responseResult || 'Invalid credentials'}`, 'red');
+          }
+        } catch (err) {
+          showSnackbar(`Login error: ${err.message || 'Something went wrong'}`, 'red');
+        }
+
+      
+      // Reset loading state
+      state.loading = false;
+      elements.submitBtn.disabled = false;
+      elements.submitBtn.innerHTML = 'Login';
+      preloadImages();
+    }
+
+    // Initialize the app when DOM is loaded
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+
+      
+      
+      
+      
+      

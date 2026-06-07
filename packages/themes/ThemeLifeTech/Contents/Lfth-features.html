@@ -1,0 +1,99 @@
+<!-- Features Section Module -->
+<section id="features" class="py-20 bg-gradient-to-br from-primary to-primary-light">
+    <div class="container mx-auto px-4">
+        
+        <div id="features-header" class="text-center mb-16">
+            <h2 class="section-title text-4xl font-bold mb-4 text-gray-900">Loading Features...</h2>
+            <p class="text-xl text-gray-600">Please wait</p>
+        </div>
+        
+        <div id="features-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
+        
+    </div>
+</section>
+<script>
+
+(function() {
+    'use strict';
+    
+    // Extracted target IDs for easy reference
+    const DOMFeatures = {
+        header: document.getElementById('features-header'),
+        grid: document.getElementById('features-grid')
+    };
+    
+    function initScrollAnimations() {
+        const cards = document.querySelectorAll('#features .feature-card');
+        if (cards.length === 0) return;
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    entry.target.style.opacity = '1';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            observer.observe(card);
+        });
+    }
+    
+    // The missing updateFeaturesUI function!
+    function updateFeaturesUI(data) {
+        if (!data) return;
+
+        // 1. Update Header
+        if (DOMFeatures.header) {
+            DOMFeatures.header.innerHTML = `
+                <h2 class="section-title text-4xl font-bold mb-4 text-gray-900">${data.name || 'Powerful Features'}</h2>
+                <p class="text-xl text-gray-600">${data.description || ''}</p>
+            `;
+        }
+
+        // 2. Loop through profiles and build the cards
+        if (DOMFeatures.grid && data.profiles && Array.isArray(data.profiles)) {
+            DOMFeatures.grid.innerHTML = data.profiles.map(profile => `
+                <div class="feature-card bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 h-full border-0">
+                    <div class="feature-icon w-20 h-20 mb-6 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center text-white text-4xl">
+                        <i class="${profile.icon || 'bi bi-star-fill'}"></i>
+                    </div>
+                    <h5 class="text-xl font-bold mb-4 text-gray-900">${profile.title || ''}</h5>
+                    <p class="text-gray-600">${profile.short_bio || ''}</p>
+                </div>
+            `).join('');
+        }
+
+        // 3. Initialize animations AFTER cards exist in the DOMFeatures
+        initScrollAnimations();
+    }
+    
+    async function featuresInit() {
+        try {
+            let contentName = 'Lfth-features.html';
+            let packageName = 'ThemeLifeTech';
+            let fetauresUrl = `/render/cards/${packageName}/${contentName}`;
+            
+            const featuresResponse = await fetchRequest(fetauresUrl);
+            if (featuresResponse && featuresResponse.responseData) {
+                updateFeaturesUI(featuresResponse.responseData);
+            }
+            
+        } catch(error) {
+            console.error("Failed to load Features content:", error);
+            if (DOMFeatures.header) {
+                DOMFeatures.header.innerHTML = `<h2 class="text-2xl text-red-500">Could not load features.</h2>`;
+            }
+        }
+    }
+    
+    // Simply wait for the page to load, then run featuresInit()
+    document.addEventListener('DOMContentLoaded', featuresInit);
+
+})();
+
+</script>

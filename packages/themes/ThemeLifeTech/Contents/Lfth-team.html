@@ -1,0 +1,150 @@
+<!-- Team Section Module -->
+
+<section id="team" class="py-20">
+    <div class="container mx-auto px-4">
+        
+        <div id="team-header" class="text-center mb-16">
+            <h2 class="section-title text-4xl font-bold mb-4 text-gray-900">Loading Team...</h2> 
+            <p class="text-xl text-gray-600">Please wait</p>
+        </div>
+        
+        <div id="team-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            </div>
+        
+    </div>
+</section>
+<script>
+
+(function() {
+    'use strict';
+    
+    const DOMTeams = {
+        header: document.getElementById('team-header'),
+        grid: document.getElementById('team-grid')
+    };
+    
+    function initScrollAnimations() {
+        const cards = document.querySelectorAll('#team .team-card');
+        if (cards.length === 0) return;
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    entry.target.style.opacity = '1';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            observer.observe(card);
+        });
+    }
+    
+    function updateTeamUI(data) {
+        if (!data) return;
+
+        // 1. Update Header
+        if (DOMTeams.header) {
+            DOMTeams.header.innerHTML = `
+                <h2 class="section-title text-4xl font-bold mb-4 text-gray-900">${data.name || 'Our Team'}</h2> 
+                <p class="text-xl text-gray-600">${data.description || ''}</p>
+            `;
+        }
+
+        // 2. Build the Team Cards
+        if (DOMTeams.grid && data.profiles && Array.isArray(data.profiles)) {
+            DOMTeams.grid.innerHTML = data.profiles.map(profile => {
+                
+                // Helper to conditionally render social links so we don't get empty icons
+                const getSocialLink = (url, iconClass) => {
+                    // console.log(siteHostAddress, profile.image1);
+                    return url 
+                        ? `<a href="${url}" class="text-gray-400 hover:text-primary transition-colors text-xl" target="_blank" rel="noopener noreferrer"><i class="${iconClass}"></i></a>` 
+                        : '';
+                };
+
+                return `
+                    <div class="team-card bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 text-center h-full border-0 flex flex-col">
+                        
+                        <div class="team-avatar w-full h-48 pt-4 mx-auto mb-2 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                            <img src="${siteHostAddress}/storage/media${profile.image1}?v=${Date.now()}" class="w-fit h-full rounded-2xl" alt="${profile.full_name || 'Team Member'}">
+                        </div>
+                    <div class="p-8"> 
+                        <h5 class="text-xl font-bold mb-2 text-gray-900">${profile.full_name || 'Team Member'}</h5>
+                        <p class="text-primary mb-4 font-medium">${profile.title || ''}</p> 
+                        <p class="text-gray-600 text-sm mb-6 flex-grow">${profile.short_bio || ''}</p> 
+                        
+                        <div class="social-links flex justify-center space-x-4 mt-auto">
+                            ${getSocialLink(profile.linkedin, 'bi bi-linkedin')}
+                            ${getSocialLink(profile.twitter, 'bi bi-twitter')}
+                            ${getSocialLink(profile.github, 'bi bi-github')}
+                            ${getSocialLink(profile.dribbble, 'bi bi-dribbble')}
+                        </div>
+                    </div>
+                    </div>
+                    `;
+            }).join('');
+        }
+
+        // 3. Initialize scroll animations after the cards are painted
+        initScrollAnimations();
+    }
+    
+    async function teamInit() {
+        try {
+            let contentName = 'Lfth-team.html'; 
+            let packageName = 'ThemeLifeTech';
+            let url = `/render/cards/${packageName}/${contentName}`;
+            
+            const teamRes = await fetchRequest(url);
+            
+            if (teamRes && teamRes.responseData) {
+                updateTeamUI(teamRes.responseData);
+            }
+            
+        } catch(error) {
+            console.error("Failed to load Team content:", error);
+            if (DOMTeams.header) {
+                DOMTeams.header.innerHTML = `<h2 class="text-2xl text-red-500">Could not load team data.</h2>`;
+            }
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', teamInit);
+
+})();
+
+
+// (function() {
+//     'use strict';
+    
+//     function initScrollAnimations() {
+//         const cards = document.querySelectorAll('#team .team-card');
+//         if (cards.length === 0) return;
+        
+//         const observer = new IntersectionObserver(function(entries) {
+//             entries.forEach(entry => {
+//                 if (entry.isIntersecting) {
+//                     entry.target.classList.add('fade-in');
+//                     entry.target.style.opacity = '1';
+//                     observer.unobserve(entry.target);
+//                 }
+//             });
+//         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        
+//         cards.forEach(card => {
+//             card.style.opacity = '0';
+//             observer.observe(card);
+//         });
+//     }
+    
+//     if (document.readyState === 'loading') {
+//         document.addEventListener('DOMContentLoaded', initScrollAnimations);
+//     } else {
+//         initScrollAnimations();
+//     }
+// })();
+</script>

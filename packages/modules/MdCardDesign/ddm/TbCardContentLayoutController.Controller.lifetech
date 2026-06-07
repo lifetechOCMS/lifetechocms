@@ -1,0 +1,11 @@
+<?php
+
+namespace Lt\Modules\MdCardDesign\Controllers;
+
+use Lt\Modules\MdCardDesign\Services\TbCardContentLayoutService;
+        
+class TbCardContentLayoutController
+{
+
+}
+

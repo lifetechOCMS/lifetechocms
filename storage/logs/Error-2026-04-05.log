@@ -1,0 +1,8 @@
+[2026-04-05 18:01:29] [ERR_69d2956972d94] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'PRIMARY_KEY,
+title VARCHAR(100) NOT NULL,
+is_enabled INT(2) DEFAULT 1,
+is_defaul' at line 2 on line 158 /home4/uxdri30e/public_html/abaj/packages/modules/MdLt/Services/tableManagementService.php
+[2026-04-05 18:05:06] [ERR_69d296427fb33] array_slice(): Argument #1 ($array) must be of type array, false given on line 152 /home4/uxdri30e/public_html/abaj/packages/modules/MdLt/Controllers/TbFileManagementController.php
+[2026-04-05 18:09:59] [ERR_69d297675c95a] array_slice(): Argument #1 ($array) must be of type array, false given on line 152 /home4/uxdri30e/public_html/abaj/packages/modules/MdLt/Controllers/TbFileManagementController.php
+[2026-04-05 18:10:14] [ERR_69d297769ed95] Class "LtResponse" not found on line 44 /home4/uxdri30e/public_html/abaj/includes/connect2db.php(44) : eval()'d code(88) : eval()'d code(464) : eval()'d code
+[2026-04-05 18:30:33] [ERR_69d29c3964ed5] Class "Lt\Modules\MdDocs\Services\TbDocumentationLayer" not found on line 18 /home4/uxdri30e/public_html/abaj/packages/modules/MdDocs/Services/TbDocumentationVersionsService.php

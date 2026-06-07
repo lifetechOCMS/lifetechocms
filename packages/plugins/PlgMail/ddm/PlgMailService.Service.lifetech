@@ -1,0 +1,10 @@
+<?php
+namespace Lt\Modules\PlgMail\Services;
+
+use Lt\Modules\PlgMail\Models\PlgMail;
+        
+class PlgMailService
+{
+
+}
+

@@ -1,0 +1,18 @@
+[
+    {
+        "ltId": "177670545216885",
+        "packageName": "PlgMail",
+        "pageName": "Test",
+        "pageType": "router",
+        "routeContent": "",
+        "routeFileName": "PlgMailRoutes.php",
+        "routeHandler": "PlgMail@PlgMailController@test",
+        "routeMethod": "get",
+        "routePath": "\/mail\/test",
+        "routePayload": "",
+        "routeResponse": "",
+        "routeUpdateStatus": 1,
+        "apiToAllowRouters": "",
+        "description": ""
+    }
+]

@@ -1,0 +1,130 @@
+<!-- Services Section Module -->
+
+<section id="services" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+        
+        <div id="services-header" class="text-center mb-16">
+            <h2 class="section-title text-4xl font-bold mb-4 text-gray-900">Loading Services...</h2>
+            <p class="text-xl text-gray-600">Please wait</p>
+        </div>
+        
+        <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
+        
+    </div>
+</section>
+<script>
+
+(function() {
+    'use strict';
+    
+    // Extracted target IDs for easy reference
+    const DOMServices = {
+        header: document.getElementById('services-header'),
+        grid: document.getElementById('services-grid')
+    };
+    
+    function initScrollAnimations() {
+        const cards = document.querySelectorAll('#services .service-card');
+        if (cards.length === 0) return;
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    entry.target.style.opacity = '1';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            observer.observe(card);
+        });
+    }
+    
+    function updateUI(data) {
+        if (!data) return;
+
+        // 1. Update Header
+        if (DOMServices.header) {
+            DOMServices.header.innerHTML = `
+                <h2 class="section-title text-4xl font-bold mb-4 text-gray-900">${data.name || 'Our Services'}</h2>
+                <p class="text-xl text-gray-600">${data.description || ''}</p>
+            `;
+        }
+
+        // 2. Loop through profiles and build the cards
+        if (DOMServices.grid && data.profiles && Array.isArray(data.profiles)) {
+            DOMServices.grid.innerHTML = data.profiles.map(profile => {
+                
+                // Smart Bullet List Handler
+                let servicesListHtml = '';
+                if (profile.extra) { 
+                    // Converts to array whether it's already an array or a comma-separated string
+                    let itemsObj = JSON.parse(profile.extra);
+                    servicesListHtml = `
+                        <ul class="list-none text-left space-y-2">
+                            ${Object.values(itemsObj).map((item, i) => `
+                                <li class="flex items-center">
+                                    <i class="bi bi-check text-primary mr-3 font-bold text-xl"></i>
+                                    ${item.trim()}
+                                </li>
+                            `).join('')}
+                        </ul>
+                    `;
+                }
+
+                return `
+                <div class="service-card bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 h-full flex flex-col overflow-hidden border-0">
+
+                    <div class="w-full h-auto sm:h-56 flex-shrink-0">
+                        <img class="w-full h-full" src="${siteHostAddress}/storage/media${profile.image1}" alt="${profile.title || 'Service Image'}">
+                    </div>
+
+                    <div class="p-6 sm:p-8 flex flex-col flex-grow">
+                        <!-- Centered Title and Bio -->
+                        <h5 class="text-xl font-bold mb-4 text-gray-900 text-center uppercase">${profile.title || ''}</h5>
+                        <p class="text-gray-600 mb-6 flex-grow text-center">${profile.short_bio || ''}</p>
+
+                        <div class="text-left w-full">
+                            ${servicesListHtml}
+                        </div>
+                    </div>
+                    
+                </div>
+                `;
+            }).join('');
+        }
+
+        // 3. Initialize animations AFTER cards exist in the DOMServices
+        initScrollAnimations();
+    }
+    
+    async function init() {
+        try {
+            let contentName = 'Lfth-services.html';
+            let packageName = 'ThemeLifeTech';
+            let url = `/render/cards/${packageName}/${contentName}`;
+            
+            const res = await fetchRequest(url);
+            
+            if (res && res.responseData) {
+                updateUI(res.responseData);
+            }
+            
+        } catch(error) {
+            console.error("Failed to load Services content:", error);
+            if (DOMServices.header) {
+                DOMServices.header.innerHTML = `<h2 class="text-2xl text-red-500">Could not load services.</h2>`;
+            }
+        }
+    }
+    
+    // Trigger on load
+    document.addEventListener('DOMContentLoaded', init);
+
+})();
+
+</script>
