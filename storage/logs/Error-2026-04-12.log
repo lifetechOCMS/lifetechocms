@@ -1,6 +1,0 @@
-[2026-04-12 10:01:46] [ERR_69db5f7abd91c] Class "LtResponse" not found on line 44 /home4/uxdri30e/public_html/abaj/includes/connect2db.php(44) : eval()'d code(88) : eval()'d code(464) : eval()'d code
-[2026-04-12 12:26:16] [ERR_69db81585fe85] Class "LtResponse" not found on line 44 /home4/uxdri30e/public_html/abaj/includes/connect2db.php(44) : eval()'d code(88) : eval()'d code(464) : eval()'d code
-[2026-04-12 13:04:17] [ERR_69db8a414c162] array_slice(): Argument #1 ($array) must be of type array, false given on line 152 /home4/uxdri30e/public_html/abaj/packages/modules/MdLt/Controllers/TbFileManagementController.php
-[2026-04-12 13:04:23] [ERR_69db8a47ebd5a] array_slice(): Argument #1 ($array) must be of type array, false given on line 152 /home4/uxdri30e/public_html/abaj/packages/modules/MdLt/Controllers/TbFileManagementController.php
-[2026-04-12 23:25:23] [ERR_69dc1bd3ebe9c] json_encode(): Argument #2 ($flags) must be of type int, string given on line 525 /home4/uxdri30e/public_html/abaj/packages/modules/MdDocs/Services/TbDocumentationContentService.php
-[2026-04-12 23:29:10] [ERR_69dc1cb620645] Call to undefined function Lt\Modules\MdDocs\Services\extractImageFilenames() on line 365 /home4/uxdri30e/public_html/abaj/packages/modules/MdDocs/Services/TbDocumentationContentService.php

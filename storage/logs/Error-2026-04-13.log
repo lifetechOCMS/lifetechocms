@@ -1,6 +1,0 @@
-[2026-04-13 07:26:53] [ERR_69dc8cadb2829] Class "LtResponse" not found on line 44 /home4/uxdri30e/public_html/abaj/includes/connect2db.php(44) : eval()'d code(88) : eval()'d code(464) : eval()'d code
-[2026-04-13 17:23:29] [ERR_69dd1881f3581] Class "LtResponse" not found on line 44 /home4/uxdri30e/public_html/abaj/includes/connect2db.php(44) : eval()'d code(88) : eval()'d code(464) : eval()'d code
-[2026-04-13 17:24:04] [ERR_69dd18a483392] Class "LtResponse" not found on line 44 /home4/uxdri30e/public_html/abaj/includes/connect2db.php(44) : eval()'d code(88) : eval()'d code(464) : eval()'d code
-[2026-04-13 17:29:02] [ERR_69dd19ced661e] array_slice(): Argument #1 ($array) must be of type array, false given on line 152 /home4/uxdri30e/public_html/abaj/packages/modules/MdLt/Controllers/TbFileManagementController.php
-[2026-04-13 18:01:46] [ERR_69dd217a91fb6] array_slice(): Argument #1 ($array) must be of type array, false given on line 152 /home4/uxdri30e/public_html/abaj/packages/modules/MdLt/Controllers/TbFileManagementController.php
-[2026-04-13 18:15:32] [ERR_69dd24b4a8dca] Path cannot be empty on line 615 /home4/uxdri30e/public_html/abaj/includes/connect2db.php(44) : eval()'d code(88) : eval()'d code

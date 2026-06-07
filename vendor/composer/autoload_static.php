@@ -22,6 +22,7 @@ class ComposerStaticInit0f972319dc655c0813467bfddb83642c
             'Lt\\Themes\\' => 10,
             'Lt\\Plugins\\' => 11,
             'Lt\\Modules\\' => 11,
+            'Lt\\Events\\' => 10,
         ),
         'D' => 
         array (
@@ -50,6 +51,10 @@ class ComposerStaticInit0f972319dc655c0813467bfddb83642c
         'Lt\\Modules\\' => 
         array (
             0 => __DIR__ . '/../..' . '/packages/modules',
+        ),
+        'Lt\\Events\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/lifetechocms/events/src',
         ),
         'Doctrine\\Instantiator\\' => 
         array (

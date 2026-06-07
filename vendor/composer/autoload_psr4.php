@@ -11,6 +11,7 @@ return array(
     'Lt\\Themes\\' => array($baseDir . '/packages/themes'),
     'Lt\\Plugins\\' => array($baseDir . '/packages/plugins'),
     'Lt\\Modules\\' => array($baseDir . '/packages/modules'),
+    'Lt\\Events\\' => array($vendorDir . '/lifetechocms/events/src'),
     'Doctrine\\Instantiator\\' => array($vendorDir . '/doctrine/instantiator/src/Doctrine/Instantiator'),
     'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
 );

@@ -1,4 +1,0 @@
-[2026-04-09 17:12:34] [ERR_69d7cff210f8d] Attempt to assign property "children" on null on line 211 /home4/uxdri30e/public_html/abaj/packages/modules/MdDocs/Services/TbDocumentationContentService.php
-[2026-04-09 17:17:02] [ERR_69d7d0feb3b42] Attempt to assign property "children" on null on line 211 /home4/uxdri30e/public_html/abaj/packages/modules/MdDocs/Services/TbDocumentationContentService.php
-[2026-04-09 17:18:02] [ERR_69d7d13a123b9] Cannot use object of type stdClass as array on line 211 /home4/uxdri30e/public_html/abaj/packages/modules/MdDocs/Services/TbDocumentationContentService.php
-[2026-04-09 17:18:41] [ERR_69d7d16173d86] Cannot use object of type stdClass as array on line 211 /home4/uxdri30e/public_html/abaj/packages/modules/MdDocs/Services/TbDocumentationContentService.php

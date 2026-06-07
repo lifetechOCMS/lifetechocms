@@ -1,4 +1,0 @@
-[2026-04-11 18:21:01] [ERR_69da82fda5827] Object of class DOMDocument could not be converted to string on line 252 /home4/uxdri30e/public_html/abaj/packages/modules/MdLt/Services/LtRoute.php
-[2026-04-11 18:21:17] [ERR_69da830d38b00] Class "LtResponse" not found on line 44 /home4/uxdri30e/public_html/abaj/includes/connect2db.php(44) : eval()'d code(88) : eval()'d code(464) : eval()'d code
-[2026-04-11 18:23:14] [ERR_69da8382b4648] Object of class DOMNodeList could not be converted to string on line 252 /home4/uxdri30e/public_html/abaj/packages/modules/MdLt/Services/LtRoute.php
-[2026-04-11 18:32:34] [ERR_69da85b21ad71] Object of class DOMNodeList could not be converted to string on line 252 /home4/uxdri30e/public_html/abaj/packages/modules/MdLt/Services/LtRoute.php
