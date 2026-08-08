@@ -114,6 +114,7 @@ class LtAuth
                 $user->roleId = $getActiveRoles;
                 self::internalActivateUser($user);
                 $togetTokenName = ApiTokenDetails::tokenName();
+                $user->tokenName = ApiTokenDetails::tokenName();
                 $user->$togetTokenName = LtSession::get('lwToken');
                 LtSession::set('ltUrid', $user->roleId);
                 return LtResponse::json("Login Succesful", "1002", "200",$user);
@@ -208,8 +209,7 @@ class LtAuth
 
     private static function setLtSession($user, $id)
     {
-        $useId = $user->userId ?? $id;
-        LtSession::set('user_id', $useId);
+        LtSession::set('user_id', $id);
         LtSession::set("{$id}_email", $user->email);
         LtSession::set("{$id}_firstname", $user->firstName);
         LtSession::set("{$id}_othername", $user->otherName);

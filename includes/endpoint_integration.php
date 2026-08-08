@@ -25,18 +25,33 @@ function getCurrentScheme()
     return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
         ? 'https'
         : 'http';
-}
-
+} 
 // Current browser URL details
 $urlHostRaw = $_SERVER['HTTP_HOST'] ?? '';
 $urlHost    = getHostOnly($urlHostRaw);
 $urlPort    = getPortOnly($urlHostRaw);
 $urlScheme  = getCurrentScheme();
 
+
 $currentUri = $_SERVER['REQUEST_URI'] ?? '/';
 
 // Your endpoint config
 $dataEndPointUrlSS = include("includes/endpoint.php");
+
+/*
+echo "<br><br><br>this".$urlPort.'-'.$dataEndPointUrl['subfolder'];
+
+$subfolder = '/hubs'; // or '/'
+
+// Convert to a valid session name
+$sessionName = ($subfolder === '/')
+    ? 'LTSESSID_ROOT'
+    : 'LTSESSID_' . trim($subfolder, '/');
+
+session_name($sessionName);
+session_start();
+echo "<br>zxczd".$sessionName; 
+*/
 
 /*
 Expected endpoint.php should return array like:

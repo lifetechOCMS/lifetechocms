@@ -47,7 +47,7 @@ class LtService
                 $sqlConnect->exec($sql);
                 $results .= LtResponse::json("Column '$column' added successfully to '$table'", '201', '200');
             } catch (PDOException $e) {
-                $results .= LtResponse::json("Error modifying '$table': " . $e->getMessage(), '101', '100');
+                $results .= LtResponse::error("Error modifying '$table': " . $e->getMessage(), '101', '100');
             }
         }
     

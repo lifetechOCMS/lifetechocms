@@ -4,6 +4,8 @@ namespace Lt\Modules\MdLt\Services;
 
 class LtResponse 
 {   
+    public static string $defaultProductionErrorMessage = "Something went wrong. Please try again later.";
+
     public static function json($responseResult = "Unknown", $responseCode = "101", $responseCategory = "100", $responseData = [], $responseStatus = "fail", $responseOperationType = "others"  ) 
     {
         if ($responseResult === null || $responseResult === '') {
@@ -24,14 +26,14 @@ class LtResponse
     }
  
 
-    public static function error($responseResult = "Something went wrong",$responseCode = "101", $responseCategory = "100",$responseData = [], $responseStatus = "fail", $responseOperationType = "others")
+    public static function error($responseResult = "Unknown Error",$responseCode = "1043", $responseCategory = "100",$responseData = [], $responseStatus = "fail", $responseOperationType = "others")
     {
-        $env = defined('LT_ENV') ? LT_ENV : 'development'; 
+        $env = defined('LT_ENV') ? LT_ENV : 'development';  
 
         if ($env === "production") {
             self::writeLog($responseResult);
             return self::json(
-                "Something went wrong",
+                self::$defaultProductionErrorMessage ,
                 "1043",
                 "100"
             );

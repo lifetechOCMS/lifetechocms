@@ -24,7 +24,8 @@ namespace Lt\Modules\MdLt\Controllers;
     LtRoute::get ('/dashboard/analysis',                         'mdLt@dashboardController@dashboardIndex')->name('admin-dashboard.dashboard-analysis');
     
     LtRoute::post  ('/software/update/load',            'mdLt@TbSoftwareUpdateController@loadUpdate')->name('admin-software-update.load-update');
-    LtRoute::patch   ('/software/{contentName}/update', 'mdLt@TbSoftwareUpdateController@update')->name('admin-software-update.update');
+    
+    LtRoute::patch ('/software/{contentName}/update', 'mdLt@TbSoftwareUpdateController@update')->name('admin-software-update.update');
     
        
        
@@ -51,15 +52,13 @@ namespace Lt\Modules\MdLt\Controllers;
     LtRoute::post  ('/users',                           'mdLt@TbUserController@store')->name('admin-users.store');
     LtRoute::patch ('/users/{ltId}',                    'mdLt@TbUserController@update')->name('admin-users.update');
     LtRoute::patch ('/users/{ltId}/reset-password',     'mdLt@TbUserController@resetPassword')->name('admin-reset.password');
-    LtRoute::patch ('/users/{ltId}/change-password',    'mdLt@TbUserController@changePassword')->name('admin-change.password');
+    LtRoute::patch ('/users/{ltId}/change-password',     'mdLt@TbUserController@changePassword')->name('admin-change.password');
     LtRoute::delete('/users/{ltId}',                    'mdLt@TbUserController@destroy')->name('admin-users.destroy');
     LtRoute::patch ('/users/{ltId}/toggle-enabled',     'mdLt@TbUserController@toggleEnabled')->name('admin-users.toggle-enabled');
-    LtRoute::post ('/users/request-password-reset',     'mdLt@TbUserController@requestPasswordReset')->name('admin-users.request-password-reset');
-    LtRoute::post ('/users/verify-otp',                 'mdLt@TbUserController@verifyOtp')->name('admin-users.verify-otp');
-    LtRoute::post ('/users/reset-password',            'mdLt@TbUserController@reset')->name('admin-reset.password-token');
     
     
     //////////////////////////////////  MODULE   //////////////////////////////////////////////////////
+    LtRoute::get   ('/packages/filtered',                   'mdLt@TbPackageController@filteredPackages')->name('admin-packages.filtered'); //new
 
     LtRoute::get   ('/packages',                   'mdLt@TbPackageController@index')->name('admin-packages.index');
     LtRoute::post  ('/packages',                   'mdLt@TbPackageController@store')->name('admin-packages.store');
@@ -88,6 +87,7 @@ namespace Lt\Modules\MdLt\Controllers;
      
      LtRoute::post ('/contents/auto-create',      'mdLt@TbContentController@autoCreate')->name('admin-contents.auto-create');
    
+     LtRoute::post ('/contents/synchronize',           'mdLt@TbContentController@synchronizeContent')->name('admin-contents.synchronize-content');
     
     LtRoute::post ('/page-contents/toggle-published',   'mdLt@TbPageContentController@togglePublished')->name('admin-page-contents.toggle-published');
    

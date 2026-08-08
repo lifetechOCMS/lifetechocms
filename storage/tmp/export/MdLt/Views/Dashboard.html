@@ -1,0 +1,31 @@
+
+<div class="w-2/3 mx-auto my-14 shadow-md" id="root">
+  
+  <!-- Welcome Banner -->
+  <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 mb-8 flex flex-col md:flex-row items-start md:items-center justify-center gap-4">
+    <div class="text-center">
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Welcome back</h1>
+      <h3 class="text-2xl font-bold mt-5 text-gray-500" id="username">User! 👋</h3>
+    </div>
+  </div>
+</div>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function(){
+        
+        const userDetails = localStorage.getItem('userDetails');
+        let user = {};
+        try{
+             user = JSON.parse(userDetails || '{}');
+        }catch(e){
+            user =  {};
+        }
+        
+        let capitalizeUser = user.username.charAt(0).toUpperCase() + user.username.slice(1);
+
+        document.getElementById('username').textContent= capitalizeUser;
+        
+    })
+    
+</script>

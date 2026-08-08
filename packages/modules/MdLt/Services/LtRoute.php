@@ -206,8 +206,13 @@ class LtRoute
                 //echo $module.$ct; 
                 $ctName = pathinfo($ct, PATHINFO_FILENAME);
 
-
-                $controllerUse = "Lt\\Modules\\{$module}\\Controllers\\{$ctName}";
+                if (str_starts_with($module, 'Plg')) {
+                    // Starts with "plg"
+                    $controllerUse = "Lt\\Plugins\\{$module}\\Controllers\\{$ctName}";
+                }else{
+                    $controllerUse = "Lt\\Modules\\{$module}\\Controllers\\{$ctName}";
+                    
+                }
 
                 // Default final controller is null
                 $controller = null;

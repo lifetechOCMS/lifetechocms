@@ -12,8 +12,7 @@ $dataEndPointUrl = [
 ];
 
 // Build endpoint
-$endpointUrl =   $dataEndPointUrl['scheme'] . '://' . $dataEndPointUrl['host'] . (!empty($dataEndPointUrl['port']) ? ':' . $dataEndPointUrl['port'] : '') . '/' . trim($dataEndPointUrl['subfolder'], '/') . '/' . ltrim($dataEndPointUrl['endpoint'], '/');
-
+$endpointUrl =$dataEndPointUrl['scheme'] . '://' . $dataEndPointUrl['host'] . (!empty($dataEndPointUrl['port']) ? ':' . $dataEndPointUrl['port'] : '') . (!empty(trim($dataEndPointUrl['subfolder'], '/'))  ? '/' . trim($dataEndPointUrl['subfolder'], '/'): '') . '/' . ltrim($dataEndPointUrl['endpoint'], '/');
 //sample of the endpoint is  'https://www.lifetech.host/hubs/api/v1/v2'; 
 
 

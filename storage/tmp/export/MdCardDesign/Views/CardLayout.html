@@ -1,0 +1,836 @@
+
+      <div class="w-2/3 mx-auto my-14" id="root">
+        <main class="pt-2 flex-1 p-1 py-2 transition-all duration-300 overflow-y-auto h-full">
+
+          <!-- Breadcrumb + Add -->
+            <div class="mb-1 rounded-xl p-4 bg-white">
+                <div class="flex flex-row items-center justify-between">
+                  <div>
+                    <h1 class="text-xl md:text-2xl font-bold text-gray-800 mb-1">Card Layout</h1>
+                  </div>
+                  <div class="flex space-x-2">
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg flex items-center text-xs md:text-sm font-medium" id="addLayoutBtn">
+                      <i class="fas fa-plus mr-2"></i>
+                      Add New Layout 
+                    </button>
+                  </div>
+                </div>
+                <nav class="flex" aria-label="Breadcrumb">
+                  <ol class="inline-flex items-center space-x-3 bg-gray-50 px-4 py-2 rounded-lg shadow-sm text-sm">
+                    <li>
+                      <a href="<?=ltSiteUrl() ?>/LtDashboard" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors duration-200">
+                        <i class="fas fa-home text-gray-400 mr-2"></i>
+                        <span class="font-medium">Dashboard</span>
+                      </a>
+                    </li>
+                    <li class="flex items-center">
+                      <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path>
+                      </svg>
+                      <a href="#" class="ml-2 text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200">Card Layout</a>
+                    </li>
+                  </ol>
+                </nav>
+            </div>
+          <!-- Filter Bar -->
+            <div class="bg-white rounded-xl shadow-md p-4 mb-1 hidden" id="filterBar">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                    <div class="flex flex-1 flex-col md:flex-row md:items-center gap-2">
+                        <div class="relative w-full md:w-auto">
+                            <input type="search" placeholder="Search..." class="w-full md:w-64 pl-10 pr-4 py-2 bg-gray-100 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" id="searchInput" />
+                            <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                        </div>
+                        <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-gray-500" id="clearFiltersBtn">Clear</button>
+                    </div>
+                </div>
+            </div>
+
+          <!-- Table -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-4 border-b border-gray-200">
+                    <div class="flex flex-row items-center justify-between">
+                        <div class="flex items-center">
+                            <label class="text-sm text-gray-600 mr-2">Show</label>
+                            <select class="bg-gray-100 border border-gray-300 text-gray-700 py-1 px-3 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" id="entriesPerPageSelect">
+                                <option value="10">10</option>
+                                <option value="20">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <button class="flex items-center justify-center w-10 h-10 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 ml-4" id="toggleFiltersBtn">
+                                <i class="fas fa-filter text-gray-600"></i>
+                            </button>
+                        </div>
+                        <div class="flex-1 flex justify-end">
+                          <nav class="inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination" id="paginationNav">
+                            <!-- Pagination will be populated here -->
+                          </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="theme-table-container overflow-x-auto">
+                    <table class="theme-table w-full min-w-[700px] text-sm">
+                        <thead>
+                            <tr class="bg-gray-50 text-left">
+                                
+                                <th class="py-3 px-4 font-medium text-gray-600 border-b border-gray-200 w-16">
+                                  <div class="flex items-center">SN<button class="ml-1 text-gray-400 hover:text-gray-600 focus:outline-none" data-sort="id"><i class="fas fa-sort"></i></button></div>
+                                </th>
+                                <th class="py-3 px-4 font-medium text-gray-600 border-b border-gray-200 w-32">Package Name</th>
+                                <th class="py-3 px-4 font-medium text-gray-600 border-b border-gray-200 w-32">
+                                  Content Name
+                                </th>
+                                <th class="py-3 px-4 font-medium text-gray-600 border-b border-gray-200 w-32">Card Section</th>
+                                <th class="py-3 px-4 font-medium text-gray-600 border-b border-gray-200 w-32">Usage</th>
+                                <th class="py-3 px-4 font-medium text-gray-600 border-b border-gray-200 w-32">
+                                  <div class="flex items-center">Status<button class="ml-1 text-gray-400 hover:text-gray-600 focus:outline-none" data-sort="status"><i class="fas fa-sort"></i></button></div>
+                                </th>
+                                <th class="py-3 px-4 font-medium text-gray-600 border-b border-gray-200 w-24 text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                          <!-- Table rows will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-sm text-gray-500 p-2" id="tableInfo">Showing 0 to 0 of 0 entries</div>
+            </div>
+
+            <div id="sectionDrawer" class="fixed inset-0 bg-black/40 flex items-center justify-center z-50 hidden">
+                    <div class="bg-white rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col">
+                        <div class="bg-blue-600 p-4 flex justify-between items-center">
+                              <div>
+                                <h2 class="text-2xl font-bold text-white flex items-center" id="modalLabel">
+                                  <i class="fas fa-plus mr-2"></i>
+                                  New Layout
+                                </h2>
+                              </div>
+                              <button type="button" class="text-white hover:text-red-200 text-3xl focus:outline-none transition-colors" id="closeDrawerBtn">
+                                <i class="fas fa-times-circle"></i>
+                              </button>
+                        </div>
+                    <!--<form  class="bg-white p-6 rounded shadow-lg w-full  flex flex-col h-auto max-h-[90vh]" id="layoutForm">-->
+                    <form  class="bg-white p-6 w-full" id="layoutForm">
+        
+                        <div class="flex-1 overflow-y-auto px-1">
+                          <div class="tab-content block">
+                              <div class="grid grid-cols-1 gap-2">
+                                <div>
+                                  <label class="mb-1 block text-sm font-medium text-gray-700">Package Name</label>
+                                  <input type="text" name="packageName" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-blue-500" placeholder="Package Name"  id="packageNameInput" />
+                                </div>
+                                <div>
+                                  <label class="mb-1 block text-sm font-medium text-gray-700">Content Name</label>
+                                  <input type="text" name="contentName" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-blue-500" placeholder="Content Name" id="contentNameInput" />
+                                </div>
+                                <div>
+                                  <label class="mb-1 block text-sm font-medium text-gray-700">Usage</label>
+                                  <textarea  name="userGuide" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-blue-500" placeholder="Usage" id="usageInput"></textarea>
+                                </div>
+                                <div>
+                                  <label class="mb-1 block text-sm font-medium text-gray-700">Card Section</label>
+                                  <select name="cardSectionId" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-blue-500" id="cardSectionSelect">
+                                  </select>
+                                </div>
+                                <div id="enableStatusDisplay">
+                                  <label class="mb-1 block text-sm font-medium text-gray-700">Status</label>
+                                  <select name="isEnabled" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-blue-500" id="isEnabled">
+                                    <option value="1">Enabled</option>
+                                    <option value="0">Disabled</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          
+                        </div>
+                 </form>       
+                        <div class="bg-gradient-to-r from-gray-100 to-gray-200 px-6 py-4 border-t border-gray-300 flex justify-between items-center">
+                          <button type="button" class="px-4 py-2 rounded bg-gray-200 text-gray-600 hover:text-gray-800" id="cancelBtn">Cancel</button>
+                
+                            <button type="submit" class="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700" id="submitBtn"> Submit </button>
+                          
+                        </div>
+        
+                 </div>
+            </div>
+            
+        </main>
+      </div>
+
+    <!-- Footer -->
+
+</div>
+<?php  ltImport('MdLtTheme','LtThemeService.js')  ?>
+<script>
+
+
+    // State variables
+    let cardSection = [];
+    let cardLayout = [];
+    let search = '';
+    let entriesPerPage = 10;
+    let page = 1;
+    let editId = null;
+    let showFilters = false;
+
+    
+    
+    const elements = {
+        packageNameInput: document.getElementById("packageNameInput"),
+        contentNameInput: document.getElementById("contentNameInput"),
+        isEnabled: document.getElementById('isEnabled'),
+        cardSectionSelect: document.getElementById('cardSectionSelect'),
+        usageInput: document.getElementById('usageInput'),
+        drawer: document.getElementById('sectionDrawer'),
+        title: document.getElementById('drawerTitle'),
+        submitBtn: document.getElementById('submitBtn'),
+        enableStatusDisplay: document.getElementById("enableStatusDisplay"),
+        tableInfo: document.getElementById('tableInfo'),
+        paginationNav: document.getElementById('paginationNav'),
+        filterBar: document.getElementById('filterBar'),
+        tableBody: document.getElementById('tableBody'),
+    }
+    
+
+    
+
+    // Filter data based on search
+    function filterData() {
+      return cardLayout.filter(c => {
+        return (
+            !search 
+            || c.packageName.toLowerCase().includes(search.toLowerCase())
+            || c.contentName.toLowerCase().includes(search.toLowerCase())
+            );
+      });
+    }
+    
+    function populateSection(value){
+        let html = '<option value="">-- Select Section --</option>';
+        
+         html += cardSection.map(s => `<option value="${s.ltId}" ${s.ltId === value ? 'selected' : ''}> ${s.name} </option>`).join('');
+        return html;
+    }
+    
+    function getSectionName(sectionId){
+        let section = cardSection.find(s => +s.ltId === +sectionId);
+        return section.name;
+    }
+    
+
+    // Paginate data
+    function paginateData(data) {
+      const start = (page - 1) * entriesPerPage;
+      const end = start + entriesPerPage;
+      return data.slice(start, end);
+    }
+
+    // Update table with current data
+    function updateTable() {
+      const filtered = filterData();
+      const paginated = paginateData(filtered);
+      const total = filtered.length;
+      const totalPages = Math.max(1, Math.ceil(total / entriesPerPage));
+
+      // Update table body
+      elements.tableBody.innerHTML = '';
+      if (paginated.length === 0) {
+        elements.tableBody.innerHTML = '<tr><td colspan="8" class="text-center py-6 text-gray-400">No Card Layout Found.</td></tr>';
+      } else {
+        paginated.forEach((s, i) => {
+          const tr = document.createElement('tr');
+          tr.className = `hover:bg-blue-50 transition duration-150 cursor-pointer`;
+          tr.innerHTML = `
+            <td class="py-3 px-4 border-b border-gray-200 text-center">${(page - 1) * entriesPerPage + i + 1}</td>
+            <td class="py-3 px-4 border-b border-gray-200">
+            <div class="flex items-center gap-1">
+                <div class="font-medium text-blue-700" data-id="${s.ltId}" id="viewAvailableProfile">${s.packageName}</div>
+                <span id="viewLoader"></span>
+            </div>
+            </td>
+            <td class="py-3 px-4 border-b border-gray-200">${s.contentName}</td>
+            <td class="py-3 px-4 border-b border-gray-200">
+            <select class="w-full rounded-md border border-gray-200 px-3 py-2 focus:border-blue-200 focus:ring-blue-200" id="cardSectionSelectUpdate" data-id="${s.ltId}">
+                ${populateSection(s.cardSectionId)}
+            </select>
+            </td>
+            <td class="py-3 px-4 border-b border-gray-200"><textarea readonly>${s.userGuide}</textarea></td>
+
+            <td class="py-3 px-4 border-b border-gray-200">
+              <span id="isEnabledStatus" data-id="${s.ltId}" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${s.isEnabled == '1' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">
+                <span class="w-2 h-2 ${s.isEnabled == '1' ? 'bg-green-500' : 'bg-yellow-500'} rounded-full mr-1.5"></span>
+                ${s.isEnabled == '1' ? 'Enabled' : 'Disabled'}
+              </span>
+            </td>
+            <td class="py-3 px-4 border-b border-gray-200">
+              <div class="flex justify-center">
+                <button aria-label="Edit" class="text-gray-500 hover:text-blue-600 mx-1 focus:outline-none" data-id="${s.ltId}">
+                  <i class="fas fa-edit text-xl text-green-500"></i>
+                </button>
+                <button aria-label="Delete" class="text-gray-500 hover:text-red-600 mx-1 focus:outline-none" data-id="${s.ltId}">
+                  <i class="fas fa-trash-alt text-xl text-red-400"></i>
+                </button>
+              </div>
+            </td>
+          `;
+          elements.tableBody.appendChild(tr);
+        });
+      }
+
+      // Update pagination
+      updatePagination(total, totalPages);
+
+      // Update table info
+      const start = total === 0 ? 0 : (page - 1) * entriesPerPage + 1;
+      const end = Math.min(page * entriesPerPage, total);
+      elements.tableInfo.textContent = `Showing ${start} to ${end} of ${total} entries`;
+
+      // Add event listeners to table elements
+      addTableEventListeners();
+    }
+
+function updatePagination(total, totalPages) {
+  elements.paginationNav.innerHTML = `
+    <button class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50" id="prevPageBtn" ${page === 1 ? 'disabled' : ''}>
+      <i class="fas fa-chevron-left text-xs"></i>
+    </button>
+  `;
+
+  const maxButtons = 5;
+  let startPage, endPage;
+
+  if (totalPages <= maxButtons) {
+    startPage = 1;
+    endPage = totalPages;
+  } else if (page <= 3) {
+    startPage = 1;
+    endPage = 5;
+  } else if (page >= totalPages - 2) {
+    startPage = totalPages - 4;
+    endPage = totalPages;
+  } else {
+    startPage = page - 2;
+    endPage = page + 2;
+  }
+
+  for (let i = startPage; i <= endPage; i++) {
+    const btn = document.createElement('button');
+    btn.className = `relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium ${page === i ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-100'}`;
+    btn.textContent = i;
+    btn.disabled = page === i;
+    btn.addEventListener('click', () => {
+      page = i;
+      updateTable();
+    });
+    elements.paginationNav.appendChild(btn);
+  }
+
+  const nextBtn = document.createElement('button');
+  nextBtn.className = `relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50`;
+  nextBtn.id = 'nextPageBtn';
+  nextBtn.innerHTML = '<i class="fas fa-chevron-right text-xs"></i>';
+  nextBtn.disabled = page === totalPages;
+  nextBtn.addEventListener('click', () => {
+    if (page < totalPages) {
+      page++;
+      updateTable();
+    }
+  });
+  elements.paginationNav.appendChild(nextBtn);
+
+  document.getElementById('prevPageBtn').addEventListener('click', () => {
+    if (page > 1) {
+      page--;
+      updateTable();
+    }
+  });
+}
+
+    // Add event listeners to table elements
+    function addTableEventListeners() {
+      // Select all checkbox
+
+      // Sort buttons
+      document.querySelectorAll('[data-sort]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const sortKey = e.currentTarget.getAttribute('data-sort');
+          handleSort(sortKey);
+        });
+      });
+      
+      // Edit buttons
+      document.querySelectorAll('button[aria-label="Edit"]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const ltId = e.currentTarget.getAttribute('data-id');
+          handleEdit(ltId);
+        });
+      });
+
+      // Delete buttons
+      document.querySelectorAll('button[aria-label="Delete"]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const ltId = e.currentTarget.getAttribute('data-id');
+          deleteLayout(ltId);
+        });
+      });
+      
+      
+    }
+
+    function handleisEnabled(ltId){
+        
+        cardLayout = cardLayout.map(profile => profile.ltId === +ltId ? {...profile, isEnabled: profile.isEnabled ? 0 : 1} : profile);
+        updateTable();
+    }
+
+    async function handleDelete(ltId) {
+        cardLayout = cardLayout.filter(s => +s.ltId !== +ltId);
+        updateTable();
+   
+    }
+    
+    
+    
+
+    // package drawer functions
+    function openProfileDrawer() {
+      const modalLabel = document.getElementById('modalLabel');
+ 
+    // 1. Find the Layout
+      const Layout = cardLayout.find(p => p.ltId == editId);
+        // update the title 
+      modalLabel.innerHTML = editId ? `<i class="fas fa-edit mr-2"></i>Edit Layout` : ` <i class="fas fa-plus mr-2"></i> New Layout`; 
+      
+      if(!editId){
+          document.getElementById('enableStatusDisplay').classList.remove('hidden');
+      }
+         
+      elements.drawer.classList.remove('hidden');
+    };
+
+    function closeProfileDrawer() {
+      elements.drawer.classList.add('hidden');
+      document.getElementById('modalLabel').innerHTML = '';
+      document.getElementById('layoutForm').reset();
+      editId = null;
+    };
+    
+
+    async function handleFormSubmit(e) {
+      e.preventDefault();
+      
+      let formData = new FormData(document.getElementById('layoutForm'));
+        if (editId) {
+            formData.delete('isEnabled');
+            const formEdit = Object.fromEntries(formData.entries());
+
+          // Update Package
+            Swal.fire({
+                title: 'Notice!',
+                text: 'Are you sure you want to update this Layout?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, Update',
+                cancelButtonText: 'No, Cancel'
+            }).then(async result => {
+                if (result.isConfirmed) {
+                    
+                        elements.submitBtn.innerHTML = '<span class="animate-pulse">processing...</span>';
+                    try{
+                        
+                        const response = await fetch(`${BASE_URL}/cards/contents/layouts/${editId}`, {
+                            method: 'PATCH',
+                            headers: {
+                                'Authorization': `Bearer ${LW_TOKEN}`,
+                                'Accept': 'application/json'
+    
+                            },
+                            body: JSON.stringify(formEdit)
+                        });
+                        
+                        const result = await response.json();
+                        const {responseData, responseCategory, responseResult} = result;
+ 
+                        if(responseCategory == 200){
+                              // update the table
+                            cardLayout = cardLayout.map(s => s.ltId === +editId ? {
+                                ...s,
+                                ...responseData
+                              } : s);
+                
+                            Swal.fire('Notice!!!', 'Updated Successfully', 'success').then(function(){
+                                elements.submitBtn.textContent = 'Update';
+                                    updateTable();
+                                 closeProfileDrawer();
+                            });
+                        }else{
+                            Swal.fire('Error!!!', `${responseResult}`, 'warning').then(function(){
+                                elements.submitBtn.textContent = 'Update';
+                             
+                            })
+                            
+                        }
+    
+                    }catch(error){
+                        Swal.fire('Error!!!', `${error}`, 'warning');
+                         elements.submitBtn.innerHTML = 'Update';
+                      
+                    }
+                }
+            });
+
+        } else {
+          
+            Swal.fire({
+                title: 'Notice!',
+                text: 'Are you sure you want to add this Layout?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, Add',
+                cancelButtonText: 'No, Cancel'
+            }).then(async result => {
+                if (result.isConfirmed) {
+                    
+                    try {
+                        elements.submitBtn.innerHTML = '<span class="animate-pulse">processing...</span>';
+                        // 4. The Direct Fetch Call
+                        const response = await fetch(`${BASE_URL}/cards/contents/layouts`, {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${LW_TOKEN}`,
+                                'Accept': 'application/json'
+    
+                            },
+                            // body: JSON.stringify(formEdit)
+                            body: formData
+                        });
+                    
+                        // 5. Parse the JSON response
+                        const result = await response.json();
+                         const {responseData, responseCategory, responseResult} = result;
+                    
+                        if(responseCategory == 200){
+                            cardLayout = [...cardLayout, responseData];
+
+                            Swal.fire('Notice!!!', 'Card Layout Added successfully', 'success').then(function(){
+                                 elements.submitBtn.innerHTML = 'Submit';
+                                    closeProfileDrawer();
+                                    updateTable();
+                            });
+    
+                        }else{
+                            Swal.fire('Error!!!', `${responseResult}`, 'warning').then(function(){
+                                elements.submitBtn.innerHTML = 'Submit';
+                            })
+                        }
+                    
+                    } catch (error) {
+                        // 7. Handle Network Errors (e.g., DNS issues, offline)
+                        console.error('Network Error:', error);
+                        Swal.fire('Error', 'Network error occurred', 'error');
+                    }
+            
+                }
+            }); 
+
+        }
+        
+
+    }
+
+  function handleEdit(ltId) {
+       
+       
+    const modalLabel = document.getElementById('modalLabel');
+    document.getElementById('enableStatusDisplay').classList.add('hidden');
+       
+       
+    // 1. Find the Layout
+    const Layout = cardLayout.find(p => p.ltId == ltId);
+
+    if (!Layout) return;
+      // storing the ID somewhere for Updating
+    editId = ltId;
+    
+     
+    // update the title 
+    modalLabel.innerHTML = `<i class="fas fa-edit mr-2"></i>Edit Layout`;
+
+    const form = document.getElementById('layoutForm');
+
+    // ---------------------------------------------------------
+    // A. Standard Fields (Text, Email, Select, Textarea)
+    // ---------------------------------------------------------
+    const fields = [
+        'packageName', 'contentName', 'userGuide',
+    ];
+
+    fields.forEach(field => {
+        const input = form.querySelector(`[name="${field}"]`);
+        // Check if input exists and Layout has data for it
+        if (input && Layout[field] !== undefined && Layout[field] !== null) {
+            
+            input.value = Layout[field];
+        } else if (input) {
+            input.value = ''; // Clear if data is null
+        }
+        
+    });
+    
+    let html = populateSection(Layout['cardSectionId']);
+    elements.cardSectionSelect.innerHTML = html;
+    
+    // D. Open the Drawer / Modal
+    openProfileDrawer();
+    
+ 
+}
+
+
+
+    
+    //// Delete event Listener
+     function deleteLayout(ltId){
+        let res = cardLayout.find(s => s.ltId == ltId);
+
+        Swal.fire({
+            title: 'Notice!',
+            text: `Are you sure you want to delete this card Layout?`,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, Delete',
+            cancelButtonText: 'No, Cancel'
+        }).then(async result => {
+            if (result.isConfirmed) {
+   
+                try{
+                    
+                    const data = await ajaxRequest(`/cards/contents/layouts/${ltId}`,'', 'DELETE');
+                    
+                    const {responseData, responseResult, responseCategory} = data;
+                    if(responseCategory == '200'){
+                        let msg = `Card Layout Deleted successfully ✌️`;
+                        Swal.fire('Notice!!!',msg,'success').then(function(){
+                            handleDelete(ltId);
+                        });
+                         
+                    }else{
+                        Swal.fire('Error!!!', `${responseResult}`, 'warning');
+                    }
+                    
+                }catch(error){
+                    Swal.fire('Error!!!', `${error}`, 'warning');
+                }
+            }
+        }); 
+    
+    };
+    
+
+    // Initialize event listeners
+    function initEventListeners() {
+    
+    document.addEventListener('click', function(e){
+        let btn = e.target.closest('#cardSectionSelectUpdate');
+        let sectionId = btn?.value;
+        if(!sectionId) return;
+        let ltId = btn.dataset.id;
+        let res = cardLayout.find(s => s.ltId == ltId);
+        if(res.cardSectionId === +sectionId) return;
+
+        Swal.fire({
+            title: 'Notice!',
+            text: `Are you sure you want to assign section ${getSectionName(sectionId)} to this profile?`,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: `Yes, assign`,
+            cancelButtonText: 'No, Cancel'
+        }).then(async result => {
+            if (result.isConfirmed) {
+                try{
+
+                    const data = await ajaxRequest(`/cards/contents/layouts/${ltId}/assign-section/${sectionId}`, '', 'PATCH');
+
+                     const {responseData, responseResult, responseCategory} = data;
+
+                    if(responseCategory == '200'){
+                         Swal.fire('Notice!!!', `Section Assigned successfully`, 'success').then(function(){
+                            
+                         
+                         });
+                         
+                    }else{
+                        Swal.fire('Error!!!', `${responseResult}`, 'warning');
+                    }
+                    
+                }catch(error){
+                    console.log(error);
+                }
+            }
+        });
+        
+    });
+        
+    
+        
+        
+    //      ///  is Enabled Event Listenere
+    document.addEventListener('click', function(e){
+        let btn = e.target.closest('#isEnabledStatus');
+        if(!btn) return;
+        let ltId = btn.dataset.id;
+        
+        let res = cardLayout.find(res => res.ltId == ltId);
+        let resStatusText = res.isEnabled  ? 'disable' : 'enable';
+
+        Swal.fire({
+            title: 'Notice!',
+            text: `Are you sure you want to ${resStatusText} this profile?`,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: `Yes, ${resStatusText}`,
+            cancelButtonText: 'No, Cancel'
+        }).then(async result => {
+            if (result.isConfirmed) {
+                try{
+
+                    const data = await ajaxRequest(`/cards/contents/layouts/${ltId}/toggle-enabled`, '', 'PATCH');
+
+                     const {responseData, responseResult, responseCategory} = data;
+
+                    if(responseCategory == '200'){
+                         Swal.fire('Notice!!!', `Layout successfully ${resStatusText}d `, 'success').then(function(){
+                            handleisEnabled(ltId);
+                         
+                         });
+                         
+                    }else{
+                        Swal.fire('Error!!!', `${responseResult}`, 'warning');
+                    }
+                    
+                }catch(error){
+                    console.log(error);
+                }
+            }
+        });
+        
+       
+        
+    })
+  
+      // Search
+      document.getElementById('searchInput')?.addEventListener('input', (e) => {
+        search = e.target.value;
+        page = 1;
+        updateTable();
+      });
+
+      // Clear filters
+      document.getElementById('clearFiltersBtn')?.addEventListener('click', () => {
+        search = '';
+        document.getElementById('searchInput').value = '';
+        page = 1;
+        updateTable();
+      });
+
+      // Entries per page
+      document.getElementById('entriesPerPageSelect')?.addEventListener('change', (e) => {
+        entriesPerPage = parseInt(e.target.value);
+        page = 1;
+        updateTable();
+      });
+
+      // Toggle filters
+      document.getElementById('toggleFiltersBtn')?.addEventListener('click', () => {
+        showFilters = !showFilters;
+        elements.filterBar.classList.toggle('hidden', !showFilters);
+      });
+
+    //   // Add Package
+      document.getElementById('addLayoutBtn')?.addEventListener('click', () => {
+        editId = null;
+        let html = populateSection();
+        elements.cardSectionSelect.innerHTML = html;
+        openProfileDrawer();
+      });
+
+    
+
+    //   // Drawer buttons
+      document.getElementById('closeDrawerBtn')?.addEventListener('click', closeProfileDrawer);
+      document.getElementById('cancelBtn')?.addEventListener('click', closeProfileDrawer);
+      elements.submitBtn?.addEventListener('click', handleFormSubmit);
+      
+        
+        
+    }
+    
+    
+    // Initialize the application
+    function init() {
+        
+        async function onLoad(){
+              
+            fx_lifetech_button_loader_open();
+            try{
+                
+                const [cardProfile, sections] = await Promise.all([
+                    ajaxRequest('/cards/contents/layouts'),
+                    ajaxRequest('/cards/sections?isEnabled=1')
+                ]);
+                 
+                const { responseData, responseResult, responseCategory } = cardProfile;
+                 
+                 cardSection = sections.responseData
+                 if(responseCategory == 200){
+                     if (Array.isArray(responseData) && responseData.length > 0) {
+                            cardLayout = [...responseData];
+                     }
+        
+                     updateTable();
+                 }else{
+                     Swal.fire('Notice!!!', `${responseResult}`, 'warning')
+                 }
+                 
+                 fx_lifetech_button_loader_close(); 
+            }catch(error){
+                 
+                 console.log(error);
+    
+            }
+             
+         }
+         
+        onLoad();    
+        
+        
+      initEventListeners();
+    //   updateTable();
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+
+    
+    
+    
+    
+  </script>
+  </body>
+      
+    
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      

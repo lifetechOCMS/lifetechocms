@@ -172,7 +172,7 @@ class TbPackageController
         $dataModelService = new TbPackageService();
         $response = $dataModelService->exportPackage();
         
-        return json_encode($response);
+        return $response;
         
     }
     public function imports(){
@@ -180,7 +180,15 @@ class TbPackageController
         $dataModelService = new TbPackageService();
         $response = $dataModelService->importPackage();
         
-        return json_encode($response);
+        return $response;
+        
+    }
+    public function filteredPackages(){
+        
+        $dataModelService = new TbPackageService();
+        $response = $dataModelService->filteredPackages();
+        
+        return $response;
         
     }
 

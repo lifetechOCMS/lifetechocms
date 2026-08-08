@@ -143,7 +143,7 @@ class TbRoleService
         
             } catch (PDOException $e) {
                 $sqlConnect->rollBack();
-                return LtResponse::json("failed: " . $e->getMessage(), 3205, 100, 'Role failed to published for the selected.');
+                return LtResponse::error("failed: " . $e->getMessage(), 3205, 100, 'Role failed to published for the selected.');
             } 
 
         }
@@ -185,5 +185,67 @@ class TbRoleService
             $roles = ['totalRoles' => count($roles)];
             return $roles;
         }
+        
+        /**
+         *     ROLE EXIST
+         */
+         
+         public function roleExist(String $role){
+            $developerRoleId = $role;
+            $roleExist = false;
+            $exist = $this->roleModel->select()->where('ltId', '=', $developerRoleId)->get();
+            if(count($exist) > 0){
+                $roleExist = true;
+            }
+            
+            return $roleExist;
+         }
+         
+         
+        /**
+         *     ROLE EXIST
+         */
+         
+          /**
+         *     get role name by id
+         */
+         
+        public function getRoleNameById($role)
+        {
+            try {
+        
+                $sqlConnect = DbConnect::dbDriver();
+        
+                if (is_array($role)) {
+                    $rolesArr = $role;
+                } else {
+                    $rolesArr = explode(',', $role);
+                }
+        
+                $rolesArr = array_filter(array_map('trim', $rolesArr));
+        
+                if (empty($rolesArr)) {
+                    return null;
+                }
+        
+                $placeholders = implode(',', array_fill(0, count($rolesArr), '?'));
+        
+                $sql = "SELECT GROUP_CONCAT(role_name SEPARATOR ', ') AS role_names
+                        FROM tb_role
+                        WHERE lt_id IN ($placeholders)
+                        AND is_enabled = 1";
+        
+                $stmt = $sqlConnect->prepare($sql);
+                $stmt->execute($rolesArr);
+        
+                return $stmt->fetchColumn();
+        
+            } catch (\PDOException $e) {
+        
+                $logError = 'ROLE ERROR [' . $e->getCode() . ']: ' . $e->getMessage();
+                return LtResponse::error($logError);
+            }
+        }
+         
 
 }    

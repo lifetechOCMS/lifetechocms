@@ -59,6 +59,7 @@ class TbMenuService
         }
         
         public function deleteMenu($ltId = null, $params = null){
+            
             if($params !== null){
                 $this->menuModel->remove('packageName', '=', $params)->orWhere('contentName', '=', $params)->delete();
                 // $this->menuModel->remove('packageName', '=', $params);

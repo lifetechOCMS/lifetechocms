@@ -25,9 +25,15 @@
             return $backEndBaseUrl;
         }
         
-        //set your token varriable name
+        //set your app id value
+        public static function appId(){
+            global $appIdentifier; 
+            return $appIdentifier;
+        }
+        
+         //set your token varriable name
         public static function tokenName(){
-          $theName = "lwToken";
+          $theName = "lwToken_".self::appId();
             return $theName;
         }
         

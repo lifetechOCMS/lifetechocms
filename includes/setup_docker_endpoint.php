@@ -5,7 +5,7 @@ ob_start();
  
 
 
-  function isHttps()
+function isHttps()
 {
     return (
         (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ||
@@ -123,10 +123,14 @@ $contentEnd= <<<PHP
                 
                     'endpoint'  => '{$dataEndPointUrl['endpoint']}',         // Application/API path (must start with '/')
                 ];
+        
                 
-                // Build endpoint
-                \$endpointUrl =   \$dataEndPointUrl['scheme'] . '://' . \$dataEndPointUrl['host'] . (!empty(\$dataEndPointUrl['port']) ? ':' . \$dataEndPointUrl['port'] : '') . '/' . trim(\$dataEndPointUrl['subfolder'], '/') . '/' . ltrim(\$dataEndPointUrl['endpoint'], '/');
-                
+                 // Build endpoint
+                \$endpointUrl = \$dataEndPointUrl['scheme'] . '://' .
+                    \$dataEndPointUrl['host'] . (!empty(\$dataEndPointUrl['port']) ? ':' .\$dataEndPointUrl['port'] : '') .
+                    (!empty(trim(\$dataEndPointUrl['subfolder'], '/')) ? '/' . trim(\$dataEndPointUrl['subfolder'], '/')
+                        : '') .'/' . ltrim(\$dataEndPointUrl['endpoint'], '/');
+
                 //sample of the endpoint is  'https://www.lifetech.host/hubs/api/v1/v2'; 
                 
                 
@@ -136,5 +140,81 @@ $contentEnd= <<<PHP
    fwrite($fhEnd,$contentEnd);
             fclose($fhEnd); 
             
+//to write session identity file 
+$siteSessionId = (string) random_int(100000000000000, 999999999999999);
+
+       $pageurlEnd= 'includes/app.identity.php'; 
+        $fhEnd = fopen($pageurlEnd,"w");
+
+       $pageurlEnd= 'app.identity.php'; 
+        $fhEnd = fopen($pageurlEnd,"w");
+   $contentEnd = <<<PHP
+            <?php
+
+            /**
+             * -------------------------------------------------------
+             * LifeTech OCMS - Site Identity
+             * -------------------------------------------------------
+             * This file is auto-generated during installation.
+             * It generates a unique PHP session name for this
+             * website installation to prevent session collisions
+             * between multiple LifeTech instances.
+             * -------------------------------------------------------
+             */
+
+            \$hostParts = explode(':', \$_SERVER['HTTP_HOST'] ?? '');
+
+            \$host = \$hostParts[0];
+            \$port = \$hostParts[1] ?? '';
+
+            \$identifier = \$host;
+
+            if (\$port !== '') {
+                \$identifier .= '_' . \$port;
+            }
+
+            \$uniqId = "{$siteSessionId}";
+           
+            \$identifier .= '_' . (trim(\$uniqId, '/') ?: 'ROOT');
+
+            \$appIdentifier = preg_replace('/[^A-Za-z0-9_]/', '_', \$identifier);
+            \$sessionName = 'LTSESSID_' . \$appIdentifier;
+
+            session_name(\$sessionName);
+
+            PHP;
+   fwrite($fhEnd,$contentEnd);
+            fclose($fhEnd); 
+            
+
+//to write backend switching json
+
+$pageurlEndJson = 'includes/backendswitching.json';
+
+$dataJson = [
+    [
+        'ltId'       => '658887544',
+        'siteName'   => 'Default Site',
+        'scheme'     => ltScheme(),
+        'port'       => ltPort(),
+        'host'       => ltHost(),
+        'subfolder'  => ltSubfolder(),
+        'endpoint'   => '/api/v1/v2',
+        'username'   => 'developer',
+        'isEnabled'  => 1,
+        'password'   => '',
+        'loginPath'  => '/users/login',
+        'serverType' => 'main'
+    ]
+];
+
+$contentJson = json_encode(
+    $dataJson,
+    JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+);
+
+if (file_put_contents($pageurlEndJson, $contentJson) === false) {
+    throw new Exception('Unable to create backendswitching.json');
+}
 
 ?>

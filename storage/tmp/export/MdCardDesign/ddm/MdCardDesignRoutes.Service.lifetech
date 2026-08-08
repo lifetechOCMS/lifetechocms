@@ -1,0 +1,11 @@
+<?php
+    
+    ltImport('MdCardDesign','MdCardDesign.php');
+             
+    class MdCardDesignRoutes
+    {
+
+    }
+
+    ?>
+    

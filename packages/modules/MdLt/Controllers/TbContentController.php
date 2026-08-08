@@ -29,7 +29,11 @@ class TbContentController
         $contentModel->select();
         
         if (!empty($contentType)) {
-            $contentModel->where('contentType', '=', $contentType);
+            if($contentType == 'text'){
+                $contentModel->where('contentType', '=', 'text')->orWhere('contentType', '=', 'html');
+            }else{
+                $contentModel->where('contentType', '=', $contentType);
+            }
         }
         
         if (!empty($packageName)) {
@@ -96,13 +100,6 @@ class TbContentController
         $contentModel->update('ltId', '=', $contentModel->ltId);
         return $contentModel->responseJson(); 
     }
-    // public function togglePublished(){
-    //     $contentModel = new TbContent();
-    //     $contentModel->processRequest(['isPublished', 'ltId']);  
-    //     $contentModel->updatedBy = LtSession::get('ltUid');
-    //     $contentModel->update('ltId', '=', $contentModel->ltId); 
-    //     return $contentModel->responseJson(); 
-    // }
     
     public function destroy(){
         
@@ -137,6 +134,15 @@ class TbContentController
         
         return $response;
     }
+    
+    public function synchronizeContent(){
+        $contentModel = new TbContent();
+        
+        $dataModelService = new TbContentService();
+        $response = $dataModelService->synchronizeContent();
+        
+        return $response;
+    }
 
     public function toggleRole(){
         $sqlConnect = DbConnect::dbDriver();
@@ -153,7 +159,7 @@ class TbContentController
         $contentType = $contents->contentType;
         $packageName = $contents->packageName;
 
-        if($contents->mvcType !== 'View' && $contentType !== 'theme'){
+       if($contents->mvcType !== 'View' && $contentType !== 'theme'){
             return LtResponse::json('Role can only be publish for type View','3512', '100');
         };
         
@@ -163,7 +169,7 @@ class TbContentController
         $contentModel->update('ltId', '=', $ltId);
         
         // early return if contentType is theme
-        if($contentType == 'theme'){
+        if($contentType == 'theme' || $contentType == 'text' || $contentType == 'html'){
              return $contentModel->responseJson();
         }
         

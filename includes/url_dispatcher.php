@@ -106,7 +106,7 @@ function toCheckDynamicRoute($incomingUrl) {
     $incomingCount = count($incomingSegments);
 
     // Fetch dynamic routes with {$...} placeholders
-    $stmt = $db->prepare("SELECT * FROM tb_page WHERE page_type = 'router' AND route_path LIKE '%{%'  AND (route_method IS NULL OR route_method = '' OR route_method = :route_method)");
+    $stmt = $db->prepare("SELECT * FROM tb_page WHERE (page_type = 'router'  OR page_type = 'theme') AND route_path LIKE '%{%'  AND (route_method IS NULL OR route_method = '' OR route_method = :route_method)");
     $stmt->bindParam(':route_method', $route_method);
     $stmt->execute();
     $routes = $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -173,7 +173,6 @@ function urlDispatcher($incomingPath) {
         if($verifyToCheckWebRoute){
             return $verifyToCheckWebRoute;
         }
-
         //check whether it is route
         $verifyToCheckApiRoute =toCheckApiRoute($incomingPath);
         if($verifyToCheckApiRoute){
@@ -193,6 +192,7 @@ function urlDispatcher($incomingPath) {
             return false;
 
         }else{ 
+
             //check whether webrout is having dynamic value
             $verifyapiRouteValueRemaining = toCheckDynamicRoute($incomingPath);
             if($verifyapiRouteValueRemaining){

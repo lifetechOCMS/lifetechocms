@@ -1,12 +1,36 @@
 <?php 
-ob_start();
+ob_start(); 
 //getting information about the required functions
-$maxUpload      = (int)(ini_get('upload_max_filesize'));
-$maxPost        = (int)(ini_get('post_max_size'));
-$maxtime      = (ini_get('max_execution_time'));
+$maxUpload      =  (ini_get('upload_max_filesize'));
+$maxPost        =  (ini_get('post_max_size'));
+$maxtime      = (ini_get('max_execution_time')); 
+function phpSizeToBytes($size)
+{
+    $size = trim($size);
+    $unit = strtolower(substr($size, -1));
+    $value = (float) $size;
+
+    switch ($unit) {
+        case 'g':
+            $value *= 1024;
+        case 'm':
+            $value *= 1024;
+        case 'k':
+            $value *= 1024;
+    }
+
+    return (int) $value;
+}
+$minimum = 40 * 1024 * 1024; // 40 MB
+
+$maxUploadNew      = phpSizeToBytes(ini_get('upload_max_filesize'));
+$maxPostNew        = phpSizeToBytes(ini_get('post_max_size'));
+$maxtimeNew      = (ini_get('max_execution_time'));
+
 
 $keys = [];
-if ($maxUpload < 40){ 
+
+if ($maxUploadNew < $minimum){  
     $Res_maxUpload = false;
     $keys['Upload_Max_Size'] = 'Upload max size of above 40M';
  }else{$a=2;
@@ -14,7 +38,7 @@ if ($maxUpload < 40){
     unset($keys['Upload_Max_Size']);
  }
 
-if ($maxPost < 40){ 
+if ($maxPostNew < $minimum){ 
     $Res_maxPost = false;
     $keys['Post_Max_Size'] = 'Post max size of above 40M';
  }else{$b=3;
@@ -100,9 +124,9 @@ function ltSubfolder()
 {
 
     $reqUrl = $_SERVER['REQUEST_URI'];
-  	$djkasdgs = substr($reqUrl,0,-19); 
-  	return $djkasdgs;
-  	
+    $djkasdgs = substr($reqUrl,0,-19); 
+    return $djkasdgs;
+    
     // Example: /v2_8/admin-end/welcome/login
     $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
     // Example output: /v2_8 if project is inside htdocs/v2_8
@@ -241,9 +265,15 @@ $contentEnd= <<<PHP
                     'endpoint'  => '{$dataEndPointUrl['endpoint']}',         // Application/API path (must start with '/')
                 ];
                 
+               
                 // Build endpoint
-                \$endpointUrl =   \$dataEndPointUrl['scheme'] . '://' . \$dataEndPointUrl['host'] . (!empty(\$dataEndPointUrl['port']) ? ':' . \$dataEndPointUrl['port'] : '') . '/' . trim(\$dataEndPointUrl['subfolder'], '/') . '/' . ltrim(\$dataEndPointUrl['endpoint'], '/');
-                
+                \$endpointUrl = \$dataEndPointUrl['scheme'] . '://' .
+                    \$dataEndPointUrl['host'] . (!empty(\$dataEndPointUrl['port']) ? ':' .\$dataEndPointUrl['port'] : '') .
+                    (!empty(trim(\$dataEndPointUrl['subfolder'], '/')) ? '/' . trim(\$dataEndPointUrl['subfolder'], '/')
+                        : '') .'/' . ltrim(\$dataEndPointUrl['endpoint'], '/');
+
+
+
                 //sample of the endpoint is  'https://www.lifetech.host/hubs/api/v1/v2'; 
                 
                 
@@ -253,6 +283,94 @@ $contentEnd= <<<PHP
    fwrite($fhEnd,$contentEnd);
             fclose($fhEnd); 
             
+//to write session identity file 
+$siteSessionId = (string) random_int(100000000000000, 999999999999999);
+
+       $pageurlEnd= 'app.identity.php'; 
+        $fhEnd = fopen($pageurlEnd,"w");
+
+       $pageurlEnd= 'app.identity.php'; 
+        $fhEnd = fopen($pageurlEnd,"w");
+   $contentEnd = <<<PHP
+            <?php
+
+            /**
+             * -------------------------------------------------------
+             * LifeTech OCMS - Site Identity
+             * -------------------------------------------------------
+             * This file is auto-generated during installation.
+             * It generates a unique PHP session name for this
+             * website installation to prevent session collisions
+             * between multiple LifeTech instances.
+             * -------------------------------------------------------
+             */
+
+            \$hostParts = explode(':', \$_SERVER['HTTP_HOST'] ?? '');
+
+            \$host = \$hostParts[0];
+            \$port = \$hostParts[1] ?? '';
+
+            \$identifier = \$host;
+
+            if (\$port !== '') {
+                \$identifier .= '_' . \$port;
+            }
+
+            \$uniqId = "{$siteSessionId}";
+
+            \$identifier .= '_' . (trim(\$uniqId, '/') ?: 'ROOT');
+
+            \$appIdentifier = preg_replace('/[^A-Za-z0-9_]/', '_', \$identifier);
+            \$sessionName = 'LTSESSID_' . \$appIdentifier;
+
+            session_name(\$sessionName);
+
+            PHP;
+   fwrite($fhEnd,$contentEnd);
+            fclose($fhEnd); 
+            
+
+//to write backend switching json
+
+$pageurlEndJson = 'backendswitching.json';
+
+$dataJson = [
+    [
+        'ltId'       => '658887544',
+        'siteName'   => 'Default Site',
+        'scheme'     => ltScheme(),
+        'port'       => ltPort(),
+        'host'       => ltHost(),
+        'subfolder'  => ltSubfolder(),
+        'endpoint'   => '/api/v1/v2',
+        'username'   => 'developer',
+        'isEnabled'  => 1,
+        'password'   => '',
+        'loginPath'  => '/users/login',
+        'serverType' => 'main'
+    ]
+];
+
+$contentJson = json_encode(
+    $dataJson,
+    JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+);
+
+if (file_put_contents($pageurlEndJson, $contentJson) === false) {
+    throw new Exception('Unable to create backendswitching.json');
+}
+
+/*
+        $fhEndJson = fopen($pageurlEndJson,"w");
+$contentEndJson= <<<PHP
+                <?php
+                ?>
+                PHP;
+   fwrite($fhEndJson,$contentEndJson);
+            fclose($fhEndJson); 
+  */          
+
+
 
 
 
@@ -288,17 +406,17 @@ $contentEnd= <<<PHP
           
           $contentdelete='<?php 
         class DatabaseConfig
-	    {
-	        public static function get(): array
-	        {
-	            return [
-	                \'host\' => getenv(\'LT_DB_HOST\') ?: "'.$host.'",
-	                \'user\' => getenv(\'LT_DB_USER\') ?: "'.$username.'",
-	                \'pass\' => getenv(\'LT_DB_PASS\') ?: "'.$password.'",
-	                \'name\' => getenv(\'LT_DB_NAME\') ?: "'.$dbname.'",
-	            ];
-	        }
-	    }
+        {
+            public static function get(): array
+            {
+                return [
+                    \'host\' => getenv(\'LT_DB_HOST\') ?: "'.$host.'",
+                    \'user\' => getenv(\'LT_DB_USER\') ?: "'.$username.'",
+                    \'pass\' => getenv(\'LT_DB_PASS\') ?: "'.$password.'",
+                    \'name\' => getenv(\'LT_DB_NAME\') ?: "'.$dbname.'",
+                ];
+            }
+        }
      ';
 
 
@@ -457,7 +575,7 @@ include('connect2db_setup.php');
                 <span class="text-green-700 bg-green-100 hover:shadow hover:text-shadow-lg text-lg px-2 py-1 rounded font-bold">Upload Max Size</span>
                 <span class="text-green-600 bg-green-100 hover:shadow hover:text-shadow-lg px-2 py-1 rounded text-xs font-bold">✔ OK</span>
             <?php else: ?>
-                <span class="text-red-800 bg-red-300 hover:shadow hover:text-shadow-lg text-lg px-2 py-1 rounded font-bold">Upload Max Sized</span>
+                <span class="text-red-800 bg-red-300 hover:shadow hover:text-shadow-lg text-lg px-2 py-1 rounded font-bold">Upload Max Sized is: <?php echo $maxUpload ?></span>
                 <span class="text-black-600 bg-black-100 px-2 py-1 rounded text-xs font-bold">should not be less than 40M</span>
             <?php endif; ?>
         </li>
@@ -466,7 +584,7 @@ include('connect2db_setup.php');
                 <span class="text-green-700 bg-green-100 hover:shadow hover:text-shadow-lg text-lg px-2 py-1 rounded font-bold">Post Max Size</span>
                 <span class="text-green-600 bg-green-100 hover:shadow hover:text-shadow-lg px-2 py-1 rounded text-xs font-bold">✔ OK</span>
             <?php else: ?>
-                <span class="text-red-800 bg-red-300 hover:shadow hover:text-shadow-lg text-lg px-2 py-1 rounded font-bold">Post Max Size</span>
+                <span class="text-red-800 bg-red-300 hover:shadow hover:text-shadow-lg text-lg px-2 py-1 rounded font-bold">Post Max Size is: <?php echo $maxPost; ?></span>
                 <span class="text-black-600 bg-black-100 px-2 py-1 rounded text-xs font-bold">should not be less than 40M</span>
             <?php endif; ?>
         </li>
@@ -475,7 +593,7 @@ include('connect2db_setup.php');
                 <span class="text-green-700 bg-green-100 hover:shadow hover:text-shadow-lg text-lg px-2 py-1 rounded font-bold">Execution Time</span>
                 <span class="text-green-600 bg-green-100 hover:shadow hover:text-shadow-lg px-2 py-1 rounded text-xs font-bold">✔ OK</span>
             <?php else: ?>
-                <span class="text-red-800 bg-red-300 hover:shadow hover:text-shadow-lg text-lg px-2 py-1 rounded font-bold">Execution Time</span>
+                <span class="text-red-800 bg-red-300 hover:shadow hover:text-shadow-lg text-lg px-2 py-1 rounded font-bold">Execution Time is: <?php echo $maxtime; ?></span>
                 <span class="text-black-600 bg-black-100 px-2 py-1 rounded text-xs font-bold">should not be less than 120sec</span>
             <?php endif; ?>
         </li>
@@ -483,8 +601,9 @@ include('connect2db_setup.php');
      <?php if($Res_maxUpload && $Res_maxPost && $Res_maxtime): ?>
       <button onclick="runStep(1)" class="w-full bg-blue-600 hover:bg-blue-700 transition-colors text-white py-3 rounded-lg font-semibold shadow-md">Verify & Continue</button>
      <?php else: ?>
-      <div class="bg-yellow-50 border border-yellow-100 rounded-lg h-full w-full p-4 shadow-lg hover:shadow-xl hover:text-shadow-lg">
-        <p><stong>Note:</stong></p>
+      <div class="bg-yellow-50 border border-yellow-100 rounded-lg h-full w-full p-4 shadow-lg hover:shadow-xl hover:text-shadow-lg"> 
+        <p><stong>Path File: <?php echo  php_ini_loaded_file(); ?></stong></p>
+        <p><stong><b>Note:</b></stong></p>
         <p>In respective of PhP version you are using, You are to search for 
         <b>PhP.ini Configuration</b> 
         file in your server directories and adjust <b><?php echo implode(', ', array_keys($keys)); ?></b> parameter to meet atleast the minimum requirement of <b><?php echo implode(', ', array_values($keys)); ?></b>

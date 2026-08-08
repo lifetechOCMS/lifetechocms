@@ -1,5 +1,6 @@
 <?php  
 error_reporting(0);
+include_once("includes/app.identity.php"); 
 session_start(); 
 
 
@@ -18,7 +19,7 @@ include_once 'includes/api_settings.php';
 $urlAccess = isset($_SERVER['PATH_INFO']) ? explode('/', ltrim($_SERVER['PATH_INFO'],'/')) : '/';
 include("includes/url_dispatcher.php");
 
-//
+ 
 //$urlAccessInfo = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 //echo $urlAccessInfo;
 if ($urlAccess == '/')  {
@@ -36,6 +37,33 @@ if ($urlAccess == '/')  {
 
         session_start();
         include("includes/controller.php"); 
+
+}else if(end($urlAccess) === "force-logout"){ 
+    // Clear session here...
+    session_destroy();
+    array_pop($urlAccess); 
+    $redirectUrl = '/' . implode('/', $urlAccess);
+     
+    $fullUrl = (isset($_SERVER['REQUEST_SCHEME']) ? $_SERVER['REQUEST_SCHEME'] : 'http')
+        . '://' . $_SERVER['HTTP_HOST']
+        . $_SERVER['REQUEST_URI'];
+
+    // extract path only
+    $path = parse_url($fullUrl, PHP_URL_PATH);
+
+    // convert to array
+    $segments = explode('/', trim($path, '/'));
+
+    // remove last segment
+    array_pop($segments);
+
+    // rebuild URL
+    $baseUrl = (isset($_SERVER['REQUEST_SCHEME']) ? $_SERVER['REQUEST_SCHEME'] : 'http')
+        . '://' . $_SERVER['HTTP_HOST']
+        . '/' . implode('/', $segments);
+ 
+    header("Location: $baseUrl");
+    exit;
 }else{  
 $urlAccessInfo = substr($_SERVER['PATH_INFO'],1); 
 

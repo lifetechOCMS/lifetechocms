@@ -284,7 +284,7 @@ class TbPageController
         
         $existing = $pageModel->select()->where('routePath', '=', $routePath)->get();
         
-        if(count($existing)) return LtResponse::json("failed: route path [ $routePath ] exist already",'3402', '200');
+        if(count($existing)) return LtResponse::json("failed: route path [ $routePath ] exist already",'3402', '100');
         // updating page route path
         $pageModel->update('ltId', '=', $ltId);
         

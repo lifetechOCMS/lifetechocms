@@ -2,8 +2,9 @@
     "ltId": "17294272843",
     "packageName": "MdLt",
     "packageType": "module",
-    "version": "2.5", 
+    "version": "1.3",
     "isPublished": "1",
-    "readme": "Main Module",
-    "languageUsed": "html,css, javascript"
+    "readme": "",
+    "languageUsed": "php, html, css, javascript, liferazor",
+    "dependsOn": ""
 }

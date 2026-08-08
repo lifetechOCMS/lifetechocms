@@ -25,14 +25,5 @@
         "pageId": "176039490585625",
         "sortOrder": 80,
         "publishSource": "content"
-    },
-    {
-        "ltId": 177927424784349,
-        "contentId": "177927424714930",
-        "contentType": "module",
-        "packageName": "MdLt",
-        "pageId": "177927424798189",
-        "sortOrder": 8,
-        "publishSource": "content"
     }
 ]

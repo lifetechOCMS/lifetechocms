@@ -23,7 +23,14 @@ class TbSiteController
                 $data = $record;
             }else{
                 
-                $data = ['siteAlias' => $record[0]->siteAlias, 'logo' => $record[0]->logo, "siteHostAddress"=> $record[0]->siteHostAddress];
+                $data = [
+                            'siteAlias' => $record[0]->siteAlias, 
+                            'logo' => $record[0]->logo, 
+                            "siteHostAddress"=> $record[0]->siteHostAddress, 
+                            'pageTitle' => $record[0]->pageTitle,
+                            'favicon' => $record[0]->favicon,
+                            'siteCopyright' => $record[0]->siteCopyright
+                        ];
             }
         }else{
             $data = [];
@@ -35,9 +42,7 @@ class TbSiteController
     public function updateSiteInfo(){
         $siteInfoModel = new TbSite();
         $siteInfoModel->processRequest();
-        
         $sn = $siteInfoModel->sn;
-        $siteInfoModel->linkedin = $siteInfoModel->linkedIn;
         $siteInfoModel->update('sn', '=', $sn);
         return $siteInfoModel->responseJson();
     }

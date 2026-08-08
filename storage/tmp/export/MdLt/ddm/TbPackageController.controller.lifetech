@@ -1,0 +1,195 @@
+y6tl?oyype_oyy 
+
+sLead6yabQoyyuyZbdad(q6tlabQcsBEadq6tl, q6tlG5c_dB9pycd_ceWpya_ecy.oyype_oyyq6tl);
+sLead6yabQoyyuyZbdad(q6tlabQcsBEadq6tl, q6tlG5c_dB9pycd_ceWpya_ecyHzcybdbgo_ccd_cy.oyype_oyyq6tl);               ////////// aduyZ c_dcy sLecypybgcy
+sLead6yabQoyyuyZbdad(q6tlabQcsBEadq6tl, q6tlG5c_db5uyZTMuadcyTMuadHzcybdbgo_ccd_cy.oyype_oyyq6tl);
+sLead6yabQoyyuyZbdad(q6tlabQcsBEadq6tl, q6tlG5c_dB9pya_ecyb5uyZTMuadcyTMuadHzcybdbgo_ccd_cy.oyype_oyyq6tl);
+sLead6yabQoyyuyZbdad(q6tlabQcsBEadq6tl, q6tlG5c_dB9pya_ecyHzcybdbgo_ccd_cy.oyype_oyyq6tl);
+sLead6yabQoyyuyZbdad(q6tlabQcsBEadq6tl, q6tlG5c_dGEcyTMubcHzcybdbgo_ccd_cy.oyype_oyyq6tl);
+
+
+
+
+cd_sLepyacac G5c_dB9pycd_ceWpya_ecyb5uyZTMuadbduyZsLesLecybd {
+    
+    oyybcc_dsLeo_ccd_ zc_bcTMucd_ado_cuyZTMu o_cTMucscyaf(){
+        
+        
+        $oyypycd_ceWpya_ecyGEuyZcscysLe iejr TMucybj G5c_dB9pycd_ceWpya_ecy();
+        $oyypycd_ceWpya_ecyGEuyZcscysLe-g6tlaccysLecycd_ad();
+
+        $bdcyz_sbccyacad iejr TMucybj BEadBzcyz_sbccyacad();
+
+        // b5uyZsLesLecycd_ad z_sbccybdaj oyypybdpyabQcyadcybdac
+        $oyypycd_ceWpya_ecyBKpyabQcy iejr $bdcyz_sbccyacad-g6tloyypycd_ceWpya_ecy_TMupyabQcy ?? TMubcsLesLe;
+        $oyypycd_ceWpya_ecyG5ajoyycy iejr $bdcyz_sbccyacad-g6tloyypycd_ceWpya_ecy_adajoyycy ?? TMubcsLesLe;
+        
+        
+        $o_cacB9bcc_dsLeo_cacpe_cycs iejr BEadHzcybdbgo_ccd_cy::a_ecyad6yacG1pysLebccy($bdcyz_sbccyacad-g6tlo_cac_oyybcc_dsLeo_cacpe_cycs ?? TMubcsLesLe);
+
+        // k7bco_csLecs cd_uyZTMucso_cado_cuyZTMuac csajTMupyabQo_ccd_pysLesLeaj
+        $pe_pyacb5uyZTMucso_cado_cuyZTMu iejr zc_pysLeaccy;
+
+        o_czc_ (!cyabQoyyadaj($oyypycd_ceWpya_ecyBKpyabQcy)) {
+            $oyypycd_ceWpya_ecyGEuyZcscysLe-g6tlbjpe_cybdcy(q6tloyypycd_ceWpya_ecy_TMupyabQcyq6tl, q6tliejrq6tl, $oyypycd_ceWpya_ecyBKpyabQcy);
+            $pe_pyacb5uyZTMucso_cado_cuyZTMu iejr adbdbccy;
+        }
+
+        o_czc_ (!cyabQoyyadaj($oyypycd_ceWpya_ecyG5ajoyycy)) {
+            // o_czc_ adpe_cybdcy bjpyac py oyybdcybgo_cuyZbcac bjpe_cybdcy, bcaccy pyTMucsK5pe_cybdcy
+            o_czc_ ($pe_pyacb5uyZTMucso_cado_cuyZTMu) {
+                $oyypycd_ceWpya_ecyGEuyZcscysLe-g6tlpyTMucsK5pe_cybdcy(q6tloyypycd_ceWpya_ecy_adajoyycyq6tl, q6tliejrq6tl, $oyypycd_ceWpya_ecyG5ajoyycy);
+            } cysLeaccy {
+                $oyypycd_ceWpya_ecyGEuyZcscysLe-g6tlbjpe_cybdcy(q6tloyypycd_ceWpya_ecy_adajoyycyq6tl, q6tliejrq6tl, $oyypycd_ceWpya_ecyG5ajoyycy);
+                $pe_pyacb5uyZTMucso_cado_cuyZTMu iejr adbdbccy;
+            }
+        }
+
+        o_czc_ ($o_cacB9bcc_dsLeo_cacpe_cycs !iejriejr TMubcsLesLe) {
+            o_czc_ ($pe_pyacb5uyZTMucso_cado_cuyZTMu) {
+                $oyypycd_ceWpya_ecyGEuyZcscysLe-g6tlpyTMucsK5pe_cybdcy(q6tlo_cac_oyybcc_dsLeo_cacpe_cycsq6tl, q6tliejrq6tl, $o_cacB9bcc_dsLeo_cacpe_cycs);
+            } cysLeaccy {
+                $oyypycd_ceWpya_ecyGEuyZcscysLe-g6tlbjpe_cybdcy(q6tlo_cac_oyybcc_dsLeo_cacpe_cycsq6tl, q6tliejrq6tl, $o_cacB9bcc_dsLeo_cacpe_cycs);
+                $pe_pyacb5uyZTMucso_cado_cuyZTMu iejr adbdbccy;
+            }
+        }
+
+        // a7cyzc_pybcsLead uyZbdcscybdo_cTMua_e
+        $oyypycd_ceWpya_ecyGEuyZcscysLe-g6tluyZbdcscybdk7aj(q6tloyypycd_ceWpya_ecy_TMupyabQcyq6tl, q6tlryHzb5q6tl);
+
+        // b7afcycd_bcadcy z_sbccybdaj
+        $oyypycd_ceWpya_ecyGEuyZcscysLe-g6tla_ecyad();
+
+        bdcyadbcbdTMu BEadBzcyacoyyuyZTMuaccy::p_xacuyZTMu(q6tlacbccd_cd_cyacacq6tl, kdkdp1kq, aqp1p1, $oyypycd_ceWpya_ecyGEuyZcscysLe-g6tlbdcyacoyyuyZTMuaccya7pyadpy);
+    }
+
+        
+    oyybcc_dsLeo_ccd_ zc_bcTMucd_ado_cuyZTMu acaduyZbdcy(){
+        
+        $oyypycd_ceWpya_ecyGEuyZcscysLe iejr TMucybj G5c_dB9pycd_ceWpya_ecy();  
+        $oyypycd_ceWpya_ecyGEuyZcscysLe-g6tloyybduyZcd_cyacacBzcyz_sbccyacad();
+        
+        $oyypycd_ceWpya_ecyGEuyZcscysLe-g6tlbgpysLeo_ccspyadcyBzcyz_sbccyacad([
+            q6tloyypycd_ceWpya_ecyBKpyabQcyq6tl iejrg6tl q6tlbdcyz_sbco_cbdcycsq6tl
+        ]);
+  
+        $cspyadpyGEuyZcscysLeHzcybdbgo_ccd_cy iejr TMucybj G5c_dB9pycd_ceWpya_ecyHzcybdbgo_ccd_cy();
+        $bdcyacoyyuyZTMuaccy iejr $cspyadpyGEuyZcscysLeHzcybdbgo_ccd_cy-g6tlacaduyZbdcy($oyypycd_ceWpya_ecyGEuyZcscysLe);
+        
+        bdcyadbcbdTMu $bdcyacoyyuyZTMuaccy;
+        
+    }
+    
+    oyybcc_dsLeo_ccd_ zc_bcTMucd_ado_cuyZTMu bcoyycspyadcy(){
+        $oyypycd_ceWpya_ecyGEuyZcscysLe iejr TMucybj G5c_dB9pycd_ceWpya_ecy();
+        $oyypycd_ceWpya_ecyGEuyZcscysLe-g6tloyybduyZcd_cyacacBzcyz_sbccyacad([q6tlcscyoyycyTMucsacGKTMuq6tl, q6tlcscyaccd_bdo_coyyado_cuyZTMuq6tl, q6tlo_cacB9bduyZadcycd_adcycsq6tl,q6tlo_cacB9bcc_dsLeo_cacpe_cycsq6tl,q6tlbdcypycsabQcyq6tl, q6tlbgcybdaco_cuyZTMuq6tl, q6tlsLead6ycsq6tl, q6tlsLepyTMua_ebcpya_ecyH7accycsq6tl]); 
+        
+        $cspyadpyGEuyZcscysLeHzcybdbgo_ccd_cy iejr TMucybj G5c_dB9pycd_ceWpya_ecyHzcybdbgo_ccd_cy();
+        $bdcyacoyyuyZTMuaccy iejr $cspyadpyGEuyZcscysLeHzcybdbgo_ccd_cy-g6tlbcoyycspyadcyB9pycd_ceWpya_ecy($oyypycd_ceWpya_ecyGEuyZcscysLe);
+        
+        bdcyadbcbdTMu $bdcyacoyyuyZTMuaccy;
+ 
+    }
+    
+    oyybcc_dsLeo_ccd_ zc_bcTMucd_ado_cuyZTMu aduyZa_ea_esLecyB9bcc_dsLeo_cacpe_cycs(){
+        $oyypycd_ceWpya_ecyGEuyZcscysLe iejr TMucybj G5c_dB9pycd_ceWpya_ecy();
+        
+        $cspyadpyGEuyZcscysLeHzcybdbgo_ccd_cy iejr TMucybj G5c_dB9pycd_ceWpya_ecyHzcybdbgo_ccd_cy();
+        $bdcyacoyyuyZTMuaccy iejr $cspyadpyGEuyZcscysLeHzcybdbgo_ccd_cy-g6tladuyZa_ea_esLecyB9bcc_dsLeo_cacpe_($oyypycd_ceWpya_ecyGEuyZcscysLe);
+        
+        bdcyadbcbdTMu $bdcyacoyyuyZTMuaccy;
+        
+         
+    }
+    oyybcc_dsLeo_ccd_ zc_bcTMucd_ado_cuyZTMu aduyZa_ea_esLecya7cyzc_pybcsLead(){
+        $oyypycd_ceWpya_ecyGEuyZcscysLe iejr TMucybj G5c_dB9pycd_ceWpya_ecy();
+        
+        $cspyadpyGEuyZcscysLeHzcybdbgo_ccd_cy iejr TMucybj G5c_dB9pycd_ceWpya_ecyHzcybdbgo_ccd_cy();
+        $bdcyacoyyuyZTMuaccy iejr $cspyadpyGEuyZcscysLeHzcybdbgo_ccd_cy-g6tlo_caca7cyzc_pybcsLead($oyypycd_ceWpya_ecyGEuyZcscysLe);
+        
+        bdcyadbcbdTMu $bdcyacoyyuyZTMuaccy;
+        
+         
+    }
+    
+    oyybcc_dsLeo_ccd_ zc_bcTMucd_ado_cuyZTMu cscyacadbduyZaj(){
+        $oyypycd_ceWpya_ecyGEuyZcscysLe iejr TMucybj G5c_dB9pycd_ceWpya_ecy();
+        $oyypycd_ceWpya_ecyGEuyZcscysLe-g6tloyybduyZcd_cyacacBzcyz_sbccyacad(); 
+        
+        $sLead6ycs iejr  $oyypycd_ceWpya_ecyGEuyZcscysLe-g6tlsLead6ycs;
+        $oyypycd_ceWpya_ecyBKpyabQcy iejr  $oyypycd_ceWpya_ecyGEuyZcscysLe-g6tloyypycd_ceWpya_ecyBKpyabQcy;
+        $oyypycd_ceWpya_ecyG5ajoyycy iejr  $oyypycd_ceWpya_ecyGEuyZcscysLe-g6tloyypycd_ceWpya_ecyG5ajoyycy;
+
+        $oyypycd_ceWpya_ecyGEuyZcscysLe-g6tlaccysLecycd_ad()-g6tlbjpe_cybdcy(q6tlsLead6ycsq6tl, q6tliejrq6tl, $sLead6ycs)-g6tlpyTMucsK5pe_cybdcy(q6tlo_cacB9bduyZadcycd_adcycsq6tl, q6tlkqq6tl)-g6tla_ecyad(); 
+        o_czc_($oyypycd_ceWpya_ecyGEuyZcscysLe-g6tlbdcyacoyyuyZTMuaccyb5pyadcya_euyZbdaj iejriejriejr q6tlaqp1p1q6tl){
+            $oyypycd_ceWpya_ecyBKpyabQcy iejr $oyypycd_ceWpya_ecyGEuyZcscysLe-g6tlbdcyacoyyuyZTMuaccya7pyadpy[p1]-g6tl$oyypycd_ceWpya_ecyBKpyabQcy;
+            bdcyadbcbdTMu BEadBzcyacoyyuyZTMuaccy::p_xacuyZTMu(dq3yB9pycd_ceWpya_ecy [ $oyypycd_ceWpya_ecyBKpyabQcy ] cd_pyTMuTMuuyZad c_dcy cscysLecyadcycs c_dcycd_pybcaccy o_cad o_cac B9bduyZadcycd_adcycsdq3y, dq3ykdkdp1aqdq3y);
+        } cysLeaccy {
+           
+         
+            
+            // / cscysLecyadcy zc_bduyZabQ uyZadpe_cybd adpyc_dsLecy
+            // B9pya_ecyb5uyZTMuadcyTMuad Hzcybdbgo_ccd_cy
+            $oyypya_ecyb5uyZTMuadcyTMuadGEuyZcscysLe iejr TMucybj G5c_dB9pya_ecyb5uyZTMuadcyTMuadHzcybdbgo_ccd_cy(); 
+            $cscysLecyadcyB9pya_ecyb5uyZTMuadcyTMuad iejr $oyypya_ecyb5uyZTMuadcyTMuadGEuyZcscysLe-g6tlcscysLecyadcyB9pya_ecyb5uyZTMuadcyTMuad(oyypycd_ceWpya_ecyBKpyabQcy: $oyypycd_ceWpya_ecyBKpyabQcy);
+            //  b5uyZTMuadcyTMuad Hzcybdbgo_ccd_cy 
+            $cd_uyZTMuadcyTMuadGEuyZcscysLe iejr TMucybj G5c_db5uyZTMuadcyTMuadHzcybdbgo_ccd_cy(); 
+            $cscysLecyadcyb5uyZTMuadcyTMuad iejr $cd_uyZTMuadcyTMuadGEuyZcscysLe-g6tlcscysLecyadcyb5uyZTMuadcyTMuad(oyypycd_ceWpya_ecyBKpyabQcy: $oyypycd_ceWpya_ecyBKpyabQcy);
+            // // // B9pya_ecy accybdbgo_ccd_cy
+            o_czc_($oyypycd_ceWpya_ecyG5ajoyycy iejriejr q6tlabQuyZcsbcsLecyq6tl){
+                $oyypya_ecyGEuyZcscysLe iejr TMucybj G5c_dB9pya_ecyHzcybdbgo_ccd_cy(); 
+                $cscysLecyadcyB9pya_ecy iejr $oyypya_ecyGEuyZcscysLe-g6tlcscysLecyadcyB9pya_ecyac(oyypybdpyabQac: $oyypycd_ceWpya_ecyBKpyabQcy);
+                // // // GEcyTMubc Hzcybdbgo_ccd_cy
+                $abQcyTMubcGEuyZcscysLe iejr TMucybj G5c_dGEcyTMubcHzcybdbgo_ccd_cy(); 
+                $cscysLecyadcyGEcyTMubc iejr $abQcyTMubcGEuyZcscysLe-g6tlcscysLecyadcyGEcyTMubc(oyypybdpyabQac: $oyypycd_ceWpya_ecyBKpyabQcy);
+
+            }
+            /// cscysLecyadcy zc_uyZsLecscybd
+            $oyypycd_ceWpya_ecyGEuyZcscysLe-g6tlcscysLecyadcy(q6tlsLead6ycsq6tl, q6tliejrq6tl, $sLead6ycs);
+            
+            $oyypyadpe_iejrdq3yoyypycd_ceWpya_ecyac/dq3y.$oyypycd_ceWpya_ecyG5ajoyycy.q6tlac/q6tl;
+            $ajcypype_ iejr BEad2do_csLecy::oyypyadpe_($oyypyadpe_)-g6tlcscysLecyadcy2duyZsLecscybd($oyypycd_ceWpya_ecyBKpyabQcy);
+            bdcyadbcbdTMu $oyypycd_ceWpya_ecyGEuyZcscysLe-g6tlbdcyacoyyuyZTMuaccyayacuyZTMu();
+            
+            
+        }
+
+    }
+    
+    oyybcc_dsLeo_ccd_ zc_bcTMucd_ado_cuyZTMu cyafoyyuyZbdadG5pyc_dsLecyac(){
+        
+        $cspyadpyGEuyZcscysLeHzcybdbgo_ccd_cy iejr TMucybj G5c_dB9pycd_ceWpya_ecyHzcybdbgo_ccd_cy();
+        $bdcyacoyyuyZTMuaccy iejr $cspyadpyGEuyZcscysLeHzcybdbgo_ccd_cy-g6tlcyafoyyuyZbdadG5pyc_dsLecy();
+        
+        bdcyadbcbdTMu $bdcyacoyyuyZTMuaccy;
+        
+    }
+    oyybcc_dsLeo_ccd_ zc_bcTMucd_ado_cuyZTMu cyafoyyuyZbdadac(){
+        
+        $cspyadpyGEuyZcscysLeHzcybdbgo_ccd_cy iejr TMucybj G5c_dB9pycd_ceWpya_ecyHzcybdbgo_ccd_cy();
+        $bdcyacoyyuyZTMuaccy iejr $cspyadpyGEuyZcscysLeHzcybdbgo_ccd_cy-g6tlcyafoyyuyZbdadB9pycd_ceWpya_ecy();
+        
+        bdcyadbcbdTMu p_xacuyZTMu_cyTMucd_uyZcscy($bdcyacoyyuyZTMuaccy);
+        
+    }
+    oyybcc_dsLeo_ccd_ zc_bcTMucd_ado_cuyZTMu o_cabQoyyuyZbdadac(){
+        
+        $cspyadpyGEuyZcscysLeHzcybdbgo_ccd_cy iejr TMucybj G5c_dB9pycd_ceWpya_ecyHzcybdbgo_ccd_cy();
+        $bdcyacoyyuyZTMuaccy iejr $cspyadpyGEuyZcscysLeHzcybdbgo_ccd_cy-g6tlo_cabQoyyuyZbdadB9pycd_ceWpya_ecy();
+        
+        bdcyadbcbdTMu p_xacuyZTMu_cyTMucd_uyZcscy($bdcyacoyyuyZTMuaccy);
+        
+    }
+
+    
+}
+
+?g6tl
+      
+      
+      
+      
+      
+      
+      
+      

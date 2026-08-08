@@ -11,6 +11,9 @@ use Lt\Modules\MdLt\Services\TbPageService;
 use Lt\Modules\MdLt\Services\LtFile;
 use Lt\Modules\MdLt\Services\CaseConverter; 
 use Lt\Modules\MdLt\Services\TbPageContentService; 
+
+use Lt\Modules\MdLt\Services\TbRoleService;
+
 use DbConnect;
 use LtDdm;
 
@@ -88,7 +91,7 @@ class TbContentService
       $exist = $this->contentModel->get();
         
         if(count($exist) > 0){
-            return  LtResponse::json('Content record already exist', 3503, 100); 
+            return  LtResponse::json("Content {$contentName} record already exist", 3503, 100); 
         }
         
         $this->contentModel->select('MAX(sort_order) AS highestSortNo')->where('packageName', '=', $packageName)->get();
@@ -102,13 +105,9 @@ class TbContentService
         }
         
         // checking if role of developer is available, then auto publish it for developer
-        $roleModel = new TbRole();
+        $roleModel = new TbRoleService();
         $developerRoleId = "accbc87e4b5ce2";
-        $roleExist = false;
-        $exist = $roleModel->select()->where('ltId', '=', $developerRoleId)->get();
-        if(count($exist) > 0){
-            $roleExist = true;
-        }
+        $roleExist = $roleModel->roleExist($developerRoleId);
         
         $contentId = ltId();
         $this->contentModel->contentName = $contentName;
@@ -228,7 +227,7 @@ class TbContentService
                     $ddmFilename = $ddmContentName.'.Contents.lifetech';
                     LtFile::path($path)->createFile($contentName);
                     LtFile::path($ddmpath)->createFile($ddmFilename);
-            }else if($contentType == 'text'){
+            }else if($contentType == 'text' || $contentType == 'html'){
                 $path = '/'.$contentName;
                 if($isMenu){
                     
@@ -603,15 +602,6 @@ class {$fileNameWithNoExt}
         
         return $result;
 
-        // Safe Code
-        // $this->request->codeContent = $uploadFileContent;
-        // $this->request->contentName = $contentName;
-        // $this->request->mvcType = $content->mvcType;
-        // $this->request->packageName = $content->packageName;
-        // $this->request->saveContentType = $contentType;
-        // $this->request->storeType = $content->storeType;
-        
-        // echo LtDdm::saveEditCode();
     }
   
     public function dashboardAnalysis(){
@@ -631,6 +621,47 @@ class {$fileNameWithNoExt}
         }
         $result = ['Theme Content' => count($theme), 'Module Content' => count($module), 'User Content' => count($text), 'totalContents' => count($contents)];
         return $result;
+    }
+    
+    public function synchronizeContent(){
+       $packageName = $this->request->packageName;
+       $packageType = $this->request->packageType;
+       
+       if(empty($packageName) && empty($packageType)){
+           return LtResponse::json('Package Name and Package Type can\'t be empty', 3504, 100);
+       }
+       $path = '';
+       if($packageType == 'theme'){
+           $path="packages/".$packageType.'s/'.$packageName.'/Contents';
+       }
+       $contents = scandir($path);
+       $files = array_slice($contents, 2);
+       $responses = [];
+       foreach ($files as $key => $file){
+          
+          $storeResponse = $this->store([
+                'contentName' => $file,
+                'storeType'   => 'folder',
+                'description'     => "Synchronized from file manager",
+                'packageName' => $packageName,
+                'contentType' => $packageType
+            ], false);
+        
+            // If store() returns JSON, decode it
+            if (is_string($storeResponse)) {
+                $storeResponse = json_decode($storeResponse, true);
+            }
+        
+            $responses[] = $storeResponse;
+           
+        }
+        
+        if(empty($responses))  return LtResponse::json('Failed to Synchronized', 3504, 100);
+        
+        return LtResponse::json('Synchronized succesfully', 200, 200, $responses);
+    //   return $responses;
+       
+       
     }
         
         

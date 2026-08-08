@@ -23,7 +23,8 @@ class TbUserController
                 $getCurrentTime = $request->getCurrentTime;
                 if($getCurrentTime){
                     $currentTimestamp = time();
-                    return json_encode($currentTimestamp);
+                    // return json_encode($currentTimestamp);
+                    return LtResponse::json('success', 201, 200, $currentTimestamp);
                 }else{
                     $result = (object)json_decode(checkTestBkSwit($request->bkSwitchHashPassword), true);
                     if($result->responseCategory == 200){
@@ -38,13 +39,17 @@ class TbUserController
                 }
 
             }else{
-                     // Validate input
-                LtValidator::validate((array) $request, [
-                    'username' => 'required|min:3',
-                    'password' => 'required|min:6'
-                ]);
+
                 $username = $request->username;
                 $password = $request->password;
+                
+                if(empty($password) || strlen($password) < 6){
+                    return LtResponse::json('password|required|min:6', 3005, 100);
+                };
+                if(empty($username) || strlen($username) < 6){
+                    return LtResponse::json('username|required|min:6', 3005, 100);
+                };
+                
                 $login = true;
                 
             }
@@ -59,6 +64,8 @@ class TbUserController
        
         }
 
+
+        
     public function index(){
         
         $userModel = new TbUser(); 
@@ -88,9 +95,9 @@ class TbUserController
         }
 
         
-        // if ($password !== $confirm) {
-        //     return LtResponse::json('validation error', 3003, 100, "Please ensure that Password and Confirm Password are the same.");
-        // }
+        if ($password !== $confirm) {
+            return LtResponse::json('validation error', 3003, 100, "Please ensure that Password and Confirm Password are the same.");
+        }
 
         
         $userModel->validateRequest([
@@ -102,32 +109,23 @@ class TbUserController
         return $response;
         
     }
-    
-    public function requestPasswordReset(){
-        $dataModelService = new TbUserService();
-        $response = $dataModelService->requestPasswordReset();
-        return $response;
-    }
-    public function verifyOtp(){
-        $dataModelService = new TbUserService();
-        $response = $dataModelService->verifyOtp();
-        return $response;
-    }
-    public function reset(){
-        $dataModelService = new TbUserService();
-        $response = $dataModelService->reset();
-        return $response;
-    }
 
     public function resetPassword(){
-        $model = $userModel = new TbUser(); 
+        $userModel = new TbUser(); 
         
-        $model->processRequest(); 
+        $userModel->processRequest(); 
         
-        $dataModelService = new TbUserService();
-        $response = $dataModelService->reset($model, '123456');
-        return $response;
+      //      // ///  Create Password Hash and Salt
+        $togetPasswordDetails = LtDdm::createPassword('123456');
+        $salt = $togetPasswordDetails->salt;
+        $encrypt = $togetPasswordDetails->hash;
+
+        $userModel->updatedBy = LtSession::get('ltUid');
+        $userModel->password = $encrypt;
+        $userModel->salt = $salt;
         
+        $userModel->update('ltId', '=', $userModel->ltId);
+        return $userModel->responseJson(); 
     }
 
      public function changePassword(){

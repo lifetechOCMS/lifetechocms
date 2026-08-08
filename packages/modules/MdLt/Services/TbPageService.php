@@ -443,7 +443,7 @@ class TbPageService
         
             } catch (PDOException $e) {
                 $sqlConnect->rollBack();
-                return LtResponse::json("failed: " . $e->getMessage(), 3412, 100, 'Page(s) failed to published for the selected theme.');
+                return LtResponse::error("failed: " . $e->getMessage(), 3412, 100, 'Page(s) failed to published for the selected theme.');
             }
         }
 

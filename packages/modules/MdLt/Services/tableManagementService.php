@@ -139,7 +139,7 @@ class tableManagementService
         
                 return LtResponse::json("Table {$tableName} dropped successfully", 3309, 200);
             } catch (\PDOException $e) {
-                return LtResponse::json("Error dropping table: " . $e->getMessage(), 500, 101);
+                return LtResponse::error("Error dropping table: " . $e->getMessage(), 500, 101);
             }
 
         }
@@ -211,7 +211,7 @@ class tableManagementService
                 return LtResponse::json('success', 3309, 200, $result);
         
             } catch (Throwable $e) {
-                return LtResponse::json($e->getMessage(), 3309, 100);
+                return LtResponse::error($e->getMessage(), 3309, 100);
             } 
         }
         

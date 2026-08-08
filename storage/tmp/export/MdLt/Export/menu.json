@@ -1,0 +1,14 @@
+[
+    {
+        "ltId": "177927424740853",
+        "packageName": "MdLt",
+        "menuLevel": 1,
+        "menuName": "Dashboard.html",
+        "contentName": "Dashboard.html",
+        "parentMenuId": "",
+        "routePath": "\/user-dashboard",
+        "slug": null,
+        "target": "_blank",
+        "sortOrder": null
+    }
+]
