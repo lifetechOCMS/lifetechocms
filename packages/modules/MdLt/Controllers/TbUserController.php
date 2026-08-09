@@ -9,6 +9,7 @@ use Lt\Modules\MdLt\Services\LtResponse;
 use Lt\Modules\MdLt\Services\LtSession;
 use Lt\Modules\MdLt\Services\LtLWToken;
 use Lt\Modules\MdLt\Services\TbUserService;
+use Lt\Modules\MdLt\Services\TbLoginAuditService;
 use LtDdm;
 
 class TbUserController
@@ -19,6 +20,7 @@ class TbUserController
             $request = new LtRequest;
             $bkSwitching = $request->bkSwitching;
             $login = false;
+            $loginFrom = $request->loginFrom ?? '';
             if($bkSwitching){
                 $getCurrentTime = $request->getCurrentTime;
                 if($getCurrentTime){
@@ -32,6 +34,7 @@ class TbUserController
                      $username = $request->username;
                        // Attempt login
                         $login = true;
+                        $loginFrom = "site_connect";
                     }else{
                         $response = $result->responseResult;
                         return LtResponse::json($response, 3005, 100);
@@ -51,14 +54,14 @@ class TbUserController
                 };
                 
                 $login = true;
+                //$loginFrom = "client";
                 
             }
             
             if($login){
                 // Attempt login
-                $auth = LtAuth::login($username, $password);
-    
-                return $auth;
+                $authResponse = LtAuth::loginWithAudit($username, $password, $loginFrom); 
+                return $authResponse; 
             }
         
        

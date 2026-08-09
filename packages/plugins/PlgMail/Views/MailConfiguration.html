@@ -9,5 +9,7 @@ ltImport("PlgMail","PlgMailController.php");
 use Lt\Plugins\PlgMail\Controllers\PlgMailController;    
 
 $testMailer = new PlgMailController();
-echo $testMailer->send();
+echo "<pre>";
+print_r( $testMailer->storeMail() );
+echo "</pre>";
 ?>

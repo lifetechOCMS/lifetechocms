@@ -3,6 +3,7 @@ namespace Lt\Modules\MdLt\Services;
 
 use Lt\Modules\MdLt\Models\TbFormRole;
 use Lt\Modules\MdLt\Models\TbUser;
+use Lt\Modules\MdLt\Services\TbLoginAuditService;
 use ApiTokenDetails;
 use LtDdm;
 
@@ -53,6 +54,34 @@ class LtAuth
         }
 
         return self::handleLoginAttempt($username, $password, 'getUserByUsernameOrEmail');
+    }
+    
+    public static function loginWithAudit($username, $password = "null", $loginFrom="null")
+    {
+        $loginProcess = self::login($username, $password);
+          //Login audit for trachking (optional)
+                $response = json_decode($loginProcess);
+                if($response->responseCategory == '100'){
+                    $status = 'failed';
+                    $reason = $response->responseResult;
+                }else{
+                     $status = 'success';
+                     $reason = $response->responseResult;
+                     $userId = $response->responseData->ltId;
+                }
+                $loginAuditInstance = new TbLoginAuditService();
+                $loginDetails = [
+                        "username" => $username,
+                        "reason" => $reason,
+                        "status" => $status,
+                        "loginFrom" => $loginFrom,
+                        "userId" => $userId
+                     ];
+                     
+                $result = $loginAuditInstance->logAudit($loginDetails); 
+                //end of login audit
+                return $loginProcess;
+         
     }
 
     public static function loginWithEmail($email, $password = "")

@@ -1,6 +1,6 @@
 [
     {
-        "ltId": "177670428098329",
+        "ltId": "177787805078261",
         "packageName": "PlgMail",
         "menuLevel": 1,
         "menuName": "PlgMail",
@@ -10,5 +10,41 @@
         "slug": null,
         "target": "self",
         "sortOrder": 8
+    },
+    {
+        "ltId": "177773364499496",
+        "packageName": "PlgMail",
+        "menuLevel": 2,
+        "menuName": "MailConfiguration.html",
+        "contentName": "MailConfiguration.html",
+        "parentMenuId": "",
+        "routePath": "\/PlgMail\/MailConfiguration",
+        "slug": "",
+        "target": "_blank",
+        "sortOrder": 0
+    },
+    {
+        "ltId": "177797997685445",
+        "packageName": "PlgMail",
+        "menuLevel": 2,
+        "menuName": "MailSender.html",
+        "contentName": "MailSender.html",
+        "parentMenuId": "",
+        "routePath": "\/PlgMail\/MailSender",
+        "slug": "",
+        "target": "_blank",
+        "sortOrder": 0
+    },
+    {
+        "ltId": "178311699576336",
+        "packageName": "PlgMail",
+        "menuLevel": 2,
+        "menuName": "MailQueue.html",
+        "contentName": "MailQueue.html",
+        "parentMenuId": "",
+        "routePath": "\/PlgMail\/MailQueue",
+        "slug": "",
+        "target": "_blank",
+        "sortOrder": 0
     }
 ]

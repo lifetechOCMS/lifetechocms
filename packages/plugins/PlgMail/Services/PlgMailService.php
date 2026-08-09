@@ -9,20 +9,30 @@ use PHPMailer\PHPMailer\SMTP;
 
 class PlgMailService
 {
-    public function send(array $sender, array $template, array $receiver): bool
+    public function send(array $sender, array $template, array $receiver)
     {
         $mail = new PHPMailer(true);
 
         try {
             
             if (empty($sender)) {
-                // sender not provided
-                    
+                // sender not providedycubzbkzmlqdbqitllll
+                  
                 $mail->Host       = 'smtp.gmail.com';
-                $mail->Username   = 'abolorea@gmail.com';
-                $mail->Password   = 'ycubzbkzmlqdbqit';
+                $mail->Username   = 'lifetechocms2016@gmail.com';
+                $mail->Password   = 'nveppwaocccvtrtl';
                 $mail->Port       = 587;
-                $mail->setFrom('abolorea@gmail.com', 'LifeTechOCMS');
+                $mail->setFrom('lifetechocms2016@gmail.com', 'OGITECH SU');
+                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+               
+                /*
+                $mail->Host       = 'mail.lifetech.host';
+                $mail->Username   = 'noreply@lifetech.host';
+                $mail->Password   = 'aUBtpY;wj]d4';
+                $mail->Port       = 465;
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                $mail->setFrom('noreply@lifetech.host', 'OGITECH SU');
+                */
             }else{
                 $fromEmail =$sender['fromEmail'];  $fromName = $sender['fromName'];
                 
@@ -31,26 +41,28 @@ class PlgMailService
                 $mail->Password   = $sender['Password'];
                 $mail->Port       = $sender['Port'];
                 $mail->setFrom($fromEmail, $fromName);
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             }
 
             $mail->isSMTP();
             $mail->SMTPAuth   = true;
             $mail->isHTML(true);
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+           
             
             $mail->addAddress($receiver['toEmail']);
-
             $mail->Subject = $template['subject'];
             $mail->Body    = $template['bodyText'];
 
             // Debug
             //$mail->SMTPDebug  = SMTP::DEBUG_SERVER;
             //$mail->Debugoutput = 'html';
-            
-            return $mail->send();
+            $mail->send();
+            $toReturn = ["responseCategory"=>"200"];
+            return $toReturn;
         } catch (Exception $e) {
-          //  echo 'Mailer Error: ' . $mail->ErrorInfo;
-            return false;
+            //  echo 'Mailer Error: ' . $mail->ErrorInfo;
+            $toReturn = ["responseCategory"=>"100",$responseData=$mail->ErrorInfo];
+            return $toReturn;
         }
     }
 }

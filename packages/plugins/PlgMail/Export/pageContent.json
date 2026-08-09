@@ -1,1 +1,29 @@
-[]
+[
+    {
+        "ltId": 177773364417158,
+        "contentId": "177773364411967",
+        "contentType": "plugin",
+        "packageName": "PlgMail",
+        "pageId": "177773364468488",
+        "sortOrder": 8,
+        "publishSource": "content"
+    },
+    {
+        "ltId": 177797997649676,
+        "contentId": "177797997641850",
+        "contentType": "plugin",
+        "packageName": "PlgMail",
+        "pageId": "177797997678993",
+        "sortOrder": 8,
+        "publishSource": "content"
+    },
+    {
+        "ltId": 178311699577878,
+        "contentId": "178311699564618",
+        "contentType": "plugin",
+        "packageName": "PlgMail",
+        "pageId": "178311699530060",
+        "sortOrder": 8,
+        "publishSource": "content"
+    }
+]

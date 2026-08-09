@@ -1,0 +1,10 @@
+<?php
+namespace Lt\Modules\MdLt\Services;
+
+use Lt\Modules\MdLt\Models\TbLoginAudit;
+        
+class TbLoginAuditService
+{
+
+}
+
