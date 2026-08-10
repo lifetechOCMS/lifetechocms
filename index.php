@@ -1,6 +1,7 @@
 <?php  
 error_reporting(0);
 include_once("includes/app.identity.php"); 
+include("bootstrap.php");
 session_start(); 
 
 
@@ -13,7 +14,6 @@ $check = @fopen($rFile, 'r');
 // Check if the file exists
 if(!$check){
 require_once("includes/DbConnect.php");
-include("bootstrap.php");
 include_once 'includes/api_settings.php';
 
 $urlAccess = isset($_SERVER['PATH_INFO']) ? explode('/', ltrim($_SERVER['PATH_INFO'],'/')) : '/';
