@@ -100,15 +100,14 @@ class TbPageController
     }
     public function togglePublished(){
         $pageModel = new TbPage();
-        $pageModel->processRequest(['isPublished', 'ltId']); 
+        $pageModel->processRequest(['isPublished']); 
         
-        $published = LtService::getIsValue($pageModel->isPublished);
-
-        $pageModel->updatedBy = LtSession::get('ltUid');
-        $pageModel->isPublished = $published;
+        $isPublished = LtService::getIsValue($pageModel->isPublished);
         
-        $pageModel->update('ltId', '=', $pageModel->ltId); 
-        return $pageModel->responseJson(); 
+        $dataModelService = new TbPageService();
+        $response = $dataModelService->togglePublished(null, $isPublished);
+        return $response;
+ 
     }
     
     public function destroy(){

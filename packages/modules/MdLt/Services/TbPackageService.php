@@ -41,7 +41,8 @@ class TbPackageService
 
             $packageName = $model->packageName;
             $packageType = $model->packageType;
-            
+            $dependsOn = $this->request->dependsOn;
+   
             if (str_contains($packageName, ' ')) {
                 return  LtResponse::json('Package name must not contain spaces.', 3303, 100); 
             } 
@@ -68,6 +69,7 @@ class TbPackageService
 
             $packageId = ltId();
             $model->ltId = $packageId;
+            $model->dependsOn = $dependsOn;
             $model->updatedBy = $this->userId;
             $model->updatedAt = $this->ltNow;
             $model->createdAt = $this->ltNow;
@@ -79,11 +81,13 @@ class TbPackageService
                         "packageName" => $packageName,
                         "packageType" => $packageType,
                         "version"     => $model->version,
-                        "dependsOn"     => $model->dependsOn,
+                        "dependsOn"     => json_decode($dependsOn, true),
                         "isPublished"     => $model->isPublished ?? '0',
                         "readme"     => $model->readme,
-                        "languageUsed" => $model->languageUsed
-                        ];
+                        "description"     => $model->description,
+                        "languageUsed" => $model->languageUsed,
+                        "ltVersion" => $model->ltVersion
+                    ];
                         
              // checking if role of developer is available, then auto publish it for developer
             $roleModel = new TbRoleService();
@@ -131,11 +135,9 @@ class TbPackageService
                     LtFile::path($path)->createFolder('Models');
                     LtFile::path($path)->createFolder('Services');
                     LtFile::path($path)->createFolder('Views');
-                    LtFile::path($path)->createFile('LICENSE');
+                    LtFile::path($path)->createFile('LICENSE', $licenceContent);
+                    LtFile::path($path)->createFile('package.json', $jsonData);
                     LtFile::path($path)->createFile('README.md');
-                    LtFile::path($path)->createFile('package.json');
-                    LtFile::path($path)->writeFile('package.json', $jsonData);
-                    LtFile::path($path)->writeFile('LICENSE', $licenceContent);
                     $path="packages/".$packageType.'s/'.$packageName.'/Export';
                     LtFile::path($path)->createFile('page.json');
                     LtFile::path($path)->createFile('content.json');
@@ -152,7 +154,7 @@ class TbPackageService
                         'menuName'=> $packageName,
                         'packageName' => $packageName,   
                         'routePath' => '#',
-                        'target' => 'self',
+                        'target' => '_self',
                         'menuLevel' => '1',
                         'isPublished' => '1',  
                         'sortOrder' => '8',  
@@ -185,21 +187,40 @@ class TbPackageService
                     $path="packages/".$packageType.'s/';
                     LtFile::path($path)->createFolder($packageName);
                     $path="packages/".$packageType.'s/'.$packageName.'/';
-                    LtFile::path($path)->createFolder('Contents');
-                    LtFile::path($path)->createFolder('Media');
+                    LtFile::path($path)->createFolder('Components');
+                    LtFile::path($path)->createFolder('Views');
+                    LtFile::path($path)->createFolder('Assets');
+                    LtFile::path($path)->createFolder('Layouts');
                     LtFile::path($path)->createFolder('Export');
                     LtFile::path($path)->createFolder('ddm');
-                    LtFile::path($path)->createFile('LICENSE');
+                    LtFile::path($path)->createFile('LICENSE', $licenceContent);
+                    LtFile::path($path)->createFile('package.json', $jsonData);
                     LtFile::path($path)->createFile('README.md');
-                    LtFile::path($path)->createFile('package.json');
-                    LtFile::path($path)->writeFile('package.json', $jsonData);
-                    LtFile::path($path)->writeFile('LICENSE', $licenceContent);
                     $path="packages/".$packageType.'s/'.$packageName.'/Export';
                     LtFile::path($path)->createFile('page.json');
                     LtFile::path($path)->createFile('content.json');
                     LtFile::path($path)->createFile('menu.json');
                     LtFile::path($path)->createFile('table.json');
                     LtFile::path($path)->createFile('pageContent.json');
+                    
+                    
+                    // Create menu for the package
+                    $serviceMenuModel = [
+                        'menuName'=> $packageName,
+                        'packageName' => $packageName,   
+                        'routePath' => '#',
+                        'target' => '_self',
+                        'menuLevel' => '1',
+                        'isPublished' => '1',  
+                        'sortOrder' => '8',  
+                    ];
+                    if($roleExist){
+                        $serviceMenuModel[$developerRoleId] = 1;
+                    }
+                    
+                    $menuService = new TbMenuService();
+                    $result = $menuService->store($serviceMenuModel);
+                    
                     return LtResponse::json('Package created successfully', 3306, 200, $model->responseData);
                     
                 }
@@ -207,39 +228,41 @@ class TbPackageService
             
         }
 
-        
         public function updatePackage($model){
             
             $packageName = $this->request->packageName;
             $packageType = $this->request->packageType;
             $model->updatedBy = $this->userId;
+            $dependsOn = $this->request->dependsOn;
+            $ltVersion = $this->request->ltVersion;
             
-            if($packageType == 'module'){
                 $path="packages/".$packageType.'s/'.$packageName.'/';
                 $packageJsonPath = $path . 'package.json';
-
+    
                 $packageJsonContent = file_get_contents($packageJsonPath);
                 if($packageJsonContent === false){
                     return LtResponse::json("Failed to read package json file ", "3308");
                 }
                 $data = json_decode($packageJsonContent, true);
                 $data["version"] = $model->version;
-                $data["dependsOn"] = $model->dependsOn;
+                $data["dependsOn"] = json_decode($dependsOn, true);
                 $data["isPublished"] = $model->isPublished;
                 $data["readme"] = $model->readme;
+                $data["description"] = $model->description;
                 $data["languageUsed"] = $model->languageUsed;
+                $data["ltVersion"] = $ltVersion;
                 $jsonData = json_encode($data, JSON_PRETTY_PRINT);
                 LtFile::path($path)->writeFile('package.json', $jsonData);
-            }
 
+            $model->dependsOn = $dependsOn;
+            $model->ltVersion = $ltVersion;
             $model->update('ltId', '=', $model->ltId);
             return $model->responseJson(); 
             
             
         }
-        /// new
-        public function filteredPackages()
-        {
+ 
+        public function filteredPackages(){
             $filtered = array_values(array_filter([
                 $this->request->packageTypeModule ?? null,
                 $this->request->packageTypeTheme ?? null,
@@ -253,7 +276,7 @@ class TbPackageService
             $sql = sprintf(
                 "SELECT package_name AS packageName, lt_id AS ltId
                  FROM tb_package
-                 WHERE package_type IN (%s)",
+                 WHERE package_type IN (%s) AND is_published = 1",
                 implode(',', array_fill(0, count($filtered), '?'))
             );
         
@@ -262,6 +285,356 @@ class TbPackageService
             $result = $stmt->fetchAll(\PDO::FETCH_OBJ);
             if(empty($result)) return LtResponse::json("No record Found", '101', '100');
             return LtResponse::json("Filtered Record fetched successfully", '309', '200', $result);
+        }
+        
+        public function validateDependency(){
+            // Decode and ensure it's an array (default to empty array if null)
+            $inputDependencies = json_decode($this->request->dependencies, true);
+            $dependencies = is_array($inputDependencies) ? $inputDependencies : [];
+            $result = $this->checkDependencyRequirement($dependencies);
+            return $result;
+        }
+        
+        public function checkDependencyRequirement($dependencies){
+            $dependencyResult = [];
+            $allRequiredMeet = [];
+                        
+            foreach ($dependencies as $dependency) {
+                $dependPackageName = $dependency['packageName'] ?? '';
+                $dependPackageVersion = $dependency['version'] ?? '0';
+
+                // Skip if package name is somehow empty
+                if (empty($dependPackageName)) {
+                    continue;
+                }
+        
+                // Fetch securely and check if it exists before targeting index [0]
+                $dbResult = $this->packageModel->select('version, is_published')
+                                               ->where('packageName', '=', $dependPackageName)
+                                               ->get();
+                
+                $exist = !empty($dbResult) ? $dbResult[0] : null;
+                
+        
+                if ($exist) {
+                    $installedVersion = $exist->version;
+                    $isPublished = $exist->isPublished;
+                    
+                    // Check if the currently installed version is older (<) than the required version
+                    if (version_compare($installedVersion, $dependPackageVersion, '<')) {
+                        $dependencyResult[] = [
+                            'packageName' => $dependPackageName,
+                            'version'     => $dependPackageVersion,
+                            'installed'   => $installedVersion,
+                            'isInstalled' => true,
+                            'isPublished' => $isPublished ? true : false,
+                            'isUpdated'   => false // Needs an update
+                        ];
+                    } else {
+                        
+                        if($isPublished){
+                            $dependencyResult[] = [
+                                'packageName' => $dependPackageName,
+                                'version'     => $dependPackageVersion,
+                                'installed'   => $installedVersion,
+                                'isInstalled' => true,
+                                'isPublished' => $isPublished ? true : false,
+                                'isUpdated'   => true // Requirement satisfied
+                            ];
+                            $allRequiredMeet[] = [
+                                'packageName' => $dependPackageName,
+                            ];
+                        }else{
+                            $dependencyResult[] = [
+                                'packageName' => $dependPackageName,
+                                'version'     => $dependPackageVersion,
+                                'installed'   => $installedVersion,
+                                'isInstalled' => true,
+                                'isPublished' => $isPublished ? true : false,
+                                'isUpdated'   => true // Requirement satisfied
+                            ];
+                        }
+                        
+                    }
+                } else {
+                    // Package is not installed at all
+                    $dependencyResult[] = [
+                        'packageName' => $dependPackageName,
+                        'version'     => $dependPackageVersion,
+                        'installed'   => null,
+                        'isInstalled' => false,
+                        'isPublished' => false,
+                        'isUpdated'   => false
+                    ];
+                }
+            }
+            
+            // return $newR;
+            // checking if number of dependency is equal to number of all required array
+           if(count($dependencies) === count($allRequiredMeet)){
+                return LtResponse::json("Requirements satisfy", '3319', '200', $dependencyResult);
+           }else{
+                return LtResponse::json("validated; action required", '3319', '100', $dependencyResult);
+           }
+        }
+        
+        public function browseProductFromMarkePlace() {
+            $tab = $this->request->tab ?? 'all';
+            $search = $this->request->search ?? '';
+            
+            // 1. Build the remote URL dynamically
+            // Removed the double slash // before products
+            $remoteServerUrl = "https://www.lifetech.host/hubs/api/v1/v2/products/browse/" . urlencode($tab);
+            
+            // Append search query if provided (assuming the main server supports ?search=...)
+            if (!empty($search)) {
+                $remoteServerUrl .= "?search=" . urlencode($search);
+            }
+            
+            $remotePackages = []; 
+            
+            $ch = curl_init();
+            curl_setopt_array($ch, [
+                CURLOPT_URL => $remoteServerUrl,
+                CURLOPT_RETURNTRANSFER => true, 
+                CURLOPT_FOLLOWLOCATION => true, 
+                CURLOPT_HTTPHEADER => [
+                    'Accept: application/json',
+                ],
+                CURLOPT_CONNECTTIMEOUT => 5,  
+                CURLOPT_TIMEOUT => 15,        
+                CURLOPT_SSL_VERIFYPEER => true, 
+                CURLOPT_SSL_VERIFYHOST => 2     
+            ]);
+        
+            $curlResponse = curl_exec($ch);
+            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+        
+            if ($curlResponse !== false && $httpCode === 200) {
+                $decodedData = json_decode($curlResponse, true);
+        
+                if (isset($decodedData['responseCategory']) && $decodedData['responseCategory'] == 100) {
+                    // Pass the remote server's exact error directly to the frontend
+                    return json_encode($decodedData);
+                } else {
+                    $remotePackages = $decodedData['responseData'] ?? [];
+                }
+            } else {
+                return LtResponse::json("Failed to connect to the main marketplace server.", '3319', '100');
+            }
+            
+            // 2. Fetch locally installed packages
+            $localPackages = $this->packageModel->select('package_name, version')->get();
+            
+            $localMap = [];
+            if (!empty($localPackages)) {
+                foreach ($localPackages as $lp) {
+                    $localMap[$lp->packageName] = $lp->version;
+                }
+            }
+        
+            $marketplaceResults = [];
+            
+            // return json_encode($remotePackages);
+            // 3. Compare Remote vs Local
+            foreach ($remotePackages as $remotePkg) {
+                $name = $remotePkg['packageName'];
+                $remoteVersion = $remotePkg['version'];
+                
+                $isInstalled = array_key_exists($name, $localMap);
+                $isUpdated = false;
+                $localVersion = null;
+        
+                if ($isInstalled) {
+                    $localVersion = $localMap[$name];
+                    if (version_compare($localVersion, $remoteVersion, '>=')) {
+                        $isUpdated = true;
+                    }
+                }
+        
+                $marketplaceResults[] = [
+                    'packageName'       => $name,
+                    'description'       => $remotePkg['description'] ?? 'No description provided.',
+                    'type'              => $remotePkg['packageType'] ?? 'module',
+                    'approvalStatus'    => $remotePkg['approvalStatus'] ?? 'review',
+                    'payment'           => $remotePkg['paymentCategory'] ?? 'free',
+                    'price'             => $remotePkg['productPrice'] ?? 0, // depends on if payment is free or paid if is paid it will display the price tag else free
+                    'dependency'        => json_decode($remotePkg['dependency']) ?? [], // depends on array with e.g [packageName => 'name', version => '1.12.3']
+                    'latestVersion'     => $remoteVersion,
+                    'localVersion'      => $localVersion,
+                    'isInstalled'       => $isInstalled,
+                    // 'isUpdated'         => false
+                    'isUpdated'         => $isUpdated
+                ];
+            }
+        
+            return LtResponse::json("Marketplace packages retrieved successfully", '3319', '200', $marketplaceResults);
+        }
+        
+        public function installFromMarketplace() {
+            $packageName = $this->request->packageName;
+            $state = $this->request->state ?? 'download'; // Default to download if not provided
+            $path = "storage/tmp/import/";
+            
+            // Define the tag name at the top so it is available for validation
+            $tagName = $this->request->version; 
+            
+            if (empty($packageName) || empty($tagName)) {
+                return LtResponse::json('Package name and version are required.', '3310', '100');
+            }
+            
+            // ==========================================
+            // PHASE 1: DOWNLOAD & EXTRACT
+            // ==========================================
+            if ($state === 'download') {
+                $tempDir = "storage/tmp/" . uniqid('lt_install_', true);
+                if (!mkdir($tempDir, 0755, true)) {
+                    return LtResponse::json("Failed to create local workspace.", '3311', '100');
+                }
+            
+                $tempZip = $tempDir . DIRECTORY_SEPARATOR . "download.zip";
+                $mainServerDownloadUrl = "https://www.lifetech.host/hubs/api/v1/v2/products/local/download";
+            
+                $postData = json_encode(['packageName' => $packageName, 'tagName' => $tagName]);
+            
+                $ch = curl_init();
+                curl_setopt_array($ch, [
+                    CURLOPT_URL            => $mainServerDownloadUrl,
+                    CURLOPT_POST           => true,
+                    CURLOPT_POSTFIELDS     => $postData,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_POSTREDIR      => CURL_REDIR_POST_ALL,
+                    CURLOPT_HTTPHEADER     => [
+                        'Content-Type: application/json',
+                        'Content-Length: ' . strlen($postData),
+                        'Accept: application/zip, application/json'
+                    ],
+                    CURLOPT_SSL_VERIFYPEER => true,
+                    CURLOPT_SSL_VERIFYHOST => 2,
+                    CURLOPT_CONNECTTIMEOUT => 15,
+                    CURLOPT_TIMEOUT        => 180,
+                ]);
+            
+          // 1. Execute cURL
+                $curlResponse = curl_exec($ch);
+                $curlError    = curl_error($ch);
+                $httpCode     = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                curl_close($ch);
+                
+                
+            
+                // 2. Network level check
+                if ($curlResponse === false) {
+                    $this->deleteFolder($tempDir);
+                    return LtResponse::json("Download request failed: {$curlError}", '3312', '100');
+                }
+            
+                // 3. Inspect for ZIP signature (PK\x03\x04)
+                $zipSignature = "\x50\x4b\x03\x04";
+                $zipStart = strpos($curlResponse, $zipSignature);
+
+                if ($zipStart === false) {
+                    // NOT a ZIP file: do not strip anything, clean up temp dir and return exact remote response
+                    $this->deleteFolder($tempDir);
+                    return $curlResponse;
+                }
+            
+                // IS a ZIP file: strip any leading spaces, PHP notices, or BOM prefixes
+                if ($zipStart > 0) {
+                    $curlResponse = substr($curlResponse, $zipStart);
+                }
+            
+                // Proceed with saving and extracting the ZIP
+                $bytesWritten = file_put_contents($tempZip, $curlResponse);
+                if ($bytesWritten === false) {
+                    $this->deleteFolder($tempDir);
+                    return LtResponse::json("Could not save downloaded ZIP file.", '3314', '100');
+                }
+            
+                if (!class_exists('ZipArchive')) {
+                    $this->deleteFolder($tempDir);
+                    return LtResponse::json('ZipArchive is not Activated in your PHP Configuration.', 1999, 100);
+                }
+            
+                $zip = new \ZipArchive();
+                $zipStatus = $zip->open($tempZip);
+            
+                if ($httpCode !== 200 || $zipStatus !== true) {
+                    $this->deleteFolder($tempDir);
+                    return LtResponse::json("Marketplace returned a corrupted package (Zip Status: {$zipStatus}).", '3315', '100');
+                }
+            
+                // 4. Extract verified ZIP
+                $importBase = "storage/tmp/";
+                LtFile::path($importBase)->unlink('import', 'no');
+            
+                if (!is_dir($path)) {
+                    mkdir($path, 0755, true);
+                }
+            
+                $zip->extractTo($path);
+                $zip->close();
+            
+                $this->deleteFolder($tempDir);
+            
+                return LtResponse::json("Package downloaded and extracted successfully.", '3316', '200');
+            }
+            
+            // ==========================================
+            // PHASE 2: IMPORT & REGISTER
+            // ==========================================
+            
+            elseif ($state === 'install') {
+                if (!is_dir($path)) {
+                    return LtResponse::json("Import folder is not found.", '3319', '100');
+                }
+                
+                // --- NEW: VALIDATE PACKAGE PREFIX ---
+                $isValidPrefix = false;
+                
+                // We use an array so you can easily add more prefixes later.
+                $allowedPrefixes = ['theme', 'md', 'plg']; 
+                
+                foreach ($allowedPrefixes as $prefix) {
+                    // stripos === 0 ensures the string STARTS with the prefix (case-insensitive)
+                    if (stripos($packageName, $prefix) === 0) {
+                        $isValidPrefix = true;
+                        break;
+                    }
+                }
+                
+                if (!$isValidPrefix) {
+                    // Clean up the invalid folder so it doesn't waste disk space
+                    $this->deleteFolder($path);
+                    return LtResponse::json("Invalid package type. Name must start with 'Theme', 'Md', or 'Plg'.", '3310', '100');
+                }
+                
+                // Since $path already ends with '/', just concatenate $packageName
+                $filePath = $path . $packageName; 
+                if (!file_exists($filePath)) {
+                     return LtResponse::json("Installation source missing. Please restart the download.", '3311', '100');
+                }
+            
+                // Run framework installation logic
+                $result = $this->importPackageAbstract($path);
+                
+                return $result;
+            }
+        
+            // Fallback for invalid states
+            return LtResponse::json("Invalid installation state.", '3312', '100');
+        }
+        
+        
+        private function deleteFolder($dir) {
+            if (!is_dir($dir)) return;
+            $files = array_diff(scandir($dir), array('.', '..'));
+            foreach ($files as $file) {
+                (is_dir("$dir/$file")) ? $this->deleteFolder("$dir/$file") : unlink("$dir/$file");
+            }
+            rmdir($dir);
         }
         
         function updatePackageModifiedDate($params){
@@ -287,152 +660,6 @@ class TbPackageService
             
         }
         
-        //   public function exportPackage(){
-        //     $packageName = $this->request->packageName;
-        //     $packageType = $this->request->packageType;
-        //     $useSourceCode = $this->request->useSourceCode;
-        //     $slectedTables = json_decode($this->request->selectedTables);
-        //     $pageJsonArr = [];
-        //     $contentJsonArr = [];
-        //     $menuJsonArr = [];
-        //     $pageContentJsonArr = [];
-        //     $tableJsonArr = [];
-            
-        //     if(!class_exists('ZipArchive')){
-        //          return LtResponse::json('ZipArchive is not Activated on your PhP Configuration. You need to Activate ZipArchive! on your PhP Configuration!!!  RETRY', 1999, 100);
-        //      }
-        //     $pageModel = new TbPage();
-        //     $pageRecord = $pageModel->select()->where('packageName', '=', $packageName)->get();
-            
-        //     foreach($pageRecord as $value){
-        //         $pageJsonArr[] = [
-        //             'ltId'=> $value->ltId,
-        //             'packageName'=> $value->packageName,
-        //             'pageName'=> $value->pageName,
-        //             'pageType'=> $value->pageType,
-        //             'routeContent'=> $value->routeContent,
-        //             'routeFileName'=> $value->routeFileName,
-        //             'routeHandler'=> $value->routeHandler,
-        //             'routeMethod'=> $value->routeMethod,
-        //             'routePath'=> $value->routePath,
-        //             'routePayload'=> $value->routePayload,
-        //             'routeResponse'=> $value->routeResponse,
-        //             'routeUpdateStatus'=> $value->routeUpdateStatus,
-        //             'apiToAllowRouters'=> $value->apiToAllowRouters,
-        //             'description'=> $value->description,
-        //         ];
-        //     }
-        //     $pageJsonData = json_encode($pageJsonArr, JSON_PRETTY_PRINT);
-            
-             
-          
-        //     $contentModel = new TbContent();
-        //     $contentRecord = $contentModel->select()->where('packageName', '=', $packageName)->get();
-    
-        //     foreach($contentRecord as $value){
-        //         $contentJsonArr[] = [
-        //             'ltId'=> $value->ltId,
-        //             'packageName'=> $value->packageName,
-        //             'pageType'=> $value->pageType,
-        //             'useLiferazor'=> $value->useLiferazor,
-        //             'storeType'=> $value->storeType,
-        //             'mvcType'=> $value->mvcType,
-        //             'isThemeDefault'=> $value->isThemeDefault,
-        //             'contentType'=> $value->contentType,
-        //             'contentSource'=> $value->contentSource,
-        //             'contentName'=> $value->contentName,
-        //             'contentCategory'=> $value->contentCategory,
-        //             'contentBody'=> $value->contentBody,
-        //             'ccurrent'=> $value->ccurrent,
-        //             'ccname'=> $value->ccname,
-        //             'ccname'=> $value->ccname,
-        //             'sortOrder'=> $value->sortOrder,
-        //             'description'=> $value->description,
-        //         ];
-        //     }
-        //     $contentJsonData = json_encode($contentJsonArr, JSON_PRETTY_PRINT);
-
-        //     $menuModel = new TbMenu();
-        //     $menuRecord = $menuModel->select()->where('packageName', '=', $packageName)->get();
-        //       foreach($menuRecord as $value){
-        //             $menuJsonArr[] = [
-        //                 'ltId'=> $value->ltId,
-        //                 'packageName'=> $value->packageName,
-        //                 'menuLevel'=> $value->menuLevel,
-        //                 'menuName'=> $value->menuName,
-        //                 'contentName'=> $value->contentName,
-        //                 'parentMenuId'=> $value->parentMenuId,
-        //                 'routePath'=> $value->routePath,
-        //                 'slug'=> $value->slug,
-        //                 'target'=> $value->target,
-        //                 'sortOrder'=> $value->sortOrder,
-        //             ];
-        //     }
-        //     $menuJsonData = json_encode($menuJsonArr, JSON_PRETTY_PRINT);
-            
-        //     $pageContentModel = new TbPageContent();
-        //     $pageContentRecord = $pageContentModel->select()->where('packageName', '=', $packageName)->andWhere('contentType', '<>', 'theme')->get();
-        //     foreach($pageContentRecord as $value){
-        //             $pageContentJsonArr[] = [
-        //                 'ltId'=> $value->ltId,
-        //                 'contentId'=> $value->contentId,
-        //                 'contentType'=> $value->contentType,
-        //                 'packageName'=> $value->packageName,
-        //                 'pageId'=> $value->pageId,
-        //                 'sortOrder'=> $value->sortOrder,
-        //                 'publishSource' => $value->publishSource
-        //             ];
-        //     }
-        //     $pageContentJsonData = json_encode($pageContentJsonArr, JSON_PRETTY_PRINT);
-            
-        //     foreach($slectedTables as $table){
-        //           $sql = "SHOW CREATE TABLE $table";
-        //           $stmt = $this->sqlConnect->query($sql);
-        //           $result = $stmt->fetch(\PDO::FETCH_ASSOC);
-        //           $createStmt = $result['Create Table'];
-        //           $createStmtModified = str_replace("CREATE TABLE","CREATE TABLE IF NOT EXISTS", $createStmt);
-        //           $tableJsonArr[] = ['tableData'=>$createStmtModified];
-        //     }
-            
-        //     $tableStructureJsonData = json_encode($tableJsonArr, JSON_PRETTY_PRINT);
-            
-        //      $path="packages/".$packageType.'s/'.$packageName.'/Export/';
-        //      LtFile::path($path)->writeFile('content.json', $contentJsonData);
-        //      LtFile::path($path)->writeFile('menu.json', $menuJsonData);
-        //      LtFile::path($path)->writeFile('table.json', $tableStructureJsonData);
-        //      LtFile::path($path)->writeFile('page.json', $pageJsonData);
-        //      LtFile::path($path)->writeFile('pageContent.json', $pageContentJsonData);
-            
-        //       $dstPath="storage/tmp/export/";   
-        //       $pathToPackage="packages/".$packageType.'s/'.$packageName;
-             
-        //       $res = LtFile::path($pathToPackage)->copy($dstPath);
-               
-        //       if(!$useSourceCode){
-        //          $dstPath="storage/tmp/export/".$packageName;
-        //          $result = LtFile::path($dstPath)->unlink('Views','no');
-        //          $result = LtFile::path($dstPath)->unlink('Services','no');
-        //          $result = LtFile::path($dstPath)->unlink('Models','no');
-        //          $result = LtFile::path($dstPath)->unlink('Controllers','no');
-        //          $result = LtFile::path($dstPath)->unlink('Contents','no');
-        //       }
-            
-        //      // create Zip file
-        //      $path="storage/tmp/export/"; 
-           
-        //     $zipName = $packageName. '.zip';
-        //     $zipFilePath = $path . "/" . $zipName;
-            
-        //     $result = $this->zipFolder($dstPath, $zipFilePath);
-        //     return json_encode($result);
-        //     //  $result = LtFile::path($path)->download($packageName);
-        //      $result = LtFile::path($path)->unlink($packageName); 
-        //     // return LtResponse::json('Package exported successfully.', 3310, 200);
-        //     // return json_encode($result);
-            
-            
-        // }
-        
         public function exportPackage(){
             $packageName = $this->request->packageName;
             $packageType = $this->request->packageType;
@@ -443,7 +670,7 @@ class TbPackageService
             $menuJsonArr = [];
             $pageContentJsonArr = [];
             $tableJsonArr = [];
-            
+
             if(!class_exists('ZipArchive')){
                  return LtResponse::json('ZipArchive is not Activated on your PhP Configuration. You need to Activate ZipArchive! on your PhP Configuration!!!  RETRY', 1999, 100);
              }
@@ -495,6 +722,8 @@ class TbPackageService
                     'ccname'=> $value->ccname,
                     'sortOrder'=> $value->sortOrder,
                     'description'=> $value->description,
+                    'themeResourceType'=> $value->themeResourceType,
+                    'additionalPath'=> $value->additionalPath,
                 ];
             }
             $contentJsonData = json_encode($contentJsonArr, JSON_PRETTY_PRINT);
@@ -557,11 +786,16 @@ class TbPackageService
                
               if(!$useSourceCode){
                  $dstPath="storage/tmp/export/".$packageName;
-                 $result = LtFile::path($dstPath)->unlink('Views','no');
                  $result = LtFile::path($dstPath)->unlink('Services','no');
                  $result = LtFile::path($dstPath)->unlink('Models','no');
                  $result = LtFile::path($dstPath)->unlink('Controllers','no');
                  $result = LtFile::path($dstPath)->unlink('Contents','no');
+                 // for all
+                 $result = LtFile::path($dstPath)->unlink('Views','no');
+                 // theme
+                 $result = LtFile::path($dstPath)->unlink('Components','no');
+                 $result = LtFile::path($dstPath)->unlink('Assets','no');
+                 $result = LtFile::path($dstPath)->unlink('Layouts','no');
               }
             
              // create Zip file
@@ -575,8 +809,7 @@ class TbPackageService
             
         }
         
-        public function zipFolder($folderPath, $zipFilePath)
-            {
+        public function zipFolder($folderPath, $zipFilePath){
                 if (!extension_loaded('zip')) {
                     return [
                         "status" => false,
@@ -654,34 +887,41 @@ class TbPackageService
             
                 
             }
-        
+            
         public function importPackage(){
+            $tmp_name = $_FILES['file']['tmp_name'];
+            $path="storage/tmp/"; 
+             
+            $result = LtFile::path($path)->unlink('import', 'no');   // to clean import folder before extracting inside
+            $path="storage/tmp/import/";
+             
+            if(!class_exists('ZipArchive')){
+                return LtResponse::json('ZipArchive is not Activated on your PhP Configuration. You need to Activate ZipArchive! on your PhP Configuration!!!  RETRY', 1999, 100);
+            }
+             
+            $zip = new ZipArchive;
+            $res = $zip->open($tmp_name); 
+             
+            if ($res === TRUE) { 
+            
+                $zip->extractTo($path);
+                $zip->close();
+                        
+            }
+            
+            $result = $this->importPackageAbstract($path);
+            return $result;
+        }    
+        
+        public function importPackageAbstract($path){
             $pageModel = new TbPage();
             $menuModel = new TbMenu();
             $contentModel = new TbContent();
             $pageContentModel = new TbPageContent();
-            $tmp_name = $_FILES['file']['tmp_name'];
             $batchSize = 100;
             $pageTypeThemeArr = [];
-            // create Zip file
-             $path="storage/tmp/"; 
-             
-             $result = LtFile::path($path)->unlink('import', 'no');   
-             $path="storage/tmp/import/";
-             
-             if(!class_exists('ZipArchive')){
-                  return LtResponse::json('ZipArchive is not Activated on your PhP Configuration. You need to Activate ZipArchive! on your PhP Configuration!!!  RETRY', 1999, 100);
-              }
-             
-             $zip = new ZipArchive;
-             $res = $zip->open($tmp_name); 
-             
-            if ($res === TRUE) { 
+
             
-             $zip->extractTo($path);
-             $zip->close();
-                        
-            }
             $packageDir = scandir($path);
             $packageDir = array_slice($packageDir, 2)[0];
             $pathToJson = $path.''.$packageDir.'/package.json';
@@ -691,19 +931,47 @@ class TbPackageService
             // read package.json file 
             $packageDetails = json_decode(file_get_contents($pathToJson), true);
             
-
+            $dependsOn = $packageDetails['dependsOn']; //getting depends on before removing it from packageDetails to avoid processRequest error of binding array
+            unset($packageDetails['dependsOn']); //unsetting depends on
+            
             $this->packageModel->processRequest($packageDetails);
             $packageName =  $this->packageModel->packageName;
             $packageType =  $this->packageModel->packageType;
+            $isPublished = 0;
+            $dependencies = is_array($dependsOn) ? $dependsOn : [];
+            
+            // Run the dependency check
+            $result = $this->checkDependencyRequirement($dependencies);
+            $check = json_decode($result, true);
+            $returnDependencies = $check['responseData'];
+            
+            if(strtolower($packageName) == 'mdlt'){
+                $isPublished = 1;
+            }else if($check['responseCategory'] == 200) {
+                $isPublished = 1;
+            }
+            
+            $this->packageModel->dependsOn = json_encode($dependsOn);
+            $this->packageModel->isPublished = $isPublished;
             $exist = $this->packageModel->select()->where('packageName', '=', $packageName)->get();
             
+            $msg = '';
             if(count($exist) > 0){
                 $this->packageModel->update('packageName', '=', $packageName);
+                $msg = 'Failed to update package';
             }else{
                 $this->packageModel->insert();
+                $msg = 'Failed to install package';
             }
             
             
+            if($this->packageModel->responseCategory !== '200'){
+                $error = $this->packageModel->responseResult;
+                  // Fallback for invalid states
+                return LtResponse::json("$msg: $error", '3319', '100');
+            }
+            
+
             $path = $path.''.$packageName.'/';  // import directory path
             
             $dstPath="packages/".$packageType.'s/'.$packageName.'/';
@@ -728,6 +996,7 @@ class TbPackageService
             if(count($pageRecordArr) > 0){
                 foreach($pages as $key => $page){
                     $pageModel->processRequest($page);
+                    $pageModel->isPublished = $isPublished;
                     $ltId = $pageModel->ltId;
                     $pageRecord = $pageModel->select()->where('ltId', '=', $ltId)->get();
                     if(count($pageRecord) > 0){
@@ -747,7 +1016,7 @@ class TbPackageService
                     $values = [];
                     
                     foreach($batch as $index => $row){
-                            $placeholder[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                            $placeholder[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                             $values[] = $row['ltId'];
                             $values[] = $row['packageName'];
                             $values[] = $row['pageName'];
@@ -762,13 +1031,14 @@ class TbPackageService
                             $values[] = $row['routeUpdateStatus'];
                             $values[] = $row['apiToAllowRouters'];
                             $values[] = $row['description'];
+                            $values[] = $isPublished;
                             $values[] = $this->ltNow;
                             $values[] = $this->ltNow;
                             $values[] = LtSession::get('ltUid');
                          
                         }
                         
-                        $sql = "INSERT INTO tb_page (lt_id, package_name, page_name, page_type, route_content, route_file_name, route_handler, route_method, route_path, route_payload, route_response, route_update_status, api_to_allow_routers, description, created_at, updated_at, updated_by ) VALUES " . implode(", ", $placeholder);
+                        $sql = "INSERT INTO tb_page (lt_id, package_name, page_name, page_type, route_content, route_file_name, route_handler, route_method, route_path, route_payload, route_response, route_update_status, api_to_allow_routers, description, is_published, created_at, updated_at, updated_by ) VALUES " . implode(", ", $placeholder);
                         $stmt = $this->sqlConnect->prepare($sql);
                         $stmt->execute($values);
                     
@@ -782,6 +1052,7 @@ class TbPackageService
             if(count($menuRecordArr) > 0){
                 foreach($menus as $menu){
                     $menuModel->processRequest($menu);
+                    $menuModel->isPublished = $isPublished;
                     $ltId = $menuModel->ltId;
                     $menuRecord = $menuModel->select()->where('ltId', '=', $ltId)->get();
                     if(count($menuRecord) > 0){
@@ -802,7 +1073,7 @@ class TbPackageService
                     $values = [];
                     
                     foreach($batch as $index => $row){
-                            $placeholder[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                            $placeholder[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                             $values[] = $row['ltId'];
                             $values[] = $row['packageName'];
                             $values[] = $row['menuLevel'];
@@ -813,13 +1084,14 @@ class TbPackageService
                             $values[] = $row['slug'];
                             $values[] = $row['target'];
                             $values[] = $row['sortOrder'];
+                            $values[] = $isPublished;
                             $values[] = $this->ltNow;
                             $values[] = $this->ltNow;
                             $values[] = LtSession::get('ltUid');
                          
                         }
                         
-                        $sql = "INSERT INTO tb_menu (lt_id, package_name, menu_level, menu_name, content_name, parent_menu_id, route_path, slug, target, sort_order, created_at, updated_at, updated_by ) VALUES " . implode(", ", $placeholder);
+                        $sql = "INSERT INTO tb_menu (lt_id, package_name, menu_level, menu_name, content_name, parent_menu_id, route_path, slug, target, sort_order, is_published, created_at, updated_at, updated_by ) VALUES " . implode(", ", $placeholder);
                         $stmt = $this->sqlConnect->prepare($sql);
                         $stmt->execute($values);
                     
@@ -836,6 +1108,7 @@ class TbPackageService
             if(count($contentRecordArr) > 0){
                 foreach($contents as $key => $content){
                     $contentModel->processRequest($content);
+                    $contentModel->isPublished = $isPublished;
                     $ltId = $contentModel->ltId;
                     $contentRecord = $contentModel->select()->where('ltId', '=', $ltId)->get();
                     if(count($contentRecord) > 0){
@@ -856,7 +1129,7 @@ class TbPackageService
                     $values = [];
                     
                     foreach($batch as $index => $row){
-                            $placeholder[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                            $placeholder[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                             $values[] = $row['ltId'];
                             $values[] = $row['packageName'];
                             $values[] = $row['pageType'];
@@ -873,20 +1146,22 @@ class TbPackageService
                             $values[] = $row['ccname'];
                             $values[] = $row['description'];
                             $values[] = $row['sortOrder'];
+                            $values[] = $row['themeResourceType'];
+                            $values[] = $row['additionalPath'];
+                            $values[] = $isPublished;
                             $values[] = $this->ltNow;
                             $values[] = $this->ltNow;
                             $values[] = LtSession::get('ltUid');
                          
                         }
                         
-                        $sql = "INSERT INTO tb_content (lt_id, package_name, page_type, use_liferazor, store_type, mvc_type, is_theme_default, content_type, content_source, content_name, content_category, content_body, ccurrent, ccname, description, sort_order, created_at, updated_at, updated_by) VALUES " . implode(", ", $placeholder);
+                        $sql = "INSERT INTO tb_content (lt_id, package_name, page_type, use_liferazor, store_type, mvc_type, is_theme_default, content_type, content_source, content_name, content_category, content_body, ccurrent, ccname, description, sort_order, theme_resource_type, additional_path, is_published, created_at, updated_at, updated_by) VALUES " . implode(", ", $placeholder);
                         $stmt = $this->sqlConnect->prepare($sql);
                         $stmt->execute($values);
                     
                 }
                 
             }
-            
             
             
            
@@ -989,7 +1264,6 @@ class TbPackageService
             return LtResponse::json('Package installation completed successfully.', 3311, 200, $packageDetails);
         }
         
-
         public function batchInsertPageContent(array $pageContents, int $batchSize, $userId){
                 if (empty($pageContents)) {
                     return;
@@ -1033,400 +1307,72 @@ class TbPackageService
                 }
         }
         
-        // public function importPackage(){
-        //     $pageModel = new TbPage();
-        //     $menuModel = new TbMenu();
-        //     $contentModel = new TbContent();
-        //     $pageContentModel = new TbPageContent();
-        //     $tmp_name = $_FILES['file']['tmp_name'];
-        //     $batchSize = 100;
-        //     $pageTypeThemeArr = [];
-        //     // create Zip file
-        //      $path="storage/tmp/"; 
-             
-        //      $result = LtFile::path($path)->unlink('import', 'no');   
-        //      $path="storage/tmp/import/";
-             
-        //      if(!class_exists('ZipArchive')){
-        //           return LtResponse::json('ZipArchive is not Activated on your PhP Configuration. You need to Activate ZipArchive! on your PhP Configuration!!!  RETRY', 1999, 100);
-        //       }
-             
-        //      $zip = new ZipArchive;
-        //      $res = $zip->open($tmp_name); 
-             
-        //     if ($res === TRUE) { 
-            
-        //      $zip->extractTo($path);
-        //      $zip->close();
-                        
-        //     }
-        //     $packageDir = scandir($path);
-        //     $packageDir = array_slice($packageDir, 2)[0];
-        //     $pathToJson = $path.''.$packageDir.'/package.json';
-            
-            
-            
-        //     // read package.json file 
-        //     $packageDetails = json_decode(file_get_contents($pathToJson), true);
-
-        //     $this->packageModel->processRequest($packageDetails);
-        //     $packageName =  $this->packageModel->packageName;
-        //     $packageType =  $this->packageModel->packageType;
-        //     $exist = $this->packageModel->select()->where('packageName', '=', $packageName)->get();
-            
-        //     if(count($exist) > 0){
-        //         $this->packageModel->update('packageName', '=', $packageName);
-        //     }else{
-        //         $this->packageModel->insert();
-        //     }
-            
-            
-        //     $path = $path.''.$packageName.'/';  // import directory path
-            
-        //     $dstPath="packages/".$packageType.'s/'.$packageName.'/';
-        //       //return LtResponse::json($path.'Package installation completed', 1715, 200, $packageDetails);
-            
-        //     $result = LtFile::path($path)->moveFolder($path,$dstPath);
-        //     $packagePath ="packages/".$packageType.'s/'.$packageName.'/Export/';
-        //     // // pages
-        //     $pages = json_decode(file_get_contents($packagePath.'page.json'), true);
-            
-        //                 //get content with page_type theme 
-        //     foreach($pages as $p){
-        //         $p = (object)$p;
-        //         if($p->pageType == 'theme'){
-        //             $pageTypeThemeArr[] = $p->ltId;
-        //         }
-        //     }
-            
-        //     $pageRecordArr = $pageModel->select()->where('packageName', '=', $packageName)->get();
-        //     if(count($pageRecordArr) > 0){
-        //         foreach($pages as $key => $page){
-        //             $pageModel->processRequest($page);
-        //             $ltId = $pageModel->ltId;
-        //             $pageRecord = $pageModel->select()->where('ltId', '=', $ltId)->get();
-        //             if(count($pageRecord) > 0){
-        //                 $pageModel->update('ltId', '=', $ltId);
-        //             }else{
-        //                 $pageModel->insert();
-        //             }
-        //         }
-        //     }else{
-
-        //         $totalPageSize = is_array($pages) ? count($pages) : 0;
-        //         $insertPageArr = is_array($pages) ? array_values($pages) : [];
-                
-        //         for($i = 0; $i < $totalPageSize; $i += $batchSize){
-        //             $batch = array_slice($insertPageArr, $i, $batchSize);
-        //             $placeholder = [];
-        //             $values = [];
-                    
-        //             foreach($batch as $index => $row){
-        //                     $placeholder[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        //                     $values[] = $row['ltId'];
-        //                     $values[] = $row['packageName'];
-        //                     $values[] = $row['pageName'];
-        //                     $values[] = $row['pageType'];
-        //                     $values[] = $row['routeContent'];
-        //                     $values[] = $row['routeFileName'];
-        //                     $values[] = $row['routeHandler'];
-        //                     $values[] = $row['routeMethod'];
-        //                     $values[] = $row['routePath'];
-        //                     $values[] = $row['routePayload'];
-        //                     $values[] = $row['routeResponse'];
-        //                     $values[] = $row['routeUpdateStatus'];
-        //                     $values[] = $row['apiToAllowRouters'];
-        //                     $values[] = $row['description'];
-        //                     $values[] = $this->ltNow;
-        //                     $values[] = $this->ltNow;
-        //                     $values[] = LtSession::get('ltUid');
-                         
-        //                 }
-                        
-        //                 $sql = "INSERT INTO tb_page (lt_id, package_name, page_name, page_type, route_content, route_file_name, route_handler, route_method, route_path, route_payload, route_response, route_update_status, api_to_allow_routers, description, created_at, updated_at, updated_by ) VALUES " . implode(", ", $placeholder);
-        //                 $stmt = $this->sqlConnect->prepare($sql);
-        //                 $stmt->execute($values);
-                    
-        //         }
-                
-        //     }
-            
-        //     // // menus
-        //     $menus = json_decode(file_get_contents($packagePath.'menu.json'), true);
-        //     $menuRecordArr = $menuModel->select()->where('packageName', '=', $packageName)->get();
-        //     if(count($menuRecordArr) > 0){
-        //         foreach($menus as $menu){
-        //             $menuModel->processRequest($menu);
-        //             $ltId = $menuModel->ltId;
-        //             $menuRecord = $menuModel->select()->where('ltId', '=', $ltId)->get();
-        //             if(count($menuRecord) > 0){
-        //                 $menuModel->update('ltId', '=', $ltId);
-        //             }else{
-        //                 $menuModel->insert();
-        //             }
-        //         }
-        //     }else{
-                
-        //         $totalMenuSize = is_array($menus) ? count($menus) : 0;
-        //         $insertMenuArr = is_array($menus) ? array_values($menus) : [];
-
-                
-        //         for($i = 0; $i < $totalMenuSize; $i += $batchSize){
-        //             $batch = array_slice($insertMenuArr, $i, $batchSize);
-        //             $placeholder = [];
-        //             $values = [];
-                    
-        //             foreach($batch as $index => $row){
-        //                     $placeholder[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        //                     $values[] = $row['ltId'];
-        //                     $values[] = $row['packageName'];
-        //                     $values[] = $row['menuLevel'];
-        //                     $values[] = $row['menuName'];
-        //                     $values[] = $row['contentName'];
-        //                     $values[] = $row['parentMenuId'];
-        //                     $values[] = $row['routePath'];
-        //                     $values[] = $row['slug'];
-        //                     $values[] = $row['target'];
-        //                     $values[] = $row['sortOrder'];
-        //                     $values[] = $this->ltNow;
-        //                     $values[] = $this->ltNow;
-        //                     $values[] = LtSession::get('ltUid');
-                         
-        //                 }
-                        
-        //                 $sql = "INSERT INTO tb_menu (lt_id, package_name, menu_level, menu_name, content_name, parent_menu_id, route_path, slug, target, sort_order, created_at, updated_at, updated_by ) VALUES " . implode(", ", $placeholder);
-        //                 $stmt = $this->sqlConnect->prepare($sql);
-        //                 $stmt->execute($values);
-                    
-        //         }
-                
-        //     }
-            
-
-        //     // contents
-        //     $contents = json_decode(file_get_contents($packagePath.'content.json'), true);
-            
-            
-        //     $contentRecordArr = $contentModel->select()->where('packageName', '=', $packageName)->get();
-        //     if(count($contentRecordArr) > 0){
-        //         foreach($contents as $key => $content){
-        //             $contentModel->processRequest($content);
-        //             $ltId = $contentModel->ltId;
-        //             $contentRecord = $contentModel->select()->where('ltId', '=', $ltId)->get();
-        //             if(count($contentRecord) > 0){
-        //                 $contentModel->update('ltId', '=', $ltId);
-        //             }else{
-        //                 $contentModel->insert();
-        //             }
-        //         }
-        //     }else{
- 
-
-        //         $totalContentSize = is_array($contents) ? count($contents) : 0;
-        //         $insertContentArr = is_array($contents) ? array_values($contents) : [];
-                
-        //         for($i = 0; $i < $totalContentSize; $i += $batchSize){
-        //             $batch = array_slice($insertContentArr, $i, $batchSize);
-        //             $placeholder = [];
-        //             $values = [];
-                    
-        //             foreach($batch as $index => $row){
-        //                     $placeholder[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        //                     $values[] = $row['ltId'];
-        //                     $values[] = $row['packageName'];
-        //                     $values[] = $row['pageType'];
-        //                     $values[] = $row['useLiferazor'];
-        //                     $values[] = $row['storeType'];
-        //                     $values[] = $row['mvcType'];
-        //                     $values[] = $row['isThemeDefault'];
-        //                     $values[] = $row['contentType'];
-        //                     $values[] = $row['contentSource'];
-        //                     $values[] = $row['contentName'];
-        //                     $values[] = $row['contentCategory'];
-        //                     $values[] = $row['contentBody'];
-        //                     $values[] = $row['ccurrent'];
-        //                     $values[] = $row['ccname'];
-        //                     $values[] = $row['description'];
-        //                     $values[] = $row['sortOrder'];
-        //                     $values[] = $this->ltNow;
-        //                     $values[] = $this->ltNow;
-        //                     $values[] = LtSession::get('ltUid');
-                         
-        //                 }
-                        
-        //                 $sql = "INSERT INTO tb_content (lt_id, package_name, page_type, use_liferazor, store_type, mvc_type, is_theme_default, content_type, content_source, content_name, content_category, content_body, ccurrent, ccname, description, sort_order, created_at, updated_at, updated_by) VALUES " . implode(", ", $placeholder);
-        //                 $stmt = $this->sqlConnect->prepare($sql);
-        //                 $stmt->execute($values);
-                    
-        //         }
-                
-        //     }
-            
-            
-            
-           
-        //     // page contents
-        //     $pageContents = json_decode(file_get_contents($packagePath.'pageContent.json'), true);
-            
-        //     // fetching dafault theme region for page content publishing 
-        //     $stmtSelectContent = $this->sqlConnect->prepare("SELECT lt_id, sort_order, package_name FROM tb_content WHERE package_name = (
-        //         SELECT package_name FROM tb_package WHERE package_type = 'theme' AND is_theme_default = 1
-        //         ) AND is_theme_default = :isThemeDefault");
-        //     $stmtSelectContent->execute([
-        //             ':isThemeDefault' => '1'
-        //         ]);
-        //     $themeContent = $stmtSelectContent->fetchAll(\PDO::FETCH_OBJ);
-            
-        //     $pageContentRecordArr = $pageContentModel->select()->where('packageName', '=', $packageName)->get();
-        //     $pageRegion = [];
-        //     $userId = LtSession::get('ltUid');
-            
-        //     if(count($pageContentRecordArr) > 0){   
-        //         foreach($pageContents as $key => $pageContent){
-        //             $pageContentModel->processRequest($pageContent);
-        //             $ltId = $pageContentModel->ltId;
-        //             $pageContentRecord = $pageContentModel->select()->where('ltId', '=', $ltId)->get();
-        //             if(count($pageContentRecord) > 0){
-        //                 $pageContentModel->update('ltId', '=', $ltId);
-                      
-        //             }else{
-        //                 /// page content insertion 
-        //                 // type content
-        //                 $pageContentModel->updatedBy = $userId;
-        //                 $pageContentModel->insert();
-        //                 // type region
-        //                 if(in_array($pageContentModel->pageId, $pageTypeThemeArr)){
-        //                     foreach($themeContent as $content){
-        //                         $pageRegion[] = [
-        //                                 'pageId' => $pageContentModel->pageId,
-        //                                 'contentId' => $content->lt_id,
-        //                                 'contentType' => 'theme',  //$pageContentModel->contentType,
-        //                                 'packageName' => $content->package_name,
-        //                                 'sortOrder' => $content->sort_order,
-        //                                 'publishSource' => 'region',
-        //                                 'createdAt' => $this->ltNow,
-        //                                 'updatedAt' => $this->ltNow,
-        //                                 'ltId' => ltId()
-        //                             ];
-        //                     }
-        //                 }
-                        
-        //             }
-        //         }
-        //     }else{
-
-        //             // insert type content
-                    
-        //             $this->batchInsertPageContent($pageContents, $batchSize, $userId);
-                    
-        //             //insert type region
-        //             foreach($pageContents as $page){
-        //               $page = (object)$page;
-        //                 if(in_array($page->pageId, $pageTypeThemeArr)){
-        //                     foreach($themeContent as $content){
-        //                         $pageRegion[] = [
-        //                                 'pageId' => $page->pageId,
-        //                                 'contentId' => $content->lt_id,
-        //                                 'contentType' => 'theme', //$page->contentType
-        //                                 'packageName' => $content->package_name,
-        //                                 'sortOrder' => $content->sort_order,
-        //                                 'publishSource' => 'region',
-        //                                 'createdAt' => $this->ltNow,
-        //                                 'updatedAt' => $this->ltNow,
-        //                                 'ltId' => ltId()
-                                    
-        //                             ];
-        //                     }
-        //                 }
-                        
-        //             }
-
-        //     }
-            
-        //     if(!empty($pageRegion)){
-        //          $this->batchInsertPageContent($pageRegion, $batchSize, $userId);
-        //      };
-             
-        //     // //Tables
-            
-        //     $tables = json_decode(file_get_contents($packagePath.'table.json'), true);
-            
-        //     foreach($tables as $table){
-        //         $sql = $table['tableData'];
-        //         try {
-        //             $this->sqlConnect->exec($sql);
-        //             $succes = "Table created successfully.<br>";
-        //         } catch (PDOException $e) {
-        //             $failed =  "Error creating table: " . $e->getMessage() . "<br>";
-        //         }
-        //     }
-
-        //     return LtResponse::json('Package installation completed successfully.', 3311, 200, $packageDetails);
-        // }
-        
-
-        // public function batchInsertPageContent(array $pageContents, int $batchSize, $userId){
-        //         if (empty($pageContents)) {
-        //             return;
-        //         }
-            
-        //         $insertData = array_values($pageContents);
-        //         $totalSize  = count($insertData);
-            
-        //         for ($i = 0; $i < $totalSize; $i += $batchSize) {
-            
-        //             $batch       = array_slice($insertData, $i, $batchSize);
-        //             $placeholders = [];
-        //             $values       = [];
-            
-        //             foreach ($batch as $row) {
-            
-        //                 $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            
-        //                 $values[] = $row['ltId'];
-        //                 $values[] = $row['contentId'];
-        //                 $values[] = $row['contentType'];
-        //                 $values[] = $row['packageName'];
-        //                 $values[] = $row['pageId'];
-        //                 $values[] = $row['sortOrder'];
-        //                 $values[] = $row['publishSource'];
-        //                 $values[] = $row['createdAt'];
-        //                 $values[] = $row['updatedAt'];
-        //                 $values[] = $userId;
-        //             }
-            
-        //             $sql ="
-        //                 INSERT INTO tb_page_content 
-        //                 (lt_id, content_id, content_type, package_name, page_id, sort_order, publish_source, created_at, updated_at, updated_by)
-        //                 VALUES " . implode(', ', $placeholders);
-            
-        //             $stmt = $this->sqlConnect->prepare($sql);
-            
-        //             if (!$stmt->execute($values)) {
-        //                 throw new Exception('Batch insert failed');
-        //             }
-        //         }
-        // }
-
-        
-        
-        
-        public function togglePublish($model){
-            // $packageModel->processRequest(['isPublished', 'ltId', 'packageName', 'packageType']);  
+        public function togglePublish($model) {
+            $sqlConnect = DbConnect::dbDriver();
             $ltId = $this->request->ltId;
-            $isPublished = $this->request->isPublished;
-            $packageName =  $this->request->packageName;
-            $packageType =  $this->request->packageType;
-            $model->updatedBy = LtSession::get('ltUid');
+            $isPublished = (int) $this->request->isPublished; // Cast to int for safety
+            $packageName = $this->request->packageName;
             
+            $model->updatedBy = LtSession::get('ltUid');
+            $updatePublish = false;
+            
+            // Check if package exists. 
+            $dbResult = $model->select('depends_on')->where('packageName', '=', $packageName)->get();
+            
+            if (empty($dbResult)) {
+                return LtResponse::json("Failed to publish; package is not found", '3319', '100');
+            }
+            
+            $exist = $dbResult[0];
+        
+            // If attempting to PUBLISH, we must check dependencies
+            if ($isPublished === 1) {
+                // Safely extract and decode the dependencies JSON
+                $rawDependencies = $exist->dependsOn ?? '[]';
+                $inputDependencies = json_decode($rawDependencies, true);
+                $dependencies = is_array($inputDependencies) ? $inputDependencies : [];
+                
+                // Run the dependency check
+                $result = $this->checkDependencyRequirement($dependencies);
+                $check = json_decode($result, true);
+                $returnDependencies = $check['responseData'];
+
+                if ($check['responseCategory'] == 100) {
+                    $failedDependency = [];
+                    foreach($returnDependencies as $dependency){
+                        if(!$dependency['isInstalled'] || !$dependency['isPublished'] || !$dependency['isUpdated']){
+                             $failedDependency[] = $dependency['packageName'];
+                        }
+                    }
+                    
+                    $failedDependencyString = implode(',', $failedDependency);
+                    $msg = count($failedDependency) > 1 ? "dependencies are" : "dependency is";
+                    return LtResponse::json("Failed to publish; please check [$failedDependencyString] if this $msg installed, updated or published", '3319', '100');
+                } else {
+                    $updatePublish = true;
+                }
+            } else {
+                // If UNPUBLISHING (0), no dependency check is needed
+                $updatePublish = true;
+            }
+            
+            // Execute the publish/unpublish action
+            if ($updatePublish) {
                 $model->isPublished = $isPublished;
                 $model->update('ltId', '=', $ltId); 
-            /// togggle-publish module content
+                // for content
                 $contentModel = new TbContentService(); 
-                $publishContent = $contentModel->togglePublished($packageName, $isPublished);
+                $publishContent = $contentModel->togglePublishedContent($packageName, $isPublished);
+                // for menu
+                $menuModel = new TbMenuService(); 
+                $publishMenu = $menuModel->togglePublishedMenu($packageName, $isPublished);
+                // for page
+                $pageModel = new TbPageService(); 
+                $publishPage = $pageModel->togglePublished($packageName, $isPublished);
+                
                 return $model->responseJson();
+            }
         }
-        
         
         public function isDefault($model){
                     // $packageModel->processRequest(['isPublished', 'ltId', 'packageName', 'packageType']);  
@@ -1578,3 +1524,47 @@ class TbPackageService
      
         
 }
+
+
+//  function storeMail(array $data){
+//             $url = "https://www.lifetech.host/hubs/api/v1/v2/queues";
+        
+//             $headers = [
+//                 "Accept: application/json",
+//             ];
+        
+//             $responseHeaders = [];
+        
+//             $ch = curl_init($url);
+        
+//             curl_setopt_array($ch, [
+//                 CURLOPT_RETURNTRANSFER => true,
+//                 CURLOPT_CUSTOMREQUEST  => "POST",
+//                 CURLOPT_POSTFIELDS => json_encode($data),
+//                 CURLOPT_HTTPHEADER => $headers,
+//                 CURLOPT_HEADERFUNCTION => function ($curl, $header) use (&$responseHeaders) {
+//                     $length = strlen($header);
+//                     $parts = explode(':', $header, 2);
+        
+//                     if (count($parts) == 2) {
+//                         $responseHeaders[strtolower(trim($parts[0]))] = trim($parts[1]);
+//                     }
+        
+//                     return $length;
+//                 }
+//             ]);
+        
+//             $body = curl_exec($ch);
+//             $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+//             $error = curl_error($ch);
+        
+//             curl_close($ch);
+            
+//             return [
+//                 "success" => ($statusCode >= 200 && $statusCode < 300),
+//                 "status" => $statusCode,
+//                 "error" => $error ?: null,
+//                 // "headers" => $responseHeaders,
+//                 "body" => $body
+//             ];
+//         }

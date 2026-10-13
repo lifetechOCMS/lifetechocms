@@ -1,0 +1,26 @@
+[
+    {
+        "ltId": "178887701844694",
+        "packageName": "PlgMyTailwind",
+        "menuLevel": 1,
+        "menuName": "PlgMyTailwind",
+        "contentName": null,
+        "parentMenuId": null,
+        "routePath": "#",
+        "slug": null,
+        "target": "self",
+        "sortOrder": 8
+    },
+    {
+        "ltId": "178896646199638",
+        "packageName": "PlgMyTailwind",
+        "menuLevel": 1,
+        "menuName": "Cassady Waller",
+        "contentName": null,
+        "parentMenuId": "",
+        "routePath": "#",
+        "slug": null,
+        "target": "_self",
+        "sortOrder": null
+    }
+]

@@ -62,35 +62,54 @@ class TbMenuController
     }
 
     public function isNavigation(){
-        $menuModel = new TbMenu();
         $request = new LtRequest();
-        $menuModel->select('lt_id, menu_name, slug, route_path, target, is_external, parent_menu_id, menu_level, icon');
+        $sqlConnect = DbConnect::dbDriver();
+        $packageName = $request->packageName ?: null;
+        
         $roles = [];
             $userRole = LtSession::get('ltUrid');
             if(empty($userRole)){
-               $userRole =  "c81e728d9d4c2f"; // anonymous role
+              $userRole =  "c81e728d9d4c2f"; // anonymous role
             };
             $roles = array_map('trim', explode(',', $userRole));
-
-
-            $first = true;
-            foreach ($roles as $role) {
-                    if ($first) {
-                        $menuModel->where($role, '=', 1);
-                        $first = false;
-                    } else {
-                        $menuModel->orWhere($role, '=', 1);
-                    }
+            
+            $sql =  "SELECT 
+                        lt_id AS ltId, 
+                        menu_name AS menuName, 
+                        slug, 
+                        route_path AS routePath, 
+                        target, 
+                        is_external AS isExternal, 
+                        parent_menu_id AS parentMenuId, menu_level AS menuLevel, icon 
+                    FROM tb_menu ";
+                    
+            $params = [];
+            
+            if (!empty($roles)) {
+            
+                $conditions = array_map(function ($role) {
+                    return "$role = 1";
+                }, $roles);
+            
+                if ($packageName) {
+                    $sql .= " WHERE package_name = :packageName AND ";
+                    $params[':packageName'] = $packageName;
+                } else {
+                    $sql .= " WHERE ";
+                }
+            
+                $sql .= "(" . implode(" OR ", $conditions) . ")";
             }
+            $stmt = $sqlConnect->prepare($sql);
+            $stmt->execute($params);
+            $data = $stmt->fetchAll(\PDO::FETCH_OBJ);
 
-        $data = $menuModel->get();
-
-        // 2. Build the Tree
         $result = $this->buildHierarchyMenu($data, "");
 
         if(!$result) return LtResponse::json('No Record   Found', 2012, 100);
         return LtResponse::json('Data Fetched', 2009, 200, $result);
     }
+    
     public function isQuicklink(){
         $menuModel = new TbMenu();
         $request = new LtRequest();
@@ -116,6 +135,7 @@ class TbMenuController
               if(!$data) return LtResponse::json('No Record Found', 2012, 100);
             return LtResponse::json('Data Fetched', 2009, 200, $data);
     }
+    
     public function isService(){
         $menuModel = new TbMenu();
         $request = new LtRequest();
@@ -197,9 +217,6 @@ class TbMenuController
         return $menuModel->responseJson();
     }
 
-
-
-
     public function toggleQuicklink(){
         $menuModel = new TbMenu();
         $menuModel->processRequest(['isQuicklink', 'ltId']);
@@ -266,6 +283,7 @@ class TbMenuController
         $ltId = $menuModel->ltId;
         $roleId = $menuModel->roleId;
         $routePath = $menuModel->routePath;
+        $publishToggleStatus = $menuModel->publishToggleStatus;
 
         $publishValue = LtService::getIsValue($menuModel->publishValue);
 
@@ -273,6 +291,11 @@ class TbMenuController
         $menuModel->$roleId = $publishValue;
 
         $menuModel->update('ltId', '=', $ltId);
+        
+        if(!$publishToggleStatus){
+            return $menuModel->responseJson();
+        }
+        
 
         if($routePath !== '#'){
 
@@ -323,6 +346,18 @@ class TbMenuController
 
         return $menuModel->responseJson();
 
+    }
+    
+    public function togglePublishedMenu(){
+        $menuModel = new TbMenu();
+        $menuModel->processRequest(['isPublished']); 
+        
+        $isPublished = LtService::getIsValue($menuModel->isPublished);
+        
+        $dataModelService = new TbMenuService();
+        $response = $dataModelService->togglePublishedMenu(null, $isPublished);
+        return $response;
+ 
     }
 
 

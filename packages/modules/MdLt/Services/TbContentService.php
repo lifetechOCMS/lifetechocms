@@ -12,6 +12,7 @@ use Lt\Modules\MdLt\Services\LtFile;
 use Lt\Modules\MdLt\Services\CaseConverter; 
 use Lt\Modules\MdLt\Services\TbPageContentService; 
 
+use Lt\Modules\MdLt\Models\TbPage;
 use Lt\Modules\MdLt\Services\TbRoleService;
 
 use DbConnect;
@@ -53,7 +54,7 @@ class TbContentService
         }
         
 
-        
+      
         $contentName = $this->contentModel->contentName;
         $packageName = $this->contentModel->packageName;
         $mvcType = ucfirst($this->contentModel->mvcType);
@@ -62,6 +63,8 @@ class TbContentService
         $pageType = $this->contentModel->pageType;
         $isPage = $this->contentModel->isPage;
         $isMenu = $this->contentModel->isMenu;
+        $themeResourceType = $this->contentModel->themeResourceType;
+        $additionalPath = $this->contentModel->additionalPath;
         
          //check for extension
             $extension = pathinfo($contentName, PATHINFO_EXTENSION);
@@ -116,8 +119,10 @@ class TbContentService
         $this->contentModel->updatedBy = $this->userId;
         $this->contentModel->updatedAt = $this->ltNow;
         $this->contentModel->createdAt = $this->ltNow;
-        if($roleExist && $mvcType == 'View'){
-             $this->contentModel->$developerRoleId = 1;
+        if($roleExist){
+            if($mvcType == 'View' || $themeResourceType == 'View'){
+                $this->contentModel->$developerRoleId = 1;
+            }
         }
         
 
@@ -136,9 +141,12 @@ class TbContentService
                     $ddmFilename = $ddmContentName.'.'.$mvcType.'.lifetech';
                     LtFile::path($path)->createFile($contentName);
                     LtFile::path($ddmpath)->createFile($ddmFilename);
-                    $template = $this->autoCreateTemplate($packageName, $contentName, $mvcType, $isService,$contentType);
-                    LtFile::path($path)->writeFile($contentName, $template);
-                    LtFile::path($ddmpath)->writeFile($ddmFilename, $template);
+                    $template = $this->autoCreateTemplate($packageName, $contentName, $mvcType, $isService, $contentType);
+                    if($template){
+                        LtFile::path($path)->writeFile($contentName, $template);
+                        LtFile::path($ddmpath)->writeFile($ddmFilename, $template);
+                    }
+                    
                 }
 
         
@@ -166,7 +174,7 @@ class TbContentService
                     if($pageType !== 'api'){
                                  // Create menu for the package
                          
-                         $parentId = $menuService->getMenuId($packageName);
+                        $parentId = $menuService->getMenuId($packageName);
                         
                         $menuModel = [
                             'menuName'=> $contentName, 
@@ -210,7 +218,7 @@ class TbContentService
                             "contentType" => 'theme',
                             "packageName" => $packageName,
                         ];
-                        $pageContentService->publishPageRegion($pageContent);
+                      $pageContentService->publishPageRegion($pageContent);
                     }
                     
                     
@@ -219,14 +227,97 @@ class TbContentService
                 }
             }
             else if($contentType == 'theme'){
-     
-                 //creating file and ddm file for this page $contentType
-                    $path="packages/".$contentType.'s/'.$packageName.'/Contents';
-                    $ddmpath="packages/".$contentType.'s/'.$packageName.'/ddm';
-                    $ddmContentName = pathinfo($contentName, PATHINFO_FILENAME);
-                    $ddmFilename = $ddmContentName.'.Contents.lifetech';
-                    LtFile::path($path)->createFile($contentName);
-                    LtFile::path($ddmpath)->createFile($ddmFilename);
+                    
+                    if($storeType === 'folder'){
+                        //creating file and ddm file for this page $contentType
+                        if(!empty($additionalPath)){
+                            $additionalPath = ltrim($additionalPath, '/');
+                        }
+                        
+                        $path="packages/".$contentType.'s/'.$packageName.'/'.$themeResourceType.'s/'.$additionalPath;
+                        
+                        $ddmpath="packages/".$contentType.'s/'.$packageName.'/ddm';
+                        $ddmContentName = pathinfo($contentName, PATHINFO_FILENAME);
+                        $ddmFilename = $ddmContentName.'.'.$themeResourceType.'.lifetech';
+                        LtFile::path($path)->createFile($contentName);
+                        LtFile::path($ddmpath)->createFile($ddmFilename);
+                    
+                    }     
+                    
+                    if($themeResourceType == 'View'){
+                        
+                        $contentRoutePath = pathinfo($contentName, PATHINFO_FILENAME);
+                        $path = '/'.$packageName.'/'.$contentRoutePath;
+                        $pageId = ltId();
+                        $pageModel = [
+                            'ltId' => $pageId,
+                            'pageName'=> $contentName, 
+                            'packageName' => $packageName, 
+                            'routePath' => $path,
+                            'pageType' => "theme",
+                            'updatedAt' => $this->ltNow,
+                            'createdAt' => $this->ltNow,
+                        ];
+                        if($roleExist){
+                            $pageModel[$developerRoleId] = 1;
+                        }
+                        
+                        // // creating page for the package content
+                        $pageService->store($pageModel);
+                        
+                        //// Menu Start
+                        $parentId = $menuService->getMenuId($packageName);
+                        
+                        $menuModel = [
+                            'menuName'=> $contentName, 
+                            'contentName'=> $contentName, 
+                            'packageName' => $packageName, 
+                            'routePath' => $path,
+                            'parentMenuId' => $parentId->ltId,
+                            'target' => '_blank',
+                            'menuLevel' => '2',
+                            'isPublished' => '1',
+                            'publishedAt' => $this->ltNow,
+                            'updatedAt' => $this->ltNow,
+                            'createdAt' => $this->ltNow,
+                        ];
+                         if($roleExist){
+                            $menuModel[$developerRoleId] = 1;
+                        }
+                        // creating menu for the package content
+                        $menuService->store($menuModel);
+                        
+                        // Page Content
+                         // publish to page content
+                        $pageContent = [
+                            "pageId" => $pageId,
+                            "contentId" => $contentId,
+                            "publishStatus" => 1,
+                            "contentType" => $contentType,
+                            "packageName" => $packageName,
+                            "publishSource" => "content"
+                        ];
+                        // 
+                         $pageContentService = new TbPageContentService();
+                         $pageContentService->publishPageContent($pageContent);
+                         
+                         // Publishing for Region 
+                         $contentModel = new TbContent(); // re-instantiating the model
+                         $contentRecord = $contentModel->select('lt_id, sort_order')->where('packageName', '=', $packageName)->andWhere('themeResourceType','=', 'Component')->andWhere('isThemeDefault', '=', 1)->get();
+                        
+                            $pageContent = [
+                                "pageId" => $pageId,
+                                "contentType" => 'theme',
+                                "packageName" => $packageName,
+                            ];
+                            
+                          $pageContentService->publishPageRegion($pageContent, $contentRecord);
+                           
+                        
+                        $this->contentModel->responseData->routePath = $path;
+                        
+                    }
+                    
             }else if($contentType == 'text' || $contentType == 'html'){
                 $path = '/'.$contentName;
                 if($isMenu){
@@ -245,7 +336,6 @@ class TbContentService
                         }
                         
                         $result = $menuService->store($menuModel);
-                        // $result = json_encode($menuModel);
                     
                 }
                 if($isPage){
@@ -355,7 +445,8 @@ class TbContentService
                 'storeType'   => 'folder',
                 'mvcType'     => $mvcType,
                 'packageName' => $packageName,
-                'contentType' => $contentType
+                'contentType' => $contentType,
+                'isPublished' => 1
             ], $createService);
         
             // If store() returns JSON, decode it
@@ -499,29 +590,37 @@ class {$fileNameWithNoExt}
         }else{
             
             $existing = $this->contentModel->select()->where('ltId', '=', $ltId)->get();
-            
+            $id = $ltId;
 
             if(count($existing) < 0) return LtResponse::json('Unable to delete content, no record found', 3506, 100);
+                $pageContentService = new TbPageContentService();
                 $contentData = $existing[0]; 
                 $contentName = $contentData->contentName;
                 $contentType = $contentData->contentType;
                 $packageName = $contentData->packageName;
                 $mvcType = ucfirst($contentData->mvcType);
-              if($mvcType == 'View'){
-
+                $themeResourceType = ucfirst($contentData->themeResourceType);	
+              if($mvcType == 'View' || $themeResourceType == 'View'){
+                    $pageModel = new TbPage();
+                    $pageData = $pageModel->select('lt_id')->where('pageName', '=', $contentName)->get()[0];
+                    $id = $pageData->ltId;
+                 
                 // deleting from Menu service
                 $menuService = new TbMenuService();
-                $resultMenu = $menuService->deleteMenu(params:$contentName);
+                $paramsData = [
+                    'packageName' => $packageName,
+                    'contentName' => $contentName
+                    ];
+                $resultMenu = $menuService->deleteMenu(params:$paramsData);
                 
                 //delete page service
                 $pageService = new TbPageService();
-                $result = $pageService->deletePages(params:$contentName);
+                $result = $pageService->deletePages(params:$paramsData);
                 
               }  
               if($contentType == 'module'){
                      // deleting page content service
-                $pageContentService = new TbPageContentService();
-                $publishedContent = $pageContentService->deletePageContent($ltId);
+                $publishedContent = $pageContentService->deletePageContent($id);
                     // deleting file
                   $path="packages/".$contentType.'s/'.$packageName.'/'.$mvcType.'s/';
                   LtFile::path($path)->deleteFile($contentName);
@@ -530,14 +629,20 @@ class {$fileNameWithNoExt}
                     $ddmContentName = pathinfo($contentName, PATHINFO_FILENAME);
                     $ddmFilename = $ddmContentName.'.'.$mvcType.'.lifetech';
                     LtFile::path($ddmpath)->deleteFile($ddmFilename);
-              }else{
-                  
-                  $path="packages/".$contentType.'s/'.$packageName.'/contents';
+              }elseif($contentType == 'theme'){
+
+                $publishedContent = $pageContentService->deletePageContent($id);
+                  $additionalPath = $contentData->additionalPath;
+                  if(!empty($additionalPath)){
+                        $additionalPath = ltrim($additionalPath, '/');
+                    }
+                     
+                  $path = "packages/".$contentType.'s/'.$packageName.'/'.$themeResourceType.'s/'.$additionalPath;
                   LtFile::path($path)->deleteFile($contentName);
                   
                   $ddmpath="packages/".$contentType.'s/'.$packageName.'/ddm';
                   $ddmContentName = pathinfo($contentName, PATHINFO_FILENAME);
-                  $ddmFilename = $ddmContentName.'.contents.lifetech';
+                  $ddmFilename = $ddmContentName.'.'.$themeResourceType.'.lifetech';
                   LtFile::path($ddmpath)->deleteFile($ddmFilename);
               }
                 $this->contentModel->processRequest();
@@ -550,12 +655,17 @@ class {$fileNameWithNoExt}
        
     }
     
-    public function togglePublished($packageName= null, $isPublished){
+    
+    public function togglePublishedContent($packageName= null, $isPublished){
         $publish = false;
         $this->contentModel->updatedBy = LtSession::get('ltUid');
-        $this->contentModel->isPublished = $isPublished;
+            $this->contentModel->isPublished = $isPublished;
         if($packageName !== null){
             $this->contentModel->update('packageName', '=', $packageName);
+            $publish =true;
+        }else{
+            $ltId = $this->request->ltId; 
+            $this->contentModel->update('ltId', '=', $ltId); 
             $publish =true;
         }
         if($publish){
@@ -623,45 +733,358 @@ class {$fileNameWithNoExt}
         return $result;
     }
     
-    public function synchronizeContent(){
-       $packageName = $this->request->packageName;
-       $packageType = $this->request->packageType;
-       
-       if(empty($packageName) && empty($packageType)){
-           return LtResponse::json('Package Name and Package Type can\'t be empty', 3504, 100);
-       }
-       $path = '';
-       if($packageType == 'theme'){
-           $path="packages/".$packageType.'s/'.$packageName.'/Contents';
-       }
-       $contents = scandir($path);
-       $files = array_slice($contents, 2);
-       $responses = [];
-       foreach ($files as $key => $file){
-          
-          $storeResponse = $this->store([
-                'contentName' => $file,
-                'storeType'   => 'folder',
-                'description'     => "Synchronized from file manager",
-                'packageName' => $packageName,
-                'contentType' => $packageType
-            ], false);
+
+    private function parsePathDetails(string $path){
+        // 1. Normalize directory separators
+        $normalizedPath = trim(str_replace('\\', '/', $path), '/');
         
-            // If store() returns JSON, decode it
+      
+        
+        $segments = array_values(array_filter(explode('/', trim($normalizedPath, '/'))));
+        
+        // 3. Extract the first folder after package name (e.g. "Views", "components", "services")
+        $firstFolder = array_shift($segments) ?? '';
+          
+        // Strip trailing 's' or 'S' (Views -> View, components -> component, services -> service)
+        $type = preg_replace('/s$/i', '', $firstFolder);
+    
+        // 4. Pop the filename at the end if present
+        if (!empty($segments)) {
+            array_pop($segments);
+        }
+    
+        // 5. Remaining segments make up the additional path
+        $additionalPath = !empty($segments) ? '/' . implode('/', $segments) : '/';
+    
+        return [
+            'type'           => $type,
+            'additionalPath' => $additionalPath,
+        ];
+    }
+    
+    public function synchronizeContent(){
+        $packageName = $this->request->packageName;
+        $packageType = strtolower((string)$this->request->packageType);
+        $items       = $this->request->items;
+    
+        if (empty($packageName) || empty($packageType) || empty($items) || !is_array($items)) {
+            return LtResponse::json('Invalid synchronization payload', 3504, 100);
+        }
+    
+        $responses = [];
+    
+        // Determine key dynamically: 'themeResourceType' vs 'mvcType'
+        $typeKey = ($packageType === 'theme') ? 'themeResourceType' : 'mvcType';
+    
+        foreach ($items as $item) {
+            $relativePath = $item['relativePath'] ?? '';
+            
+            // Extract type and subfolder path
+            $pathDetails = $this->parsePathDetails($relativePath);
+            $isServices = $pathDetails['type'] == 'Service' ? true : false;
+            $isThemeDefault = $pathDetails['type'] == 'Component' ? 1 : 0;
+            $payload = [
+                'contentName'    => $item['contentName'],
+                'storeType'      => 'folder',
+                'description'    => "Synchronized from file manager",
+                'packageName'    => $packageName,
+                'isThemeDefault' => $isThemeDefault,
+                $typeKey         => $pathDetails['type'],           
+                'additionalPath' => $pathDetails['additionalPath'], 
+                'contentType'    => $packageType,
+                'isPublished'   => 1
+            ];
+            
+
+            $storeResponse = $this->store($payload, false);
+    
             if (is_string($storeResponse)) {
                 $storeResponse = json_decode($storeResponse, true);
             }
-        
+    
             $responses[] = $storeResponse;
-           
+        }
+    
+        if (empty($responses)) {
+            return LtResponse::json('Failed to synchronize', 3504, 100);
+        }
+    
+        return LtResponse::json('Synchronized successfully', 200, 200, $responses);
+    }
+    
+    public function scanContent(){
+         
+        $packageName = $this->request->packageName;
+        $packageType = strtolower((string)$this->request->packageType);
+    
+        if (empty($packageName) || empty($packageType)) {
+            return LtResponse::json('Package Name and Package Type cannot be empty', 3504, 100);
+        }
+    
+        $folderMap = [
+            'theme'  => ['Components', 'Layouts', 'Views', 'Assets'],
+            'module' => ['Model', 'Controller', 'Services', 'Views'],
+            'plugin' => ['Model', 'Controller', 'Services', 'Views'],
+        ];
+    
+        if (!isset($folderMap[$packageType])) {
+            return LtResponse::json('Unsupported package type', 3504, 100);
+        }
+    
+        $baseFolder = ($packageType === 'theme') ? 'themes' : $packageType . 's';
+        $packageBasePath = "packages/{$baseFolder}/{$packageName}";
+    
+        if (!is_dir($packageBasePath)) {
+            return LtResponse::json("Directory not found: {$packageBasePath}", 404, 100);
+        }
+    
+        // 1. Fetch existing content records for this package
+        
+        $registered = $this->contentModel->select('content_name')->where('packageName', '=', $packageName)->andWhere('contentType', '=', $packageType)->get();
+    
+        $flipped = array_column($registered, 'contentName');
+        $registeredLookup = array_flip($flipped);
+        $discovered = [];
+        
+        // 2. Scan folders recursively
+        foreach ($folderMap[$packageType] as $folder) {
+            $folderPath = "{$packageBasePath}/{$folder}";
+            $discovered[$folder] = [];
+            // $discovered[$folder] = $folderPath;
+    
+            if (!is_dir($folderPath)) {
+                continue;
+            }
+            
+            
+            
+            $iterator = new \RecursiveIteratorIterator(
+                new \RecursiveDirectoryIterator($folderPath, \FilesystemIterator::SKIP_DOTS),
+                \RecursiveIteratorIterator::LEAVES_ONLY
+            );
+    
+            foreach ($iterator as $file) {
+                if ($file->isDir()) continue;
+    
+                $fileName = $file->getFilename();
+    
+                // Ignore auto-generated index.php & dotfiles
+                if (strtolower($fileName) === 'index.php' || str_starts_with($fileName, '.')) {
+                    continue;
+                }
+    
+                $normalizedFilePath = str_replace('\\', '/', $file->getPathname()); // e.g., "packages/themes/ThemeBrainDump/Views/UserProfile.html"
+                
+                if (str_contains($normalizedFilePath, $packageName)) {
+                    // 1. Find exactly where 'ThemeBrainDump' starts
+                    $packagePos = strpos($normalizedFilePath, $packageName);
+                    
+                    // 2. Extract everything after 'ThemeBrainDump'
+                    $subPath = substr($normalizedFilePath, $packagePos + strlen($packageName));
+                    
+                    // 3. Strip any leading forward slashes to get a clean relative path
+                    $subPath = ltrim($subPath, '/');
+                } else {
+                    $subPath = $normalizedFilePath;
+                }
+                
+                // Exclude already registered files
+                if (isset($registeredLookup[$fileName])) {
+                    continue;
+                }
+    
+                $discovered[$folder][] = [
+                    'contentName'  => $fileName,
+                    'relativePath' => $subPath,
+                    'category'     => $folder
+                ];
+            }
+        }
+    
+        return LtResponse::json('Scan successful', 200, 200, $discovered);
+    }
+    
+    public function getFolders(){
+        $resoucesType = $this->request->type; // e.g., 'View', 'Component'
+        $additionalPath = $this->request->path; // e.g., '/', '/auth'
+        $packageName = $this->request->packageName;
+       
+        if(empty($resoucesType)){
+            return LtResponse::json('Resources Type can\'t be empty', 3504, 100);
+        }
+
+        // 1. Properly format the additional path with a leading slash if it's not empty
+        $pathSuffix = '';
+        if(!empty($additionalPath) && $additionalPath !== '/'){
+            $pathSuffix = '/' . trim($additionalPath, '/');
+        }
+
+        // 2. Format the resource type
+        $resoucesType = $resoucesType . 's'; 
+
+        // 3. Safely build the full path
+        $folderPath = rtrim("packages/themes/" . $packageName . "/" . $resoucesType . $pathSuffix, '/');
+       
+        $responses = [];
+
+        // 4. Verify directory exists before attempting to scan it
+        if(is_dir($folderPath)){
+            // array_diff removes '.' and '..' cleanly without relying on array_slice
+            $files = array_diff(scandir($folderPath), ['.', '..']);
+            
+            foreach ($files as $file){
+                $filePath = $folderPath . DIRECTORY_SEPARATOR . $file;
+                
+                // 5. Only push to response if it is ACTUALLY a directory
+                if(is_dir($filePath)){
+                    // We only need to return the folder name to match the frontend dropdown logic
+                    $responses[] = $file; 
+                }
+            }
         }
         
-        if(empty($responses))  return LtResponse::json('Failed to Synchronized', 3504, 100);
+        if(empty($responses)) return LtResponse::json('No subdirectory found', 101, 100);
         
-        return LtResponse::json('Synchronized succesfully', 200, 200, $responses);
-    //   return $responses;
+        return LtResponse::json('validate successfully', 200, 200, $responses);
+    }
+    
+    
+    // public function fetchLayouts(){
+    //     $packageName = $this->request->packageName;
        
+    //     if(empty($packageName)){
+    //         return LtResponse::json('Package Name Type can\'t be empty', 3504, 100);
+    //     }
+        
+    //     $layouts = $this->contentModel->select('content_name, description, package_name')->andWhere('themeResourceType', '=', 'Layout')->get();
+        
+    //     if(empty($layouts)) return LtResponse::json('No Layouts found', 101, 100);
+        
+    //     return LtResponse::json('Layout fetched successfully', 200, 200, $layouts);
+    // }
+    
+    public function fetchLayouts()
+{
+    $packageName = $this->request->packageName;
+
+    if (empty($packageName)) {
+        return LtResponse::json('Package Name cannot be empty', 3504, 100);
+    }
+
+    $layouts = $this->contentModel
+        ->select('content_name, description, package_name')
+        ->where('themeResourceType', '=', 'Layout')
+        ->get();
+
+    if (empty($layouts)) {
+        return LtResponse::json('No Layouts found', 101, 100);
+    }
+
+    // Group layouts by package_name
+    $grouped = [];
+    foreach ($layouts as $layout) {
+        $pkg = $layout->packageName ?? 'Other';
+        $grouped[$pkg][] = [
+            'contentName' => $layout->contentName,
+            'description' => $layout->description ?? '',
+            'packageName' => $pkg
+        ];
+    }
+
+    // Sort to ensure the requested package appears at the top
+    uksort($grouped, function($a, $b) use ($packageName) {
+        if ($a === $packageName) return -1;
+        if ($b === $packageName) return 1;
+        return strcasecmp($a, $b);
+    });
+
+    return LtResponse::json('Layouts fetched successfully', 200, 200, [
+            'currentPackage' => $packageName,
+            'groupedLayouts' => $grouped
+        ]);
+    }
+    
+    public function assignLayouts(){
+        $layoutName = $this->request->layoutName;
+        $contentId = $this->request->contentId;
+        $layoutPackageName = $this->request->layoutPackageName;
+        
        
+        if (empty($layoutName) || empty($contentId)) {
+            return LtResponse::json('please provide layout, content or package name for assigning', 3504, 100);
+        }
+        
+        $content = $this->contentModel->select('content_name, lt_id, package_name')->where('ltId', '=', $contentId)->get()[0];
+        if(empty($content)) return LtResponse::json('No Contents found', 101, 100);
+        
+        $pageModel = new TbPage();
+        $pageData = $pageModel->select('lt_id')->where('pageName', '=', $content->contentName)->andWhere('packageName', '=', $content->packageName)->get()[0];
+        
+        if(empty($pageData)) return LtResponse::json('No Page found', 101, 100);
+        
+        $pageModel->themeLayout = $layoutName;
+        $pageModel->themeLayoutPackage = $layoutPackageName;
+        $pageModel->updatedBy = $this->userId;
+        $pageModel->updatedAt = $this->ltNow;
+        $pageModel->update('ltId', '=', $pageData->ltId);
+        
+        return $pageModel->responseJson(); 
+        
+        // return LtResponse::json('Layout assigned successfully', 200, 200, $content);
+    }
+    
+    public function contentRegions(){
+        $contentName = $this->request->contentName;
+        $contentId = $this->request->contentId;
+        $packageName = $this->request->packageName;
+        $pageModel = new TbPage();
+        $sqlConnect = DbConnect::dbDriver();
+       
+        if (empty($contentName) || empty($packageName)) {
+            return LtResponse::json('please provide content name and package name', 3504, 100);
+        }
+        
+        $pageData = $pageModel->select('lt_id, page_name')->where('pageName', '=', $contentName)->andWhere('packageName', '=', $packageName)->get();
+        
+        if(empty($pageData)) return LtResponse::json('No Page found for content $contentName', 101, 100);
+        
+        $pageContentService = new TbPageContentService();
+        $publishedContents = $pageContentService->fetchPublished($pageData[0]->ltId);
+        
+        if(empty($publishedContents)) return LtResponse::json('No Publish Content Found', 101, 100);
+        
+        $contentIds = array_column($publishedContents, 'contentId');
+        
+        $placeholders = implode(', ', array_fill(0, count($contentIds), '?'));
+        
+        $stmt = $sqlConnect->prepare("SELECT lt_id, content_name, package_name FROM tb_content WHERE lt_id IN ($placeholders)");
+
+        // 3. Execute and pass the raw array directly
+        $stmt->execute($contentIds);
+        $results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        //map the result ltId to contentName
+        $nameMap = [];
+        $pkgMap = [];
+        if(!empty($results)){
+            foreach($results as $row){
+                $nameMap[$row['lt_id']] = $row['content_name'];
+                $pkgMap[$row['lt_id']] = $row['package_name'];
+            }
+        }
+        
+        //update the original record with name
+        foreach($publishedContents as &$content){
+            $name = $nameMap[$content->contentId] ?? '';
+            $pkg = $pkgMap[$content->contentId] ?? '';
+            $content->contentName = $name;
+            $content->packageName = $pkg;
+        }
+        
+        unset($content);
+
+        if(empty($publishedContents)) return LtResponse::json('No Region found', 101, 100);
+        
+        return LtResponse::json('Regions Found', 200, 200, $publishedContents);
     }
         
         

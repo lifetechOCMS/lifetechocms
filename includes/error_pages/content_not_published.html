@@ -142,12 +142,16 @@
       </svg>
 
     </div>
+    <?php 
+    global $adminRoleResponseNow;   
+    ?>
 
     <div class="noContent-statusBadge">Unpublished</div>
-    <h1 class="noContent-title">No Content is published to this page</h1>
+    <h1 style="color:black" class="noContent-title">Your role(s):  <?php echo $adminRoleResponseNow?></h1>
+    <h1 class="noContent-title">No Contents is published to this page</h1>
     <p class="noContent-separator">or</p>
     <h1 class="noContent-title">The Session has Timed Out</h1>
-
+ 
     <a href="<?= ltSiteUrl(); ?>" class="noContent-btn">Go Back Home</a>
   </div>
 

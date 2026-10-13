@@ -1,0 +1,22 @@
+[
+    {
+        "ltId": "178888011647538",
+        "packageName": "PlgMyFontAwesome",
+        "pageType": null,
+        "useLiferazor": 0,
+        "storeType": "folder",
+        "mvcType": "service",
+        "isThemeDefault": 0,
+        "contentType": "plugin",
+        "contentSource": "plugin",
+        "contentName": "PlgMyFontAwesomeRoutes.php",
+        "contentCategory": null,
+        "contentBody": null,
+        "ccurrent": null,
+        "ccname": null,
+        "sortOrder": 8,
+        "description": null,
+        "themeResourceType": null,
+        "additionalPath": null
+    }
+]

@@ -155,15 +155,18 @@ class TbPageContentService
             
         }
         
-        public function publishPageRegion($dataArr){
+        public function publishPageRegion($dataArr, $contentRecord = null){
          
-            if(empty($dataArr))LtResponse::json("No data", 802, 100);;
-            $packageModel = new TbPackage();
-            $themeRecord = $packageModel->select('package_name')->where('packageType', '=', 'theme')->andWhere('isThemeDefault', '=', 1)->get()[0];  //fetching default theme
+            if(empty($dataArr))LtResponse::json("No data", 802, 100);
+            if($contentRecord == null){ 
+                $packageModel = new TbPackage();
+                $themeRecord = $packageModel->select('package_name')->where('packageType', '=', 'theme')->andWhere('isThemeDefault', '=', 1)->get()[0];  //fetching default theme
+                
+                if(!$themeRecord) return LtResponse::json('No default theme', 801, 100);
+                $contentModel = new TbContent();
+                $contentRecord = $contentModel->select('lt_id, sort_order')->where('packageName', '=', $themeRecord->packageName)->andWhere('isThemeDefault', '=', 1)->get();
+            }
             
-            if(!$themeRecord) return LtResponse::json('No default theme', 801, 100);
-            $contentModel = new TbContent();
-            $contentRecord = $contentModel->select('lt_id, sort_order')->where('packageName', '=', $themeRecord->packageName)->andWhere('isThemeDefault', '=', 1)->get();
             
             if(count($contentRecord) < 0) return LtResponse::json("No content found for theme {$themeRecord->packageName}", 3410, 100);
                 //   $record = []; 
@@ -189,6 +192,22 @@ class TbPageContentService
                      }else{
                         return $this->pageContentModel->responseJson();
                      }
+        }
+        
+        public function fetchPublished($id, $fetchType='page', $source='region'){
+            $fetchColumn = [];
+            $where = '';
+            if($fetchType == 'page'){
+                $fetchColumn = ['content_id', 'sort_order'];
+                $where = 'pageId';
+            }else{
+                $fetchColumn = ['page_id', 'sort_order'];
+                $where = 'contentId';
+            }
+            $columns = implode(', ', $fetchColumn);
+            $record = $this->pageContentModel->select(implode(', ', $fetchColumn))->where($where, '=', $id)->andWhere('publish_source', '=', $source)->orderBy('sort_order')->get();
+            return $record;
+            
         }
         
         

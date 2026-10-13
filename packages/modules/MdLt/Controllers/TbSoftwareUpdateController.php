@@ -117,12 +117,12 @@ class TbSoftwareUpdateController
         $request = new LtRequest;
         $lastUpdated = $request->lastUpdated;
         $contentName = $request->contentName;
-        $softwareUpdateModel->select('lastupdate, content_name, content, dependsOn');
+        $softwareUpdateModel->select('lastupdate, content_name, content, dependsOn, contentWork');
         
         if(!empty($contentName)){
-            $updatedRecord = $softwareUpdateModel->select('lastupdate, content_name, content, depends_on')->where('content_name', '=', $contentName)->andWhere('downloadStatus', '=', 1)->get()[0];
+            $updatedRecord = $softwareUpdateModel->select('lastupdate, content_name, content, depends_on, content_work')->where('content_name', '=', $contentName)->andWhere('downloadStatus', '=', 1)->get()[0];
         }else{
-            $updatedRecord = $softwareUpdateModel->select('lastupdate, content_name, content, depends_on')->where('lastupdate', '>', $lastUpdated)->andWhere('downloadStatus', '=', 1)->get();
+            $updatedRecord = $softwareUpdateModel->select('lastupdate, content_name, content, depends_on, content_work')->where('lastupdate', '>', $lastUpdated)->andWhere('downloadStatus', '=', 1)->get();
         }
         
         if(!empty($updatedRecord)){

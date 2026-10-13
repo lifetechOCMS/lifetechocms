@@ -26,27 +26,18 @@ class TbUserService
         
         public function store($model){
             
-             
             $username = $model->username;
             $email = $model->email;
-            $roles = $model->roles ?: 'c81e728d9d4c2f';
-  
+            $roles = $model->roles;
             $exist = $model->select()->where('username', '=', $username)->orWhere('email', '=', $email)->get();
             
             if(count($exist) > 0){
                 return  LtResponse::json('User record already exist', 3004, 100); 
             }
-        
-
-        // //      // ///  Create Password Hash and Salt
+            
             $togetPasswordDetails = LtDdm::createPassword($model->password);
             $salt = $togetPasswordDetails->salt;
             $encrypt = $togetPasswordDetails->hash;
-              
-           //   Loading of form Role 
-            $getformRoleData = LtAuth::getFormRole('UserRegForm');
-            $roleEncryption = $getformRoleData->encryptRole;
-            $activateStatus = $getformRoleData->loginStatus;
             
             $model->ltId = $this->ltId;
             $model->roleId = $roles;
@@ -54,8 +45,6 @@ class TbUserService
             $model->password = $encrypt;
             $model->salt = $salt;
             $model->formType = 'userForm';
-            $model->activationStatus = $activateStatus;
-            $model->roleEncrypt = $roleEncryption;
             $model->createdAt = $this->ltNow;
             $model->updatedAt = $this->ltNow;
             

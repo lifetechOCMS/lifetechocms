@@ -83,21 +83,59 @@ class TbUserController
         return  LtResponse::json('success', 3001, 200, $userModel->responseData); 
     }
         
-    public function store(){
+   public function store(){
         
         $userModel = new TbUser(); 
         $userModel->processRequest();
+        
+        $formName = $userModel->formName ?? null;
+        
+        if($formName){
+              //   Loading of form Role 
+            $getformRoleData = LtAuth::getFormRole($formName);
+            $roleId = $getformRoleData->formRole;
+            $userModel->roles = $roleId;
+        }else{
+           $userModel->roles = 'c81e728d9d4c2f'; //assigning anonymous role
+        }
+        
+        $response = $this->storeAbstract($userModel);
+        return $response;
+        
+    }
+    
+    public function storeAdmin(){
+        
+        $userModel = new TbUser(); 
+        $userModel->processRequest();
+        $roles = $userModel->roles;
+        $formName = $userModel->formName ?: null;
+        
+        if(empty($roles)){
+            if($formName){
+              //   Loading of form Role 
+                $getformRoleData = LtAuth::getFormRole($formName);
+                $roleId = $getformRoleData->formRole;
+                $userModel->roles = $roleId;
+            }else{
+               $userModel->roles = 'c81e728d9d4c2f'; //assigning anonymous role
+            }
+        }
+        $response = $this->storeAbstract($userModel);
+        return $response;
+    }
+    
+    private function storeAbstract($userModel){
         
         $username = $userModel->username;
         $email = $userModel->email;
         $password = $userModel->password;
         $confirm = $userModel->confirm;
-
-      if (empty(trim($username)) && empty(trim($email))) {
+        
+        if (empty(trim($username)) && empty(trim($email))) {
             return LtResponse::json('validation error', 3002, 100, "Email or Username is required");
         }
-
-        
+  
         if ($password !== $confirm) {
             return LtResponse::json('validation error', 3003, 100, "Please ensure that Password and Confirm Password are the same.");
         }
@@ -106,11 +144,10 @@ class TbUserController
         $userModel->validateRequest([
             'password' => 'required|min:6'
         ]);
-  
+
         $dataModelService = new TbUserService();
         $response = $dataModelService->store($userModel);
         return $response;
-        
     }
 
     public function resetPassword(){

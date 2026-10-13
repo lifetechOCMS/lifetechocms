@@ -11,10 +11,6 @@ Key Features:<br><br>
         &ensp; Encrypts all developer code formats (PHP, HTML, CSS, JavaScript, etc.) during deployment.
         &ensp; Decrypts securely in memory during runtime to ensure robust security and prevent reverse engineering.
 
-   **Software UNIQUE KEY:**<br>
-        &ensp; Lifetech generate an unique key for your application so that no one can copy or rename your files without the activation of that key.
-        The Unique key is free and can be regenerated. This give the developers confidence to release their software to shared domain or local servers
-
 **Separation of Modules, Themes, and Plugins:**<br>
        &ensp;  Enables fast development and easy customization.
         Modules encapsulate features, themes define UI, and plugins extend functionality.
@@ -43,6 +39,10 @@ Key Features:<br><br>
 
 **Custom Response Handling:**<br>
         &ensp;Provides a response() function with a structured json() method for clear API responses.
+
+**Site Connect:**<br>
+        &ensp;Provides connection to many applications from one dev enviroment.
+
 
 ## Notable Origins and Dedication:<br>
 

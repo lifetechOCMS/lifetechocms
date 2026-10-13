@@ -67,19 +67,32 @@
                 <input type="email" id="email" name="email" class="w-full border border-gray-300 px-4 py-2 pl-10 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="john@example.com" required>
             </div>
       </div>
-
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-            <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <i class="fas fa-key text-gray-400"></i>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-key text-gray-400"></i>
+                    </div>
+                    <input type="password" name="password" id="passwordInput" class="w-full border border-gray-300 px-4 py-2 pl-10 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="••••••••" required>
+                    <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-eye"></i>
+                    </button>
                 </div>
-                <input type="password" name="password" id="passwordInput" class="w-full border border-gray-300 px-4 py-2 pl-10 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="••••••••" required>
-                <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600">
-                    <i class="fas fa-eye"></i>
-                </button>
-            </div>
-      </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"> Confirm Password</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-key text-gray-400"></i>
+                    </div>
+                    <input type="password" name="confirm" id="confirmInput" class="w-full border border-gray-300 px-4 py-2 pl-10 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="••••••••" required>
+                    <button type="button" id="toggleConfirm" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+          </div>
+        </div>
 
       <div class="flex items-start py-2">
         <input type="checkbox" id="terms" class="mt-1 h-4 w-4 text-emerald-600 border-gray-300 rounded" required>
@@ -102,7 +115,7 @@
   </div>
 </div>
 
- <?php ltImport('mdLtTheme','LtThemeService.js') ?>
+
  <script>
   
   
@@ -113,13 +126,14 @@
         password: '',
       },
       loading: false,
-      showPassword: false
+      showPassword: false,
+      showConfirm: false
     };
 
     // DOM elements
     const elements = {};
     
-    let inputElements = ['signUpForm', 'username', 'email', 'firstname', 'surname', 'togglePassword', 'passwordInput', 'submitBtn', 'snackbar'
+    let inputElements = ['signUpForm', 'username', 'email', 'firstname', 'surname', 'togglePassword', 'toggleConfirm', 'passwordInput', 'confirmInput', 'submitBtn', 'snackbar'
     ]
     
     for(const value of inputElements){
@@ -135,6 +149,20 @@
         el.setAttribute('aria-label', `Hide Password`);
       } else {
         elements.passwordInput.type = 'password';
+        el.classList.replace('fa-eye-slash', 'fa-eye');
+        el.setAttribute('aria-label', `Show Password`);
+      }
+
+  })
+  elements.toggleConfirm.addEventListener('click', function(e){
+      state.showConfirm = !state.showConfirm;
+      let el = e.target;
+       if (state.showConfirm) {
+        elements.confirmInput.type = 'text';
+        el.classList.replace('fa-eye', 'fa-eye-slash');
+        el.setAttribute('aria-label', `Hide Password`);
+      } else {
+        elements.confirmInput.type = 'password';
         el.classList.replace('fa-eye-slash', 'fa-eye');
         el.setAttribute('aria-label', `Show Password`);
       }
@@ -175,62 +203,151 @@
         }, 300);
       }, hideTime);
     }
-
+    
     async function handleSubmit(e) {
-      e.preventDefault();
-      
-      let rawFormData = new FormData(elements.signUpForm);
-      formData = Object.fromEntries(rawFormData.entries());
-      
-      if (!formData.username && !formData.email) {
-              showSnackbar(`Email or Username field is required`, 'yellow');
-              return;
-        }
+          e.preventDefault();
         
-      if(!formData.password){
-            showSnackbar(`Password must not be empty`, 'yellow');
+          const rawFormData = new FormData(elements.signUpForm);
+          const formData = Object.fromEntries(rawFormData.entries());
+        
+          // Support both camelCase ('confirmPassword') and snake_case ('confirm_password') HTML input names
+          const confirmPassword = formData.confirm;
+        
+          // 1. Username Validation
+          if (!formData.username || !formData.username.trim()) {
+            showSnackbar('Username is required', 'yellow');
             return;
+          }else if (formData.username.length < 6) {
+            showSnackbar('Username must be at least 6', 'yellow');
+            return;
+          }
+        
+          // 2. Email Validation (Presence & Format)
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!formData.email || !formData.email.trim()) {
+            showSnackbar('Email address is required', 'yellow');
+            return;
+          } else if (!emailRegex.test(formData.email.trim())) {
+            showSnackbar('Please enter a valid email address', 'yellow');
+            return;
+          }
+        
+          // 3. Password Validation
+          if (!formData.password) {
+            showSnackbar('Password is required', 'yellow');
+            return;
+          } else if (formData.password.length < 6) {
+            showSnackbar('Password must be at least 6 characters', 'yellow');
+            return;
+          }
+        
+          // 4. Confirm Password Match Validation
+          if (!confirmPassword) {
+            showSnackbar('Please confirm your password', 'yellow');
+            return;
+          } else if (formData.password !== confirmPassword) {
+            showSnackbar('Passwords do not match', 'yellow');
+            return;
+          }
+          
+          formData.formName = 'UserRegForm';
+        
+          // Set loading state
+          state.loading = true;
+          elements.submitBtn.disabled = true;
+          elements.submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i><span class="animate-pulse">Processing...</span>';
+        
+          try {
+            const options = {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify(formData)
+            };
+        
+            const res = await fetch(`${BASE_URL}/users`, options);
+            const data = await res.json();
+        
+            const { responseCategory, responseResult } = data;
+        
+            if (responseCategory === "200") {
+              showSnackbar('Registration Successful', 'green');
+        
+              setTimeout(() => {
+                window.location.href = `${siteHostAddress}/sign-in`;
+              }, 1000);
+            } else {
+              showSnackbar(`Failed: ${responseResult || 'Invalid credentials'}`, 'red');
+            }
+          } catch (err) {
+            showSnackbar(`Error: ${err.message || 'Something went wrong'}`, 'red');
+          } finally {
+            // Reset loading state safely whether submission succeeds or fails
+            state.loading = false;
+            elements.submitBtn.disabled = false;
+            elements.submitBtn.textContent = 'Sign Up';
+          }
         }
+
+    // async function handleSubmit(e) {
+    //   e.preventDefault();
       
-      // Set loading state
-      state.loading = true;
-      elements.submitBtn.disabled = true;
-      elements.submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i><span class="animate-pulse">Processing...</span>';
+    //   let rawFormData = new FormData(elements.signUpForm);
+    //   formData = Object.fromEntries(rawFormData.entries());
+      
+    //   if (!formData.username && !formData.email) {
+    //           showSnackbar(`Email or Username field is required`, 'yellow');
+    //           return;
+    //     }
+        
+    //   if(!formData.password){
+    //         showSnackbar(`Password must not be empty`, 'yellow');
+    //         return;
+    //     }
+      
+    //   // Set loading state
+    //   state.loading = true;
+    //   elements.submitBtn.disabled = true;
+    //   elements.submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i><span class="animate-pulse">Processing...</span>';
       
   
 
-      try {
-          const options = {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify(formData)
-          };
+    //   try {
+    //       const options = {
+    //         method: 'POST',
+    //         headers: {
+    //           'Accept': 'application/json'
+    //         },
+    //         body: JSON.stringify(formData)
+    //       };
         
-          const res = await fetch(`${BASE_URL}/users`, options);
-          const data = await res.json();
-          const { responseData, responseCategory, responseResult } = data;
+    //       const res = await fetch(`${BASE_URL}/users`, options);
+    //       const data = await res.json();
+          
+    //       console.log(data);
+    //       const { responseData, responseCategory, responseResult } = data;
         
-          if (responseCategory === "200") {
-                showSnackbar('Registration Successfully', 'green');
+    //       if (responseCategory === "200") {
+    //             showSnackbar('Registration Successfully', 'green');
             
-                setTimeout(() => {
-                    window.location.href = `${siteHostAddress}/sign-in`;
-                }, 1000);
-          } else {
-            showSnackbar(`failed: ${responseResult || 'Invalid credentials'}`, 'red');
-          }
-        } catch (err) {
-          showSnackbar(`error: ${err.message || 'Something went wrong'}`, 'red');
-        }
+    //             setTimeout(() => {
+    //                 window.location.href = `${siteHostAddress}/sign-in`;
+    //             }, 1000);
+    //       } else {
+    //         showSnackbar(`failed: ${responseResult || 'Invalid credentials'}`, 'red');
+    //       }
+    //     } catch (err) {
+    //       showSnackbar(`error: ${err.message || 'Something went wrong'}`, 'red');
+    //     }
 
       
-      // Reset loading state
-      state.loading = false;
-      elements.submitBtn.disabled = false;
-      elements.submitBtn.textContent = 'Sign Up';
-    }
+    //   // Reset loading state
+    //   state.loading = false;
+    //   elements.submitBtn.disabled = false;
+    //   elements.submitBtn.textContent = 'Sign Up';
+    // }
 
     // Initialize the app when DOM is loaded
     document.addEventListener('DOMContentLoaded', init);

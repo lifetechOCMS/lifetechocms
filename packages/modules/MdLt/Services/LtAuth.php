@@ -176,22 +176,22 @@ class LtAuth
 
         if (count($query) > 0) {
             return json_decode(json_encode([
-                'encryptRole' => $query[0]->formRole
+                'formRole' => $query[0]->formRole
                // 'loginStatus' => $query[0]->loginStatus
             ]));
         }
 
         //assing anonymous defaul role
-        $encryptRole = 'c81e728d9d4c2f';
+        $formRole = 'c81e728d9d4c2f';
 
         $formRoleModel->ltId = ltId();
         $formRoleModel->formName = $formName;
-        $formRoleModel->formRole = $encryptRole;
+        $formRoleModel->formRole = $formRole;
         //$categories->loginStatus = 1;
         $formRoleModel->insert();
 
         return json_decode(json_encode([
-            'encryptRole' => $encryptRole
+            'formRole' => $formRole
             //'loginStatus' => 1
         ]));
     }

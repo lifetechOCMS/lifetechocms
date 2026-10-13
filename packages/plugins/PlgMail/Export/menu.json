@@ -1,50 +1,26 @@
 [
     {
-        "ltId": "177787805078261",
+        "ltId": "177670428098329",
         "packageName": "PlgMail",
         "menuLevel": 1,
         "menuName": "PlgMail",
-        "contentName": null,
-        "parentMenuId": null,
+        "contentName": "",
+        "parentMenuId": "",
         "routePath": "#",
-        "slug": null,
+        "slug": "",
         "target": "self",
         "sortOrder": 8
     },
     {
-        "ltId": "177773364499496",
+        "ltId": "178661853023397",
         "packageName": "PlgMail",
         "menuLevel": 2,
-        "menuName": "MailConfiguration.html",
-        "contentName": "MailConfiguration.html",
-        "parentMenuId": "",
-        "routePath": "\/PlgMail\/MailConfiguration",
-        "slug": "",
+        "menuName": "Kadeem-Meyer.html",
+        "contentName": "Kadeem-Meyer.html",
+        "parentMenuId": "177670428098329",
+        "routePath": "\/PlgMail\/Kadeem-Meyer",
+        "slug": null,
         "target": "_blank",
-        "sortOrder": 0
-    },
-    {
-        "ltId": "177797997685445",
-        "packageName": "PlgMail",
-        "menuLevel": 2,
-        "menuName": "MailSender.html",
-        "contentName": "MailSender.html",
-        "parentMenuId": "",
-        "routePath": "\/PlgMail\/MailSender",
-        "slug": "",
-        "target": "_blank",
-        "sortOrder": 0
-    },
-    {
-        "ltId": "178311699576336",
-        "packageName": "PlgMail",
-        "menuLevel": 2,
-        "menuName": "MailQueue.html",
-        "contentName": "MailQueue.html",
-        "parentMenuId": "",
-        "routePath": "\/PlgMail\/MailQueue",
-        "slug": "",
-        "target": "_blank",
-        "sortOrder": 0
+        "sortOrder": null
     }
 ]

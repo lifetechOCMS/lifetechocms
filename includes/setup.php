@@ -69,6 +69,8 @@ if(isset($_POST['dbinfo'])){
   $username =  $_POST['username'];
   $password = $_POST['password'];
   $dbname = $_POST['dbBase'];
+  $portNo = $_POST['portno'];
+  $portString = !empty($portNo) ? ";port=$portNo" : "";
   $errror =""; 
   
 
@@ -175,7 +177,11 @@ echo '<div  style="margin-left:80px"><font   color="#FF0000"><h2>Sorry!!,  Your 
 exit();
 }else{
 
-try{$connect2db = new PDO("mysql:dbname=$dbname; host=$host", $username, $password);
+
+try{
+
+$connect2db = new PDO("mysql:dbname=$dbname; host=$host$portString", $username, $password 
+);
 $connect2db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);$connect2db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 if($connect2db){//global $connect2db;
 
@@ -186,7 +192,7 @@ if($connect2db){//global $connect2db;
 }catch(PDOException $e){
     try {
         // Connect to MySQL as a root/admin user
-        $pdo = new PDO("mysql:host=$host", "$username", $password);
+        $pdo = new PDO("mysql:host=$host$portString", "$username", $password);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Define the database, new user, and credentials
@@ -386,10 +392,11 @@ $contentEndJson= <<<PHP
       $username =  "'.$username.'";
       $password = "'.$password.'";
       $dbname = "'.$dbname.'";
+      $port = "'.$portString.'";
 
 
 
-      try{$connect2db = new PDO("mysql:dbname=$dbname; host=$host", $username, $password);
+      try{$connect2db = new PDO("mysql:dbname=$dbname; host=$host$port", $username, $password);
       $connect2db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);$connect2db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       if($connect2db){
 
@@ -414,6 +421,7 @@ $contentEndJson= <<<PHP
                     \'user\' => getenv(\'LT_DB_USER\') ?: "'.$username.'",
                     \'pass\' => getenv(\'LT_DB_PASS\') ?: "'.$password.'",
                     \'name\' => getenv(\'LT_DB_NAME\') ?: "'.$dbname.'",
+                    \'port\' => getenv(\'LT_DB_PORT\') ?: "'.$portNo.'",
                 ];
             }
         }
@@ -521,8 +529,9 @@ include('connect2db_setup.php');
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Installer Wizard</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  
+  <link href="backend_assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <script src="backend_assets/tailwind/tailwind_4_cdn.js"></script>
 
   <style>
     /* THE TWIST: A 3D Tilt-Up Animation */
@@ -602,7 +611,7 @@ include('connect2db_setup.php');
       <button onclick="runStep(1)" class="w-full bg-blue-600 hover:bg-blue-700 transition-colors text-white py-3 rounded-lg font-semibold shadow-md">Verify & Continue</button>
      <?php else: ?>
       <div class="bg-yellow-50 border border-yellow-100 rounded-lg h-full w-full p-4 shadow-lg hover:shadow-xl hover:text-shadow-lg"> 
-        <p><stong>Path File: <?php echo  php_ini_loaded_file(); ?></stong></p>
+        <p style= "background-color:purple; color:white; padding-left: 5px;"><stong>PHP Configuration File Path: <?php echo  php_ini_loaded_file(); ?></stong></p>
         <p><stong><b>Note:</b></stong></p>
         <p>In respective of PhP version you are using, You are to search for 
         <b>PhP.ini Configuration</b> 
@@ -626,17 +635,29 @@ include('connect2db_setup.php');
             <input class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none transition" id="dbBase" readonly onfocus="this.removeAttribute('readonly');" autocomplete="off" placeholder="Database Name" />
         </div>
         <div class="showPriviledge hidden">
+            <div align="right">
+                <a align ="right" href="https://chatgpt.com/?q=How%20can%20I%20find%20the%20correct%20database%20hostname%20and%20port%20number%20for%20MySQL%20or%20MariaDB%20on%20macOS%20or%20Windows%3F"
+               target="_blank"
+               rel="noopener noreferrer">
+                Click here to Ask ChatGPT about Port and server host
+                </a>
+            </div>
+            
+
             <div>
                 <label class="block text-sm font-medium text-slate-700 mb-1">Username:</label>
                 <input class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none transition" id="username" value="root" placeholder="DB Username" />
             </div>
-                
             <div>
-                <label class="block text-sm font-medium text-slate-700 mb-1">Host Name:</label>
+                <label class="block text-sm font-medium text-slate-700 mt-2 mb-1">Database Port No:</label>
+                <input class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none transition" placeholder="Enter the port number used by your database server"  id="portno" value="" />
+            </div>   
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mt-3 mb-1">Database Host: <small>(macOS: use 127.0.0.1 instead of localhost)</small></label>
                 <input class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none transition" id="hostname" value="localhost" />
             </div>
             <div>
-                <label class="block text-sm font-medium text-slate-700 mb-1">Password:</label>
+                <label class="block text-sm font-medium text-slate-700 mt-2 mb-1">Database Password:</label>
                 <input type="password" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none transition" id="password" placeholder="DB Password" />
             </div>
         </div>
@@ -720,8 +741,8 @@ include('connect2db_setup.php');
   
   document.getElementById('verifyDatabase').addEventListener('click', async (e) => {
   e.preventDefault();
-
-  const formField = ['hostname', 'username', 'password', 'dbBase'];
+  document.getElementById('getResponse').innerHTML ='loading';
+  const formField = ['hostname', 'username', 'password', 'dbBase', 'portno'];
   const fd = new FormData();
 
   for (const field of formField) {

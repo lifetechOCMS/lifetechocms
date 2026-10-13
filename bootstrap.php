@@ -12,7 +12,9 @@
     //just to autoload classes psr-4
     require_once __DIR__ . '/vendor/autoload.php';
     
- 
+     //generate Browser content script policy value for xss or csp attack
+    define('CSP_NONCE', base64_encode(random_bytes(16)));
+    
     //ApiTokenDetails 
     Class ApiTokenDetails
     {
@@ -44,7 +46,13 @@
     } 
     
    
-   
+    if (!function_exists('getAppcoreVersion')) {
+        function getAppcoreVersion(){
+        $version = "2.7.6";
+        return $version;
+        }
+    }
+
     //setting default time zone
     date_default_timezone_set('Africa/Lagos');
     

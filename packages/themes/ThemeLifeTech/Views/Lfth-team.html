@@ -1,0 +1,167 @@
+<!-- Team Section Module -->
+
+<section id="team" class="py-20">
+    <div class="container mx-auto px-4">
+        
+        <div id="team-header" class="text-center mb-16">
+            <h2 class="section-title text-4xl font-bold mb-4 text-gray-900">Loading Team...</h2> 
+            <p class="text-xl text-gray-600">Please wait</p>
+        </div>
+        
+        <div id="team-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            </div>
+        
+    </div>
+</section>
+<script>
+
+(function() {
+    'use strict';
+    
+    const DOMTeams = {
+        header: document.getElementById('team-header'),
+        grid: document.getElementById('team-grid')
+    };
+    
+    function initScrollAnimations() {
+        const cards = document.querySelectorAll('#team .team-card');
+        if (cards.length === 0) return;
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    entry.target.style.opacity = '1';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            observer.observe(card);
+        });
+    }
+    
+    function updateTeamUI(data) {
+    if (!data) return;
+
+    // 1. Update Header
+    if (DOMTeams.header) {
+        DOMTeams.header.innerHTML = `
+            <h2 class="section-title text-4xl font-extrabold tracking-tight mb-4 text-gray-900">${data.name || 'Our Team'}</h2> 
+            <p class="text-xl text-gray-500 max-w-2xl mx-auto">${data.description || ''}</p>
+        `;
+    }
+
+    // 2. Build the Team Cards
+    if (DOMTeams.grid && data.profiles && Array.isArray(data.profiles)) {
+        DOMTeams.grid.innerHTML = data.profiles.map(profile => {
+            
+            // Helper to conditionally render social links
+            const getSocialLink = (url, iconClass) => {
+                return url 
+                    ? `<a href="${url}" class="text-gray-400 hover:text-primary hover:-translate-y-1 transition-all duration-300 text-lg flex items-center justify-center w-8 h-8 rounded-full bg-gray-50 hover:bg-indigo-50" target="_blank" rel="noopener noreferrer"><i class="${iconClass}"></i></a>` 
+                    : '';
+            };
+
+            return `
+                <div class="group flex flex-col bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden h-full">
+                    
+                    <!-- Edge-to-Edge Image with Zoom on Hover -->
+                    <div class="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
+                        <img 
+                            src="${siteHostAddress}/storage/media${profile.image1}?v=${Date.now()}" 
+                            class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" 
+                            alt="${profile.full_name || 'Team Member'}"
+                            loading="lazy"
+                        >
+                    </div>
+
+                    <!-- Content Area -->
+                    <div class="flex flex-col flex-grow p-6 text-center"> 
+                        <h5 class="text-xl font-bold mb-1 text-gray-900 group-hover:text-primary transition-colors">${profile.full_name || 'Team Member'}</h5>
+                        <p class="text-primary text-sm font-semibold uppercase tracking-wider mb-4">${profile.title || ''}</p> 
+                        
+                        <!-- Line-clamp ensures long bios don't break the uniform grid height -->
+                        <p class="text-gray-500 text-sm mb-6 flex-grow line-clamp-3">${profile.short_bio || ''}</p> 
+                        
+                        <!-- Social Links with top border for separation -->
+                        <div class="pt-5 border-t border-gray-100 mt-auto">
+                            <div class="flex justify-center space-x-3">
+                                ${getSocialLink(profile.linkedin, 'bi bi-linkedin')}
+                                ${getSocialLink(profile.twitter, 'bi bi-twitter-x')} 
+                                ${getSocialLink(profile.github, 'bi bi-github')}
+                                ${getSocialLink(profile.dribbble, 'bi bi-dribbble')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    // 3. Initialize scroll animations after the cards are painted
+    if (typeof initScrollAnimations === 'function') {
+        initScrollAnimations();
+    }
+}
+    
+    
+    async function teamInit() {
+        try {
+            let contentName = 'Lfth-team.html'; 
+            let packageName = 'ThemeLifeTech';
+            let url = `/render/cards/${packageName}/${contentName}`;
+            
+            const teamRes = await fetchRequest(url);
+            
+            if (teamRes && teamRes.responseData) {
+                updateTeamUI(teamRes.responseData);
+            }else{
+                DOMTeams.header.innerHTML = `<p class="text-xl text-gray-600">${teamRes.responseResult}</p>`;
+            }
+            
+        } catch(error) {
+            console.error("Failed to load Team content:", error);
+            if (DOMTeams.header) {
+                DOMTeams.header.innerHTML = `<p class="text-xl text-gray-600">${error}</p>`;
+            }
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', teamInit);
+
+})();
+
+
+// (function() {
+//     'use strict';
+    
+//     function initScrollAnimations() {
+//         const cards = document.querySelectorAll('#team .team-card');
+//         if (cards.length === 0) return;
+        
+//         const observer = new IntersectionObserver(function(entries) {
+//             entries.forEach(entry => {
+//                 if (entry.isIntersecting) {
+//                     entry.target.classList.add('fade-in');
+//                     entry.target.style.opacity = '1';
+//                     observer.unobserve(entry.target);
+//                 }
+//             });
+//         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        
+//         cards.forEach(card => {
+//             card.style.opacity = '0';
+//             observer.observe(card);
+//         });
+//     }
+    
+//     if (document.readyState === 'loading') {
+//         document.addEventListener('DOMContentLoaded', initScrollAnimations);
+//     } else {
+//         initScrollAnimations();
+//     }
+// })();
+</script>

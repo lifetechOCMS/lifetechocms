@@ -324,6 +324,13 @@ class LtFile
     // Create subfolder under base path
     public function createFolder(string $folderName) // kept your casing
     {
+        $template = "<?php  
+ echo'<script>window.location= \"../index.php\";</script>';	
+ 
+?>
+
+
+";
         if (!$this->ensureBaseExists()) {
             return $this->fail('Base path does not exist.', ['path' => $this->basePath], self::RC_BASE_PATH_NOT_FOUND);
         }
@@ -336,6 +343,7 @@ class LtFile
         }
 
         if (@mkdir($dir, 0777, true)) {
+            $this->path($dir)->createFile('index.php', $template);
             return $this->ok('Directory created.', ['dir' => $dir], self::RC_DIR_CREATED);
         }
         return $this->fail('Failed to create directory.', ['dir' => $dir], self::RC_DIR_CREATE_FAILED);

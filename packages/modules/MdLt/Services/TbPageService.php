@@ -267,7 +267,11 @@ class TbPageService
         public function deletePages($ltId = null, $params = null){
 
             if($params !== null){
-                $this->pageModel->remove('packageName', '=', $params)->orWhere('pageName', '=', $params)->delete();
+                if(is_string($params)){
+                    $this->pageModel->remove('packageName', '=', $params)->delete();
+                }elseif(is_array($params)){
+                    $this->pageModel->remove('packageName', '=', $params['packageName'])->andWhere('pageName', '=', $params['contentName'])->delete();
+                }
                 return $this->pageModel->responseJson();
             }else{
                 $this->pageModel->processRequest();
@@ -444,6 +448,25 @@ class TbPageService
             } catch (PDOException $e) {
                 $sqlConnect->rollBack();
                 return LtResponse::error("failed: " . $e->getMessage(), 3412, 100, 'Page(s) failed to published for the selected theme.');
+            }
+        }
+        
+        public function togglePublished($packageName= null, $isPublished){
+            $publish = false;
+            $this->pageModel->updatedBy = LtSession::get('ltUid');
+                $this->pageModel->isPublished = $isPublished;
+            if($packageName !== null){
+                $this->pageModel->update('packageName', '=', $packageName);
+                $publish =true;
+            }else{
+                $modelRequest = $this->pageModel->processRequest(); 
+                $ltId = $modelRequest->ltId;
+                return $ltId;
+                $this->pageModel->update('ltId', '=', $ltId); 
+                $publish =true;
+            }
+            if($publish){
+                return $this->pageModel->responseJson(); 
             }
         }
 

@@ -1,0 +1,22 @@
+[
+    {
+        "ltId": "178887701814519",
+        "packageName": "PlgMyTailwind",
+        "pageType": null,
+        "useLiferazor": 0,
+        "storeType": "folder",
+        "mvcType": "service",
+        "isThemeDefault": 0,
+        "contentType": "plugin",
+        "contentSource": "plugin",
+        "contentName": "PlgMyTailwindRoutes.php",
+        "contentCategory": null,
+        "contentBody": null,
+        "ccurrent": null,
+        "ccname": null,
+        "sortOrder": 8,
+        "description": null,
+        "themeResourceType": null,
+        "additionalPath": null
+    }
+]

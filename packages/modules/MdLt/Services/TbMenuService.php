@@ -39,12 +39,14 @@ class TbMenuService
             }
             
             $menuName = $this->menuModel->menuName ?: "nill";
+            $packageName = $this->menuModel->packageName ?: "nill";
             // $moduleName = $model->moduleName;
             
-            $exist = $this->menuModel->select()->where('menuName', '=', $menuName)->get();
+            // $exist = $this->menuModel->select()->where('menuName', '=', $menuName)->get();
+            $exist = $this->menuModel->select()->where('menuName', '=', $menuName)->andWhere('packageName', '=', $packageName)->get();
             
             if(count($exist) > 0){
-                return  LtResponse::json("Menu [ $menuName ] already exist", 1504, 100); 
+                return  LtResponse::json("Menu [ $menuName ] with packageName [ $packageName ] already exist", 1504, 100); 
             }
 
             $this->menuModel->ltId = ltId();
@@ -61,8 +63,11 @@ class TbMenuService
         public function deleteMenu($ltId = null, $params = null){
             
             if($params !== null){
-                $this->menuModel->remove('packageName', '=', $params)->orWhere('contentName', '=', $params)->delete();
-                // $this->menuModel->remove('packageName', '=', $params);
+                if(is_string($params)){
+                    $this->menuModel->remove('packageName', '=', $params)->delete();
+                }elseif(is_array($params)){
+                    $this->menuModel->remove('packageName', '=', $params['packageName'])->andWhere('contentName', '=', $params['contentName'])->delete();
+                }
                 return $this->menuModel->responseJson();
             }else{
                 $this->menuModel->processRequest();
@@ -87,4 +92,23 @@ class TbMenuService
             $result = ['totalMenu' => count($menu)];
             return $result;
         }
+        
+        public function togglePublishedMenu($packageName= null, $isPublished){
+            $publish = false;
+            $this->menuModel->updatedBy = LtSession::get('ltUid');
+                $this->menuModel->isPublished = $isPublished;
+            if($packageName !== null){
+                $this->menuModel->update('packageName', '=', $packageName);
+                $publish =true;
+            }else{
+                $ltId = $this->request->ltId; 
+                $this->menuModel->update('ltId', '=', $ltId); 
+                $publish =true;
+            }
+            if($publish){
+                return $this->menuModel->responseJson(); 
+            }
+        }
+        
+        
 }

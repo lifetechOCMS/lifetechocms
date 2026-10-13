@@ -28,9 +28,14 @@ class DbConnect
         $this->dbuser     = $config['user'];
         $this->dbpassword = $config['pass'];
         $this->dbname     = $config['name'];
+        $portNo           = $config['port'];
+
+        $port = !empty($portNo) ? ";port=$portNo" : "";
+        $this->port     = $port;
+
 
         try {
-            $dsn = $this->dbengine . ":host={$this->dbhost};dbname={$this->dbname};charset=utf8mb4";
+            $dsn = $this->dbengine . ":host={$this->dbhost};dbname={$this->dbname}{$port};charset=utf8mb4";
 
             $connect2db_iii = new PDO($dsn, $this->dbuser, $this->dbpassword, [
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,

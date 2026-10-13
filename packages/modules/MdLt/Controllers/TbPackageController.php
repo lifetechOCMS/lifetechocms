@@ -66,7 +66,6 @@ class TbPackageController
         return LtResponse()::json('success', 3301, 200, $packageModel->responseData);
     }
 
-
     public function store(){
 
         $packageModel = new TbPackage();
@@ -104,6 +103,7 @@ class TbPackageController
 
 
     }
+    
     public function toggleDefault(){
         $packageModel = new TbPackage();
 
@@ -123,14 +123,24 @@ class TbPackageController
         $packageName =  $packageModel->packageName;
         $packageType =  $packageModel->packageType;
 
-        $packageModel->select()->where('ltId', '=', $ltId)->andWhere('isProtected', '1')->get();
-        if($packageModel->responseCategory === '200'){
-            $packageName = $packageModel->responseData[0]->$packageName;
-            return LtResponse()::json("Package [ $packageName ] cannot be deleted because it is Protected", "3302");
-        } else {
-           
-         
-            
+        $packageExist = $packageModel->select()->where('ltId', '=', $ltId)->get()[0];
+        
+        if(empty($packageExist)) return LtResponse()::json("Invalid Package Id", "3302");
+        
+        $packageName = $packageExist->packageName;
+        $packageType = $packageExist->packageType;
+        $isThemeDefault = $packageExist->isThemeDefault;
+        $isProtected = $packageExist->isProtected;
+        
+
+        if($isProtected == '1'){
+             return LtResponse()::json("Package [ $packageName ] cannot be deleted because it is Protected", "3302");
+        }
+        
+        if($isThemeDefault == '1'){
+             return LtResponse()::json("Package [ $packageName ] cannot be deleted because it is default", "3302");
+        }
+        
             // / delete from other table
             // PageContent Service
             $pageContentModel = new TbPageContentService(); 
@@ -139,14 +149,11 @@ class TbPackageController
             $contentModel = new TbContentService(); 
             $deleteContent = $contentModel->deleteContent(packageName: $packageName);
             // // // Page service
-            if($packageType == 'module' || $packageType == 'plugin'){
-                $pageModel = new TbPageService(); 
-                $deletePage = $pageModel->deletePages(params: $packageName);
-                // // // Menu Service
-                $menuModel = new TbMenuService(); 
-                $deleteMenu = $menuModel->deleteMenu(params: $packageName);
-
-            }
+            $pageModel = new TbPageService(); 
+            $deletePage = $pageModel->deletePages(params: $packageName);
+            // // // Menu Service
+            $menuModel = new TbMenuService(); 
+            $deleteMenu = $menuModel->deleteMenu(params: $packageName);
             /// delete folder
             $packageModel->delete('ltId', '=', $ltId);
             
@@ -154,8 +161,6 @@ class TbPackageController
             $yeah = LtFile::path($path)->deleteFolder($packageName);
             return $packageModel->responseJson();
             
-            
-        }
 
     }
     
@@ -167,6 +172,7 @@ class TbPackageController
         return $response;
         
     }
+    
     public function exports(){
         
         $dataModelService = new TbPackageService();
@@ -175,6 +181,7 @@ class TbPackageController
         return $response;
         
     }
+    
     public function imports(){
         
         $dataModelService = new TbPackageService();
@@ -183,10 +190,38 @@ class TbPackageController
         return $response;
         
     }
+    
     public function filteredPackages(){
         
         $dataModelService = new TbPackageService();
         $response = $dataModelService->filteredPackages();
+        
+        return $response;
+        
+    }
+    
+    public function validateDependencies(){
+        
+        $dataModelService = new TbPackageService();
+        $response = $dataModelService->validateDependency();
+        
+        return $response;
+        
+    }
+    
+    public function browseProducts(){
+        
+        $dataModelService = new TbPackageService();
+        $response = $dataModelService->browseProductFromMarkePlace();
+        
+        return $response;
+        
+    }
+    
+    public function installUpdate(){
+        
+        $dataModelService = new TbPackageService();
+        $response = $dataModelService->installFromMarketplace();
         
         return $response;
         

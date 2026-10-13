@@ -2,9 +2,11 @@
     "ltId": "17294272843",
     "packageName": "MdLt",
     "packageType": "module",
-    "version": "1.3",
-    "isPublished": "1",
+    "version": "1.3.0",
+    "isPublished": null,
     "readme": "",
     "languageUsed": "php, html, css, javascript, liferazor",
-    "dependsOn": ""
+    "dependsOn": [],
+    "description": "the internal core module",
+    "ltVersion": "2.7.4"
 }

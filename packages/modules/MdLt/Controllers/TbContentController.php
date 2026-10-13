@@ -50,13 +50,13 @@ class TbContentController
         
             
         foreach($contentModel->responseData as $data){
-            if($data->mvcType == 'View'){
+            if($data->mvcType == 'View' || $data->themeResourceType == 'View'){
                 if($data->packageName !== null){
-                    $pageContent = $pageModel->select('route_path')->where('packageName','=', $data->packageName)->andWhere('pageName', '=', $data->contentName)->get()[0];
+                    $pageContent = $pageModel->select('route_path, theme_layout, theme_layout_package')->where('packageName','=', $data->packageName)->andWhere('pageName', '=', $data->contentName)->get()[0];
                 }else{
-                    $pageContent = $pageModel->select('route_path')->where('pageName', '=', $data->contentName)->get()[0];
+                    $pageContent = $pageModel->select('route_path, theme_layout, theme_layout_package')->where('pageName', '=', $data->contentName)->get()[0];
                 }
-                $contentArr[] = array_merge((array)$data, ['routePath' => $pageContent->routePath]);
+                $contentArr[] = array_merge((array)$data, ['routePath' => $pageContent->routePath, 'themeLayout' => $pageContent->themeLayout, 'themeLayoutPackage' => $pageContent->themeLayoutPackage]);
             }else{
                 $contentArr[] = (array)$data;
             }
@@ -143,6 +143,15 @@ class TbContentController
         
         return $response;
     }
+    
+    public function scanContent(){
+        $contentModel = new TbContent();
+        
+        $dataModelService = new TbContentService();
+        $response = $dataModelService->scanContent();
+        
+        return $response;
+    }
 
     public function toggleRole(){
         $sqlConnect = DbConnect::dbDriver();
@@ -154,25 +163,35 @@ class TbContentController
         $ltId = $contentModel->ltId;
         $roleId = $contentModel->roleId;
         
-        $contents = $contentModel->select('package_name, content_name, content_type, mvc_type')->where('ltId','=', $ltId)->get()[0];
+        $contents = $contentModel->select('package_name, content_name, content_type, mvc_type, theme_resource_type')->where('ltId','=', $ltId)->get()[0];
         $publishValue = LtService::getIsValue($contentModel->publishValue);
         $contentType = $contents->contentType;
         $packageName = $contents->packageName;
-
-       if($contents->mvcType !== 'View' && $contentType !== 'theme'){
+        
+        // contents->mvcType !== 'View' && $contentType !== 'theme'  checking if its type module and plugin with mvc type not view
+        // contents->themeResourceType !== 'View' && $contentType == 'theme'  checking if its type theme and themeResourceType not view
+       if(($contents->mvcType !== 'View' && $contentType !== 'theme') || ($contents->themeResourceType !== 'View' && $contentType == 'theme')){
+        //   for MVC (model, service, controller) AND themeResourceType (Components, Assets)
             return LtResponse::json('Role can only be publish for type View','3512', '100');
         };
-        
+     
         // toggle role publishing for content
         $contentModel->updatedBy = LtSession::get('ltUid');
         $contentModel->$roleId = $publishValue;
         $contentModel->update('ltId', '=', $ltId);
         
-        // early return if contentType is theme
-        if($contentType == 'theme' || $contentType == 'text' || $contentType == 'html'){
-             return $contentModel->responseJson();
+        if ($packageName !== null) {
+                // package_name is not null or empty
+            $pageContent = $pageModel->select('lt_id, route_path')->where('packageName','=', $packageName)->andWhere('pageName', '=', $contents->contentName)->get()[0];
+        } else {
+            $pageContent = $pageModel->select('lt_id, route_path')->where('pageName', '=', $contents->contentName)->get()[0];
         }
         
+ 
+        // early return if contentType is text and html, meaning user content without route path
+        if(($contentType == 'text' || $contentType == 'html') && !$pageContent){
+             return $contentModel->responseJson();
+        }
          // toggle role publishing for menu
              if ($packageName !== null) {
                 // package_name is not null or empty
@@ -196,9 +215,6 @@ class TbContentController
                     ":contentName"     => $contents->contentName,
                 ]);
                 
-                $pageContent = $pageModel->select('lt_id')->where('packageName','=', $packageName)->andWhere('pageName', '=', $contents->contentName)->get()[0];
-                if(!$pageContent) return;
-                
             } else {
                 
                 // package_name is null or empty, only check content_name
@@ -219,8 +235,6 @@ class TbContentController
                     ":contentName"     => $contents->contentName,
                 ]);
                 
-                $pageContent = $pageModel->select('lt_id')->where('pageName', '=', $contents->contentName)->get()[0];
-                if(!$pageContent) return;
             }
                 
             
@@ -318,7 +332,6 @@ class TbContentController
         
     }
     
-    
     public function downloadContent(){
         
         $contentModel = new TbContent();
@@ -330,6 +343,7 @@ class TbContentController
         return $response;
         
     }
+    
     public function uploadContent(){
         
         $contentModel = new TbContent();
@@ -341,4 +355,54 @@ class TbContentController
         return $response;
         
     }
+    
+    public function getFolders(){
+        
+        $dataModelService = new TbContentService();
+        $response = $dataModelService->getFolders();
+        
+        return $response;
+        
+    }
+    
+    public function fetchLayouts(){
+        
+        $dataModelService = new TbContentService();
+        $response = $dataModelService->fetchLayouts();
+        
+        return $response;
+        
+    }
+    
+    public function assignLayouts(){
+        
+        $dataModelService = new TbContentService();
+        $response = $dataModelService->assignLayouts();
+        
+        return $response;
+        
+    }
+    
+    public function contentRegions(){
+        
+        $dataModelService = new TbContentService();
+        $response = $dataModelService->contentRegions();
+        return $response;
+        
+    }
+    
+    public function togglePublishedContent(){
+        $contentModel = new TbContent();
+        $contentModel->processRequest(['isPublished']); 
+        
+        $isPublished = LtService::getIsValue($contentModel->isPublished);
+        
+        $dataModelService = new TbContentService();
+        $response = $dataModelService->togglePublishedContent(null, $isPublished);
+        return $response;
+ 
+    }
+    
+    
+    
 }

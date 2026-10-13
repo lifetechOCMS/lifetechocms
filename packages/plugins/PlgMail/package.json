@@ -3,8 +3,10 @@
     "packageName": "PlgMail",
     "packageType": "plugin",
     "version": "1.0",
-    "dependsOn": "mdLt",
-    "isPublished": "1",
+    "dependsOn": [],
+    "isPublished": null,
     "readme": "this is the plugin for the mailer",
-    "languageUsed": "php"
+    "languageUsed": "php",
+    "description": "this is the plugin for the mailer",
+    "ltVersion": null
 }

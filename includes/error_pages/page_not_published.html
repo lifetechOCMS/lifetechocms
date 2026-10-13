@@ -108,7 +108,9 @@
 
             </svg>
         </div>
-
+        <?php 
+        global $adminRoleResponseNow;   
+        ?>
         <!-- STATUS -->
         <div class="noContent-statusBadge">Unpublished</div>
 
@@ -116,6 +118,8 @@
         <h1 class="noContent-title">Page Not Published</h1>
 
         <!-- MESSAGE -->
+        <h1 style="color:black" class="noContent-title">Your role(s):  <?php echo $adminRoleResponseNow?></h1>
+    
         <p class="noContent-text">
             This page exists but is currently not published.<br>
             Please publish it to make it accessible, or your session may have expired.

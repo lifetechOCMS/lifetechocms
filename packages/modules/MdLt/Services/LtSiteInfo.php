@@ -169,4 +169,9 @@ class LtSiteInfo extends \LtModel
     {
         return self::baseUrl() . self::siteHostAddress() . '/packages/modules';
     }
+    
+    public static function pluginPath()
+    {
+        return self::baseUrl() . self::siteHostAddress() . '/packages/plugins';
+    }
 }
