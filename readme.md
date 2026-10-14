@@ -75,5 +75,6 @@ LifetechOCMS model is an open-sourced software licensed under the MIT
 ## Documentations
 platform
         https://www.lifetech.host/hubs/docs
+        
 GitHub
         https://github.com/lifetechOCMS/docs/blob/master/readme.md
