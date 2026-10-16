@@ -124,7 +124,6 @@ class TbContentService
                 $this->contentModel->$developerRoleId = 1;
             }
         }
-        
 
         // return $template;
         $this->contentModel->insert();
@@ -281,7 +280,7 @@ class TbContentService
                             'updatedAt' => $this->ltNow,
                             'createdAt' => $this->ltNow,
                         ];
-                         if($roleExist){
+                        if($roleExist){
                             $menuModel[$developerRoleId] = 1;
                         }
                         // creating menu for the package content
@@ -301,20 +300,39 @@ class TbContentService
                          $pageContentService = new TbPageContentService();
                          $pageContentService->publishPageContent($pageContent);
                          
-                         // Publishing for Region 
-                         $contentModel = new TbContent(); // re-instantiating the model
-                         $contentRecord = $contentModel->select('lt_id, sort_order')->where('packageName', '=', $packageName)->andWhere('themeResourceType','=', 'Component')->andWhere('isThemeDefault', '=', 1)->get();
-                        
-                            $pageContent = [
-                                "pageId" => $pageId,
-                                "contentType" => 'theme',
-                                "packageName" => $packageName,
+                         //checking if Default layouts exist
+                        $defaultPath ="packages/".$contentType.'s/'.$packageName.'/Layouts/Default.html';
+                        if(file_exists($defaultPath)){
+                            $layoutData = [
+                                'layoutName' => "Default.html",
+                                'contentId' =>  $contentId,
+                                'layoutPackageName' => $packageName
                             ];
-                            
-                          $pageContentService->publishPageRegion($pageContent, $contentRecord);
-                           
+                            // assign Default layout to the content
+                            $result = $this->assignLayouts($layoutData);
+                            $decodeResult = json_decode($result);
+
+                            if($decodeResult->responseCategory == 200){
+                                $this->contentModel->responseData->themeLayoutPackage = $packageName;
+                                $this->contentModel->responseData->themeLayout = "Default.html";
+                            }
+                        }else{
+                        // Publishing for Region 
+                            $contentModel = new TbContent(); // re-instantiating the model
+                            $contentRecord = $contentModel->select('lt_id, sort_order')->where('packageName', '=', $packageName)->andWhere('themeResourceType','=', 'Component')->andWhere('isThemeDefault', '=', 1)->get();
+                                
+                                $pageContent = [
+                                    "pageId" => $pageId,
+                                    "contentType" => 'theme',
+                                    "packageName" => $packageName,
+                                ];
+                                    
+                            $pageContentService->publishPageRegion($pageContent, $contentRecord);
+
+                        }
                         
                         $this->contentModel->responseData->routePath = $path;
+                        $this->contentModel->responseData->isPublished = 1;
                         
                     }
                     
@@ -963,58 +981,59 @@ class {$fileNameWithNoExt}
     //     return LtResponse::json('Layout fetched successfully', 200, 200, $layouts);
     // }
     
-    public function fetchLayouts()
-{
-    $packageName = $this->request->packageName;
-
-    if (empty($packageName)) {
-        return LtResponse::json('Package Name cannot be empty', 3504, 100);
-    }
-
-    $layouts = $this->contentModel
-        ->select('content_name, description, package_name')
-        ->where('themeResourceType', '=', 'Layout')
-        ->get();
-
-    if (empty($layouts)) {
-        return LtResponse::json('No Layouts found', 101, 100);
-    }
-
-    // Group layouts by package_name
-    $grouped = [];
-    foreach ($layouts as $layout) {
-        $pkg = $layout->packageName ?? 'Other';
-        $grouped[$pkg][] = [
-            'contentName' => $layout->contentName,
-            'description' => $layout->description ?? '',
-            'packageName' => $pkg
-        ];
-    }
-
-    // Sort to ensure the requested package appears at the top
-    uksort($grouped, function($a, $b) use ($packageName) {
-        if ($a === $packageName) return -1;
-        if ($b === $packageName) return 1;
-        return strcasecmp($a, $b);
-    });
-
-    return LtResponse::json('Layouts fetched successfully', 200, 200, [
+    public function fetchLayouts(){
+        $packageName = $this->request->packageName;
+    
+        if (empty($packageName)) {
+            return LtResponse::json('Package Name cannot be empty', 3504, 100);
+        }
+    
+        $layouts = $this->contentModel
+            ->select('content_name, description, package_name')
+            ->where('themeResourceType', '=', 'Layout')
+            ->get();
+    
+        if (empty($layouts)) {
+            return LtResponse::json('No Layouts found', 101, 100);
+        }
+    
+        // Group layouts by package_name
+        $grouped = [];
+        foreach ($layouts as $layout) {
+            $pkg = $layout->packageName ?? 'Other';
+            $grouped[$pkg][] = [
+                'contentName' => $layout->contentName,
+                'description' => $layout->description ?? '',
+                'packageName' => $pkg
+            ];
+        }
+    
+        // Sort to ensure the requested package appears at the top
+        uksort($grouped, function($a, $b) use ($packageName) {
+            if ($a === $packageName) return -1;
+            if ($b === $packageName) return 1;
+            return strcasecmp($a, $b);
+        });
+    
+        return LtResponse::json('Layouts fetched successfully', 200, 200, [
             'currentPackage' => $packageName,
             'groupedLayouts' => $grouped
         ]);
     }
     
-    public function assignLayouts(){
-        $layoutName = $this->request->layoutName;
-        $contentId = $this->request->contentId;
-        $layoutPackageName = $this->request->layoutPackageName;
+    public function assignLayouts($data){
         
-       
+        if(!is_array($data)) return;
+        
+        $layoutName = $data['layoutName'];
+        $contentId = $data['contentId'];
+        $layoutPackageName = $data['layoutPackageName'];
+        
         if (empty($layoutName) || empty($contentId)) {
             return LtResponse::json('please provide layout, content or package name for assigning', 3504, 100);
         }
-        
-        $content = $this->contentModel->select('content_name, lt_id, package_name')->where('ltId', '=', $contentId)->get()[0];
+        $contentModel = new TbContent();
+        $content = $contentModel->select('content_name, lt_id, package_name')->where('ltId', '=', $contentId)->get()[0];
         if(empty($content)) return LtResponse::json('No Contents found', 101, 100);
         
         $pageModel = new TbPage();

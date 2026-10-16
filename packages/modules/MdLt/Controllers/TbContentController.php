@@ -375,15 +375,21 @@ class TbContentController
     }
     
     public function assignLayouts(){
-        
+        $request = new LtRequest;
+        $data = [
+            'layoutName' => $request->layoutName,
+            'contentId' =>  $request->contentId,
+            'layoutPackageName' => $request->layoutPackageName
+        ];
         $dataModelService = new TbContentService();
-        $response = $dataModelService->assignLayouts();
+        $response = $dataModelService->assignLayouts($data);
         
         return $response;
         
     }
     
     public function contentRegions(){
+        
         
         $dataModelService = new TbContentService();
         $response = $dataModelService->contentRegions();
