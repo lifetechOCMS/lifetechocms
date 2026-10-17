@@ -1,0 +1,9 @@
+<?php ltImport('ThemeStarter', 'TopHeader.html'); ?>
+<?php ltImport('ThemeStarter', 'DynamicHeader.html'); ?>
+
+<!-- This layout demonstrates backend navigation instead of static links. -->
+<main class="container" id="main-content">
+    <?php dddm::loadDynamicContent(); ?>
+</main>
+
+<?php ltImport('ThemeStarter', 'Footer.html'); ?>

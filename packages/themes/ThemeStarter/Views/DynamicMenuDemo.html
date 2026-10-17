@@ -1,0 +1,36 @@
+<section class="card">
+    <h1>Dynamic navigation demonstration</h1>
+    <p>
+        This advanced example uses DynamicMenuLayout.html and DynamicHeader.html.
+        The header requests navigation from the LifeTechOCMS backend instead of
+        defining its menu links in HTML.
+    </p>
+
+    <h2>How it works</h2>
+    <ol>
+        <li>The browser requests <code>/menus/is-navigation</code>.</li>
+        <li>The backend identifies the visitor through the existing session.</li>
+        <li>The API returns navigation permitted for the visitor’s roles.</li>
+        <li>The renderer builds links and nested lists from the returned data.</li>
+    </ol>
+
+    <h2>What to observe</h2>
+    <ul>
+        <li>Compare the navigation while signed out and signed in.</li>
+        <li>Check parent and child links and links configured for a new tab.</li>
+        <li>Review the loading, empty-result and failed-request messages.</li>
+        <li>Menu visibility does not replace page or API authorization.</li>
+    </ul>
+
+    <p>
+        If this page still shows the static Home, About and Contact navigation,
+        assign it to DynamicMenuLayout.html in the backend. Default.html remains
+        the automatic layout until that custom assignment is made.
+    </p>
+
+    <a href="<?= htmlspecialchars(
+        ltSiteUrl() . '/ThemeStarter/Home',
+        ENT_QUOTES,
+        'UTF-8'
+    ) ?>">Return to the beginner Home page</a>
+</section>

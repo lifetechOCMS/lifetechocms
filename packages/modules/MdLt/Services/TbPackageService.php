@@ -694,6 +694,8 @@ class TbPackageService
                     'routeUpdateStatus'=> $value->routeUpdateStatus,
                     'apiToAllowRouters'=> $value->apiToAllowRouters,
                     'description'=> $value->description,
+                    'themeLayout'=> $value->themeLayout,
+                    'themeLayoutPackage'=> $value->themeLayoutPackage,
                 ];
             }
             $pageJsonData = json_encode($pageJsonArr, JSON_PRETTY_PRINT);
@@ -747,7 +749,8 @@ class TbPackageService
             $menuJsonData = json_encode($menuJsonArr, JSON_PRETTY_PRINT);
             
             $pageContentModel = new TbPageContent();
-            $pageContentRecord = $pageContentModel->select()->where('packageName', '=', $packageName)->andWhere('contentType', '<>', 'theme')->get();
+            // $pageContentRecord = $pageContentModel->select()->where('packageName', '=', $packageName)->andWhere('contentType', '<>', 'theme')->get();
+            $pageContentRecord = $pageContentModel->select()->where('packageName', '=', $packageName)->get();
             foreach($pageContentRecord as $value){
                     $pageContentJsonArr[] = [
                         'ltId'=> $value->ltId,
@@ -912,400 +915,6 @@ class TbPackageService
             $result = $this->importPackageAbstract($path);
             return $result;
         }    
-        
-        public function importPackageAbstract($path){
-            $pageModel = new TbPage();
-            $menuModel = new TbMenu();
-            $contentModel = new TbContent();
-            $pageContentModel = new TbPageContent();
-            $batchSize = 100;
-            $pageTypeThemeArr = [];
-
-            
-            $packageDir = scandir($path);
-            $packageDir = array_slice($packageDir, 2)[0];
-            $pathToJson = $path.''.$packageDir.'/package.json';
-            
-            
-            
-            // read package.json file 
-            $packageDetails = json_decode(file_get_contents($pathToJson), true);
-            
-            $dependsOn = $packageDetails['dependsOn']; //getting depends on before removing it from packageDetails to avoid processRequest error of binding array
-            unset($packageDetails['dependsOn']); //unsetting depends on
-            
-            $this->packageModel->processRequest($packageDetails);
-            $packageName =  $this->packageModel->packageName;
-            $packageType =  $this->packageModel->packageType;
-            $isPublished = 0;
-            $dependencies = is_array($dependsOn) ? $dependsOn : [];
-            
-            // Run the dependency check
-            $result = $this->checkDependencyRequirement($dependencies);
-            $check = json_decode($result, true);
-            $returnDependencies = $check['responseData'];
-            
-            if(strtolower($packageName) == 'mdlt'){
-                $isPublished = 1;
-            }else if($check['responseCategory'] == 200) {
-                $isPublished = 1;
-            }
-            
-            $this->packageModel->dependsOn = json_encode($dependsOn);
-            $this->packageModel->isPublished = $isPublished;
-            $exist = $this->packageModel->select()->where('packageName', '=', $packageName)->get();
-            
-            $msg = '';
-            if(count($exist) > 0){
-                $this->packageModel->update('packageName', '=', $packageName);
-                $msg = 'Failed to update package';
-            }else{
-                $this->packageModel->insert();
-                $msg = 'Failed to install package';
-            }
-            
-            
-            if($this->packageModel->responseCategory !== '200'){
-                $error = $this->packageModel->responseResult;
-                  // Fallback for invalid states
-                return LtResponse::json("$msg: $error", '3319', '100');
-            }
-            
-
-            $path = $path.''.$packageName.'/';  // import directory path
-            
-            $dstPath="packages/".$packageType.'s/'.$packageName.'/';
-              //return LtResponse::json($path.'Package installation completed', 1715, 200, $packageDetails);
-            
-            $result = LtFile::path($path)->moveFolder($path,$dstPath);
-            $packagePath ="packages/".$packageType.'s/'.$packageName.'/Export/';
-            // // pages
-            $pages = json_decode(file_get_contents($packagePath.'page.json'), true);
-            
-            
-            
-                        //get content with page_type theme 
-            foreach($pages as $p){
-                $p = (object)$p;
-                if($p->pageType == 'theme'){
-                    $pageTypeThemeArr[] = $p->ltId;
-                }
-            }
-            
-            $pageRecordArr = $pageModel->select()->where('packageName', '=', $packageName)->get();
-            if(count($pageRecordArr) > 0){
-                foreach($pages as $key => $page){
-                    $pageModel->processRequest($page);
-                    $pageModel->isPublished = $isPublished;
-                    $ltId = $pageModel->ltId;
-                    $pageRecord = $pageModel->select()->where('ltId', '=', $ltId)->get();
-                    if(count($pageRecord) > 0){
-                        $pageModel->update('ltId', '=', $ltId);
-                    }else{
-                        $pageModel->insert();
-                    }
-                }
-            }else{
-
-                $totalPageSize = is_array($pages) ? count($pages) : 0;
-                $insertPageArr = is_array($pages) ? array_values($pages) : [];
-                
-                for($i = 0; $i < $totalPageSize; $i += $batchSize){
-                    $batch = array_slice($insertPageArr, $i, $batchSize);
-                    $placeholder = [];
-                    $values = [];
-                    
-                    foreach($batch as $index => $row){
-                            $placeholder[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                            $values[] = $row['ltId'];
-                            $values[] = $row['packageName'];
-                            $values[] = $row['pageName'];
-                            $values[] = $row['pageType'];
-                            $values[] = $row['routeContent'];
-                            $values[] = $row['routeFileName'];
-                            $values[] = $row['routeHandler'];
-                            $values[] = $row['routeMethod'];
-                            $values[] = $row['routePath'];
-                            $values[] = $row['routePayload'];
-                            $values[] = $row['routeResponse'];
-                            $values[] = $row['routeUpdateStatus'];
-                            $values[] = $row['apiToAllowRouters'];
-                            $values[] = $row['description'];
-                            $values[] = $isPublished;
-                            $values[] = $this->ltNow;
-                            $values[] = $this->ltNow;
-                            $values[] = LtSession::get('ltUid');
-                         
-                        }
-                        
-                        $sql = "INSERT INTO tb_page (lt_id, package_name, page_name, page_type, route_content, route_file_name, route_handler, route_method, route_path, route_payload, route_response, route_update_status, api_to_allow_routers, description, is_published, created_at, updated_at, updated_by ) VALUES " . implode(", ", $placeholder);
-                        $stmt = $this->sqlConnect->prepare($sql);
-                        $stmt->execute($values);
-                    
-                }
-                
-            }
-            
-            // // menus
-            $menus = json_decode(file_get_contents($packagePath.'menu.json'), true);
-            $menuRecordArr = $menuModel->select()->where('packageName', '=', $packageName)->get();
-            if(count($menuRecordArr) > 0){
-                foreach($menus as $menu){
-                    $menuModel->processRequest($menu);
-                    $menuModel->isPublished = $isPublished;
-                    $ltId = $menuModel->ltId;
-                    $menuRecord = $menuModel->select()->where('ltId', '=', $ltId)->get();
-                    if(count($menuRecord) > 0){
-                        $menuModel->update('ltId', '=', $ltId);
-                    }else{
-                        $menuModel->insert();
-                    }
-                }
-            }else{
-                
-                $totalMenuSize = is_array($menus) ? count($menus) : 0;
-                $insertMenuArr = is_array($menus) ? array_values($menus) : [];
-
-                
-                for($i = 0; $i < $totalMenuSize; $i += $batchSize){
-                    $batch = array_slice($insertMenuArr, $i, $batchSize);
-                    $placeholder = [];
-                    $values = [];
-                    
-                    foreach($batch as $index => $row){
-                            $placeholder[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                            $values[] = $row['ltId'];
-                            $values[] = $row['packageName'];
-                            $values[] = $row['menuLevel'];
-                            $values[] = $row['menuName'];
-                            $values[] = $row['contentName'];
-                            $values[] = $row['parentMenuId'];
-                            $values[] = $row['routePath'];
-                            $values[] = $row['slug'];
-                            $values[] = $row['target'];
-                            $values[] = $row['sortOrder'];
-                            $values[] = $isPublished;
-                            $values[] = $this->ltNow;
-                            $values[] = $this->ltNow;
-                            $values[] = LtSession::get('ltUid');
-                         
-                        }
-                        
-                        $sql = "INSERT INTO tb_menu (lt_id, package_name, menu_level, menu_name, content_name, parent_menu_id, route_path, slug, target, sort_order, is_published, created_at, updated_at, updated_by ) VALUES " . implode(", ", $placeholder);
-                        $stmt = $this->sqlConnect->prepare($sql);
-                        $stmt->execute($values);
-                    
-                }
-                
-            }
-            
-
-            // contents
-            $contents = json_decode(file_get_contents($packagePath.'content.json'), true);
-            
-            
-            $contentRecordArr = $contentModel->select()->where('packageName', '=', $packageName)->get();
-            if(count($contentRecordArr) > 0){
-                foreach($contents as $key => $content){
-                    $contentModel->processRequest($content);
-                    $contentModel->isPublished = $isPublished;
-                    $ltId = $contentModel->ltId;
-                    $contentRecord = $contentModel->select()->where('ltId', '=', $ltId)->get();
-                    if(count($contentRecord) > 0){
-                        $contentModel->update('ltId', '=', $ltId);
-                    }else{
-                        $contentModel->insert();
-                    }
-                }
-            }else{
- 
-
-                $totalContentSize = is_array($contents) ? count($contents) : 0;
-                $insertContentArr = is_array($contents) ? array_values($contents) : [];
-                
-                for($i = 0; $i < $totalContentSize; $i += $batchSize){
-                    $batch = array_slice($insertContentArr, $i, $batchSize);
-                    $placeholder = [];
-                    $values = [];
-                    
-                    foreach($batch as $index => $row){
-                            $placeholder[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                            $values[] = $row['ltId'];
-                            $values[] = $row['packageName'];
-                            $values[] = $row['pageType'];
-                            $values[] = $row['useLiferazor'];
-                            $values[] = $row['storeType'];
-                            $values[] = $row['mvcType'];
-                            $values[] = $row['isThemeDefault'];
-                            $values[] = $row['contentType'];
-                            $values[] = $row['contentSource'];
-                            $values[] = $row['contentName'];
-                            $values[] = $row['contentCategory'];
-                            $values[] = $row['contentBody'];
-                            $values[] = $row['ccurrent'];
-                            $values[] = $row['ccname'];
-                            $values[] = $row['description'];
-                            $values[] = $row['sortOrder'];
-                            $values[] = $row['themeResourceType'];
-                            $values[] = $row['additionalPath'];
-                            $values[] = $isPublished;
-                            $values[] = $this->ltNow;
-                            $values[] = $this->ltNow;
-                            $values[] = LtSession::get('ltUid');
-                         
-                        }
-                        
-                        $sql = "INSERT INTO tb_content (lt_id, package_name, page_type, use_liferazor, store_type, mvc_type, is_theme_default, content_type, content_source, content_name, content_category, content_body, ccurrent, ccname, description, sort_order, theme_resource_type, additional_path, is_published, created_at, updated_at, updated_by) VALUES " . implode(", ", $placeholder);
-                        $stmt = $this->sqlConnect->prepare($sql);
-                        $stmt->execute($values);
-                    
-                }
-                
-            }
-            
-            
-           
-            // page contents
-            $pageContents = json_decode(file_get_contents($packagePath.'pageContent.json'), true);
-            
-            // fetching dafault theme region for page content publishing 
-            $stmtSelectContent = $this->sqlConnect->prepare("SELECT lt_id, sort_order, package_name FROM tb_content WHERE package_name = (
-                SELECT package_name FROM tb_package WHERE package_type = 'theme' AND is_theme_default = 1
-                ) AND is_theme_default = :isThemeDefault");
-            $stmtSelectContent->execute([
-                    ':isThemeDefault' => '1'
-                ]);
-            $themeContent = $stmtSelectContent->fetchAll(\PDO::FETCH_OBJ);
-            
-            $pageContentRecordArr = $pageContentModel->select()->where('packageName', '=', $packageName)->get();
-            $pageRegion = [];
-            $userId = LtSession::get('ltUid');
-            
-            if(count($pageContentRecordArr) > 0){   
-                foreach($pageContents as $key => $pageContent){
-                    $pageContentModel->processRequest($pageContent);
-                    $ltId = $pageContentModel->ltId;
-                    $pageContentRecord = $pageContentModel->select()->where('ltId', '=', $ltId)->get();
-                    if(count($pageContentRecord) > 0){
-                        $pageContentModel->update('ltId', '=', $ltId);
-                      
-                    }else{
-                        /// page content insertion 
-                        // type content
-                        $pageContentModel->updatedBy = $userId;
-                        $pageContentModel->insert();
-                        // type region
-                        if(in_array($pageContentModel->pageId, $pageTypeThemeArr)){
-                            foreach($themeContent as $content){
-                                $pageRegion[] = [
-                                        'pageId' => $pageContentModel->pageId,
-                                        'contentId' => $content->lt_id,
-                                        'contentType' => 'theme',  //$pageContentModel->contentType,
-                                        'packageName' => $content->package_name,
-                                        'sortOrder' => $content->sort_order,
-                                        'publishSource' => 'region',
-                                        'createdAt' => $this->ltNow,
-                                        'updatedAt' => $this->ltNow,
-                                        'ltId' => ltId()
-                                    ];
-                            }
-                        }
-                        
-                    }
-                }
-            }else{
-
-                    // insert type content
-                    
-                    $this->batchInsertPageContent($pageContents, $batchSize, $userId);
-                    
-                    //insert type region
-                    foreach($pageContents as $page){
-                      $page = (object)$page;
-                        if(in_array($page->pageId, $pageTypeThemeArr)){
-                            foreach($themeContent as $content){
-                                $pageRegion[] = [
-                                        'pageId' => $page->pageId,
-                                        'contentId' => $content->lt_id,
-                                        'contentType' => 'theme', //$page->contentType
-                                        'packageName' => $content->package_name,
-                                        'sortOrder' => $content->sort_order,
-                                        'publishSource' => 'region',
-                                        'createdAt' => $this->ltNow,
-                                        'updatedAt' => $this->ltNow,
-                                        'ltId' => ltId()
-                                    
-                                    ];
-                            }
-                        }
-                        
-                    }
-
-            }
-            
-            if(!empty($pageRegion)){
-                 $this->batchInsertPageContent($pageRegion, $batchSize, $userId);
-             };
-             
-            // //Tables
-            
-            $tables = json_decode(file_get_contents($packagePath.'table.json'), true);
-            
-            foreach($tables as $table){
-                $sql = $table['tableData'];
-                try {
-                    $this->sqlConnect->exec($sql);
-                    $succes = "Table created successfully.<br>";
-                } catch (PDOException $e) {
-                    $failed =  "Error creating table: " . $e->getMessage() . "<br>";
-                }
-            }
-
-            return LtResponse::json('Package installation completed successfully.', 3311, 200, $packageDetails);
-        }
-        
-        public function batchInsertPageContent(array $pageContents, int $batchSize, $userId){
-                if (empty($pageContents)) {
-                    return;
-                }
-            
-                $insertData = array_values($pageContents);
-                $totalSize  = count($insertData);
-            
-                for ($i = 0; $i < $totalSize; $i += $batchSize) {
-            
-                    $batch       = array_slice($insertData, $i, $batchSize);
-                    $placeholders = [];
-                    $values       = [];
-            
-                    foreach ($batch as $row) {
-            
-                        $placeholders[] = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            
-                        $values[] = $row['ltId'];
-                        $values[] = $row['contentId'];
-                        $values[] = $row['contentType'];
-                        $values[] = $row['packageName'];
-                        $values[] = $row['pageId'];
-                        $values[] = $row['sortOrder'];
-                        $values[] = $row['publishSource'];
-                        $values[] = $row['createdAt'];
-                        $values[] = $row['updatedAt'];
-                        $values[] = $userId;
-                    }
-            
-                    $sql ="
-                        INSERT INTO tb_page_content 
-                        (lt_id, content_id, content_type, package_name, page_id, sort_order, publish_source, created_at, updated_at, updated_by)
-                        VALUES " . implode(', ', $placeholders);
-            
-                    $stmt = $this->sqlConnect->prepare($sql);
-            
-                    if (!$stmt->execute($values)) {
-                        throw new Exception('Batch insert failed');
-                    }
-                }
-        }
         
         public function togglePublish($model) {
             $sqlConnect = DbConnect::dbDriver();
@@ -1521,50 +1130,939 @@ class TbPackageService
             $result = ['theme' => count($theme), 'module' => count($module), 'totalPackages' => count($packages)];
             return $result;
         }
+        
+        
+        
+        
+        
+public function importPackageAbstract($path){
+    $batchSize = 100;
+    $developerRoleId = 'accbc87e4b5ce2';
+    $userId = LtSession::get('ltUid');
+    $now = $this->ltNow;
+
+    try {
+        /*
+         * STEP 1: Locate the extracted package directory.
+         *
+         * Unlike scandir()[2], glob() explicitly selects
+         * directories rather than arbitrary entries.
+         */
+        $directories = glob(
+            rtrim($path, '/\\') . '/*',
+            GLOB_ONLYDIR
+        );
+
+ 
+        if (!$directories || count($directories) !== 1) {
+            throw new \RuntimeException(
+                'Invalid package directory structure.'
+            );
+        }
+
+        $sourcePath = rtrim($directories[0], '/\\') . '/';
+
+        /*
+         * STEP 2: Read package metadata.
+         */
+       
+        $packageDetails = $this->readImportJson($sourcePath . 'package.json');
+
+        $dependsOn = $packageDetails['dependsOn'] ?? [];
+
+        if (!is_array($dependsOn)) {
+            throw new \RuntimeException(
+                'Invalid package dependencies.'
+            );
+        }
+
+        // Avoid binding the dependsOn array in processRequest().
+        unset($packageDetails['dependsOn']);
+
+        $this->packageModel->processRequest($packageDetails);
+
+        $packageName = $this->packageModel->packageName;
+        $packageType = $this->packageModel->packageType;
+
+        /*
+         * Protect destination paths from unsafe package names.
+         * Adjust allowed characters to your package specification.
+         */
+        // foreach ([$packageName, $packageType] as $name) {
+        //     if (!is_string($name) ||
+        //         !preg_match('/^[a-zA-Z0-9_-]+$/', $name)) {
+        //         throw new \RuntimeException(
+        //             'Invalid package name or type.'
+        //         );
+        //     }
+        // }
+
+        /*
+         * STEP 3: Check the developer role.
+         */
+        $roleModel = new TbRoleService();
+
+        $rolePublished = $roleModel->roleExist($developerRoleId) ? 1 : 0;
+    
+        /*
+         * STEP 4: Validate dependencies.
+         *
+         * Preserve the existing special rule:
+         * mdlt is published regardless of dependency response.
+         */
+        $dependencyResponse = json_decode($this->checkDependencyRequirement($dependsOn), true, 512, JSON_THROW_ON_ERROR);
+
+        $dependenciesSatisfied = (
+            (int)($dependencyResponse['responseCategory'] ?? 0)
+            === 200
+        );
+
+        $isPublished = (strtolower($packageName) === 'mdlt' || $dependenciesSatisfied) ? 1 : 0;
+
+        /*
+         * STEP 5: Read and validate all exported JSON.
+         *
+         * Read before moving files or changing database data,
+         * so malformed JSON cannot cause a partial data import.
+         */
+        $exportPath = $sourcePath . 'Export/';
+
+        $pages = $this->readImportJson($exportPath . 'page.json', true);
+
+        $menus = $this->readImportJson($exportPath . 'menu.json', true);
+
+        $contents = $this->readImportJson($exportPath . 'content.json', true);
+
+        $pageContents = $this->readImportJson($exportPath . 'pageContent.json',true);
+
+        $tables = $this->readImportJson($exportPath . 'table.json',true);
+        
+        /*
+         * STEP 6: Move package into its destination.
+         *
+         * Verify that moveFolder() can safely replace an
+         * existing destination during package upgrades.
+         */
+        $destinationPath = 'packages/'. $packageType . 's/'. $packageName . '/';
+
+        $moveResult = LtFile::path($sourcePath)->moveFolder($sourcePath, $destinationPath);
+
+        if ($moveResult === false) {
+            throw new \RuntimeException(
+                'Failed to move package files.'
+            );
+        }
+
+
+        /*
+         * STEP 7: Create package database tables.
+         *
+         * Exported tables may reference other package tables
+         * through foreign-key constraints.
+         *
+         * Temporarily disable foreign-key checks while processing
+         * the package's table definitions.
+         *
+         * IMPORTANT:
+         * - Applies only to the current PDO database session.
+         * - Always restore the previous setting.
+         * - Execute only SQL from trusted packages.
+         * - MySQL DDL operations cannot be rolled back normally.
+         */
+
+    // Preserve the session's original setting.
+        $originalForeignKeyChecks = (int) $this->sqlConnect->query('SELECT @@SESSION.foreign_key_checks')->fetchColumn();
+        
+        try {
+        
+            // Disable foreign-key checks for this connection.
+            $this->sqlConnect->exec("SET SESSION FOREIGN_KEY_CHECKS = 0");
+        
+            foreach ($tables as $index => $table) {
+        
+                $sql = $table['tableData'] ?? null;
+        
+                // Validate table definition.
+                if (!is_string($sql) || trim($sql) === '') {
+                    throw new \RuntimeException(
+                        "Invalid table definition at index {$index}."
+                    );
+                }
+        
+                /*
+                 * Prevent accidental execution of unrelated SQL.
+                 *
+                 * This is a basic format check, not a security
+                 * sandbox for untrusted SQL.
+                 */
+                if (!preg_match('/^\s*CREATE\s+TABLE\s+IF\s+NOT\s+EXISTS\b/i', $sql)) {
+                    throw new \RuntimeException("Unsupported table statement at index {$index}.");
+                }
+        
+                // Execute CREATE TABLE statement.
+                $this->sqlConnect->exec($sql);
+            }
+        
+        } finally {
+        
+            /*
+             * Restore the original foreign-key setting,
+             * whether table creation succeeded or failed.
+             */
+            $this->sqlConnect->exec("SET SESSION FOREIGN_KEY_CHECKS = ". $originalForeignKeyChecks);
+        }
+
+
+        /*
+         * STEP 8: Start transactional database operations.
+         *
+         * Package model operations participate only if they
+         * use the same PDO connection.
+         */
+        $this->sqlConnect->beginTransaction();
+
+        /*
+         * STEP 9: Insert or update package metadata.
+         *
+         * Keep LifeTech model methods for this operation.
+         */
+        $this->packageModel->dependsOn = json_encode($dependsOn,JSON_THROW_ON_ERROR);
+
+        $this->packageModel->isPublished = $isPublished;
+        $this->packageModel->$developerRoleId = $rolePublished;
+
+        $existingPackage = $this->packageModel->select()->where('packageName', '=', $packageName)->get();
+
+        if (count($existingPackage) > 0) {
+            $this->packageModel->update('packageName','=', $packageName);
+        } else {
+            $this->packageModel->insert();
+        }
+
+        if ((int)$this->packageModel->responseCategory !== 200) {
+            throw new \RuntimeException(
+                'Failed to save package metadata: '
+                . $this->packageModel->responseResult
+            );
+        }
+
+        /*
+         * STEP 10: Batch UPSERT pages.
+         */
+        $this->importPackageRecords(
+            'tb_page',
+            $pages,
+            [
+                'lt_id' => 'ltId',
+                'package_name' => 'packageName',
+                'page_name' => 'pageName',
+                'page_type' => 'pageType',
+                'route_content' => 'routeContent',
+                'route_file_name' => 'routeFileName',
+                'route_handler' => 'routeHandler',
+                'route_method' => 'routeMethod',
+                'route_path' => 'routePath',
+                'route_payload' => 'routePayload',
+                'route_response' => 'routeResponse',
+                'route_update_status' => 'routeUpdateStatus',
+                'api_to_allow_routers' => 'apiToAllowRouters',
+                'description' => 'description',
+                'theme_layout'=> 'themeLayout',
+                'theme_layout_package'=> 'themeLayoutPackage',
+                
+            ],
+            [
+                'is_published' => $isPublished,
+                $developerRoleId => $rolePublished
+            ],
+            $batchSize,
+            $userId,
+            $now
+        );
+
+        /*
+         * STEP 11: Batch UPSERT menus.
+         */
+        $this->importPackageRecords(
+            'tb_menu',
+            $menus,
+            [
+                'lt_id' => 'ltId',
+                'package_name' => 'packageName',
+                'menu_level' => 'menuLevel',
+                'menu_name' => 'menuName',
+                'content_name' => 'contentName',
+                'parent_menu_id' => 'parentMenuId',
+                'route_path' => 'routePath',
+                'slug' => 'slug',
+                'target' => 'target',
+                'sort_order' => 'sortOrder'
+            ],
+            [
+                'is_published' => $isPublished,
+                $developerRoleId => $rolePublished
+            ],
+            $batchSize,
+            $userId,
+            $now
+        );
+
+    /*
+     * STEP 12: Batch UPSERT contents.
+     *
+     * Assign developer role only when:
+     * - mvcType === 'View'
+     * OR
+     * - themeResourceType === 'View'
+     */
+    $this->importPackageRecords(
+        'tb_content',
+        $contents,
+        [
+            'lt_id' => 'ltId',
+            'package_name' => 'packageName',
+            'page_type' => 'pageType',
+            'use_liferazor' => 'useLiferazor',
+            'store_type' => 'storeType',
+            'mvc_type' => 'mvcType',
+            'is_theme_default' => 'isThemeDefault',
+            'content_type' => 'contentType',
+            'content_source' => 'contentSource',
+            'content_name' => 'contentName',
+            'content_category' => 'contentCategory',
+            'content_body' => 'contentBody',
+            'ccurrent' => 'ccurrent',
+            'ccname' => 'ccname',
+            'description' => 'description',
+            'sort_order' => 'sortOrder',
+            'theme_resource_type' => 'themeResourceType',
+            'additional_path' => 'additionalPath'
+        ],
+        [
+            'is_published' => $isPublished
+        ],
+        $batchSize,
+        $userId,
+        $now,
+        function (array $record) use (
+            $developerRoleId,
+            $rolePublished
+        ): array {
+    
+            $isView = (
+                strcasecmp((string)($record['mvcType'] ?? ''), 'View') === 0
+                ||
+                strcasecmp((string)($record['themeResourceType'] ?? ''), 'View') === 0
+            );
+    
+            return [
+                $developerRoleId => $isView ? $rolePublished : 0
+            ];
+        }
+    );
+
+        /*
+         * STEP 13: Batch UPSERT normal page-content records.
+         */
+        $this->batchInsertPageContent($pageContents,$batchSize,$userId);
+
+        /*
+         * STEP 14: Generate missing default-theme regions.
+         */
+        $this->insertThemePageRegions($pages, $pageContents, $batchSize, $userId, $now);
+
+        /*
+         * STEP 15: Commit changes when all operations succeed.
+         */
+        $this->sqlConnect->commit();
+        $packageDetails['isPublished'] = $isPublished;
+        return LtResponse::json('Package installation completed successfully.', 3311, 200, $packageDetails);
+
+    } catch (\Throwable $e) {
+
+        if ($this->sqlConnect->inTransaction()) {
+            $this->sqlConnect->rollBack();
+        }
+
+        return LtResponse::error('Package installation failed. Check server logs.'.$e->getMessage(), 3319, 100);
+    }
+}
+
+
+/**
+ * Insert or update page-content records in batches.
+ *
+ * Uses the 10 columns from your existing implementation.
+ * Existing created_at values are preserved by batchUpsert().
+ *
+ * This method remains public for compatibility with any
+ * existing LifeTech code that calls it directly.
+ */
+public function batchInsertPageContent(array $pageContents, int $batchSize, $userId): void {
+
+    if (empty($pageContents)) {
+        return;
+    }
+
+    if ($batchSize < 1) {
+        throw new \InvalidArgumentException(
+            'Batch size must be greater than zero.'
+        );
+    }
+
+    $requiredFields = [
+        'ltId',
+        'contentId',
+        'contentType',
+        'packageName',
+        'pageId',
+        'sortOrder',
+        'publishSource'
+    ];
+
+    $batch = [];
+
+    foreach ($pageContents as $row) {
+
+        if (!is_array($row)) {
+            throw new \RuntimeException(
+                'Invalid page-content record.'
+            );
+        }
+
+        // Check required JSON properties.
+        foreach ($requiredFields as $field) {
+            if (!array_key_exists($field, $row)) {
+                throw new \RuntimeException(
+                    "Missing page-content property: {$field}"
+                );
+            }
+        }
+
+        // Map the exported properties to SQL columns.
+        $batch[] = [
+            'lt_id' => $row['ltId'],
+            'content_id' => $row['contentId'],
+            'content_type' => $row['contentType'],
+            'package_name' => $row['packageName'],
+            'page_id' => $row['pageId'],
+            'sort_order' => $row['sortOrder'],
+            'publish_source' => $row['publishSource'],
+            'created_at' => $row['createdAt'] ?? $this->ltNow,
+            'updated_at' => $this->ltNow,
+            'updated_by' => $userId
+        ];
+
+        // Write one batch when the limit is reached.
+        if (count($batch) >= $batchSize) {
+
+            $this->batchUpsert(
+                'tb_page_content',
+                $batch
+            );
+
+            $batch = [];
+        }
+    }
+
+    // Write any remaining records.
+    if (!empty($batch)) {
+        $this->batchUpsert(
+            'tb_page_content',
+            $batch
+        );
+    }
+}
+
+
+/**
+ * Reusable batch UPSERT helper.
+ *
+ * Inserts records that do not exist.
+ * Updates existing records when MySQL finds a unique-key conflict.
+ *
+ * REQUIRES:
+ * Suitable UNIQUE or PRIMARY indexes in the database.
+ *
+ * IMPORTANT:
+ * ON DUPLICATE KEY UPDATE reacts to any unique constraint,
+ * not specifically lt_id. Review other unique indexes.
+ */
+private function batchUpsert(string $table, array $rows, array $skipUpdate = ['lt_id', 'created_at']): void {
+
+    if (empty($rows)) {
+        return;
+    }
+
+    /*
+     * Allow only known application tables.
+     * Table names cannot be bound using PDO placeholders.
+     */
+    $allowedTables = ['tb_page','tb_menu','tb_content','tb_page_content'];
+
+    if (!in_array($table, $allowedTables, true)) {
+        throw new \InvalidArgumentException(
+            "Unsupported import table: {$table}"
+        );
+    }
+
+    // Use the first row to determine the column ordering.
+    $columns = array_keys($rows[0]);
+
+    if (empty($columns)) {
+        throw new \RuntimeException(
+            'Cannot UPSERT records with no columns.'
+        );
+    }
+
+    // Validate column names before placing them in SQL.
+    foreach ($columns as $column) {
+        if (!preg_match('/^[a-zA-Z0-9_]+$/', $column)) {
+            throw new \InvalidArgumentException(
+                "Invalid SQL column: {$column}"
+            );
+        }
+    }
+
+    $quotedColumns = array_map(
+        static fn($column) => "`{$column}`",
+        $columns
+    );
+
+    $placeholders = [];
+    $values = [];
+
+    /*
+     * Convert the records into:
+     *
+     * VALUES (?, ?, ...), (?, ?, ...), ...
+     *
+     * Keep all actual data in bound parameters.
+     */
+    foreach ($rows as $row) {
+
+        if (array_keys($row) !== $columns) {
+            throw new \RuntimeException(
+                'Inconsistent batch columns.'
+            );
+        }
+
+        $placeholders[] = '(' . implode(
+            ', ',
+            array_fill(0, count($columns), '?')
+        ) . ')';
+
+        foreach ($columns as $column) {
+
+            $value = $row[$column];
+
+            // Explicitly encode structured JSON values.
+            if (is_array($value)) {
+                $value = json_encode(
+                    $value,
+                    JSON_THROW_ON_ERROR
+                );
+            }
+
+            $values[] = $value;
+        }
+    }
+
+    /*
+     * Generate UPDATE expressions for all columns except
+     * identifiers and fields that should be preserved.
+     */
+    $updates = [];
+
+    foreach ($columns as $column) {
+
+        if (in_array($column, $skipUpdate, true)) {
+            continue;
+        }
+
+        $updates[] = "`{$column}` = VALUES(`{$column}`)";
+    }
+
+    if (empty($updates)) {
+        throw new \RuntimeException(
+            'No columns available for UPSERT updates.'
+        );
+    }
+
+    /*
+     * VALUES(column) is supported by MySQL/MariaDB.
+     * Newer MySQL versions deprecate this form in favor
+     * of row aliases; adapt it for your deployed version
+     * if necessary.
+     */
+    $sql = "
+        INSERT INTO `{$table}` (
+            " . implode(', ', $quotedColumns) . "
+        )
+        VALUES " . implode(', ', $placeholders) . "
+        ON DUPLICATE KEY UPDATE
+        " . implode(', ', $updates);
+
+    $stmt = $this->sqlConnect->prepare($sql);
+
+    if (!$stmt->execute($values)) {
+        throw new \RuntimeException(
+            "Batch UPSERT failed for {$table}."
+        );
+    }
+}
+
+
+
+/**
+ * Import package records using batch UPSERT.
+ *
+ * $rowCallback optionally generates additional values
+ * based on each individual imported record.
+ */
+private function importPackageRecords(
+    string $table,
+    array $records,
+    array $columnMap,
+    array $fixedValues,
+    int $batchSize,
+    $userId,
+    string $now,
+    ?callable $rowCallback = null
+): void {
+
+    if (empty($records)) {
+        return;
+    }
+
+    if ($batchSize < 1) {
+        throw new \InvalidArgumentException(
+            'Batch size must be greater than zero.'
+        );
+    }
+
+    $batch = [];
+
+    foreach ($records as $record) {
+
+        if (!is_array($record)) {
+            throw new \RuntimeException(
+                "Invalid record for {$table}."
+            );
+        }
+
+        $row = [];
+
+        // Convert JSON properties into database columns.
+        foreach ($columnMap as $column => $property) {
+
+            if (!array_key_exists($property, $record)) {
+                throw new \RuntimeException(
+                    "Missing {$property} in {$table}."
+                );
+            }
+
+            $value = $record[$property];
+
+            if (is_array($value)) {
+                $value = json_encode(
+                    $value,
+                    JSON_THROW_ON_ERROR
+                );
+            }
+
+            $row[$column] = $value;
+        }
+
+        // Apply values common to all records.
+        foreach ($fixedValues as $column => $value) {
+            $row[$column] = $value;
+        }
+
+        /*
+         * Apply conditional values per record.
+         *
+         * For tb_content:
+         * Assign developer role when mvcType or
+         * themeResourceType is View.
+         */
+        if ($rowCallback !== null) {
+
+            $additionalValues = $rowCallback($record);
+
+            foreach ($additionalValues as $column => $value) {
+                $row[$column] = $value;
+            }
+        }
+
+        // Audit fields.
+        $row['created_at'] = $now;
+        $row['updated_at'] = $now;
+        $row['updated_by'] = $userId;
+
+        $batch[] = $row;
+
+        if (count($batch) >= $batchSize) {
+
+            $this->batchUpsert($table, $batch);
+
+            $batch = [];
+        }
+    }
+
+    // Process remaining records.
+    if (!empty($batch)) {
+        $this->batchUpsert($table, $batch);
+    }
+}
+
+
+
+/**
+ * Generate missing region relationships for imported theme pages.
+ *
+ * A default theme may contain content elements configured as
+ * theme regions. Theme pages should reference these elements.
+ *
+ * Existing region relationships are preserved.
+ *
+ * NOTE:
+ * The SELECT-based duplicate check works for sequential imports.
+ * For concurrent imports, enforce the appropriate relationship
+ * uniqueness constraint in the database.
+ */
+private function insertThemePageRegions(
+    array $pages,
+    array $pageContents,
+    int $batchSize,
+    $userId,
+    string $now
+): void {
+
+    if ($batchSize < 1) {
+        throw new \InvalidArgumentException(
+            'Batch size must be greater than zero.'
+        );
+    }
+
+    /*
+     * STEP 1: Build a lookup of imported theme pages.
+     *
+     * Associative lookups are more efficient than repeatedly
+     * searching an array with in_array().
+     */
+    $themePageIds = [];
+
+    foreach ($pages as $page) {
+
+        if (($page['pageType'] ?? null) === 'theme') {
+            $themePageIds[$page['ltId']] = true;
+        }
+    }
+
+    if (empty($themePageIds)) {
+        return;
+    }
+
+    /*
+     * STEP 2: Identify theme pages with page-content records.
+     *
+     * Preserve the eligibility rule in your original importer.
+     */
+    $eligiblePageIds = [];
+
+    foreach ($pageContents as $pageContent) {
+
+        $pageId = $pageContent['pageId'] ?? null;
+
+        if ($pageId !== null &&
+            isset($themePageIds[$pageId])) {
+
+            $eligiblePageIds[$pageId] = true;
+        }
+    }
+
+    if (empty($eligiblePageIds)) {
+        return;
+    }
+
+    /*
+     * STEP 3: Retrieve default-theme region contents.
+     *
+     * The query assumes there is one active default theme.
+     */
+    $sql = "
+        SELECT
+            c.lt_id,
+            c.sort_order,
+            c.package_name
+        FROM tb_content c
+        WHERE c.package_name = (
+            SELECT p.package_name
+            FROM tb_package p
+            WHERE p.package_type = 'theme'
+              AND p.is_theme_default = 1
+            LIMIT 1
+        )
+        AND c.is_theme_default = 1
+    ";
+
+    $stmt = $this->sqlConnect->prepare($sql);
+    $stmt->execute();
+
+    $themeContents = $stmt->fetchAll(
+        \PDO::FETCH_ASSOC
+    );
+
+    if (empty($themeContents)) {
+        return;
+    }
+
+    /*
+     * STEP 4: Find region relationships already stored.
+     *
+     * These are identified by page_id and content_id
+     * where publish_source is 'region'.
+     */
+    $existingRegions = [];
+
+    foreach (
+        array_chunk(array_keys($eligiblePageIds), $batchSize)
+        as $pageIdBatch
+    ) {
+
+        $placeholders = implode(
+            ', ',
+            array_fill(0, count($pageIdBatch), '?')
+        );
+
+        $sql = "
+            SELECT page_id, content_id
+            FROM tb_page_content
+            WHERE publish_source = 'region'
+              AND page_id IN ({$placeholders})
+        ";
+
+        $stmt = $this->sqlConnect->prepare($sql);
+        $stmt->execute($pageIdBatch);
+
+        while ($record = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+
+            $existingRegions[
+                $record['page_id']
+            ][
+                $record['content_id']
+            ] = true;
+        }
+    }
+
+    /*
+     * STEP 5: Create only missing region records.
+     */
+    $regionBatch = [];
+
+    foreach (array_keys($eligiblePageIds) as $pageId) {
+
+        foreach ($themeContents as $content) {
+
+            $contentId = $content['lt_id'];
+
+            // Do not recreate an existing region.
+            if (isset($existingRegions[$pageId][$contentId])) {
+                continue;
+            }
+
+            $regionBatch[] = [
+                'ltId' => ltId(),
+                'contentId' => $contentId,
+                'contentType' => 'theme',
+                'packageName' => $content['package_name'],
+                'pageId' => $pageId,
+                'sortOrder' => $content['sort_order'],
+                'publishSource' => 'region',
+                'createdAt' => $now,
+                'updatedAt' => $now
+            ];
+
+            /*
+             * Mark the relationship as created in this import
+             * so duplicate JSON inputs cannot repeat it.
+             */
+            $existingRegions[$pageId][$contentId] = true;
+
+            if (count($regionBatch) >= $batchSize) {
+
+                $this->batchInsertPageContent(
+                    $regionBatch,
+                    $batchSize,
+                    $userId
+                );
+
+                $regionBatch = [];
+            }
+        }
+    }
+
+    /*
+     * STEP 6: Insert the final region batch.
+     */
+    if (!empty($regionBatch)) {
+
+        $this->batchInsertPageContent(
+            $regionBatch,
+            $batchSize,
+            $userId
+        );
+    }
+}
+
+
+/**
+ * Read and validate JSON files used by the package importer.
+ *
+ * $expectList = false:
+ *     Accept a JSON object/array, typically package.json.
+ *
+ * $expectList = true:
+ *     Require a JSON array, including an empty array.
+ *
+ * JSON_THROW_ON_ERROR provides useful failure messages.
+ */
+ 
+ private function readImportJson(string $file, bool $expectList = false): array{
+    if (!is_file($file) || !is_readable($file)) {
+        throw new \RuntimeException("Missing or unreadable JSON file: {$file}");
+    }
+    
+    $content = file_get_contents($file);
+    
+    if ($content === false) {
+        throw new \RuntimeException("Unable to read JSON file: {$file}");
+    }
+    
+    $data = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
+    
+    if (!is_array($data)) {
+        throw new \RuntimeException("Invalid JSON structure in {$file}");
+    }
+    
+    if ($expectList) {
+        $isList = ($data === []);
+    
+        if (!$isList) {
+            $isList = array_keys($data) === range(0, count($data) - 1);
+        }
+    
+        if (!$isList) {
+            throw new \RuntimeException("Expected a JSON list in {$file}");
+        }
+    }
+    
+     return $data;
+}
+        
+
      
         
 }
 
-
-//  function storeMail(array $data){
-//             $url = "https://www.lifetech.host/hubs/api/v1/v2/queues";
-        
-//             $headers = [
-//                 "Accept: application/json",
-//             ];
-        
-//             $responseHeaders = [];
-        
-//             $ch = curl_init($url);
-        
-//             curl_setopt_array($ch, [
-//                 CURLOPT_RETURNTRANSFER => true,
-//                 CURLOPT_CUSTOMREQUEST  => "POST",
-//                 CURLOPT_POSTFIELDS => json_encode($data),
-//                 CURLOPT_HTTPHEADER => $headers,
-//                 CURLOPT_HEADERFUNCTION => function ($curl, $header) use (&$responseHeaders) {
-//                     $length = strlen($header);
-//                     $parts = explode(':', $header, 2);
-        
-//                     if (count($parts) == 2) {
-//                         $responseHeaders[strtolower(trim($parts[0]))] = trim($parts[1]);
-//                     }
-        
-//                     return $length;
-//                 }
-//             ]);
-        
-//             $body = curl_exec($ch);
-//             $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-//             $error = curl_error($ch);
-        
-//             curl_close($ch);
-            
-//             return [
-//                 "success" => ($statusCode >= 200 && $statusCode < 300),
-//                 "status" => $statusCode,
-//                 "error" => $error ?: null,
-//                 // "headers" => $responseHeaders,
-//                 "body" => $body
-//             ];
-//         }

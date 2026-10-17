@@ -1,0 +1,42 @@
+<section class="card">
+    <h1>Popular posts</h1>
+    <p id="postsStatus" role="status">Loading posts...</p>
+    <ul id="postsList"></ul>
+</section>
+
+<script>
+(async function loadPosts() {
+    const apiBase = <?= json_encode(
+        ApiTokenDetails::backEndBaseUrl(),
+        JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT
+    ) ?>;
+    const status = document.getElementById('postsStatus');
+    const list = document.getElementById('postsList');
+
+    try {
+        const url = apiBase.replace(/\/+$/, '')
+            + '/blogs/posts/widget?limit=6&type=popular';
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: { Accept: 'application/json' }
+        });
+        if (!response.ok) {
+            throw new Error('Request failed with HTTP status ' + response.status);
+        }
+        const result = await response.json();
+        if (Number(result.responseCategory) !== 200) {
+            throw new Error(result.responseResult || 'Unable to load posts.');
+        }
+        const posts = Array.isArray(result.responseData) ? result.responseData : [];
+        list.replaceChildren();
+        for (const post of posts) {
+            const item = document.createElement('li');
+            item.textContent = post.title || 'Untitled post';
+            list.appendChild(item);
+        }
+        status.textContent = posts.length ? '' : 'No posts available.';
+    } catch (error) {
+        status.textContent = error.message;
+    }
+})();
+</script>

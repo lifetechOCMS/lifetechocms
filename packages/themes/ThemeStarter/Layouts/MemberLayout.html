@@ -1,0 +1,19 @@
+<?php ltImport('ThemeStarter', 'TopHeader.html'); ?>
+
+<div class="member-layout">
+    <aside class="member-sidebar">
+        <?php ltImport('ThemeStarter', 'MemberSidebar.html'); ?>
+    </aside>
+
+    <div class="member-content">
+        <header class="member-header">
+            <?php ltImport('ThemeStarter', 'MemberHeader.html'); ?>
+        </header>
+
+        <main class="member-body" id="main-content">
+            <?php dddm::loadDynamicContent(); ?>
+        </main>
+    </div>
+</div>
+
+<?php ltImport('ThemeStarter', 'Footer.html'); ?>

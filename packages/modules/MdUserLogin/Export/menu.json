@@ -1,0 +1,74 @@
+[
+    {
+        "ltId": "177787805076525",
+        "packageName": "MdUserLogin",
+        "menuLevel": 1,
+        "menuName": "MdUserLogin",
+        "contentName": null,
+        "parentMenuId": null,
+        "routePath": "#",
+        "slug": null,
+        "target": "self",
+        "sortOrder": 8
+    },
+    {
+        "ltId": "177801602740586",
+        "packageName": "MdUserLogin",
+        "menuLevel": 1,
+        "menuName": "About-us",
+        "contentName": "About-us.html",
+        "parentMenuId": null,
+        "routePath": "\/about-us",
+        "slug": null,
+        "target": "_blank",
+        "sortOrder": null
+    },
+    {
+        "ltId": "177788166514437",
+        "packageName": "MdUserLogin",
+        "menuLevel": 2,
+        "menuName": "Sign In",
+        "contentName": "Login.html",
+        "parentMenuId": "177763191189791",
+        "routePath": "\/sign-in",
+        "slug": null,
+        "target": "_blank",
+        "sortOrder": null
+    },
+    {
+        "ltId": "177788172660811",
+        "packageName": "MdUserLogin",
+        "menuLevel": 2,
+        "menuName": "Sign Up",
+        "contentName": "Register.html",
+        "parentMenuId": "177763191189791",
+        "routePath": "\/sign-up",
+        "slug": null,
+        "target": "_blank",
+        "sortOrder": null
+    },
+    {
+        "ltId": "177788220117642",
+        "packageName": "MdUserLogin",
+        "menuLevel": 2,
+        "menuName": "Logout",
+        "contentName": "Logout.html",
+        "parentMenuId": "177763191189791",
+        "routePath": "\/logout",
+        "slug": null,
+        "target": "_blank",
+        "sortOrder": null
+    },
+    {
+        "ltId": "177788187318772",
+        "packageName": "MdUserLogin",
+        "menuLevel": 2,
+        "menuName": "ForgotPassword.html",
+        "contentName": "ForgotPassword.html",
+        "parentMenuId": "177787805076525",
+        "routePath": "\/forgot-password",
+        "slug": null,
+        "target": "_blank",
+        "sortOrder": null
+    }
+]
