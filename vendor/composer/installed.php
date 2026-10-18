@@ -1,8 +1,8 @@
 <?php return array(
     'root' => array(
         'name' => 'lifetechocms/lifetechocms',
-        'pretty_version' => '2.7.6',
-        'version' => '2.7.6.0',
+        'pretty_version' => '2.7.9',
+        'version' => '2.7.9.0',
         'reference' => null,
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
@@ -20,8 +20,8 @@
             'dev_requirement' => true,
         ),
         'lifetechocms/lifetechocms' => array(
-            'pretty_version' => '2.7.6',
-            'version' => '2.7.6.0',
+            'pretty_version' => '2.7.9',
+            'version' => '2.7.9.0',
             'reference' => null,
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
