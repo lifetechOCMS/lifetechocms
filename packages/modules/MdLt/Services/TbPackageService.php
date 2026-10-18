@@ -135,6 +135,7 @@ class TbPackageService
                     LtFile::path($path)->createFolder('Models');
                     LtFile::path($path)->createFolder('Services');
                     LtFile::path($path)->createFolder('Views');
+                    LtFile::path($path)->createFolder('Storage');
                     LtFile::path($path)->createFile('LICENSE', $licenceContent);
                     LtFile::path($path)->createFile('package.json', $jsonData);
                     LtFile::path($path)->createFile('README.md');
@@ -144,6 +145,11 @@ class TbPackageService
                     LtFile::path($path)->createFile('menu.json');
                     LtFile::path($path)->createFile('table.json');
                     LtFile::path($path)->createFile('pageContent.json');
+                    $storagePath ="packages/".$packageType.'s/'.$packageName.'/Storage';
+                    LtFile::path($storagePath)->createFolder('Layouts');
+                    $storageLayoutPath =$storagePath .'/Layouts';
+                    LtFile::path($storageLayoutPath)->createFile('AppliedLayouts.json');
+                    LtFile::path($storageLayoutPath)->createFile('PendingLayouts.json');
                     
                     $contentName = ucfirst($packageName).'Routes.php';
                     // LtFile::path($path)->createFile($routeFilename);
@@ -193,6 +199,7 @@ class TbPackageService
                     LtFile::path($path)->createFolder('Layouts');
                     LtFile::path($path)->createFolder('Export');
                     LtFile::path($path)->createFolder('ddm');
+                    LtFile::path($path)->createFolder('Storage');
                     LtFile::path($path)->createFile('LICENSE', $licenceContent);
                     LtFile::path($path)->createFile('package.json', $jsonData);
                     LtFile::path($path)->createFile('README.md');
@@ -202,6 +209,11 @@ class TbPackageService
                     LtFile::path($path)->createFile('menu.json');
                     LtFile::path($path)->createFile('table.json');
                     LtFile::path($path)->createFile('pageContent.json');
+                    $storagePath ="packages/".$packageType.'s/'.$packageName.'/Storage';
+                    LtFile::path($storagePath)->createFolder('Layouts');
+                    $storageLayoutPath =$storagePath .'/Layouts';
+                    LtFile::path($storageLayoutPath)->createFile('AppliedLayouts.json');
+                    LtFile::path($storageLayoutPath)->createFile('PendingLayouts.json');
                     
                     
                     // Create menu for the package
@@ -1335,6 +1347,7 @@ public function importPackageAbstract($path){
 
         if (count($existingPackage) > 0) {
             $this->packageModel->update('packageName','=', $packageName);
+            
         } else {
             $this->packageModel->insert();
         }
@@ -1345,7 +1358,8 @@ public function importPackageAbstract($path){
                 . $this->packageModel->responseResult
             );
         }
-
+        
+        $returnData = $this->packageModel->responseData;
         /*
          * STEP 10: Batch UPSERT pages.
          */
@@ -1475,8 +1489,8 @@ public function importPackageAbstract($path){
          * STEP 15: Commit changes when all operations succeed.
          */
         $this->sqlConnect->commit();
-        $packageDetails['isPublished'] = $isPublished;
-        return LtResponse::json('Package installation completed successfully.', 3311, 200, $packageDetails);
+
+        return LtResponse::json('Package installation completed successfully.', 3311, 200, $returnData);
 
     } catch (\Throwable $e) {
 

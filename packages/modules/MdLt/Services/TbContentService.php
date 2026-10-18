@@ -586,7 +586,7 @@ class {$fileNameWithNoExt}
         
     }
     
-     public function fetchPublishContent($ltId = null){
+    public function fetchPublishContent($ltId = null){
         
         $this->contentModel->select('lt_id, content_name, package_name, description, is_published, content_type');
         if($ltId !== null){
@@ -656,7 +656,7 @@ class {$fileNameWithNoExt}
                     }
                      
                   $path = "packages/".$contentType.'s/'.$packageName.'/'.$themeResourceType.'s/'.$additionalPath;
-                  LtFile::path($path)->deleteFile($contentName);
+                //   LtFile::path($path)->deleteFile($contentName);
                   
                   $ddmpath="packages/".$contentType.'s/'.$packageName.'/ddm';
                   $ddmContentName = pathinfo($contentName, PATHINFO_FILENAME);
@@ -795,6 +795,7 @@ class {$fileNameWithNoExt}
         $typeKey = ($packageType === 'theme') ? 'themeResourceType' : 'mvcType';
     
         foreach ($items as $item) {
+            
             $relativePath = $item['relativePath'] ?? '';
             
             // Extract type and subfolder path
@@ -807,7 +808,7 @@ class {$fileNameWithNoExt}
                 'description'    => "Synchronized from file manager",
                 'packageName'    => $packageName,
                 'isThemeDefault' => $isThemeDefault,
-                $typeKey         => $pathDetails['type'],           
+                 $typeKey         => $pathDetails['type'],           
                 'additionalPath' => $pathDetails['additionalPath'], 
                 'contentType'    => $packageType,
                 'isPublished'   => 1
@@ -826,9 +827,170 @@ class {$fileNameWithNoExt}
         if (empty($responses)) {
             return LtResponse::json('Failed to synchronize', 3504, 100);
         }
-    
+        /*
+         * Process pending layouts.
+         */
+        $layoutResult = $this->processPendingLayouts($packageName,$packageType);
+        
+        // return LtResponse::json('Synchronization completed', 200, 200, ['contents' => $responses,'layouts' => $layoutResult]);
+        
         return LtResponse::json('Synchronized successfully', 200, 200, $responses);
     }
+    
+
+    /**
+     * Read pending layouts, assign them, and update JSON files.
+     *
+     * Successful items are appended to AppliedLayouts.json.
+     * Failed items remain in PendingLayouts.json.
+     */
+    private function processPendingLayouts(string $packageName,string $packageType): array {
+    
+        $result = ['total' => 0,'successful' => 0,'failed' => 0];
+    
+        $layoutsDir ="packages/".$packageType.'s/'.$packageName.'/Storage/Layouts';
+    
+        $pendingFile = $layoutsDir . '/PendingLayouts.json';
+        $appliedFile = $layoutsDir . '/AppliedLayouts.json';
+    
+        if (!is_file($pendingFile)) {
+            return $result;
+        }
+    
+        /*
+         * STEP 1: Read PendingLayouts.json.
+         */
+        $pendingContent = file_get_contents($pendingFile);
+    
+        if ($pendingContent === false) {
+            throw new \RuntimeException(
+                'Unable to read PendingLayouts.json'
+            );
+        }
+    
+        $pendingLayouts = json_decode($pendingContent,true,512,JSON_THROW_ON_ERROR);
+    
+        if (!is_array($pendingLayouts)) {
+            throw new \RuntimeException(
+                'PendingLayouts.json must contain an array'
+            );
+        }
+    
+        $result['total'] = count($pendingLayouts);
+    
+        if (empty($pendingLayouts)) {
+            return $result;
+        }
+        
+       
+        /*
+         * STEP 2: Load existing applied layouts.
+         */
+        $appliedLayouts = [];
+    
+        if (is_file($appliedFile)) {
+    
+            $appliedContent = file_get_contents($appliedFile);
+    
+            if ($appliedContent === false) {
+                throw new \RuntimeException('Unable to read AppliedLayouts.json');
+            }
+    
+            $appliedLayouts = json_decode($appliedContent, true, 512, JSON_THROW_ON_ERROR);
+    
+            if (!is_array($appliedLayouts)) {
+                throw new \RuntimeException('AppliedLayouts.json must contain an array');
+            }
+        }
+        
+        
+    
+        /*
+         * STEP 3: Attempt each pending layout assignment.
+         */
+        $remainingLayouts = [];
+    
+        foreach ($pendingLayouts as $layoutItem) {
+    
+            if (!is_array($layoutItem)) {
+                $remainingLayouts[] = $layoutItem;
+                $result['failed']++;
+                continue;
+            }
+            
+            try {
+    
+                // Calling assignLayouts() method.
+                $assignRes = $this->assignLayouts($layoutItem);
+                
+                // $remainingLayouts[] = $assignRes;
+                if (is_string($assignRes)) {
+                    $assignRes = json_decode($assignRes,true);
+                }
+    
+                $isSuccess = $assignRes['responseCategory'] == '200';
+    
+                if ($isSuccess) {
+    
+                    // Avoid appending an identical record twice.
+                    $alreadyApplied = false;
+    
+                    foreach ($appliedLayouts as $existing) {
+                        if ($existing === $layoutItem) {
+                            $alreadyApplied = true;
+                            break;
+                        }
+                    }
+    
+                    if (!$alreadyApplied) {
+                        $appliedLayouts[] = $layoutItem;
+                    }
+    
+                    $result['successful']++;
+    
+                } else {
+    
+                    $remainingLayouts[] = $layoutItem;
+                    $result['failed']++;
+                }
+    
+            } catch (\Throwable $e) {
+    
+                $remainingLayouts[] = $layoutItem;
+                $result['failed']++;
+    
+                LtResponse::json('Layout assignment failed: '. $e->getMessage());
+            }
+        }
+        
+        /*
+         * STEP 4: Persist successful assignments.
+         *
+         * Write AppliedLayouts.json before removing entries from
+         * PendingLayouts.json to reduce loss after partial failures.
+         */
+        if ($result['successful'] > 0) {
+    
+            $appliedJson = json_encode(array_values($appliedLayouts), JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR);
+    
+            if (file_put_contents($appliedFile, $appliedJson, LOCK_EX) === false) {
+                throw new \RuntimeException(
+                    'Failed to update AppliedLayouts.json'
+                );
+            }
+    
+            $pendingJson = json_encode(array_values($remainingLayouts), JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR);
+    
+            if (file_put_contents($pendingFile, $pendingJson, LOCK_EX) === false) {
+                throw new \RuntimeException(
+                    'Failed to update PendingLayouts.json'
+                );
+            }
+        }
+    
+        return $result;
+    }
+
     
     public function scanContent(){
          
@@ -966,21 +1128,6 @@ class {$fileNameWithNoExt}
         return LtResponse::json('validate successfully', 200, 200, $responses);
     }
     
-    
-    // public function fetchLayouts(){
-    //     $packageName = $this->request->packageName;
-       
-    //     if(empty($packageName)){
-    //         return LtResponse::json('Package Name Type can\'t be empty', 3504, 100);
-    //     }
-        
-    //     $layouts = $this->contentModel->select('content_name, description, package_name')->andWhere('themeResourceType', '=', 'Layout')->get();
-        
-    //     if(empty($layouts)) return LtResponse::json('No Layouts found', 101, 100);
-        
-    //     return LtResponse::json('Layout fetched successfully', 200, 200, $layouts);
-    // }
-    
     public function fetchLayouts(){
         $packageName = $this->request->packageName;
     
@@ -1023,24 +1170,56 @@ class {$fileNameWithNoExt}
     
     public function assignLayouts($data){
         
-        if(!is_array($data)) return;
-        
-        $layoutName = $data['layoutName'];
-        $contentId = $data['contentId'];
-        $layoutPackageName = $data['layoutPackageName'];
-        
-        if (empty($layoutName) || empty($contentId)) {
-            return LtResponse::json('please provide layout, content or package name for assigning', 3504, 100);
+        if (!is_array($data)) {
+            return LtResponse::error('Invalid layout assignment data', 3504, 100);
         }
-        $contentModel = new TbContent();
-        $content = $contentModel->select('content_name, lt_id, package_name')->where('ltId', '=', $contentId)->get()[0];
+        $sqlConnect = DbConnect::dbDriver();
+        
+        $layoutName = $data['layoutName'] ?? null;
+        $contentDetails = $data['contentName'] ?? $data['contentId'];
+        $layoutPackageName = $data['layoutPackageName'] ?? null;
+    
+        if (empty($layoutName) ||empty($contentDetails) || empty($layoutPackageName)) {
+            return LtResponse::error('Please provide layout, content and package name', 3504, 100);
+        }
+    
+        /*
+         * STEP 1: Find the content by ID or content name.
+         */
+        $searchById = ctype_digit((string)$contentDetails);
+        
+        $sql = "
+            SELECT
+                content_name AS contentName,
+                lt_id AS ltId,
+                package_name AS packageName
+            FROM tb_content
+            WHERE package_name = :packageName
+              AND " . ($searchById
+                  ? "lt_id = :contentDetails"
+                  : "content_name = :contentDetails") . "
+            LIMIT 1
+        ";
+        
+        $stmt = $sqlConnect->prepare($sql);
+        
+        $stmt->execute([
+            ':packageName' => $layoutPackageName,
+            ':contentDetails' => $contentDetails
+        ]);
+        
+        $content = $stmt->fetch(\PDO::FETCH_OBJ);
+        
         if(empty($content)) return LtResponse::json('No Contents found', 101, 100);
-        
+  
         $pageModel = new TbPage();
-        $pageData = $pageModel->select('lt_id')->where('pageName', '=', $content->contentName)->andWhere('packageName', '=', $content->packageName)->get()[0];
-        
+        $pageRecords = $pageModel->select('lt_id')->where('pageName', '=', $content->contentName)->andWhere('packageName', '=', $content->packageName)->get();
+        $pageData = $pageRecords[0] ?? null;
         if(empty($pageData)) return LtResponse::json('No Page found', 101, 100);
         
+        /*
+         * STEP 3: Assign the layout to the page.
+         */
         $pageModel->themeLayout = $layoutName;
         $pageModel->themeLayoutPackage = $layoutPackageName;
         $pageModel->updatedBy = $this->userId;
@@ -1048,9 +1227,9 @@ class {$fileNameWithNoExt}
         $pageModel->update('ltId', '=', $pageData->ltId);
         
         return $pageModel->responseJson(); 
-        
-        // return LtResponse::json('Layout assigned successfully', 200, 200, $content);
+
     }
+    
     
     public function contentRegions(){
         $contentName = $this->request->contentName;

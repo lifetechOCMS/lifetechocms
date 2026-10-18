@@ -1,0 +1,12 @@
+[
+    {
+        "layoutName": "MemberLayout.html",
+        "contentName": "MemberDashboard.html",
+        "layoutPackageName": "ThemeStarter"
+    },
+    {
+        "layoutName": "DynamicMenuLayout.html",
+        "contentName": "DynamicMenuDemo.html",
+        "layoutPackageName": "ThemeStarter"
+    }
+]

@@ -1,78 +1,254 @@
-# ThemeStarter v1.2.1 — automatic default layout test
+# ThemeStarter — LifeTech OCMS Starter Theme
 
-This sample targets the updated LifeTechOCMS behaviour described by the platform author: Layouts/Default.html takes priority as the theme default layout; otherwise components marked Is Theme Default provide the fallback composition.
+**Version:** `v1.2.1` · **Package:** `ThemeStarter` · **Platform:** LifeTech OCMS
 
-## Install and preview
-1. Use a test installation running the new backend update.
-2. In Packages → Themes Development choose Install Theme and upload this ZIP. If ThemeStarter already exists, back it up and use your supported package update/replacement workflow. Do not assume an existing custom page layout assignment will be cleared by import.
-3. Preview Home and About through LifeTechOCMS. Do not manually assign default components first: automatic layout selection is what this package tests.
-4. Confirm /ThemeStarter/Home shows the WelcomeBanner and the welcome button works.
-5. Confirm /ThemeStarter/About shows AboutHighlights, without the WelcomeBanner.
-6. Both pages should show one header, one footer and one copy of their assigned view.
-7. Check page access/content publication if the backend requires it. Record any manual action still needed as a test observation.
+ThemeStarter is a beginner-friendly theme package for learning how LifeTech OCMS handles **layouts, components, views, assets, site helpers, and dynamic content**. Its primary example tests automatic use of `Layouts/Default.html`, while optional examples demonstrate custom layouts, role-aware navigation, and backend API integration.
 
-## Composition
-Default.html imports TopHeader and Header, calls dddm::loadDynamicContent once inside main, then imports Footer. It does not import ContentLoadBody because it already supplies the loader. TopHeader links the shared CSS with ltThemePath; Footer links plain JavaScript the same way.
+> **Testing status:** The repository documents source and metadata checks, but some import behaviour, custom layout assignments, and live API responses must still be verified in an updated LifeTech OCMS installation. Do not treat the source package as a fully validated marketplace export until tested.
 
-All component Is Theme Default flags are No in this package. This deliberately isolates Default.html selection from the fallback component mechanism and avoids duplicate wrappers. Default.html is registered as Layout content. No separate page-layout assignment is encoded for Home or About.
+## Contents
 
-WelcomeBanner.html and AboutHighlights.html are nondefault components explicitly imported by Home and About respectively. Neither should appear on the other page.
+1. [What this theme demonstrates](#1-what-this-theme-demonstrates)
+2. [Package structure](#2-package-structure)
+3. [Installation](#3-installation)
+4. [How the default layout works](#4-how-the-default-layout-works)
+5. [Pages and reusable components](#5-pages-and-reusable-components)
+6. [Site information helpers](#6-site-information-helpers)
+7. [Custom layouts and dynamic navigation](#7-custom-layouts-and-dynamic-navigation)
+8. [Optional blog API example](#8-optional-blog-api-example)
+9. [Testing checklist](#9-testing-checklist)
+10. [Troubleshooting](#10-troubleshooting)
+11. [Documentation and licensing](#11-documentation-and-licensing)
 
-## Optional documentation extensions
-DynamicHeader.html provides the role-filtered menu example. The basic layout uses Header.html so an API issue cannot prevent testing automatic layout selection. To test dynamic navigation, replace the Header import in Default.html with DynamicHeader.
+---
 
-MemberLayout, MemberSidebar, MemberHeader and MemberDashboard remain optional examples. Assign MemberLayout only when testing that custom layout; otherwise MemberDashboard can render through Default.html. Review member page access roles separately.
+## 1. What this theme demonstrates
 
-Posts.html is the optional blog API example and requires the matching backend blog endpoint. Home/About and the layout test require no module or Tailwind plugin.
+- **Automatic default layout:** `Layouts/Default.html` is intended to wrap pages without manually assigning a layout.
+- **Reusable components:** shared header, top header, and footer.
+- **Page-specific components:** `WelcomeBanner.html` for Home and `AboutHighlights.html` for About.
+- **Views:** content for pages such as Home, About, and optional examples.
+- **Assets:** shared CSS and JavaScript referenced using `ltThemePath()`.
+- **Site helpers:** PHP functions for configured site identity, contact details, and social links.
+- **Alternative layouts:** optional member and dynamic-menu layouts that are assigned to specific views through the backend.
+- **Dynamic menus and API integration:** optional demonstrations that depend on matching backend features.
 
-## Expected test results
-| Page | Layout | Special component |
-| --- | --- | --- |
-| Home | Default.html automatically | WelcomeBanner.html |
-| About | Default.html automatically | AboutHighlights.html |
-| MemberDashboard without custom assignment | Default.html automatically | None |
-| Posts | Default.html automatically | None; API result or error state |
+The base Home/About example does **not** require the optional blog module or Tailwind plugin.
 
-Check a narrow screen, a subfolder installation, CSS/JS requests, the Home button, and one dynamic loader. Imported layouts and components must remain registered with the exact case-sensitive names.
+[↑ Back to contents](#contents)
 
-## Import metadata and distribution
-The included metadata follows the supplied ThemeBlog export structure, extended with registered Default and special components. This archive was assembled from source, not exported by the updated running backend. Import reconstruction and the new layout behaviour require your live test; source checks cannot certify them. Export the successful result through LifeTechOCMS before sharing a verified installer.
+## 2. Package structure
 
-Version: v1.2.1. No specific core compatibility claim is encoded. The earlier v1.0.0 documentation example used default components; this release tests the new Default.html priority rule.
+The repository contains these top-level directories and files:
 
+```text
+ThemeStarter/
+├── Assets/
+├── Components/
+├── Export/
+├── Layouts/
+├── Views/
+├── ddm/
+├── LICENSE
+├── README.md
+├── index.php
+└── package.json
+```
 
-## Beginner site-helper examples — v1.2.1
-Frontend PHP echoes helper values directly, with htmlspecialchars for HTML output. No logo-path resolution, social URL parsing, custom helper wrappers, or conditional setting logic is included.
-
-| Location | Helpers demonstrated |
+| Location | Purpose |
 | --- | --- |
-| TopHeader | ltPageTitle, ltSiteFaviconUrl, ltThemePath |
-| Header | ltSiteLogoUrl, ltSiteName, ltSiteTitle, ltSiteAlias, ltSiteUrl |
-| Contact | ltSiteEmail, ltSiteEmail2, ltSitePhone, ltSitePhone2, ltSiteAddress, ltSiteAddress2, ltSiteOpenHour, ltSiteClosedHour |
-| Footer | ltSiteCopyright, ltSiteLinkedln, ltSiteInstagram, ltSiteFacebook, ltSiteTwitter, ltSiteYoutube, ltThemePath |
+| `Layouts/` | Default and optional alternative page compositions |
+| `Components/` | Reusable page elements, including shared and page-specific components |
+| `Views/` | Page content and optional demonstrations |
+| `Assets/` | Theme stylesheets and JavaScript |
+| `Export/` | Package export-related files |
+| `ddm/` | Framework-related theme package files |
+| `package.json` | Package metadata used by the theme installation workflow |
 
-AppCore supplies resolved logo/favicon URLs and the page title. Configure the demonstrated site settings before previewing; blank values remain blank. The social labels match their corresponding helpers. Database/environment helpers are not displayed to visitors.
+Keep **exact filename case** when referencing layouts, views, and components.
 
-The package uses ltVersion and contains no explicit layout-mapping fields. Default.html remains the automatic default layout; component default flags remain No. Special components remain limited to Home and About. MemberLayout is still an optional separately assigned example. CSS and JavaScript use direct theme asset links.
+[↑ Back to contents](#contents)
 
-The earlier Default.html import test succeeded according to the platform author. This updated sample needs a live regression preview before public upload. Check the page title, logo, favicon, contact details, social destinations, shared assets, and both special components.
+## 3. Installation
 
-## Advanced dynamic-menu demo — v1.2.1
-After importing, assign DynamicMenuDemo.html to DynamicMenuLayout.html through your backend layout controls. No mapping fields have been added to package.json. Until assigned, the view will use Default.html and static navigation; that is expected.
+### Install from the theme package
 
-| Layout | Header | Intended views |
+1. Use a **test installation** of LifeTech OCMS with the updated theme layout behaviour.
+2. Obtain the ThemeStarter package from the [GitHub repository](https://github.com/ajayi-abolore/ThemeStarter). For an installable archive, use the package ZIP intended for your LifeTech backend rather than assuming any arbitrary GitHub source ZIP has been validated for import.
+3. Sign in to your LifeTech OCMS backend.
+4. Open **Packages → Themes Development**, select **Install Theme**, and upload the supported package ZIP.
+5. If ThemeStarter already exists, back it up and use the backend's supported update or replacement process.
+6. Open the Home and About pages and confirm that the default layout is applied automatically.
+
+> Existing page-specific layout assignments might remain in place after an import. Do not assume the installer removes them.
+
+### Initial preview
+
+The repository documents these example routes:
+
+```text
+/ThemeStarter/Home
+/ThemeStarter/About
+```
+
+If LifeTech OCMS is installed in a subfolder, use the site's actual base URL before these routes.
+
+[↑ Back to contents](#contents)
+
+## 4. How the default layout works
+
+The theme's `Layouts/Default.html` is intended to act as the automatic page layout. It imports shared components and calls the dynamic content loader **once** in the main content region.
+
+**Illustrative composition** (not a verbatim copy of the repository file):
+
+```php
+<?php // Import TopHeader and Header using the supported theme import mechanism. ?>
+
+<main class="container">
+    <?php dddm::loadDynamicContent(); ?>
+</main>
+
+<?php // Import Footer using the supported theme import mechanism. ?>
+```
+
+In the repository's current design:
+
+- `Default.html` takes priority as the theme's default layout.
+- All components have **Is Theme Default = No** to isolate and test the `Default.html` mechanism.
+- `Default.html` already calls `dddm::loadDynamicContent()`, so it should **not** also import a `ContentLoadBody` component that calls the loader again.
+- Home and About do not have separate custom layout assignments encoded in package metadata.
+- If the theme has no automatic `Default.html` layout, the framework's default-component mechanism may provide a fallback, depending on the installed release.
+
+Avoid rendering two headers, two footers, or duplicate view content.
+
+[↑ Back to contents](#contents)
+
+## 5. Pages and reusable components
+
+| Page or view | Intended layout | Special component |
 | --- | --- | --- |
-| Default.html | Header.html (static) | Home, About, Contact and ordinary views |
-| MemberLayout.html | MemberHeader plus sidebar | MemberDashboard, when manually assigned |
-| DynamicMenuLayout.html | DynamicHeader.html (API) | DynamicMenuDemo, when manually assigned |
+| Home | `Default.html` automatically | `WelcomeBanner.html` |
+| About | `Default.html` automatically | `AboutHighlights.html` |
+| Contact | `Default.html` automatically | Contact information helpers |
+| MemberDashboard, without a custom assignment | `Default.html` automatically | None required |
+| Posts | `Default.html` automatically | Optional blog API example |
 
-DynamicHeader requests /menus/is-navigation without a package filter, so the backend may return permitted menus across installed packages. Its loader still supports an optional packageName parameter if a developer chooses to filter. The demo uses the current session and does not manufacture a token or role IDs. Cross-origin API authentication needs the platform's supported configuration.
+`WelcomeBanner.html` should appear only on Home, and `AboutHighlights.html` only on About. The shared header and footer should appear once per page.
 
-The demo reuses TopHeader, Footer and shared assets, with one dynamic content loader. Do not separately publish the static Header on this custom-layout page. Test as Anonymous and as a signed-in user, nested links, new-tab targets, empty data and a failed request. Edit menu names/navigation publication in the backend to control what is returned.
+### Shared assets
 
-Static code checks and metadata references passed; the new custom-layout assignment and API response still require your live test. This does not implement automatic custom-layout mapping.
+ThemeStarter links shared CSS and JavaScript from theme assets using `ltThemePath()`. For example, the helper can be used in an asset URL:
 
-## Navigation URL fix — v1.2.1
-DynamicHeader now uses ltSiteUrl() directly as the base for internal menu links. JavaScript trims joining slashes and appends routePath; no URL constructor is used for menu destinations. External routes and # placeholders are returned unchanged. This preserves AppCore's installation subfolder.
+```php
+<link rel="stylesheet" href="<?= ltThemePath() ?>/Assets/your-stylesheet.css">
+```
 
-After updating, keep DynamicMenuDemo assigned to DynamicMenuLayout. Refresh the preview and confirm returned menus render and internal links retain the installation subfolder.
+Replace the illustrative asset filename with the **actual** filename in your package; do not assume the example exists as written.
+
+[↑ Back to contents](#contents)
+
+## 6. Site information helpers
+
+ThemeStarter demonstrates direct PHP output of LifeTech site settings. The repository associates these helpers with the following components:
+
+| Component | Helpers demonstrated |
+| --- | --- |
+| TopHeader | `ltPageTitle`, `ltSiteFaviconUrl`, `ltThemePath` |
+| Header | `ltSiteLogoUrl`, `ltSiteName`, `ltSiteTitle`, `ltSiteAlias`, `ltSiteUrl` |
+| Contact | `ltSiteEmail`, `ltSiteEmail2`, `ltSitePhone`, `ltSitePhone2`, `ltSiteAddress`, `ltSiteAddress2`, `ltSiteOpenHour`, `ltSiteClosedHour` |
+| Footer | `ltSiteCopyright`, `ltSiteLinkedln`, `ltSiteInstagram`, `ltSiteFacebook`, `ltSiteTwitter`, `ltSiteYoutube`, `ltThemePath` |
+
+Example of safely escaping a helper's text value in HTML:
+
+```php
+<h1><?= htmlspecialchars(ltSiteName(), ENT_QUOTES, 'UTF-8') ?></h1>
+```
+
+The theme expects the site settings to be configured in the backend. Unset values may appear blank. The repository uses the helper spelling **`ltSiteLinkedln`**; check the helper available in your installed framework before changing it.
+
+[↑ Back to contents](#contents)
+
+## 7. Custom layouts and dynamic navigation
+
+The repository includes optional layouts that are **not automatically assigned** through `package.json`.
+
+| Layout | Navigation or structure | Intended view |
+| --- | --- | --- |
+| `Default.html` | `Header.html` (static navigation) | Home, About, Contact, ordinary pages |
+| `MemberLayout.html` | Member header and sidebar | MemberDashboard, when assigned manually |
+| `DynamicMenuLayout.html` | `DynamicHeader.html` (API-driven navigation) | DynamicMenuDemo, when assigned manually |
+
+### Try the dynamic menu example
+
+1. Import the theme into a compatible test installation.
+2. In the backend's layout assignment controls, assign `DynamicMenuDemo.html` to `DynamicMenuLayout.html`.
+3. Open the page as an anonymous visitor and as an authenticated user.
+4. Verify menu visibility, nested links, new-tab targets, empty responses, and API error handling.
+
+`DynamicHeader.html` requests:
+
+```http
+GET /menus/is-navigation
+Accept: application/json
+```
+
+The endpoint returns navigation permitted for the current user's role(s). The demonstration does not invent a bearer token or role ID; authenticated cross-origin setups require the platform's supported configuration.
+
+For internal links, the dynamic menu example uses `ltSiteUrl()` as the base so installations in subfolders retain their path. External links and `#` placeholders remain unchanged.
+
+> Until you assign `DynamicMenuDemo.html` to `DynamicMenuLayout.html`, the view is expected to use the automatic `Default.html` layout and static navigation.
+
+[↑ Back to contents](#contents)
+
+## 8. Optional blog API example
+
+`Posts.html` is an optional example for connecting a theme view to a backend blog endpoint. It requires a compatible blog module or API endpoint to be available. The base layout and Home/About examples work without it.
+
+When testing Posts, verify both successful data rendering and the visible error or empty state if the backend API is unavailable.
+
+[↑ Back to contents](#contents)
+
+## 9. Testing checklist
+
+- [ ] Install or update the theme in a non-production LifeTech OCMS instance.
+- [ ] Confirm `Default.html` is selected automatically for Home and About.
+- [ ] Confirm Home displays `WelcomeBanner.html` only.
+- [ ] Confirm About displays `AboutHighlights.html` only.
+- [ ] Confirm each page renders one header, one footer, and one dynamic content load.
+- [ ] Verify CSS and JavaScript requests load successfully.
+- [ ] Verify page title, logo, favicon, contact information, and social links.
+- [ ] Check a narrow/mobile viewport.
+- [ ] Test a LifeTech OCMS installation under a subfolder.
+- [ ] Test the optional MemberLayout assignment separately.
+- [ ] Test the optional DynamicMenuLayout assignment and role-filtered API response.
+- [ ] Test Posts only when its backend endpoint is installed.
+- [ ] Export the successful installation through LifeTech OCMS before distributing a verified marketplace package.
+
+[↑ Back to contents](#contents)
+
+## 10. Troubleshooting
+
+| Symptom | What to check |
+| --- | --- |
+| Layout does not appear | Confirm the updated backend supports automatic `Default.html` selection and that the layout was registered during import. |
+| Duplicate content | Ensure `dddm::loadDynamicContent()` is called only once in the active layout composition. |
+| Wrong component on a page | Check view imports and page-specific component assignments. |
+| Missing CSS or JavaScript | Check actual asset filenames, `ltThemePath()`, browser network requests, and installation subfolder. |
+| Dynamic menu is empty | Verify the endpoint, published menu items, current roles, and authentication configuration. |
+| Custom layout is not used | Assign the intended view to that layout through the backend. |
+| Import fails | Inspect the backend installation error and logs; source-code checks alone cannot confirm installer compatibility. |
+
+[↑ Back to contents](#contents)
+
+## 11. Documentation and licensing
+
+- **Theme source:** [ajayi-abolore/ThemeStarter](https://github.com/ajayi-abolore/ThemeStarter)
+- **LifeTech OCMS documentation:** [Documentation portal](https://www.lifetech.host/hubs/Docs)
+- **Theme development documentation:** [LifeTech OCMS docs repository](https://github.com/lifetechOCMS/docs/tree/master/theme-dev)
+- **License:** See the repository's [LICENSE](LICENSE) file (MIT).
+
+**Version note:** This README documents the repository's stated `v1.2.1` example. It does not claim compatibility with a particular LifeTech OCMS core release because the repository does not encode a verified core-version compatibility requirement.
+
+---
+
+[↑ Back to contents](#contents) · [LifeTech OCMS documentation](https://www.lifetech.host/hubs/Docs)

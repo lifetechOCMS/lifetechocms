@@ -2,11 +2,11 @@
     "ltId": "179212543156762",
     "packageName": "ThemeStarter",
     "packageType": "theme",
-    "version": "1.0.0",
+    "version": "1.2.1",
     "dependsOn": [],
     "isPublished": null,
     "readme": "as",
-    "description": "ThemeStarter is a beginner-friendly LifeTech OCMS theme that demonstrates theme development through readable sample code. It includes an automatic default layout, reusable and page-specific components, site information helpers, static and dynamic navigation, and an optional backend API example. Designed to accompany the documentation, it helps developers learn, test, and build their first theme",
+    "description": "ThemeStarter is a beginner-friendly LifeTech OCMS theme that demonstrates theme development through readable sample code. It includes an automatic default layout, reusable and page-specific components, site information helpers, static and dynamic navigation, and an optional backend API example. Desi",
     "languageUsed": "html, css, javascript, liferazor",
     "ltVersion": "2.7.4"
 }
