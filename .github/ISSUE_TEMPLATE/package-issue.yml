@@ -28,8 +28,8 @@ body:
   - type: input
     id: package-name
     attributes:
-      label: Package Name
-      placeholder: "e.g. ThemeLifeTech, MdBlog"
+      label: Package Name e.g. ThemeLifeTech, MdBlog
+      value: "LifetechOCMS"
     validations:
       required: true
 
@@ -38,12 +38,6 @@ body:
     attributes:
       label: Package Repository URL
       placeholder: "https://github.com/lifetechOCMS/ThemeLifeTech"
-
-  - type: input
-    id: versions
-    attributes:
-      label: LifeTech OCMS and Package Versions
-      placeholder: "Core v2.7.9 / Package v1.2.1"
 
   - type: textarea
     id: description
