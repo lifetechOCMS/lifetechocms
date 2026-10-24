@@ -73,6 +73,11 @@ def main():
                 found[repo['full_name'].lower()] = repo['full_name']
 
     names = sorted(found.values(), key=str.casefold)
+    # Put the central issue tracker first (GitHub defaults to the first option).
+    core = found.get('lifetechocms/lifetechocms')
+    if core:
+        names.remove(core)
+        names.insert(0, core)
     if 'lifetechocms/lifetechocms' not in found:
         raise RuntimeError('Core repository missing; refusing to overwrite dropdown')
     if len(names) > 299:
@@ -95,6 +100,20 @@ def main():
         '      required: true\n\n'
     )
     updated = original[:matches[0].start()] + replacement + original[matches[0].end():]
+    # GitHub Issue Forms have no conditional fields, so keep the fallback visible.
+    fallback = (
+        '  - type: input\n'
+        '    id: other-repository-url\n'
+        '    attributes:\n'
+        '      label: Other Repository URL (only if not listed)\n'
+        '      description: Complete this only when you select Other / Not listed above.\n'
+        '      placeholder: https://github.com/owner/repository\n\n'
+    )
+    if '    id: other-repository-url\n' not in updated:
+        anchor = '  - type: textarea\n'
+        if anchor not in updated:
+            raise RuntimeError('Could not locate insertion point for manual repository field')
+        updated = updated.replace(anchor, fallback + anchor, 1)
     if updated != original:
         FORM.write_text(updated, encoding='utf-8')
         print(f'Updated dropdown with {len(names)} repositories')
