@@ -39,6 +39,7 @@ body:
       label: Affected Repository
       description: Select the repository associated with this issue.
       options:
+        - "lifetechOCMS/lifetechocms"
         - "adedayoAdetunji/md_forum"
         - "adedayoAdetunji/mdLtLogin"
         - "ajayi-abolore/pgsql_lifetechocms"
@@ -49,7 +50,6 @@ body:
         - "Classicking120/MdClassicComplaint"
         - "lifetechOCMS/docs"
         - "lifetechOCMS/events"
-        - "lifetechOCMS/lifetechocms"
         - "lifetechOCMS/MdLt"
         - "lifetechOCMS/modules"
         - "lifetechOCMS/ThemeLifeTech"
@@ -57,6 +57,13 @@ body:
         - "Other / Not listed"
     validations:
       required: true
+
+  - type: input
+    id: other-repository-url
+    attributes:
+      label: Other Repository URL (only if not listed)
+      description: Complete this only when you select Other / Not listed above.
+      placeholder: https://github.com/owner/repository
 
   - type: textarea
     id: description
