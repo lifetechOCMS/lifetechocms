@@ -2,9 +2,11 @@
     "ltId": "178665720650172",
     "packageName": "ThemeLifeTech",
     "packageType": "theme",
-    "version": "1.2",
-    "dependsOn": null,
-    "isPublished": "0",
+    "version": "1.2.1",
+    "dependsOn": [],
+    "isPublished": null,
     "readme": "",
-    "languageUsed": "html, tailwind\/css, javascript"
+    "languageUsed": "html, tailwind\/css, javascript",
+    "description": "",
+    "ltVersion": "2.7.4"
 }

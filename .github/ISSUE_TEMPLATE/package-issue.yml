@@ -1,0 +1,83 @@
+
+name: LifeTech OCMS Package Issue
+description: Report issues affecting LifeTech OCMS core, themes, modules or plugins
+title: "[PackageName] "
+labels:
+  - "status:needs-triage"
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve LifeTechOCMS.
+        Please provide the details below.
+
+  - type: dropdown
+    id: package-type
+    attributes:
+      label: Package Type
+      description: Select the affected package category.
+      options:
+        - Core
+        - Theme
+        - Module
+        - Plugin
+    validations:
+      required: true
+
+  - type: input
+    id: package-name
+    attributes:
+      label: Package Name
+      placeholder: "e.g. ThemeLifeTech, MdBlog"
+    validations:
+      required: true
+
+  - type: input
+    id: repository-url
+    attributes:
+      label: Package Repository URL
+      placeholder: "https://github.com/lifetechOCMS/ThemeLifeTech"
+
+  - type: input
+    id: versions
+    attributes:
+      label: LifeTech OCMS and Package Versions
+      placeholder: "Core v2.7.9 / Package v1.2.1"
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Problem Description
+      description: Describe the issue clearly.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to Reproduce
+      placeholder: |
+        1. Install the package
+        2. Open the affected page
+        3. Observe the error
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behaviour
+      description: What should happen instead?
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error Logs or Screenshots
+      description: Do not include passwords, tokens or other secrets.
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Confirmation
+      options:
+        - label: I have checked for existing issues.
+          required: true
