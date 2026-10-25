@@ -41,6 +41,7 @@ body:
       options:
         - "lifetechOCMS/lifetechocms"
         - "adedayoAdetunji/md_forum"
+        - "adedayoAdetunji/MdBlog"
         - "adedayoAdetunji/mdLtLogin"
         - "ajayi-abolore/pgsql_lifetechocms"
         - "ajayi-abolore/PlgMyFontAwesome"
