@@ -56,6 +56,11 @@ namespace Lt\Modules\MdLt\Controllers;
     LtRoute::delete('/users/{ltId}',                    'MdLt@TbUserController@destroy')->name('admin-users.destroy');
     LtRoute::patch ('/users/{ltId}/toggle-enabled',     'MdLt@TbUserController@toggleEnabled')->name('admin-users.toggle-enabled');
     
+       //forgot password
+    LtRoute::post ('/users/request-password-reset',     'mdLt@TbUserController@requestPasswordReset')->name('admin-users.request-password-reset');
+    LtRoute::post ('/users/verify-otp',                 'mdLt@TbUserController@verifyOtp')->name('admin-users.verify-otp');
+    LtRoute::post ('/users/reset-password',            'mdLt@TbUserController@reset')->name('admin-reset.password-token');
+    
     
     //////////////////////////////////  MODULE   //////////////////////////////////////////////////////
     LtRoute::get   ('/packages/filtered',                   'MdLt@TbPackageController@filteredPackages')->name('admin-packages.filtered'); //new

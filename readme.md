@@ -77,4 +77,4 @@ platform
         https://www.lifetech.host/hubs/docs
         
 GitHub
-        https://github.com/lifetechOCMS/docs/blob/master/readme.md
+        https://github.com/lifetechOCMS/docs

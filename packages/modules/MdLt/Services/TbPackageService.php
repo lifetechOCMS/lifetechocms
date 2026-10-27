@@ -961,14 +961,25 @@ class TbPackageService
                 if ($check['responseCategory'] == 100) {
                     $failedDependency = [];
                     foreach($returnDependencies as $dependency){
-                        if(!$dependency['isInstalled'] || !$dependency['isPublished'] || !$dependency['isUpdated']){
-                             $failedDependency[] = $dependency['packageName'];
+                        if(!$dependency['isInstalled']){
+                            $packageName = $dependency['packageName'];
+                             $failedDependency[] = "please check [$packageName] if this dependency is installed";
+                             
+                        }elseif(!$dependency['isPublished']){
+                            $packageName = $dependency['packageName'];
+                             $failedDependency[] = "please check [$packageName] if this dependency is published";
+                             
+                        }elseif(!$dependency['isUpdated']){
+                            $packageName = $dependency['packageName'];
+                             $failedDependency[] = "please check [$packageName] if this dependency is updated";
+                             
                         }
+                        
                     }
                     
-                    $failedDependencyString = implode(',', $failedDependency);
-                    $msg = count($failedDependency) > 1 ? "dependencies are" : "dependency is";
-                    return LtResponse::json("Failed to publish; please check [$failedDependencyString] if this $msg installed, updated or published", '3319', '100');
+                    $failedDependencyString = implode(', ', $failedDependency);
+                    
+                    return LtResponse::json("Failed to publish; $failedDependencyString", '3319', '100');
                 } else {
                     $updatePublish = true;
                 }

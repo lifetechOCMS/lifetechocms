@@ -857,22 +857,29 @@ class {$fileNameWithNoExt}
             return $result;
         }
     
-        /*
+/*
          * STEP 1: Read PendingLayouts.json.
          */
         $pendingContent = file_get_contents($pendingFile);
-    
+
         if ($pendingContent === false) {
             throw new \RuntimeException(
                 'Unable to read PendingLayouts.json'
             );
         }
-    
-        $pendingLayouts = json_decode($pendingContent,true,512,JSON_THROW_ON_ERROR);
-    
-        if (!is_array($pendingLayouts)) {
+
+        // Remove UTF-8 BOM if present and trim whitespace
+        $pendingContent = trim($pendingContent, "\xEF\xBB\xBF \t\n\r\0\x0B");
+
+        if ($pendingContent === '') {
+            return $result;
+        }
+
+        try {
+            $pendingLayouts = json_decode($pendingContent, true, 512, JSON_THROW_ON_ERROR);
+        } catch (\JsonException $e) {
             throw new \RuntimeException(
-                'PendingLayouts.json must contain an array'
+                'Invalid JSON in PendingLayouts.json: ' . $e->getMessage()
             );
         }
     
@@ -883,23 +890,27 @@ class {$fileNameWithNoExt}
         }
         
        
-        /*
+/*
          * STEP 2: Load existing applied layouts.
          */
         $appliedLayouts = [];
-    
+
         if (is_file($appliedFile)) {
-    
+
             $appliedContent = file_get_contents($appliedFile);
-    
+
             if ($appliedContent === false) {
                 throw new \RuntimeException('Unable to read AppliedLayouts.json');
             }
-    
-            $appliedLayouts = json_decode($appliedContent, true, 512, JSON_THROW_ON_ERROR);
-    
-            if (!is_array($appliedLayouts)) {
-                throw new \RuntimeException('AppliedLayouts.json must contain an array');
+
+            $appliedContent = trim($appliedContent, "\xEF\xBB\xBF \t\n\r\0\x0B");
+
+            if ($appliedContent !== '') {
+                $appliedLayouts = json_decode($appliedContent, true, 512, JSON_THROW_ON_ERROR);
+
+                if (!is_array($appliedLayouts)) {
+                    throw new \RuntimeException('AppliedLayouts.json must contain an array');
+                }
             }
         }
         

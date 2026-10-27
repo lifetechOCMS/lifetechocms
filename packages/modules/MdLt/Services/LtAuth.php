@@ -145,6 +145,8 @@ class LtAuth
                 $togetTokenName = ApiTokenDetails::tokenName();
                 $user->tokenName = ApiTokenDetails::tokenName();
                 $user->$togetTokenName = LtSession::get('lwToken');
+                unset($user->password); unset($user->salt); unset($user->createdAt); 
+                unset($user->updatedAt); unset($user->formType); 
                 LtSession::set('ltUrid', $user->roleId);
                 return LtResponse::json("Login Succesful", "1002", "200",$user);
             }
