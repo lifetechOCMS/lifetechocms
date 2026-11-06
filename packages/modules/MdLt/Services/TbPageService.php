@@ -13,6 +13,12 @@ use Lt\Modules\MdLt\Services\TbPageContentService;
 use DbConnect;  
 
 
+/**
+ *  RESPONSE CODE 3400 - 3499
+ */ 
+
+
+
 class TbPageService
 {
         protected $pageModel;
@@ -27,37 +33,101 @@ class TbPageService
             $this->userId = LtSession::get('ltUid');
         }
         
-        public function store($model){
-            
-            if($model->className !== 'tb_page'){
-                foreach ($model as $key => $newPage){
+        public function store($model) {
+            // 1. Handle array or non-tb_page object inputs (e.g. from TbContentService, or from other services)
+            if (!is_object($model) || ($model->className ?? '') !== 'tb_page') {
+                if (!is_iterable($model)) {
+                    return LtResponse::json("Page value must be an Array or Object.", 3401, 100);
+                }
+        
+                foreach ($model as $key => $newPage) {
                     $this->pageModel->$key = $newPage;
                 }
-                if($this->pageModel->ltId == ''){
-                    
+        
+                if (empty($this->pageModel->ltId)) {
                     $this->pageModel->ltId = ltId();
                 }
+        
+                // Auto-assign active default theme layout if pageType is 'theme' and not already set
+                if (($this->pageModel->pageType ?? '') === 'theme') {
+                    if (empty($this->pageModel->themeLayout) || empty($this->pageModel->themeLayoutPackage)) {
+                        $activeDefault = $this->getActiveDefaultThemeLayout();
+                        $this->pageModel->themeLayout        = $activeDefault['layoutName'] ?? null;
+                        $this->pageModel->themeLayoutPackage = $activeDefault['packageName'] ?? null;
+                    }
+                } else {
+                    $this->pageModel->themeLayout        = null;
+                    $this->pageModel->themeLayoutPackage = null;
+                }
+        
+                $this->pageModel->updatedBy = $this->pageModel->updatedBy ?? $this->userId;
+                $this->pageModel->updatedAt = $this->pageModel->updatedAt ?? $this->ltNow;
+                $this->pageModel->createdAt = $this->pageModel->createdAt ?? $this->ltNow;
+        
                 $this->pageModel->insert();
                 return $this->pageModel->responseJson();
             }
-
-            $pageName = $model->pageName;
-            $routePath = $model->routePath;
-            
-            $exist = $model->select()->where('pageName', '=', $pageName)->andWhere('routePath', '=', $routePath)->get();
-            
-            if(count($exist) > 0){
-                return  LtResponse::json("Page [ $pageName ] already exist", 3403, 100); 
+        
+            // 2. Direct TbPage model creation (from Page UI)
+            $pageName  = trim($model->pageName ?? '');
+            $routePath = trim($model->routePath ?? '');
+            $pageType  = trim($model->pageType ?? '');
+        
+            $checkPage = new TbPage();
+            $existing  = $checkPage->select()
+                                  ->where('pageName', '=', $pageName)
+                                  ->andWhere('routePath', '=', $routePath)
+                                  ->get();
+        
+            if (!empty($existing)) {
+                return LtResponse::json("Page '{$pageName}' already exists.", 3403, 100);
             }
-
-            $model->ltId = ltId();
-            $model->u9atedBy = $this->userId;
-            $model->u9atedAt = $this->ltNow;
-            $model->createdAt = $this->ltNow;
+        
+            // 3. Assign Default.html layout ONLY for 'theme' pages (never 'api', 'router', 'report')
+            if ($pageType === 'theme') {
+                $activeDefault             = $this->getActiveDefaultThemeLayout();
+                $model->themeLayout        = $activeDefault['layoutName'] ?? null;
+                $model->themeLayoutPackage = $activeDefault['packageName'] ?? null;
+            } else {
+                $model->themeLayout        = null;
+                $model->themeLayoutPackage = null;
+            }
             
+            
+        
+            $model->ltId      = ltId();
+            $model->updatedBy = $this->userId;
+            $model->updatedAt = $this->ltNow;
+            $model->createdAt = $this->ltNow;
+        
             $model->insert();
             return $model->responseJson();
-            
+        }
+        
+        private function getActiveDefaultThemeLayout(): ?array {
+            $sqlConnect = DbConnect::dbDriver();
+            $sql = "
+                SELECT 
+                    p.package_name,
+                    c.content_name
+                FROM tb_package p
+                INNER JOIN tb_content c 
+                    ON c.package_name = p.package_name
+                  AND c.content_name = 'Default.html'
+                  AND c.theme_resource_type = 'Layout'
+                WHERE p.package_type = 'theme'
+                  AND p.is_theme_default = 1
+                LIMIT 1
+            ";
+        
+            $stmt = $sqlConnect->prepare($sql);
+            $stmt->execute();
+            $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+        
+            return [
+                'packageName' => $row['package_name'],
+                'layoutName'  => $row['content_name'],
+            ];
         }
         
         public function publishedContent($model){
@@ -275,179 +345,134 @@ class TbPageService
                 return $this->pageModel->responseJson();
             }else{
                 $this->pageModel->processRequest();
+                $pageCheck = new TbPage();
+                $pageExist = $pageCheck->select()->where('ltId', '=', $ltId)->get();
+        
+                if(empty($pageExist)) return LtResponse()::json("Invalid Page Id", "3302");
+            
+                $isProtected = $pageExist[0]->isProtected;
+                
+                if($isProtected == '1'){
+                     return LtResponse()::json("Page cannot be deleted because it is Protected", "3302");
+                }
+                
                 $this->pageModel->delete('ltId', '=', $ltId);
                 return $this->pageModel->responseJson();
             }
  
         }
         
-        public function publishedToRegion(){
-             
+        public function publishedToDefault() {
             $packageModel = new TbPackage();
             $contentModel = new TbContent();
+        
+            $publishType = trim($this->request->publishType ?? '');
+            $selected    = $this->request->selected ?? [];
+            $themeId     = trim($this->request->themeId ?? '');
+            $updatedBy   = LtSession::get('ltUid');
             $sqlConnect = DbConnect::dbDriver();
         
-            $publishSource = $this->request->publishSource;
-            $publishType   = $this->request->publishType;
-            $selected      = $this->request->selected;
-            $themeId       = $this->request->themeId;
-        
-            if (empty($selected)) {
-                return LtResponse::json('No page has been selected for publishing to the specified region.', 3408, 100);
+            // 1. Validate inputs
+            if (empty($selected) || !is_array($selected)) {
+                return LtResponse::json('No page has been selected for publishing to the specified theme.', 3408, 100);
             }
         
-            // Fetch package name
-            $packageRecord = $packageModel->select('package_name')
+            if (empty($themeId)) {
+                return LtResponse::json('No target theme ID was provided.', 3409, 100);
+            }
+        
+            // 2. Fetch and validate theme package record
+            $packageRecord = $packageModel->select('lt_id, package_name, package_type')
                                           ->where('ltId', '=', $themeId)
                                           ->get();
         
             if (empty($packageRecord)) {
-                return LtResponse::json('Invalid package theme ID', 3409, 100);
+                return LtResponse::json('The specified theme package was not found.', 3410, 100);
             }
         
             $packageName = $packageRecord[0]->packageName;
+            $packageType = $packageRecord[0]->packageType;
         
+            if ($packageType !== 'theme') {
+                return LtResponse::json("Selected package is not a valid theme.", 3410, 100);
+            }
+        
+            // 3. Verify Default.html exists in both tb_content and on disk
+            $defaultLayout = $contentModel->select('lt_id, content_name')
+                                          ->where('packageName', '=', $packageName)
+                                          ->andWhere('contentName', '=', 'Default.html')
+                                          ->andWhere('themeResourceType', '=', 'Layout')
+                                          ->get();
+        
+            if (empty($defaultLayout)) {
+                return LtResponse::json("Default.html content record not found. Please create one.", 3315, 100);
+            }
+        
+            $layoutName = $defaultLayout[0]->contentName ?? 'Default.html';
+        
+            $path = "packages/{$packageType}s/{$packageName}/Layouts/{$layoutName}";
+            if (!file_exists($path)) {
+                return LtResponse::json("Default.html file not found on disk. Please create one.", 3316, 100);
+            }
+        
+            // 4. Extract target filter values (supports both array and object items in $selected)
+            $placeholders = [];
+            $inParams     = [];
+        
+            foreach (array_values($selected) as $i => $item) {
+                $itemArr = (array) $item;
+                $val     = ($publishType === 'package')
+                    ? trim($itemArr['packageName'] ?? '')
+                    : trim($itemArr['id']);
+        
+                if ($val !== '') {
+                    $key            = ":item_{$i}";
+                    $placeholders[] = $key;
+                    $inParams[$key] = $val;
+                }
+            }
+        
+            if (empty($placeholders)) {
+                return LtResponse::json('No valid page or package identifiers found in selection.', 3408, 100);
+            }
+        
+            $inClause     = implode(', ', $placeholders);
+            $targetColumn = ($publishType === 'package') ? 'package_name' : 'lt_id';
+        
+            // 5. Execute single atomic batch UPDATE on the same $this->sqlConnect instance
             try {
                 $sqlConnect->beginTransaction();
         
-                // Fetch theme default contents
-                $sql1 = "SELECT lt_id, sort_order 
-                         FROM tb_content 
-                         WHERE package_name = :pkg AND is_theme_default=:themeDefault";
+                $sql = "
+                    UPDATE tb_page 
+                    SET theme_layout         = :themeLayout,
+                        theme_layout_package = :themeLayoutPackage,
+                        updated_by           = :updatedBy,
+                        updated_at           = :updatedAt
+                    WHERE page_type = :pageType
+                      AND {$targetColumn} IN ({$inClause})
+                ";
         
-                $stmt1 = $sqlConnect->prepare($sql1);
-                $stmt1->execute([
-                    ':pkg'            => $packageName,
-                    ':themeDefault' => '1'
-                ]);
+                $baseParams = [
+                    ':themeLayout'        => $layoutName,
+                    ':themeLayoutPackage' => $packageName,
+                    ':updatedBy'          => $updatedBy,
+                    ':updatedAt'          => $this->ltNow,
+                    ':pageType'           => 'theme',
+                ];
         
-                $packageContent = $stmt1->fetchAll(\PDO::FETCH_ASSOC);
-        
-                if (empty($packageContent)) {
-                    $sqlConnect->rollBack();
-                    return LtResponse::json('Theme content not found for publishing', 3410, 100);
-                }
-        
-                /**
-                 * Build page list
-                 */
-                $pageList = [];
-        
-                if ($publishType === 'package') {
-                    $placeholders = [];
-                    $params = [];
-        
-                    foreach ($selected as $i => $pkg) {
-                        $placeholders[] = ":pkg$i";
-                        $params[":pkg$i"] = $pkg['packageName'];
-                    }
-        
-                    $inPkg = implode(', ', $placeholders);
-        
-                    $sqlPage = "SELECT lt_id AS page_id, page_type, package_name
-                                FROM tb_page
-                                WHERE page_type = 'theme'
-                                AND package_name IN ($inPkg)";
-        
-                    $stmtPage = $sqlConnect->prepare($sqlPage);
-                    $stmtPage->execute($params);
-                    $pageList = $stmtPage->fetchAll(\PDO::FETCH_ASSOC);
-                } else {
-                    foreach ($selected as $pg) {
-                        $pageList[] = [
-                            'page_id'      => $pg['id'],
-                            'package_name' => $pg['packageName'],
-                            'page_type'    => $pg['pageType']
-                        ];
-                    }
-                }
-        
-                if (empty($pageList)) {
-                    $sqlConnect->rollBack();
-                   return LtResponse::json('No page has been selected for publishing to the specified region.', 3408, 100);
-                }
-        
-                /**
-                 * Delete old region content
-                 */
-                $pl = [];
-                $params = [];
-        
-                foreach ($pageList as $i => $pg) {
-                    $pl[] = ":p$i";
-                    $params[":p$i"] = $pg['page_id'];
-                }
-        
-                $inPages = implode(', ', $pl);
-        
-                $sqlDelete = "DELETE FROM tb_page_content
-                              WHERE publish_source = 'region'
-                              AND page_id IN ($inPages)";
-        
-                $stmtDel = $sqlConnect->prepare($sqlDelete);
-                $stmtDel->execute($params);
-        
-                /**
-                 * Insert new page content
-                 */
-                $now   = $this->ltNow;
-                $ltUid = LtSession::get('ltUid');
-        
-                $insertData = [];
-        
-                foreach ($pageList as $pg) {
-                    foreach ($packageContent as $cnt) {
-                        $insertData[] = [
-                            $pg['page_id'],            // page_id
-                            $cnt['lt_id'],             // content_id
-                            $pg['page_type'],          // content_type
-                            $pg['package_name'],       // package_name
-                            ltId(),                    // lt_id
-                            $now,                      // created_at
-                            $now,                      // updated_at
-                            $ltUid,                    // updated_by
-                            $publishSource,            // publish_source
-                            $cnt['sort_order']         // sort_order
-                        ];
-                    }
-                }
-        
-                $batchSize = 100;
-                $cols = "(page_id, content_id, content_type, package_name, lt_id, created_at, updated_at, updated_by, publish_source, sort_order)";
-        
-                for ($i = 0; $i < count($insertData); $i += $batchSize) {
-                    $batch = array_slice($insertData, $i, $batchSize);
-        
-                    $placeholders = implode(", ", array_fill(0, count($batch), "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"));
-        
-                    $sqlInsert = "INSERT INTO tb_page_content $cols VALUES $placeholders
-                                  ON DUPLICATE KEY UPDATE
-                                    updated_at = VALUES(updated_at),
-                                    updated_by = VALUES(updated_by),
-                                    content_type = VALUES(content_type),
-                                    publish_source = VALUES(publish_source),
-                                    sort_order = VALUES(sort_order)";
-        
-                    $stmtIns = $sqlConnect->prepare($sqlInsert);
-        
-                    $flatValues = [];
-                    foreach ($batch as $row) {
-                        foreach ($row as $val) {
-                            $flatValues[] = $val;
-                        }
-                    }
-        
-                    $stmtIns->execute($flatValues);
-                }
-                
-                // return json_encode([$sqlInsert, $flatValues]);
+                $stmtUpdatePages = $sqlConnect->prepare($sql);
+                $stmtUpdatePages->execute(array_merge($baseParams, $inParams));
         
                 $sqlConnect->commit();
+        
                 return LtResponse::json("Page(s) successfully published for the selected theme.", 3411, 200);
         
-            } catch (PDOException $e) {
-                $sqlConnect->rollBack();
-                return LtResponse::error("failed: " . $e->getMessage(), 3412, 100, 'Page(s) failed to published for the selected theme.');
+            } catch (\Throwable $e) {
+                if ($sqlConnect->inTransaction()) {
+                    $sqlConnect->rollBack();
+                }
+                return LtResponse::error("Failed: " . $e->getMessage(), 3412, 100, 'Page(s) failed to publish for the selected theme.');
             }
         }
         

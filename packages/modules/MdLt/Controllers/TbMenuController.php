@@ -13,6 +13,10 @@ use Lt\Modules\MdLt\Services\LtSession;
 use DbConnect;
 
 
+/**
+ *  RESPONSE CODE 1500 - 1599
+ */ 
+
 // ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
 class TbMenuController
 {

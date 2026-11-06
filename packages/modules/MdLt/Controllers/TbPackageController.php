@@ -11,6 +11,10 @@ use Lt\Modules\MdLt\Services\TbPageContentService;
 use Lt\Modules\MdLt\Services\TbPageService;
 use Lt\Modules\MdLt\Services\TbMenuService;
 
+/**
+ *  RESPONSE CODE 3300 - 3399
+ */ 
+
 
 class TbPackageController
 {

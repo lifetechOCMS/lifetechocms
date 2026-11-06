@@ -5,7 +5,7 @@ use Lt\Modules\MdLt\Models\TbLwtTokenization;
 use Lt\Modules\MdLt\Services\LtResponse;
 use Lt\Modules\MdLt\Services\LtSession;
 
-
+// RESPONSE CODE 1100 - 1199
 
 
 class LtLWToken

@@ -6,7 +6,12 @@ use Lt\Modules\MdLt\Services\LtRequest;
 use Lt\Modules\MdLt\Services\LtResponse;
 use Lt\Modules\MdLt\Services\TbRoleService;
 use Lt\Modules\MdLt\Services\LtService;
-use Lt\Modules\MdLt\Services\LtSession;;
+use Lt\Modules\MdLt\Services\LtSession;
+
+/**
+ *  RESPONSE CODE 3200 - 3299
+ */ 
+
 
 class TbRoleController
 {
@@ -38,58 +43,41 @@ class TbRoleController
     }
 
     public function store(){
-        $roleModel = new TbRole(); 
-        $ltId = LtService::generateLtId();
-        $roleModel->processRequest(); 
-        $roleModel->validateRequest(['roleName' => 'required|min:3']);
-        $roleModel->ltId = $ltId;
-        $roleName = $roleModel->roleName;
-        
-        $exist = $roleModel->select()->where('roleName', '=', $roleName)->get();
-        if(count($exist) > 0) return  LtResponse::json('Role Record Exist', 3202, 100);
-        
-        $roleModel->updatedBy = LtSession::get('ltUid');
-        
-        $roleModel->insert();
-        $tables = ['tb_content', 'tb_page', 'tb_menu', 'bked_content_editor'];
-        if($roleModel->responseCategory == '200'){
-           $response =  LtService::alterTableColumn($tables, $ltId);
-        }
-        
-        return $roleModel->responseJson();
+        $roleService = new TbRoleService();
+        $result = $roleService->store();
+        return $result;
+       
+    }
+    
+    
+    public function getFormRoles(){
+        $roleService = new TbRoleService();
+        $result = $roleService->getFormRoles();
+        return $result;
+       
+    }
+    
+    public function updateFormRoles(){
+        $roleService = new TbRoleService();
+        $result = $roleService->updateFormRoles();
+        return $result;
+       
     }
     
     public function update(){
-        $roleModel = new TbRole(); 
-        
-        $roleModel->processRequest(); 
-        $roleModel->validateRequest(['roleName' => 'required|min:3']);
-        $roleModel->updatedBy = LtSession::get('ltUid');
-        $roleModel->update('ltId', '=', $roleModel->ltId);
-        return $roleModel->responseJson(); 
+        $roleService = new TbRoleService();
+        $result = $roleService->update();
+        return $result;
+       
     }
     
     public function destroy(){
-        $roleModel = new TbRole(); 
-        
-        $roleModel->processRequest(); 
-        $ltId = $roleModel->ltId; 
-        
-        $roleModel->select()->where('ltId', $ltId)->andWhere('isProtected', '1')->get(); 
-        if($roleModel->responseCategory === '200'){
-            return LtResponse::json("This Role cannot be deleted because it is Protected", "3203");
-        }else{
-         
-        $roleModel->delete('ltId', '=', $ltId);
-            
-         $tables = ['tb_content', 'tb_page', 'tb_menu', 'bked_content_editor'];
-         $response =  LtService::dropTableColumn($tables, $ltId);
-            
-              
-          return $roleModel->responseJson();
-        } 
+        $roleService = new TbRoleService();
+        $result = $roleService->destroy();
+        return $result;
+       
     }
-    
+ 
     public function toggleEnabled(){
         $roleModel = new TbRole(); 
         $roleModel->processRequest(['isEnabled', 'ltId']);  

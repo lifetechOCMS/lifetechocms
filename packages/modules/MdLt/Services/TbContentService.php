@@ -13,12 +13,15 @@ use Lt\Modules\MdLt\Services\CaseConverter;
 use Lt\Modules\MdLt\Services\TbPageContentService; 
 
 use Lt\Modules\MdLt\Models\TbPage;
+use Lt\Modules\MdLt\Models\TbPackage;
 use Lt\Modules\MdLt\Services\TbRoleService;
 
 use DbConnect;
 use LtDdm;
 
-
+/**
+ *  RESPONSE CODE 3500 - 3599
+ */ 
 
 class TbContentService
 {
@@ -53,8 +56,6 @@ class TbContentService
             return  LtResponse::json("Content Value should be Array or Object", 3502, 100); 
         }
         
-
-      
         $contentName = $this->contentModel->contentName;
         $packageName = $this->contentModel->packageName;
         $mvcType = ucfirst($this->contentModel->mvcType);
@@ -129,6 +130,10 @@ class TbContentService
         $this->contentModel->insert();
         
         if($this->contentModel->responseCategory == 200){
+            $packageModel = new TbPackage();
+            $defaultTheme = $packageModel->select('package_name')->where('packageType', '=', 'theme')->andWhere('isThemeDefault', '=', 1)->get();
+            $defaultThemePackage = $defaultTheme[0]->packageName;
+            
             
             if($contentType == 'module' || $contentType == 'plugin'){
 
@@ -160,6 +165,9 @@ class TbContentService
                         'packageName' => $packageName, 
                         'routePath' => $path,
                         'pageType' => $pageType,
+                        'themeLayout' => 'Default.html',
+                        'themeLayoutPackage' => $defaultThemePackage,
+                        'createdFrom' => $contentType,
                         'updatedAt' => $this->ltNow,
                         'createdAt' => $this->ltNow,
                     ];
@@ -210,15 +218,15 @@ class TbContentService
                      $publishedContent = $pageContentService->publishPageContent($pageContent);
                      
                     
-                    if($pageType == 'theme'){
+                    // if($pageType == 'theme'){
                         
-                        $pageContent = [
-                            "pageId" => $pageId,
-                            "contentType" => 'theme',
-                            "packageName" => $packageName,
-                        ];
-                      $pageContentService->publishPageRegion($pageContent);
-                    }
+                    //     $pageContent = [
+                    //         "pageId" => $pageId,
+                    //         "contentType" => 'theme',
+                    //         "packageName" => $packageName,
+                    //     ];
+                    //   $pageContentService->publishPageRegion($pageContent);
+                    // }
                     
                     
                     $this->contentModel->responseData->routePath = $path;
@@ -254,6 +262,9 @@ class TbContentService
                             'packageName' => $packageName, 
                             'routePath' => $path,
                             'pageType' => "theme",
+                            'themeLayout' => 'Default.html',
+                            'themeLayoutPackage' => $packageName,
+                            'createdFrom' => $contentType,
                             'updatedAt' => $this->ltNow,
                             'createdAt' => $this->ltNow,
                         ];
@@ -299,40 +310,9 @@ class TbContentService
                         // 
                          $pageContentService = new TbPageContentService();
                          $pageContentService->publishPageContent($pageContent);
-                         
-                         //checking if Default layouts exist
-                        $defaultPath ="packages/".$contentType.'s/'.$packageName.'/Layouts/Default.html';
-                        if(file_exists($defaultPath)){
-                            $layoutData = [
-                                'layoutName' => "Default.html",
-                                'contentId' =>  $contentId,
-                                'layoutPackageName' => $packageName
-                            ];
-                            // assign Default layout to the content
-                            $result = $this->assignLayouts($layoutData);
-                            $decodeResult = json_decode($result);
-
-                            if($decodeResult->responseCategory == 200){
-                                $this->contentModel->responseData->themeLayoutPackage = $packageName;
-                                $this->contentModel->responseData->themeLayout = "Default.html";
-                            }
-                        }else{
-                        // Publishing for Region 
-                            $contentModel = new TbContent(); // re-instantiating the model
-                            $contentRecord = $contentModel->select('lt_id, sort_order')->where('packageName', '=', $packageName)->andWhere('themeResourceType','=', 'Component')->andWhere('isThemeDefault', '=', 1)->get();
-                                
-                                $pageContent = [
-                                    "pageId" => $pageId,
-                                    "contentType" => 'theme',
-                                    "packageName" => $packageName,
-                                ];
-                                    
-                            $pageContentService->publishPageRegion($pageContent, $contentRecord);
-
-                        }
                         
-                        $this->contentModel->responseData->routePath = $path;
-                        $this->contentModel->responseData->isPublished = 1;
+                         $this->contentModel->responseData->routePath = $path;
+                         $this->contentModel->responseData->isPublished = 1;
                         
                     }
                     
@@ -363,6 +343,9 @@ class TbContentService
                         'pageName'=> $contentName,
                         'routePath' => $path,
                         'pageType' => $pageType,
+                        'themeLayout' => 'Default.html',
+                        'themeLayoutPackage' => $defaultThemePackage,
+                        'createdFrom' => 'lifecontent',
                         'updatedAt' => $this->ltNow,
                         'createdAt' => $this->ltNow,
                     ];
@@ -406,6 +389,397 @@ class TbContentService
         return $this->contentModel->responseJson();
         
     }
+    
+    
+// public function store($model, $isService = false) {
+//     $menuService = new TbMenuService();
+//     $pageService = new TbPageService();
+
+//     // 1. Validate and hydrate $this->contentModel
+//     if (is_object($model) && ($model->className ?? '') === 'tb_content') {
+//         $this->contentModel = $model;
+//     } elseif (is_iterable($model)) {
+//         foreach ($model as $key => $value) {
+//             $this->contentModel->$key = $value;
+//         }
+//     } else {
+//         return LtResponse::json("Content Value should be Array or Object", 3502, 100);
+//     }
+
+//     // 2. Safely extract properties (PHP 8.1+ null-safe)
+//     $contentName       = trim($this->contentModel->contentName ?? '');
+//     $packageName       = trim($this->contentModel->packageName ?? '');
+//     $mvcType           = ucfirst(trim($this->contentModel->mvcType ?? ''));
+//     $contentType       = trim($this->contentModel->contentType ?? '');
+//     $storeType         = trim($this->contentModel->storeType ?? '');
+//     $pageType          = trim($this->contentModel->pageType ?? '');
+//     $isPage            = $this->contentModel->isPage ?? false;
+//     $isMenu            = $this->contentModel->isMenu ?? false;
+//     $themeResourceType = trim($this->contentModel->themeResourceType ?? '');
+//     $additionalPath    = trim($this->contentModel->additionalPath ?? '');
+
+//     // Remove non-table helper properties so they don't break ORM insert()
+//     unset(
+//         $this->contentModel->pageType,
+//         $this->contentModel->isPage,
+//         $this->contentModel->isMenu,
+//         $this->contentModel->additionalPath
+//     );
+
+//     if ($contentName === '') {
+//         return LtResponse::json("Content name is required.", 3501, 100);
+//     }
+
+//     // 3. Normalize file extension based on contentType and mvcType
+//     $extension = pathinfo($contentName, PATHINFO_EXTENSION);
+//     if ($extension === '') {
+//         if ($contentType === 'module' || $contentType === 'plugin') {
+//             $contentName .= ($mvcType === 'View') ? '.html' : '.php';
+//         } elseif ($contentType === 'theme') {
+//             $contentName .= '.html';
+//         }
+//     }
+
+//     // 4. Check uniqueness using a clean model instance (prevents query state pollution)
+//     $checkModel = new TbContent();
+//     $checkModel->select();
+//     if ($packageName !== '') {
+//         $checkModel->where('contentName', '=', $contentName)
+//                   ->andWhere('packageName', '=', $packageName);
+//     } else {
+//         $checkModel->where('contentName', '=', $contentName);
+//     }
+
+//     $exist = $checkModel->get();
+//     if (!empty($exist)) {
+//         return LtResponse::json("Content {$contentName} record already exists", 3503, 100);
+//     }
+
+//     // 5. Calculate next sortOrder using a clean model instance
+//     $sortModel = new TbContent();
+//     $sortModel->select('MAX(sort_order) AS highestSortNo');
+//     if ($packageName !== '') {
+//         $sortModel->where('packageName', '=', $packageName);
+//     }
+//     $sortModel->get();
+
+//     $highestSortNo = $sortModel->responseData[0]->highestSortNo ?? null;
+//     $highestSortNo = empty($highestSortNo) ? 8 : ((int) $highestSortNo + 8);
+
+//     // 6. Check developer role
+//     $roleModel       = new TbRoleService();
+//     $developerRoleId = 'accbc87e4b5ce2';
+//     $roleExist       = $roleModel->roleExist($developerRoleId);
+
+//     // 7. Prepare and insert tb_content record
+//     $contentId                       = ltId();
+//     $this->contentModel->contentName = $contentName;
+//     $this->contentModel->ltId        = $contentId;
+//     $this->contentModel->sortOrder   = $highestSortNo;
+//     $this->contentModel->updatedBy   = $this->userId;
+//     $this->contentModel->updatedAt   = $this->ltNow;
+//     $this->contentModel->createdAt   = $this->ltNow;
+
+//     if ($roleExist && ($mvcType === 'View' || $themeResourceType === 'View')) {
+//         $this->contentModel->$developerRoleId = 1;
+//     }
+
+//     $this->contentModel->insert();
+
+//     if ((int) $this->contentModel->responseCategory !== 200) {
+//         return $this->contentModel->responseJson();
+//     }
+
+//     // 8. Handle post-insert scaffolding & page/menu registration
+//     if ($contentType === 'module' || $contentType === 'plugin') {
+
+//         if ($storeType === 'folder') {
+//             $path           = "packages/{$contentType}s/{$packageName}/{$mvcType}s/";
+//             $ddmPath        = "packages/{$contentType}s/{$packageName}/ddm";
+//             $ddmContentName = pathinfo($contentName, PATHINFO_FILENAME);
+//             $ddmFilename    = "{$ddmContentName}.{$mvcType}.lifetech";
+
+//             LtFile::path($path)->createFile($contentName);
+//             LtFile::path($ddmPath)->createFile($ddmFilename);
+
+//             $template = $this->autoCreateTemplate($packageName, $contentName, $mvcType, $isService, $contentType);
+//             if ($template) {
+//                 LtFile::path($path)->writeFile($contentName, $template);
+//                 LtFile::path($ddmPath)->writeFile($ddmFilename, $template);
+//             }
+//         }
+
+//         if ($mvcType === 'View') {
+//             $contentRoutePath = pathinfo($contentName, PATHINFO_FILENAME);
+//             $routePath        = "/{$packageName}/{$contentRoutePath}";
+//             $pageId           = ltId();
+
+//             $pageModel = [
+//                 'ltId'        => $pageId,
+//                 'pageName'    => $contentName,
+//                 'packageName' => $packageName,
+//                 'routePath'   => $routePath,
+//                 'pageType'    => $pageType,
+//                 'createdFrom' => $contentType,
+//                 'updatedAt'   => $this->ltNow,
+//                 'createdAt'   => $this->ltNow,
+//             ];
+
+//             // Only assign Default.html theme layout to frontend ('theme') pages, NOT 'api' or 'router'
+//             if ($pageType === 'theme') {
+//                 $pageModel['themeLayout']        = 'Default.html';
+//                 $pageModel['themeLayoutPackage'] = $this->getDefaultThemePackageName();
+//             }
+
+//             if ($roleExist) {
+//                 $pageModel[$developerRoleId] = 1;
+//             }
+
+//             $pageService->store($pageModel);
+
+//             if ($pageType !== 'api') {
+//                 $parentMenu   = $menuService->getMenuId($packageName);
+//                 $parentMenuId = is_object($parentMenu) ? ($parentMenu->ltId ?? null) : null;
+
+//                 $menuModel = [
+//                     'menuName'     => $contentName,
+//                     'contentName'  => $contentName,
+//                     'packageName'  => $packageName,
+//                     'routePath'    => $routePath,
+//                     'parentMenuId' => $parentMenuId,
+//                     'target'       => '_blank',
+//                     'menuLevel'    => '2',
+//                     'isPublished'  => '1',
+//                     'publishedAt'  => $this->ltNow,
+//                     'updatedAt'    => $this->ltNow,
+//                     'createdAt'    => $this->ltNow,
+//                 ];
+
+//                 if ($roleExist) {
+//                     $menuModel[$developerRoleId] = 1;
+//                 }
+
+//                 $menuService->store($menuModel);
+//             }
+
+//             $pageContent = [
+//                 'pageId'        => $pageId,
+//                 'contentId'     => $contentId,
+//                 'publishStatus' => 1,
+//                 'contentType'   => $contentType,
+//                 'packageName'   => $packageName,
+//                 'publishSource' => 'content',
+//             ];
+
+//             (new TbPageContentService())->publishPageContent($pageContent);
+
+//             if (is_object($this->contentModel->responseData)) {
+//                 $this->contentModel->responseData->routePath = $routePath;
+//             }
+//         }
+
+//     } elseif ($contentType === 'theme') {
+
+//         if ($storeType === 'folder') {
+//             $cleanSubPath   = !empty($additionalPath) ? ltrim($additionalPath, '/') : '';
+//             $path           = "packages/{$contentType}s/{$packageName}/{$themeResourceType}s/{$cleanSubPath}";
+//             $ddmPath        = "packages/{$contentType}s/{$packageName}/ddm";
+//             $ddmContentName = pathinfo($contentName, PATHINFO_FILENAME);
+//             $ddmFilename    = "{$ddmContentName}.{$themeResourceType}.lifetech";
+
+//             LtFile::path($path)->createFile($contentName);
+//             LtFile::path($ddmPath)->createFile($ddmFilename);
+//         }
+
+//         if ($themeResourceType === 'View') {
+//             $contentRoutePath = pathinfo($contentName, PATHINFO_FILENAME);
+//             $routePath        = "/{$packageName}/{$contentRoutePath}";
+//             $pageId           = ltId();
+
+//             $pageModel = [
+//                 'ltId'               => $pageId,
+//                 'pageName'           => $contentName,
+//                 'packageName'        => $packageName,
+//                 'routePath'          => $routePath,
+//                 'pageType'           => 'theme',
+//                 'themeLayout'        => 'Default.html',
+//                 'themeLayoutPackage' => $packageName,
+//                 'createdFrom'        => $contentType,
+//                 'updatedAt'          => $this->ltNow,
+//                 'createdAt'          => $this->ltNow,
+//             ];
+
+//             if ($roleExist) {
+//                 $pageModel[$developerRoleId] = 1;
+//             }
+
+//             $pageService->store($pageModel);
+
+//             $parentMenu   = $menuService->getMenuId($packageName);
+//             $parentMenuId = is_object($parentMenu) ? ($parentMenu->ltId ?? null) : null;
+
+//             $menuModel = [
+//                 'menuName'     => $contentName,
+//                 'contentName'  => $contentName,
+//                 'packageName'  => $packageName,
+//                 'routePath'    => $routePath,
+//                 'parentMenuId' => $parentMenuId,
+//                 'target'       => '_blank',
+//                 'menuLevel'    => '2',
+//                 'isPublished'  => '1',
+//                 'publishedAt'  => $this->ltNow,
+//                 'updatedAt'    => $this->ltNow,
+//                 'createdAt'    => $this->ltNow,
+//             ];
+
+//             if ($roleExist) {
+//                 $menuModel[$developerRoleId] = 1;
+//             }
+
+//             $menuService->store($menuModel);
+
+//             $pageContent = [
+//                 'pageId'        => $pageId,
+//                 'contentId'     => $contentId,
+//                 'publishStatus' => 1,
+//                 'contentType'   => $contentType,
+//                 'packageName'   => $packageName,
+//                 'publishSource' => 'content',
+//             ];
+
+//             (new TbPageContentService())->publishPageContent($pageContent);
+
+//             if (is_object($this->contentModel->responseData)) {
+//                 $this->contentModel->responseData->routePath   = $routePath;
+//                 $this->contentModel->responseData->isPublished = 1;
+//             }
+//         }
+
+//     } elseif ($contentType === 'text' || $contentType === 'html') {
+
+//         $routePath = '/' . $contentName;
+
+//         if ($isMenu) {
+//             $menuModel = [
+//                 'menuName'    => $contentName,
+//                 'contentName' => $contentName,
+//                 'routePath'   => $routePath,
+//                 'target'      => '_blank',
+//                 'menuLevel'   => '1',
+//                 'isPublished' => '1',
+//                 'publishedAt' => $this->ltNow,
+//             ];
+
+//             if ($roleExist) {
+//                 $menuModel[$developerRoleId] = 1;
+//             }
+
+//             $menuService->store($menuModel);
+//         }
+
+//         if ($isPage) {
+//             $pageId    = ltId();
+//             $pageModel = [
+//                 'ltId'        => $pageId,
+//                 'pageName'    => $contentName,
+//                 'routePath'   => $routePath,
+//                 'pageType'    => $pageType,
+//                 'createdFrom' => 'lifecontent',
+//                 'updatedAt'   => $this->ltNow,
+//                 'createdAt'   => $this->ltNow,
+//             ];
+
+//             if ($pageType === 'theme') {
+//                 $pageModel['themeLayout']        = 'Default.html';
+//                 $pageModel['themeLayoutPackage'] = $this->getDefaultThemePackageName();
+//             }
+
+//             if ($roleExist) {
+//                 $pageModel[$developerRoleId] = 1;
+//             }
+
+//             $pageService->store($pageModel);
+
+//             $pageContent = [
+//                 'pageId'        => $pageId,
+//                 'contentId'     => $contentId,
+//                 'publishStatus' => 1,
+//                 'contentType'   => $contentType,
+//                 'publishSource' => 'content',
+//             ];
+
+//             (new TbPageContentService())->publishPageContent($pageContent);
+
+//             if (is_object($this->contentModel->responseData)) {
+//                 $this->contentModel->responseData->routePath = $routePath;
+//             }
+//         }
+//     }
+
+//     return $this->contentModel->responseJson();
+// }
+
+/**
+ * Safely fetches the active default theme's package name (or null if none is set).
+ */
+    private function getDefaultThemePackageName(): ?string {
+        $packageModel = new TbPackage();
+        $defaultTheme = $packageModel->select('package_name')
+                                     ->where('packageType', '=', 'theme')
+                                     ->andWhere('isThemeDefault', '=', 1)
+                                     ->get();
+    
+        return !empty($defaultTheme) ? ($defaultTheme[0]->packageName ?? null) : null;
+    }
+    
+    
+public function update(){
+    $this->contentModel->processRequest();
+    $this->contentModel->updatedBy = LtSession::get('ltUid');
+    
+    // check if content exist
+    $contentModelCheck = new TbContent();
+    $checkContent = $contentModelCheck->select('lt_id, content_name')->where('ltId', '=', $this->request->ltId)->get();
+    
+    if (empty($checkContent)) {
+        $contentName = $this->request->contentName;
+        return LtResponse::json("Content {$contentName} not found", 3553, 100);
+    }
+    $targetContent = $checkContent[0]->contentName;
+    $updateSuccess = $this->contentModel->update('ltId', '=', $checkContent[0]->ltId);
+
+    $newPageType = $this->request->pageType ?? null;
+  
+    if (!empty($newPageType)) {
+        $pageModel = new TbPage();
+        $pageModel->pageType = $newPageType;
+
+        // If the type is not a theme (e.g., report, api), clear the theme layout fields
+        if (strtolower($newPageType) !== 'theme') {
+            $pageModel->themeLayout = null;
+            $pageModel->themeLayoutPackage = null;
+        }else{
+            // 1. Fetch current page details to inspect existing layout values
+            $pageModelCheck = new TbPage();
+            $pageResult = $pageModelCheck->select('theme_layout, theme_layout_package')->where('pageName', '=', $targetContent)->get();
+            
+            $currentPage = !empty($pageResult) ? $pageResult[0] : null;
+            
+            if (!empty($currentPage->themeLayout)) {
+                // Retain the previously assigned theme layout
+                $pageModel->themeLayout = $currentPage->themeLayout;
+                $pageModel->themeLayoutPackage = $currentPage->themeLayoutPackage;
+            } else {
+                // No layout exists (e.g. was cleared previously); set system defaults
+                $pageModel->themeLayout = 'Default.html'; 
+                $pageModel->themeLayoutPackage = $this->getDefaultThemePackageName(); 
+            }
+        } 
+        
+        $pageModel->update('pageName', '=', $targetContent);
+    }
+    return $this->contentModel->responseJson();
+}
 
     public function autoCreate(){
         $sqlConnect = DbConnect::dbDriver();
@@ -419,7 +793,7 @@ class TbContentService
         $createService    = (bool) ($this->request->service ?? false);
     
         if (empty($tableName) || empty($packageName)) {
-            return LtResponse::json('Invalid request parameters.', 400, 100);
+            return LtResponse::json('Invalid request parameters.', 3500, 100);
         }
     
         // Escape wildcard characters for LIKE
@@ -452,7 +826,7 @@ class TbContentService
         }
     
         if (empty($contentMap)) {
-            return LtResponse::json('Nothing to create.', 204, 100);
+            return LtResponse::json('Nothing to create.', 3504, 100);
         }
     
         $responses = [];
@@ -475,7 +849,7 @@ class TbContentService
             $responses[] = $storeResponse;
         }
         
-        return LtResponse::json('success', 200, 200, $responses);
+        return LtResponse::json('success', 3513, 200, $responses);
 
     }
     
@@ -801,17 +1175,17 @@ class {$fileNameWithNoExt}
             // Extract type and subfolder path
             $pathDetails = $this->parsePathDetails($relativePath);
             $isServices = $pathDetails['type'] == 'Service' ? true : false;
-            $isThemeDefault = $pathDetails['type'] == 'Component' ? 1 : 0;
+            $isView = $pathDetails['type'] == 'View' ? 'theme' : null;
             $payload = [
                 'contentName'    => $item['contentName'],
                 'storeType'      => 'folder',
                 'description'    => "Synchronized from file manager",
                 'packageName'    => $packageName,
-                'isThemeDefault' => $isThemeDefault,
-                 $typeKey         => $pathDetails['type'],           
+                'pageType'       => $isView,
+                 $typeKey        => $pathDetails['type'],           
                 'additionalPath' => $pathDetails['additionalPath'], 
                 'contentType'    => $packageType,
-                'isPublished'   => 1
+                'isPublished'    => 1
             ];
             
 
@@ -822,6 +1196,7 @@ class {$fileNameWithNoExt}
             }
     
             $responses[] = $storeResponse;
+            // $responses[] = $payload;
         }
     
         if (empty($responses)) {
@@ -834,7 +1209,7 @@ class {$fileNameWithNoExt}
         
         // return LtResponse::json('Synchronization completed', 200, 200, ['contents' => $responses,'layouts' => $layoutResult]);
         
-        return LtResponse::json('Synchronized successfully', 200, 200, $responses);
+        return LtResponse::json('Synchronized successfully', 3500, 200, $responses);
     }
     
 
@@ -1014,8 +1389,8 @@ class {$fileNameWithNoExt}
     
         $folderMap = [
             'theme'  => ['Components', 'Layouts', 'Views', 'Assets'],
-            'module' => ['Model', 'Controller', 'Services', 'Views'],
-            'plugin' => ['Model', 'Controller', 'Services', 'Views'],
+            'module' => ['Models', 'Controllers', 'Services', 'Views'],
+            'plugin' => ['Models', 'Controllers', 'Services', 'Views'],
         ];
     
         if (!isset($folderMap[$packageType])) {
@@ -1026,7 +1401,7 @@ class {$fileNameWithNoExt}
         $packageBasePath = "packages/{$baseFolder}/{$packageName}";
     
         if (!is_dir($packageBasePath)) {
-            return LtResponse::json("Directory not found: {$packageBasePath}", 404, 100);
+            return LtResponse::json("Directory not found: {$packageBasePath}", 3504, 100);
         }
     
         // 1. Fetch existing content records for this package
@@ -1067,10 +1442,10 @@ class {$fileNameWithNoExt}
                 $normalizedFilePath = str_replace('\\', '/', $file->getPathname()); // e.g., "packages/themes/ThemeBrainDump/Views/UserProfile.html"
                 
                 if (str_contains($normalizedFilePath, $packageName)) {
-                    // 1. Find exactly where 'ThemeBrainDump' starts
+                    // 1. Find exactly where package name starts
                     $packagePos = strpos($normalizedFilePath, $packageName);
                     
-                    // 2. Extract everything after 'ThemeBrainDump'
+                    // 2. Extract everything after package name
                     $subPath = substr($normalizedFilePath, $packagePos + strlen($packageName));
                     
                     // 3. Strip any leading forward slashes to get a clean relative path
@@ -1092,7 +1467,7 @@ class {$fileNameWithNoExt}
             }
         }
     
-        return LtResponse::json('Scan successful', 200, 200, $discovered);
+        return LtResponse::json('Scan successful', 3500, 200, $discovered);
     }
     
     public function getFolders(){
@@ -1134,9 +1509,9 @@ class {$fileNameWithNoExt}
             }
         }
         
-        if(empty($responses)) return LtResponse::json('No subdirectory found', 101, 100);
+        if(empty($responses)) return LtResponse::json('No subdirectory found', 3501, 100);
         
-        return LtResponse::json('validate successfully', 200, 200, $responses);
+        return LtResponse::json('validate successfully', 3512, 200, $responses);
     }
     
     public function fetchLayouts(){
@@ -1152,7 +1527,7 @@ class {$fileNameWithNoExt}
             ->get();
     
         if (empty($layouts)) {
-            return LtResponse::json('No Layouts found', 101, 100);
+            return LtResponse::json('No Layouts found', 3506, 100);
         }
     
         // Group layouts by package_name
@@ -1173,7 +1548,7 @@ class {$fileNameWithNoExt}
             return strcasecmp($a, $b);
         });
     
-        return LtResponse::json('Layouts fetched successfully', 200, 200, [
+        return LtResponse::json('Layouts fetched successfully', 3507, 200, [
             'currentPackage' => $packageName,
             'groupedLayouts' => $grouped
         ]);
@@ -1221,12 +1596,12 @@ class {$fileNameWithNoExt}
         
         $content = $stmt->fetch(\PDO::FETCH_OBJ);
         
-        if(empty($content)) return LtResponse::json('No Contents found', 101, 100);
+        if(empty($content)) return LtResponse::json('No Contents found', 3508, 100);
   
         $pageModel = new TbPage();
         $pageRecords = $pageModel->select('lt_id')->where('pageName', '=', $content->contentName)->andWhere('packageName', '=', $content->packageName)->get();
         $pageData = $pageRecords[0] ?? null;
-        if(empty($pageData)) return LtResponse::json('No Page found', 101, 100);
+        if(empty($pageData)) return LtResponse::json('No Page found', 3509, 100);
         
         /*
          * STEP 3: Assign the layout to the page.
@@ -1255,12 +1630,12 @@ class {$fileNameWithNoExt}
         
         $pageData = $pageModel->select('lt_id, page_name')->where('pageName', '=', $contentName)->andWhere('packageName', '=', $packageName)->get();
         
-        if(empty($pageData)) return LtResponse::json('No Page found for content $contentName', 101, 100);
+        if(empty($pageData)) return LtResponse::json('No Page found for content $contentName', 3511, 100);
         
         $pageContentService = new TbPageContentService();
         $publishedContents = $pageContentService->fetchPublished($pageData[0]->ltId);
         
-        if(empty($publishedContents)) return LtResponse::json('No Publish Content Found', 101, 100);
+        if(empty($publishedContents)) return LtResponse::json('No Publish Content Found', 3012, 100);
         
         $contentIds = array_column($publishedContents, 'contentId');
         
@@ -1291,9 +1666,9 @@ class {$fileNameWithNoExt}
         
         unset($content);
 
-        if(empty($publishedContents)) return LtResponse::json('No Region found', 101, 100);
+        if(empty($publishedContents)) return LtResponse::json('No Region found', 3501, 100);
         
-        return LtResponse::json('Regions Found', 200, 200, $publishedContents);
+        return LtResponse::json('Regions Found', 3500, 200, $publishedContents);
     }
         
         

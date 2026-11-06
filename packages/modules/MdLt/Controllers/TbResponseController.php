@@ -7,9 +7,10 @@ use Lt\Modules\MdLt\Services\LtResponse;
 use Lt\Modules\MdLt\Services\LtRequest;
 use Lt\Modules\MdLt\Services\LtService;
 
-// error_reporting(E_ALL);       // Report all errors and warnings
-// ini_set('display_errors', 1); // Show errors in the browser
-// ini_set('display_startup_errors', 1); // Show startup errors too
+/**
+ *  RESPONSE CODE 3100 - 3149
+ */ 
+
 
 // Example: a deliberate error
 // echo $undefined_variable;

@@ -10,6 +10,11 @@ use Lt\Modules\MdLt\Services\LtSession;
 use Lt\Modules\MdLt\Models\TbContent;
 use DbConnect;
 
+/**
+ *  RESPONSE CODE 3400 - 3499
+ */ 
+
+
 
 class TbPageController
 {
@@ -298,10 +303,10 @@ class TbPageController
         return $pageModel->responseJson();
     }
     
-    public function publishToRegion(){
+    public function publishedToDefault(){
 
         $dataModelService = new TbPageService();
-        $response = $dataModelService->publishedToRegion();
+        $response = $dataModelService->publishedToDefault();
         
         return $response;
 

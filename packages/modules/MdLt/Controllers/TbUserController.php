@@ -12,6 +12,10 @@ use Lt\Modules\MdLt\Services\TbUserService;
 use Lt\Modules\MdLt\Services\TbLoginAuditService;
 use LtDdm;
 
+/**
+ *  RESPONSE CODE 3000 - 3099
+ */ 
+
 class TbUserController
 {
     

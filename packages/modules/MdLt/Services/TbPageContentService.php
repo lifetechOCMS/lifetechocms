@@ -115,44 +115,83 @@ class TbPageContentService
         }
         
         
-         public function deletePageContent($ltId = null, $packageName = null){
-
-            if($packageName !== null){
-                $sqlConnect = DbConnect::dbDriver();
-                
-                $sqlPage = "SELECT lt_id FROM tb_page WHERE package_name =:pkgName AND page_type <> 'router'";
-        
-                $stmtPage = $sqlConnect->prepare($sqlPage);
-                $stmtPage->execute([':pkgName' => $packageName]);
-                $matchedPages = $stmtPage->fetchAll(\PDO::FETCH_COLUMN, 0);
-
-                if (empty($matchedPages)) return 0;
-                
-                  // Step 3: Build dynamic placeholders and parameter bindings for deleting page content 
-                $placeHolders = [];
-                $parameters = [];
-        
-                foreach ($matchedPages as $i => $pg) {
-                    $placeHolders[] = ":id$i";
-                    $parameters[":id$i"] = $pg;
+        public function deletePageContent($ltId = null, $packageName = null) {
+            $db = $this->sqlConnect ?? DbConnect::dbDriver();
+       
+            if ($packageName !== null) {
+                $packageName = trim((string) $packageName);
+                if ($packageName === '') {
+                    return LtResponse::json("Package name cannot be empty.", 3404, 100);
                 }
         
-                $inPageContent = implode(', ', $placeHolders);
-                $parameters[':pkg'] = $packageName;
-                // Step 4: Delete matching entries from tb_page_content
-                $sqlDelete = "DELETE FROM tb_page_content
-                              WHERE page_id IN ($inPageContent) OR package_name = :pkg";
+                // 1. Fetch only view page IDs for this package
+                $sqlPage = "
+                    SELECT lt_id 
+                    FROM tb_page 
+                    WHERE package_name = :pkgName 
+                      AND page_type = 'theme'
+                ";
+                $stmtPage = $db->prepare($sqlPage);
+                $stmtPage->execute([':pkgName' => $packageName]);
+                $matchedPages = $stmtPage->fetchAll(\PDO::FETCH_COLUMN, 0);
         
-                 $stmtDel = $sqlConnect->prepare($sqlDelete);
-                 $stmtDel->execute($parameters);
-                 return $stmtDel->rowCount();
-            }else{
-                $this->pageContentModel->processRequest(); //to capture ltId for response Json method
-                $this->pageContentModel->remove('contentId', '=', $ltId)->orWhere('pageId', '=', $ltId)->delete();
-                return $this->pageContentModel->responseJson();
+                // 2. Build delete query targeting views only
+                $parameters = [':pkg' => $packageName];
+        
+                if (!empty($matchedPages)) {
+                    $placeholders = [];
+                    foreach ($matchedPages as $i => $pageId) {
+                        $key = ":pg_{$i}";
+                        $placeholders[] = $key;
+                        $parameters[$key] = $pageId;
+                    }
+                    $inClause = implode(', ', $placeholders);
+        
+                    $sqlDelete = "
+                        DELETE FROM tb_page_content 
+                        WHERE (package_name = :pkg OR page_id IN ({$inClause}))
+                          AND content_type IN ('module', 'plugin', 'theme')
+                    ";
+                } else {
+                    $sqlDelete = "
+                        DELETE FROM tb_page_content 
+                        WHERE package_name = :pkg
+                          AND content_type IN ('module', 'plugin', 'theme')
+                    ";
+                }
+        
+                $stmtDel = $db->prepare($sqlDelete);
+                $stmtDel->execute($parameters);
+                $deletedCount = $stmtDel->rowCount();
+        
+                return LtResponse::json("Successfully removed {$deletedCount} page content record(s).", 3411, 200, [
+                    'deletedCount' => $deletedCount
+                ]);
             }
-            
-            
+        
+            // Branch 2: Delete by specific contentId or pageId via pure SQL
+            $this->pageContentModel->processRequest();
+            $targetId = trim((string) ($ltId ?? $this->pageContentModel->ltId ?? ''));
+        
+            if ($targetId === '') {
+                return LtResponse::json("Target contentId or pageId is required.", 3408, 100);
+            }
+        
+            $sqlDeleteSingle = "
+                DELETE FROM tb_page_content 
+                WHERE content_id = :contentId 
+                   OR page_id = :pageId
+            ";
+            $stmtSingle = $db->prepare($sqlDeleteSingle);
+            $stmtSingle->execute([
+                ':contentId' => $targetId,
+                ':pageId'    => $targetId
+            ]);
+            $deletedCount = $stmtSingle->rowCount();
+        
+            return LtResponse::json("Successfully deleted {$deletedCount} record(s).", 3412, 200, [
+                'deletedCount' => $deletedCount
+            ]);
         }
         
         public function publishPageRegion($dataArr, $contentRecord = null){

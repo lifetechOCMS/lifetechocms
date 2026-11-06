@@ -7,7 +7,7 @@ use Lt\Modules\MdLt\Services\TbLoginAuditService;
 use ApiTokenDetails;
 use LtDdm;
 
- 
+// RESPONSE CODE 1000 - 1099
 
 //global class declaration
 

@@ -5,11 +5,15 @@ use Lt\Modules\MdLt\Models\TbRole;
 use Lt\Modules\MdLt\Services\LtResponse;
 use Lt\Modules\MdLt\Services\LtRequest;
 use Lt\Modules\MdLt\Services\LtSession;
+use Lt\Modules\MdLt\Services\LtService;
+
+use Lt\Modules\MdLt\Models\TbFormRole;
 use DbConnect;
 
+/**
+ *  RESPONSE CODE 3200 - 3299
+ */ 
 
-// ltImport('mdLt', 'TbRole.php');
-// ltImport('mdLt', 'LtService.php');
 
 class TbRoleService
 {
@@ -26,6 +30,138 @@ class TbRoleService
         }
         
         
+        public function store() {
+            $this->roleModel->validateRequest(['roleName' => 'required|min:3']);
+        
+            $roleName = trim($this->request->roleName ?? '');
+            $remoteId = trim(strtolower($this->request->remoteId ?? ''));
+        
+            // 1. Determine final ltId (remote override vs auto-generated)
+            if (!empty($remoteId)) {
+                if (!preg_match('/^[a-z0-9]{12}$/', $remoteId)) {
+                    return LtResponse::json('Remote ID must be 12 characters and contain only lowercase letters (a-z) and numbers (0-9).', 3001, 100);
+                }
+        
+                // Check ID uniqueness
+                $roleCheck = new TbRole();
+                $idExists = $roleCheck->select()->where('ltId', '=', $remoteId)->get();
+                if (!empty($idExists)) {
+                    return LtResponse::json('A role with this ID already exists.', 3002, 100);
+                }
+        
+                $finalLtId = $remoteId;
+            } else {
+                $finalLtId = LtService::generateLtId();
+            }
+        
+            // 2. Check roleName uniqueness using a fresh query/model instance
+            $nameCheck = new TbRole();
+            $nameExists = $nameCheck->select()->where('roleName', '=', $roleName)->get();
+            if (!empty($nameExists)) {
+                return LtResponse::json("A Role Record with this name [ $roleName ] already exists", 3202, 100);
+            }
+        
+            // 3. Assign properties to model
+            $this->roleModel->ltId        = $finalLtId;
+            $this->roleModel->roleName    = $roleName;
+            $this->roleModel->updatedAt    = $this->ltNow;
+            $this->roleModel->createdAt    = $this->ltNow;
+            $this->roleModel->isProtected = $this->request->isProtected ?? 0;
+            $this->roleModel->updatedBy   = LtSession::get('ltUid');
+        
+            // 4. Save record
+            $this->roleModel->insert();
+        
+            // 5. Alter table columns using the true saved ID ($finalLtId)
+            if ($this->roleModel->responseCategory == '200') {
+                $tables = ['tb_content', 'tb_page', 'tb_menu', 'bked_content_editor'];
+                LtService::alterTableColumn($tables, $finalLtId);
+            }
+        
+            return $this->roleModel->responseJson();
+        }
+        
+         /**
+         *   GET FORM ROLES
+         */
+        
+        public function getFormRoles(){
+
+            $formRoleModel = new TbFormRole();
+            $query = $formRoleModel->select('lt_id, form_name, form_role')->get();
+            if(empty($query)) return LtResponse::json("No Form Roles found", 3205, 100); 
+            return LtResponse::json("Form Roles found", 3205, 200, $query);
+        } 
+         
+         /**
+         *   GET FORM ROLES
+         */
+         
+         /**
+         *   UPDATE FORM ROLES
+         */
+        
+        public function updateFormRoles(){
+            $newRoleId = $this->request->newRoleId ?? null;
+            $formRoleltId = $this->request->formRoleltId ?? null;
+            $formRoleModel = new TbFormRole();
+            
+            $formRoleModel->formRole = $newRoleId;
+            $formRoleModel->update('ltId', '=', $formRoleltId);
+            return $formRoleModel->responseJson();
+        } 
+         
+         /**
+         *   UPDATE FORM ROLES
+         */
+         
+         /**
+         *   UPDATE ROLES
+         */
+        
+            public function update(){
+                $roleModel = new TbRole(); 
+                
+                $roleModel->processRequest(); 
+                $roleModel->validateRequest(['roleName' => 'required|min:3']);
+                $roleModel->updatedBy = LtSession::get('ltUid');
+                $roleModel->update('ltId', '=', $roleModel->ltId);
+                return $roleModel->responseJson(); 
+            } 
+         
+         /**
+         *   UPDATE ROLES
+         */
+         
+         /**
+         *   DESTROY ROLES
+         */
+        
+            public function destroy(){
+                $roleModel = new TbRole(); 
+                
+                $roleModel->processRequest(); 
+                $ltId = $roleModel->ltId; 
+                
+                $roleModel->select()->where('ltId', $ltId)->andWhere('isProtected', '1')->get(); 
+                if($roleModel->responseCategory === '200'){
+                    return LtResponse::json("This Role cannot be deleted because it is Protected", "3203");
+                }else{
+                 
+                $roleModel->delete('ltId', '=', $ltId);
+                    
+                 $tables = ['tb_content', 'tb_page', 'tb_menu', 'bked_content_editor'];
+                 $response =  LtService::dropTableColumn($tables, $ltId);
+                    
+                      
+                  return $roleModel->responseJson();
+                } 
+            } 
+         
+         /**
+         *   DESTROY ROLES
+         */
+
          /**
          *   ROLE PERMISSION
          */
@@ -152,8 +288,6 @@ class TbRoleService
          *     ROLE PERMISSION
          */
          
-         
-        
         public function roleUserPermissionStatus($roles=[]){
             //$roles = "c81e728d9d4c2f, accbc87e4b5ce2, ri3wqzb4sc1v, 03c2q7lkutvo";
             $rolesArr = array_map('trim', explode(',', $roles));
@@ -210,8 +344,7 @@ class TbRoleService
          *     get role name by id
          */
          
-        public function getRoleNameById($role)
-        {
+        public function getRoleNameById($role){
             try {
         
                 $sqlConnect = DbConnect::dbDriver();
@@ -245,6 +378,14 @@ class TbRoleService
                 $logError = 'ROLE ERROR [' . $e->getCode() . ']: ' . $e->getMessage();
                 return LtResponse::error($logError);
             }
+        }
+        
+            
+        public function fetchRole(){
+            $roleModel = new TbRole();
+            $result = $roleModel->select('lt_id')->where('isEnabled', 1)->orderBy('created_at')->get();
+            if(empty($result)) return "Failed to fetch role";
+            return $result;
         }
          
 

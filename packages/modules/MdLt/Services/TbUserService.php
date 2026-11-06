@@ -8,6 +8,10 @@ use Lt\Modules\MdLt\Services\LtSession;
 use Lt\Modules\MdLt\Services\LtAuth;
 use LtDdm;
 
+/**
+ *  RESPONSE CODE 3000 - 3099
+ */ 
+
 class TbUserService
 {
         protected $userModel;

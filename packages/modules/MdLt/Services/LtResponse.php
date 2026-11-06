@@ -1,6 +1,9 @@
 <?php
 namespace Lt\Modules\MdLt\Services;
 
+/**
+ *  RESPONSE CODE 3100 - 3149
+ */ 
 
 class LtResponse 
 {   

@@ -7,6 +7,10 @@ use ZipArchive;
 use RecursiveIteratorIterator;
 use RecursiveDirectoryIterator;
 
+/**
+ *  RESPONSE CODE 1900 - 1999
+ */ 
+
 class LtFile
 {
     /*** MODULE RESPONSE CODES (1900–2000 reserved for File Management) ***/
@@ -416,6 +420,7 @@ class LtFile
                 return $this->fail("Failed to create zip file.");
             }
     
+    
             // Send ZIP to browser
             header('Content-Type: application/zip');
             header('Content-Disposition: attachment; filename="' . basename($zipName) . '"');
@@ -426,7 +431,7 @@ class LtFile
             return $this->ok('Folder downloaded successfully.', ['path' => $this->basePath], self::RC_BASE_PATH_NOT_FOUND);
         }
         if (is_file($target)) {
-    
+            
             header('Content-Type: ' . mime_content_type($target));
             header('Content-Disposition: attachment; filename="' . basename($target) . '"');
             header('Content-Length: ' . filesize($target));

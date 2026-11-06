@@ -40,6 +40,9 @@ namespace Lt\Modules\MdLt\Controllers;
 
     LtRoute::get('/roles/select',                       'MdLt@TbRoleController@select')->name('admin-roles.select');
     LtRoute::post('/roles/permissions',                 'MdLt@TbRoleController@rolePermissions')->name('admin-roles.role-permissions');
+    
+    LtRoute::get('/roles/form-roles/list',               'MdLt@TbRoleController@getFormRoles')->name('admin-roles.form-roles-get');
+    LtRoute::patch('/roles/update-form-roles',          'MdLt@TbRoleController@updateFormRoles')->name('admin-roles.form-roles-update');
 
 
         //////////////////////////////////  USER   //////////////////////////////////////////////////////
@@ -146,7 +149,7 @@ namespace Lt\Modules\MdLt\Controllers;
      LtRoute::get   ('/pages/{ltId}/published-route',   'MdLt@TbPageController@publishedRoute')->name('admin-pages.published-route');
      
             
-      LtRoute::post ('/pages/published/region',   'MdLt@TbPageController@publishToRegion')->name('admin-pages.publish-to-region');
+      LtRoute::post ('/pages/published/default',   'MdLt@TbPageController@publishedToDefault')->name('admin-pages.publish-to-default');
      
     ////////////////////////////////////  FILE ////////////////////////////////////////////////////////
     

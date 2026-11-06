@@ -8,6 +8,8 @@ use DbConnect;
 //var_dump(class_exists(LtSiteInfo::class));
 //use   Lt\Modules\MdLt\Services\LtSiteInfo; 
 
+// RESPONSE CODE 1300 - 1399
+
 class LtRoute
 {
     private $method;

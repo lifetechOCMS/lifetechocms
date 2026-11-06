@@ -13,9 +13,12 @@
         "routeResponse": "",
         "routeUpdateStatus": 0,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "Quis nihil consectet",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-10-30 18:36:17",
+        "c81e728d9d4c2f": 1,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176039491743094",
@@ -31,9 +34,12 @@
         "routeResponse": "Velit adipisci totam",
         "routeUpdateStatus": 0,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "Ullam ut ab amet in",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-10-30 18:36:17",
+        "c81e728d9d4c2f": 1,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187811459",
@@ -49,9 +55,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Deleted Successfully&quot;,\n    &quot;responseCode&quot;: &quot;2008&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;177128654599936&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-17 01:33:43&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-27 15:28:10",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187812299",
@@ -67,9 +76,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Data Fetched&quot;,\n    &quot;responseCode&quot;: &quot;2009&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: [\n        {\n            &quot;ltId&quot;: &quot;1436378125&quot;,\n            &quot;ltTableStatus&quot;: null,\n            &quot;pageName&quot;: &quot;admin.to.backendlogin&quot;,\n            &quot;description&quot;: &quot;&quot;,\n            &quot;isPublished&quot;: 1,\n            &quot;publishedAt&quot;: &quot;0000-00-00 00:00:00&quot;,\n            &quot;isProtected&quot;: 0,\n            &quot;packageName&quot;: &quot;&quot;,\n            &quot;pageType&quot;: &quot;router&quot;,\n            &quot;routePath&quot;: &quot;\/admin&quot;,\n            &quot;routeFileName&quot;: &quot;MdLtRoute.php&quot;,\n            &quot;routeHandler&quot;: &quot;function(){ header(&#039;Location: &#039; . rtrim(ltSiteHostAddress(), &#039;\/&#039;) . &#039;\/admin-end\/lifetech\/login&#039;);\\nsession_destroy(); \\nexit;\\n}&quot;,\n            &quot;routeContent&quot;: &quot;&quot;,\n            &quot;routePayload&quot;: &quot;&quot;,\n            &quot;routeResponse&quot;: &quot;&quot;,\n            &quot;apiToAllowRouters&quot;: &quot;&quot;,\n            &quot;routeUpdateStatus&quot;: 1,\n            &quot;updatedBy&quot;: &quot;route_sync_scri&quot;,\n            &quot;createdAt&quot;: &quot;0000-00-00 00:00:00&quot;,\n            &quot;updatedAt&quot;: &quot;2026-01-01 12:14:02&quot;,\n            &quot;routeMethod&quot;: &quot;get&quot;,\n            &quot;accbc87e4b5ce2&quot;: 1,\n            &quot;c81e728d9d4c2f&quot;: 1,\n            &quot;ri3wqzb4sc1v&quot;: 1\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-27 15:21:55",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187819719",
@@ -85,9 +97,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Content records retrieved successfully for page publishing.&quot;,\n    &quot;responseCode&quot;: 3404,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: [\n        {\n            &quot;ltId&quot;: &quot;0&quot;,\n            &quot;contentName&quot;: &quot;test!&quot;,\n            &quot;packageName&quot;: &quot;mdKylieMaxwell&quot;,\n            &quot;description&quot;: &quot;this is tesit&quot;,\n            &quot;isPublished&quot;: &quot;0&quot;,\n            &quot;contentType&quot;: &quot;module&quot;,\n            &quot;sortOrder&quot;: &quot;0&quot;,\n            &quot;publishSource&quot;: &quot;&quot;,\n            &quot;contentId&quot;: &quot;176006624971422&quot;\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 19:00:25",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187820767",
@@ -103,9 +118,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Deleted Successfully&quot;,\n    &quot;responseCode&quot;: &quot;2008&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;03c2q7lkutvo&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-16 10:30:10&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-27 15:24:32",
+        "c81e728d9d4c2f": 1,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187826385",
@@ -121,9 +139,12 @@
         "routeResponse": "{}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-27 15:24:49",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187828790",
@@ -139,9 +160,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Deleted Successfully&quot;,\n    &quot;responseCode&quot;: &quot;2008&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;177125170486498&quot;,\n        &quot;packageName&quot;: &quot;mdGradyRoss&quot;,\n        &quot;packageType&quot;: &quot;module&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-16 15:37:47&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-27 15:19:29",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187830828",
@@ -157,9 +181,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Publish Successfully&quot;,\n    &quot;responseCode&quot;: 803,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: {\n        &quot;pageId&quot;: &quot;176039490585625&quot;,\n        &quot;contentId&quot;: &quot;177128848656679&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-17 01:38:13",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187835249",
@@ -175,9 +202,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;success&quot;,\n    &quot;responseCode&quot;: 3001,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: [\n        {\n            &quot;ltId&quot;: &quot;173164610729251&quot;,\n            &quot;roleId&quot;: &quot;accbc87e4b5ce2,03c2q7lkutvo&quot;,\n            &quot;email&quot;: &quot;tunjiadedayo@gmail.com&quot;,\n            &quot;username&quot;: &quot;developer&quot;,\n            &quot;password&quot;: &quot;d5e0e5f786126476eefdf53cd63c73df95cf14415cbb37dc081ed3232d7484a3&quot;,\n            &quot;salt&quot;: &quot;7bb24ebe7ff852a51cf1e193a42e7e19&quot;,\n            &quot;firstName&quot;: &quot;Adetunji&quot;,\n            &quot;otherName&quot;: &quot;Isiaq&quot;,\n            &quot;surname&quot;: &quot;Adedayo&quot;,\n            &quot;phoneNumber&quot;: &quot;07064249739&quot;,\n            &quot;isEnabled&quot;: 1,\n            &quot;formType&quot;: &quot;userForm&quot;,\n            &quot;createdAt&quot;: &quot;2025-11-17 15:02:06&quot;,\n            &quot;updatedAt&quot;: &quot;2025-12-23 23:00:36&quot;,\n            &quot;updatedBy&quot;: &quot;173164610729251&quot;\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 12:59:34",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187837677",
@@ -193,9 +223,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Record Updated&quot;,\n    &quot;responseCode&quot;: &quot;2007&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;ri3wqzb4sc1v&quot;,\n        &quot;roleName&quot;: &quot;Lecturer&quot;,\n        &quot;isProtected&quot;: &quot;0&quot;,\n        &quot;updatedBy&quot;: &quot;173164610729251&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-16 10:32:46&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-27 15:25:03",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187842043",
@@ -211,9 +244,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Package created successfully&quot;,\n    &quot;responseCode&quot;: 3306,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;177125170486498&quot;,\n        &quot;packageName&quot;: &quot;mdGradyRoss&quot;,\n \n}\n        &quot;packageType&quot;: &quot;module&quot;,\n        &quot;description&quot;: &quot;Similique unde iure&quot;,\n        &quot;readme&quot;: &quot;Pariatur Incidunt&quot;,\n        &quot;version&quot;: &quot;30&quot;,\n        &quot;isPublished&quot;: &quot;1&quot;,\n        &quot;isProtected&quot;: &quot;0&quot;,\n        &quot;dependsOn&quot;: &quot;Mollit numquam eiusm&quot;,\n        &quot;updatedBy&quot;: &quot;173164610729251&quot;,\n        &quot;createdAt&quot;: &quot;2026-02-16 15:21:44&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-16 15:21:44&quot;,\n        &quot;languageUsed&quot;: &quot;Nostrum aliqua Adip&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-26 09:14:07",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187845360",
@@ -229,9 +265,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Record Updated&quot;,\n    &quot;responseCode&quot;: &quot;2007&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;176065187869154&quot;,\n        &quot;description&quot;: &quot;&quot;,\n        &quot;isPublished&quot;: &quot;1&quot;,\n        &quot;isProtected&quot;: &quot;0&quot;,\n        &quot;packageName&quot;: &quot;mdLt&quot;,\n        &quot;pageType&quot;: &quot;router&quot;,\n        &quot;routeFileName&quot;: &quot;MdLtRoute.php&quot;,\n        &quot;routeHandler&quot;: &quot;mdLt@TbPageController@store&quot;,\n        &quot;routeContent&quot;: &quot;&quot;,\n        &quot;routePayload&quot;: &quot;{\\n    &quot;pageName&quot;: &quot;Samuel-Underwood&quot;,\\n    &quot;routePath&quot;: &quot;\/Samuel-Underwood&quot;,\\n    &quot;packageName&quot;: &quot;mdLtLogin&quot;,\\n    &quot;isPublished&quot;: 1,\\n    &quot;isProtected&quot;: 1,\\n    &quot;description&quot;: &quot;Non deserunt pariatu&quot;,\\n    &quot;pageType&quot;: &quot;router&quot;,\\n    &quot;routeMethod&quot;: &quot;patch&quot;,\\n    &quot;routeFileName&quot;: &quot;Britanney Hickman&quot;,\\n    &quot;routeHandler&quot;: &quot;Consequuntur sint v&quot;,\\n    &quot;routeContent&quot;: &quot;Itaque odit aut aper&quot;,\\n    &quot;routePayload&quot;: &quot;Consequatur repellen&quot;,\\n    &quot;routeResponse&quot;: &quot;Possimus in ut et n&quot;\\n}&quot;,\n        &quot;routeResponse&quot;: &quot;{\\n    &quot;responseResult&quot;: &quot;Registration successful&quot;,\\n    &quot;responseCode&quot;: &quot;2006&quot;,\\n    &quot;responseCategory&quot;: &quot;200&quot;,\\n    &quot;responseData&quot;: {\\n        &quot;ltId&quot;: &quot;177127310584019&quot;,\\n        &quot;pageName&quot;: &quot;Samuel-Underwood&quot;,\\n        &quot;description&quot;: &quot;Non deserunt pariatu&quot;,\\n        &quot;isPublished&quot;: &quot;1&quot;,\\n        &quot;isProtected&quot;: &quot;1&quot;,\\n        &quot;packageName&quot;: &quot;mdLtLogin&quot;,\\n        &quot;pageType&quot;: &quot;router&quot;,\\n        &quot;routePath&quot;: &quot;\/Samuel-Underwood&quot;,\\n        &quot;routeFileName&quot;: &quot;Britanney Hickman&quot;,\\n        &quot;routeHandler&quot;: &quot;Consequuntur sint v&quot;,\\n        &quot;routeContent&quot;: &quot;Itaque odit aut aper&quot;,\\n        &quot;routePayload&quot;: &quot;Consequatur repellen&quot;,\\n        &quot;routeResponse&quot;: &quot;Possimus in ut et n&quot;,\\n        &quot;createdAt&quot;: &quot;2026-02-16 21:18:25&quot;,\\n        &quot;updatedAt&quot;: &quot;2026-02-16 21:18:25&quot;,\\n        &quot;routeMethod&quot;: &quot;patch&quot;\\n    }\\n}&quot;,\n        &quot;updatedBy&quot;: &quot;173164610729251&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-16 21:19:32&quot;,\n        &quot;routeMethod&quot;: &quot;post&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-27 15:22:16",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187846084",
@@ -247,9 +286,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Record Updated&quot;,\n    &quot;responseCode&quot;: &quot;2007&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;ri3wqzb4sc1v&quot;,\n        &quot;isEnabled&quot;: &quot;1&quot;,\n        &quot;updatedBy&quot;: &quot;173164610729251&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-16 10:34:01&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-27 15:25:18",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187855940",
@@ -265,9 +307,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Record Updated&quot;,\n    &quot;responseCode&quot;: &quot;2007&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;177124296586842&quot;,\n        &quot;password&quot;: &quot;b4ff1a542362aed74ee9&quot;,\n        &quot;salt&quot;: &quot;dd85df6bae43247ee9357053ad13db9c&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-16 12:59:52&quot;,\n        &quot;updatedBy&quot;: &quot;173164610729251&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 13:10:09",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187857927",
@@ -283,9 +328,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Role Record Fetched Successfully&quot;,\n    &quot;responseCode&quot;: 3201,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: [\n        {\n            &quot;ltId&quot;: &quot;c81e728d9d4c2f&quot;,\n            &quot;roleName&quot;: &quot;Anonymous&quot;,\n            &quot;isEnabled&quot;: 1,\n            &quot;isProtected&quot;: 1,\n            &quot;updatedBy&quot;: &quot;&quot;,\n            &quot;createdAt&quot;: &quot;2025-09-24 14:42:21&quot;,\n            &quot;updatedAt&quot;: &quot;2025-11-01 06:27:18&quot;\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 10:29:06",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187859777",
@@ -301,9 +349,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Role Record Fetched Successfully&quot;,\n    &quot;responseCode&quot;: 3201,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: [\n        {\n            &quot;ltId&quot;: &quot;c81e728d9d4c2f&quot;,\n            &quot;roleName&quot;: &quot;Anonymous&quot;,\n            &quot;isEnabled&quot;: 1,\n            &quot;isProtected&quot;: 1,\n            &quot;updatedBy&quot;: &quot;&quot;,\n            &quot;createdAt&quot;: &quot;2025-09-24 14:42:21&quot;,\n            &quot;updatedAt&quot;: &quot;2025-11-01 06:27:18&quot;\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 10:41:47",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187864868",
@@ -319,9 +370,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Data Fetched&quot;,\n    &quot;responseCode&quot;: &quot;2009&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: [\n        {\n            &quot;ltId&quot;: &quot;1436378125&quot;,\n            &quot;ltTableStatus&quot;: null,\n            &quot;pageName&quot;: &quot;admin.to.backendlogin&quot;,\n            &quot;description&quot;: &quot;&quot;,\n            &quot;isPublished&quot;: 1,\n            &quot;publishedAt&quot;: &quot;0000-00-00 00:00:00&quot;,\n            &quot;isProtected&quot;: 0,\n            &quot;packageName&quot;: &quot;&quot;,\n            &quot;pageType&quot;: &quot;router&quot;,\n            &quot;routePath&quot;: &quot;\/admin&quot;,\n            &quot;routeFileName&quot;: &quot;MdLtRoute.php&quot;,\n            &quot;routeHandler&quot;: &quot;function(){ header(&#039;Location: &#039; . rtrim(ltSiteHostAddress(), &#039;\/&#039;) . &#039;\/admin-end\/lifetech\/login&#039;);\\nsession_destroy(); \\nexit;\\n}&quot;,\n            &quot;routeContent&quot;: &quot;&quot;,\n            &quot;routePayload&quot;: &quot;&quot;,\n            &quot;routeResponse&quot;: &quot;&quot;,\n            &quot;apiToAllowRouters&quot;: &quot;&quot;,\n            &quot;routeUpdateStatus&quot;: 1,\n            &quot;updatedBy&quot;: &quot;route_sync_scri&quot;,\n            &quot;createdAt&quot;: &quot;0000-00-00 00:00:00&quot;,\n            &quot;updatedAt&quot;: &quot;2026-01-01 12:14:02&quot;,\n            &quot;routeMethod&quot;: &quot;get&quot;,\n            &quot;accbc87e4b5ce2&quot;: 1,\n            &quot;c81e728d9d4c2f&quot;: 1,\n            &quot;ri3wqzb4sc1v&quot;: 1\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 19:02:02",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187869154",
@@ -337,9 +391,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Registration successful&quot;,\n    &quot;responseCode&quot;: &quot;2006&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;177127310584019&quot;,\n        &quot;pageName&quot;: &quot;Samuel-Underwood&quot;,\n        &quot;description&quot;: &quot;Non deserunt pariatu&quot;,\n        &quot;isPublished&quot;: &quot;1&quot;,\n        &quot;isProtected&quot;: &quot;1&quot;,\n        &quot;packageName&quot;: &quot;mdLtLogin&quot;,\n        &quot;pageType&quot;: &quot;router&quot;,\n        &quot;routePath&quot;: &quot;\/Samuel-Underwood&quot;,\n        &quot;routeFileName&quot;: &quot;Britanney Hickman&quot;,\n        &quot;routeHandler&quot;: &quot;Consequuntur sint v&quot;,\n        &quot;routeContent&quot;: &quot;Itaque odit aut aper&quot;,\n        &quot;routePayload&quot;: &quot;Consequatur repellen&quot;,\n        &quot;routeResponse&quot;: &quot;Possimus in ut et n&quot;,\n        &quot;createdAt&quot;: &quot;2026-02-16 21:18:25&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-16 21:18:25&quot;,\n        &quot;routeMethod&quot;: &quot;patch&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-27 15:22:35",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187871135",
@@ -355,9 +412,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;success&quot;,\n    &quot;responseCode&quot;: 3301,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: [\n        {\n            &quot;ltId&quot;: &quot;176510886514658&quot;,\n            &quot;packageName&quot;: &quot;mdAlikaSilva&quot;,\n            &quot;packageType&quot;: &quot;module&quot;,\n            &quot;description&quot;: &quot;Vel neque ad ut natu&quot;,\n            &quot;readme&quot;: &quot;Blanditiis ipsa quo&quot;,\n            &quot;image&quot;: &quot;&quot;,\n            &quot;version&quot;: &quot;Dolor nihil modi lib&quot;,\n            &quot;isPublished&quot;: 1,\n            &quot;publishedAt&quot;: &quot;0000-00-00 00:00:00&quot;,\n            &quot;isProtected&quot;: 0,\n            &quot;isThemeDefault&quot;: 0,\n            &quot;layoutJson&quot;: &quot;&quot;,\n            &quot;blocksJson&quot;: &quot;&quot;,\n            &quot;dependsOn&quot;: &quot;Saepe qui voluptate&quot;,\n            &quot;updatedBy&quot;: &quot;173164610729251&quot;,\n            &quot;createdAt&quot;: &quot;2025-12-07 13:01:05&quot;,\n            &quot;updatedAt&quot;: &quot;2026-02-15 15:40:09&quot;,\n            &quot;languageUsed&quot;: null\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 15:21:14",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187874466",
@@ -373,9 +433,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Deleted Successfully&quot;,\n    &quot;responseCode&quot;: &quot;2008&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;177116869118649&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-17 02:45:33&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-27 15:22:53",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187876162",
@@ -391,9 +454,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Record Updated&quot;,\n    &quot;responseCode&quot;: &quot;2007&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;isPublished&quot;: 0,\n        &quot;updatedBy&quot;: &quot;173164610729251&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-27 15:20:14",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187876856",
@@ -409,9 +475,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Deleted Successfully&quot;,\n    &quot;responseCode&quot;: &quot;2008&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;177124296586842&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-16 15:01:41&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-26 10:31:44",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187877570",
@@ -427,9 +496,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;success&quot;,\n    &quot;responseCode&quot;: 3001,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: [\n        {\n            &quot;ltId&quot;: &quot;173164610729251&quot;,\n            &quot;roleId&quot;: &quot;accbc87e4b5ce2,03c2q7lkutvo&quot;,\n            &quot;email&quot;: &quot;tunjiadedayo@gmail.com&quot;,\n            &quot;username&quot;: &quot;developer&quot;,\n            &quot;password&quot;: &quot;d5e0e5f786126476eefdf53cd63c73df95cf14415cbb37dc081ed3232d7484a3&quot;,\n            &quot;salt&quot;: &quot;7bb24ebe7ff852a51cf1e193a42e7e19&quot;,\n            &quot;firstName&quot;: &quot;Adetunji&quot;,\n            &quot;otherName&quot;: &quot;Isiaq&quot;,\n            &quot;surname&quot;: &quot;Adedayo&quot;,\n            &quot;phoneNumber&quot;: &quot;07064249739&quot;,\n            &quot;isEnabled&quot;: 1,\n            &quot;formType&quot;: &quot;userForm&quot;,\n            &quot;createdAt&quot;: &quot;2025-11-17 15:02:06&quot;,\n            &quot;updatedAt&quot;: &quot;2025-12-23 23:00:36&quot;,\n            &quot;updatedBy&quot;: &quot;173164610729251&quot;\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 12:59:22",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187879638",
@@ -445,9 +517,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Record Updated&quot;,\n    &quot;responseCode&quot;: &quot;2007&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;177128654599936&quot;,\n        &quot;contentName&quot;: &quot;JudithJennings.html&quot;,\n        &quot;description&quot;: &quot;Voluptas dignissimos&quot;,\n        &quot;mvcType&quot;: &quot;view&quot;,\n        &quot;storeType&quot;: &quot;folder&quot;,\n        &quot;useLiferazor&quot;: &quot;1&quot;,\n        &quot;useDdm&quot;: &quot;1&quot;,\n        &quot;contentCategory&quot;: &quot;&quot;,\n        &quot;pageType&quot;: &quot;theme&quot;,\n        &quot;updatedBy&quot;: &quot;173164610729251&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-17 01:03:49&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-27 15:28:20",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187880318",
@@ -463,9 +538,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Record Updated&quot;,\n    &quot;responseCode&quot;: &quot;2007&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;177124296586842&quot;,\n        &quot;roleId&quot;: &quot;c81e728d9d4c2f&quot;,\n        &quot;email&quot;: &quot;tumulahep@mailinator.com&quot;,\n        &quot;username&quot;: &quot;qiwyhobype&quot;,\n        &quot;firstName&quot;: &quot;Hayfa&quot;,\n        &quot;otherName&quot;: &quot;Brendan Dennis&quot;,\n        &quot;surname&quot;: &quot;Waters&quot;,\n        &quot;phoneNumber&quot;: &quot;+1 (507) 395-1494&quot;,\n        &quot;isEnabled&quot;: &quot;0&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-16 13:17:07&quot;,\n        &quot;updatedBy&quot;: &quot;173164610729251&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-26 10:33:32",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187891833",
@@ -481,9 +559,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Record Updated&quot;,\n    &quot;responseCode&quot;: &quot;2007&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;177125170486498&quot;,\n        &quot;description&quot;: &quot;Similique unde iure&quot;,\n        &quot;readme&quot;: &quot;Pariatur Incidunt&quot;,\n        &quot;version&quot;: &quot;30&quot;,\n        &quot;isPublished&quot;: &quot;0&quot;,\n        &quot;isProtected&quot;: &quot;0&quot;,\n        &quot;dependsOn&quot;: &quot;Mollit numquam eiusm&quot;,\n        &quot;updatedBy&quot;: &quot;173164610729251&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-16 15:24:13&quot;,\n        &quot;languageUsed&quot;: &quot;Nostrum aliqua Adip&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-27 15:20:29",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187892041",
@@ -499,9 +580,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Page record fetch successfully for publishing&quot;,\n    &quot;responseCode&quot;: 3504,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: [\n        {\n            &quot;ltId&quot;: &quot;177128654578524&quot;,\n            &quot;pageName&quot;: &quot;JudithJennings.html&quot;,\n            &quot;packageName&quot;: &quot;mdAlikaSilva&quot;,\n            &quot;description&quot;: &quot;&quot;,\n            &quot;isPublished&quot;: 1,\n            &quot;pageType&quot;: &quot;theme&quot;\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-17 01:18:01",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187895662",
@@ -517,9 +601,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Registration successful&quot;,\n    &quot;responseCode&quot;: &quot;2006&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;177128654599936&quot;,\n        &quot;contentName&quot;: &quot;JudithJennings.html&quot;,\n        &quot;packageName&quot;: &quot;mdAlikaSilva&quot;,\n        &quot;contentType&quot;: &quot;module&quot;,\n        &quot;description&quot;: &quot;Voluptas dignissimos&quot;,\n        &quot;mvcType&quot;: &quot;view&quot;,\n        &quot;storeType&quot;: &quot;folder&quot;,\n        &quot;contentCategory&quot;: &quot;Tempor quasi dolore&quot;,\n        &quot;pageType&quot;: &quot;theme&quot;,\n        &quot;sortOrder&quot;: 72,\n        &quot;updatedBy&quot;: &quot;173164610729251&quot;,\n        &quot;createdAt&quot;: &quot;2026-02-17 01:02:25&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-17 01:02:25&quot;,\n        &quot;accbc87e4b5ce2&quot;: 1,\n        &quot;routePath&quot;: &quot;\/mdAlikaSilva\/JudithJennings&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-27 15:28:38",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187896340",
@@ -535,9 +622,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Registration successful&quot;,\n    &quot;responseCode&quot;: &quot;2006&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;9jvw350a7bkn&quot;,\n        &quot;roleName&quot;: &quot;Store Manager&quot;,\n        &quot;isProtected&quot;: &quot;0&quot;,\n        &quot;updatedBy&quot;: &quot;173164610729251&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-16 12:23:33&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-26 10:46:52",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176065187896815",
@@ -553,9 +643,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Role Record Fetched Successfully&quot;,\n    &quot;responseCode&quot;: 3201,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: [\n        {\n            &quot;ltId&quot;: &quot;c81e728d9d4c2f&quot;,\n            &quot;roleName&quot;: &quot;Anonymous&quot;\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-08-20 09:05:36",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176098425423533",
@@ -571,9 +664,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Record Updated&quot;,\n    &quot;responseCode&quot;: &quot;2007&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;177124160367815&quot;,\n        &quot;menuName&quot;: &quot;AlanaEwing&quot;,\n        &quot;routePath&quot;: &quot;#&quot;,\n        &quot;target&quot;: &quot;_top&quot;,\n        &quot;parentMenuId&quot;: &quot;&quot;,\n        &quot;menuLevel&quot;: &quot;1&quot;,\n        &quot;icon&quot;: &quot;Ut velit illo nulla&quot;,\n        &quot;updatedBy&quot;: &quot;173164610729251&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-16 12:35:33&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-27 15:14:14",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176098425429789",
@@ -589,9 +685,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Record Updated&quot;,\n    &quot;responseCode&quot;: &quot;2007&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;177124160367815&quot;,\n        &quot;isQuicklink&quot;: 1,\n        &quot;updatedBy&quot;: &quot;173164610729251&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-16 12:36:42&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-27 15:15:33",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176098425459974",
@@ -607,9 +706,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Data Fetched&quot;,\n    &quot;responseCode&quot;: &quot;2009&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: [\n        {\n            &quot;ltId&quot;: &quot;1230373735&quot;,\n            &quot;menuName&quot;: &quot;Backend Dashboard&quot;,\n            &quot;slug&quot;: null,\n            &quot;routePath&quot;: &quot;\/admin-end\/Dashboard&quot;,\n            &quot;isExternal&quot;: 0,\n            &quot;target&quot;: &quot;_self&quot;,\n            &quot;packageName&quot;: null,\n            &quot;parentMenuId&quot;: &quot;&quot;,\n            &quot;menuLevel&quot;: 1,\n            &quot;sortOrder&quot;: null,\n            &quot;isPublished&quot;: 1,\n            &quot;publishedAt&quot;: &quot;2026-02-06 04:28:55&quot;,\n            &quot;status&quot;: &quot;1&quot;,\n            &quot;icon&quot;: &quot;fas fa-service&quot;,\n            &quot;isService&quot;: 0,\n            &quot;isQuicklink&quot;: 0,\n            &quot;updatedBy&quot;: &quot;173164610729251&quot;,\n            &quot;createdAt&quot;: &quot;2026-02-06 11:28:55&quot;,\n            &quot;updatedAt&quot;: &quot;2026-02-16 12:27:16&quot;,\n            &quot;accbc87e4b5ce2&quot;: 1,\n            &quot;c81e728d9d4c2f&quot;: 0,\n            &quot;ri3wqzb4sc1v&quot;: 0,\n            &quot;contentName&quot;: null\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 12:39:50",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176098425461059",
@@ -625,9 +727,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Record Updated&quot;,\n    &quot;responseCode&quot;: &quot;2007&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;1230373735&quot;,\n        &quot;routePath&quot;: &quot;\/admin-end\/Dashboard&quot;,\n        &quot;updatedBy&quot;: &quot;173164610729251&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-16 12:27:16&quot;,\n        &quot;ri3wqzb4sc1v&quot;: 0\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-27 15:01:57",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176098425463094",
@@ -643,9 +748,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Record Updated&quot;,\n    &quot;responseCode&quot;: &quot;2007&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;176098425461059&quot;,\n        &quot;pageName&quot;: &quot;Admin-menu.toggle-role-publishing&quot;,\n        &quot;packageName&quot;: &quot;mdLt&quot;,\n        &quot;pageType&quot;: &quot;router&quot;,\n        &quot;updatedBy&quot;: &quot;173164610729251&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-16 12:24:31&quot;,\n        &quot;ri3wqzb4sc1v&quot;: 1\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 12:26:12",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176098425468579",
@@ -661,9 +769,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Deleted Successfully&quot;,\n    &quot;responseCode&quot;: &quot;2008&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;177124160367815&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-16 12:52:52&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-27 15:16:12",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176098425477157",
@@ -679,9 +790,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Record Updated&quot;,\n    &quot;responseCode&quot;: &quot;2007&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;177124160367815&quot;,\n        &quot;isService&quot;: 1,\n        &quot;updatedBy&quot;: &quot;173164610729251&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-16 12:40:44&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-27 15:16:26",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176098425492520",
@@ -697,9 +811,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Record Updated&quot;,\n    &quot;responseCode&quot;: &quot;2007&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;177128654599936&quot;,\n        &quot;updatedBy&quot;: &quot;173164610729251&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-17 01:11:42&quot;,\n        &quot;ri3wqzb4sc1v&quot;: 1\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-17 01:12:18",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176098425493861",
@@ -715,9 +832,12 @@
         "routeResponse": "{\n    &amp;quot;responseResult&amp;quot;: &amp;quot;Registration successful&amp;quot;,\n    &amp;quot;responseCode&amp;quot;: &amp;quot;2006&amp;quot;,\n    &amp;quot;responseCategory&amp;quot;: &amp;quot;200&amp;quot;,\n    &amp;quot;responseData&amp;quot;: {\n        &amp;quot;ltId&amp;quot;: &amp;quot;177124160367815&amp;quot;,\n        &amp;quot;menuName&amp;quot;: &amp;quot;AlanaEwing&amp;quot;,\n        &amp;quot;routePath&amp;quot;: &amp;quot;#&amp;quot;,\n        &amp;quot;target&amp;quot;: &amp;quot;_top&amp;quot;,\n        &amp;quot;parentMenuId&amp;quot;: &amp;quot;&amp;quot;,\n        &amp;quot;menuLevel&amp;quot;: &amp;quot;1&amp;quot;,\n        &amp;quot;icon&amp;quot;: &amp;quot;Ut velit illo nulla&amp;quot;,\n        &amp;quot;updatedBy&amp;quot;: &amp;quot;173164610729251&amp;quot;,\n        &amp;quot;createdAt&amp;quot;: &amp;quot;2026-02-16 12:33:23&amp;quot;,\n        &amp;quot;updatedAt&amp;quot;: &amp;quot;2026-02-16 12:33:23&amp;quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-25 12:36:14",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176098425499872",
@@ -733,9 +853,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;success&quot;,\n    &quot;responseCode&quot;: 1501,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: [\n        {\n            &quot;ltId&quot;: &quot;1230373735&quot;,\n            &quot;menuName&quot;: &quot;Backend Dashboard&quot;,\n            &quot;slug&quot;: null,\n            &quot;routePath&quot;: &quot;\/admin-end\/Dashboard&quot;,\n            &quot;isExternal&quot;: 0,\n            &quot;target&quot;: &quot;_self&quot;,\n            &quot;packageName&quot;: null,\n            &quot;parentMenuId&quot;: &quot;&quot;,\n            &quot;menuLevel&quot;: 1,\n            &quot;sortOrder&quot;: null,\n            &quot;isPublished&quot;: 1,\n            &quot;publishedAt&quot;: &quot;2026-02-06 04:28:55&quot;,\n            &quot;status&quot;: &quot;1&quot;,\n            &quot;icon&quot;: &quot;fas fa-service&quot;,\n            &quot;isService&quot;: 0,\n            &quot;isQuicklink&quot;: 0,\n            &quot;updatedBy&quot;: &quot;173164610729251&quot;,\n            &quot;createdAt&quot;: &quot;2026-02-06 11:28:55&quot;,\n            &quot;updatedAt&quot;: &quot;2026-02-16 12:27:16&quot;,\n            &quot;accbc87e4b5ce2&quot;: 1,\n            &quot;c81e728d9d4c2f&quot;: 0,\n            &quot;ri3wqzb4sc1v&quot;: 0,\n            &quot;contentName&quot;: null\n        },\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 12:52:21",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176175674482881",
@@ -751,9 +874,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;success&quot;,\n    &quot;responseCode&quot;: 201,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: [\n      {\n            &quot;id&quot;: 12,\n            &quot;name&quot;: &quot;media&quot;,\n            &quot;size&quot;: &quot;9.8 MB&quot;,\n            &quot;type&quot;: &quot;folder&quot;,\n            &quot;path&quot;: &quot;\/media&quot;\n        },\n        {\n            &quot;id&quot;: 13,\n            &quot;name&quot;: &quot;package.json&quot;,\n            &quot;size&quot;: &quot;128 bytes&quot;,\n            &quot;type&quot;: &quot;file&quot;,\n            &quot;path&quot;: &quot;\/package.json&quot;\n        },\n        {\n            &quot;id&quot;: 14,\n            &quot;name&quot;: &quot;packages&quot;,\n            &quot;size&quot;: &quot;10.01 MB&quot;,\n            &quot;type&quot;: &quot;folder&quot;,\n            &quot;path&quot;: &quot;\/packages&quot;\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 15:50:39",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176225451642950",
@@ -769,9 +895,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;success&quot;,\n    &quot;responseCode&quot;: 201,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: [\n        {\n            &quot;id&quot;: 1,\n            &quot;name&quot;: &quot;css&quot;,\n            &quot;size&quot;: &quot;293.16 KB&quot;,\n            &quot;type&quot;: &quot;folder&quot;,\n            &quot;path&quot;: &quot;\/assets\/css&quot;\n        },\n        {\n            &quot;id&quot;: 2,\n            &quot;name&quot;: &quot;fonts&quot;,\n            &quot;size&quot;: &quot;952.82 KB&quot;,\n            &quot;type&quot;: &quot;folder&quot;,\n            &quot;path&quot;: &quot;\/assets\/fonts&quot;\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 15:52:19",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176227434214568",
@@ -787,9 +916,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;File created.&quot;,\n    &quot;responseCode&quot;: &quot;1992&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;file&quot;: &quot;assets\/tunji\/testing.html&quot;,\n        &quot;size&quot;: 0\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 15:53:35",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176232603865077",
@@ -805,9 +937,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;File deleted.&quot;,\n    &quot;responseCode&quot;: &quot;1994&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;file&quot;: &quot;assets\/tunji\/mdGradyRoss.zip&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 16:01:36",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176238092138559",
@@ -823,27 +958,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Record Updated&quot;,\n    &quot;responseCode&quot;: &quot;2007&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;177124296586842&quot;,\n        &quot;isEnabled&quot;: &quot;0&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-16 13:19:02&quot;,\n        &quot;updatedBy&quot;: &quot;173164610729251&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
-    },
-    {
-        "ltId": "176261919127371",
-        "packageName": "MdLt",
-        "pageName": "Admin-packages.export-tables",
-        "pageType": "router",
-        "routeContent": "",
-        "routeFileName": "MdLtRoute.php",
-        "routeHandler": "MdLt@TbPackageController@exportTables",
-        "routeMethod": "get",
-        "routePath": "\/packages\/export-tables",
-        "routePayload": "{}",
-        "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Table data retrieved successfully for export.&quot;,\n    &quot;responseCode&quot;: &quot;3309&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: [\n        {\n            &quot;tableName&quot;: &quot;tb_api_route&quot;\n        },\n        {\n            &quot;tableName&quot;: &quot;tb_book&quot;\n        },\n    ]\n}",
-        "routeUpdateStatus": 1,
-        "apiToAllowRouters": "",
-        "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 13:19:50",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176264049996790",
@@ -859,9 +979,12 @@
         "routeResponse": "{}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 15:29:15",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176277436370078",
@@ -877,9 +1000,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: {\n        &quot;mvcType&quot;: &quot;controller&quot;,\n        &quot;content_width&quot;: 0,\n        &quot;packageName&quot;: &quot;mdLt&quot;,\n        &quot;contentName&quot;: &quot;MdLtRoute.php&quot;,\n        &quot;storeType&quot;: &quot;folder&quot;,\n        &quot;contentBody&quot;: &quot;Hello world&quot;    \n    },\n    &quot;responseCode&quot;: &quot;2050&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-17 01:22:51",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176277507751444",
@@ -895,9 +1021,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;success&quot;,\n    &quot;responseCode&quot;: &quot;2050&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: &quot;Hello world&quot;\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-17 01:26:51",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176293262411141",
@@ -913,9 +1042,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Package theme set to default successfully.&quot;,\n    &quot;responseCode&quot;: &quot;3313&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;isThemeDefault&quot;: 1\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-27 15:20:46",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176301721386955",
@@ -931,9 +1063,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Region records retrieved successfully for page publishing.&quot;,\n    &quot;responseCode&quot;: 3406,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: [\n        {\n            &quot;ltId&quot;: 177125313768895,\n            &quot;contentName&quot;: &quot;styleTheme.css&quot;,\n            &quot;contentType&quot;: &quot;theme&quot;,\n            &quot;packageName&quot;: &quot;themeLt&quot;,\n            &quot;sortOrder&quot;: 8,\n            &quot;description&quot;: &quot;style content&quot;,\n            &quot;isThemeDefault&quot;: 1,\n            &quot;isPublished&quot;: 1,\n            &quot;publishSource&quot;: &quot;region&quot;,\n            &quot;contentId&quot;: &quot;176433218763076&quot;\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 21:23:41",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176315384160543",
@@ -949,9 +1084,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;File contents retrieved successfully.&quot;,\n    &quot;responseCode&quot;: 1916,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: &quot;hello world&quot;\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 16:00:47",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176315876269289",
@@ -967,9 +1105,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;File written successfully&quot;,\n    &quot;responseCode&quot;: &quot;1993&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;file&quot;: &quot;.\/assets\/tunji\/testing.html&quot;,\n        &quot;size&quot;: 11\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-27 15:29:47",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176322578414063",
@@ -985,9 +1126,12 @@
         "routeResponse": "{}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 16:03:46",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176324110822598",
@@ -1003,9 +1147,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;file or folder renamed successfully.&quot;,\n    &quot;responseCode&quot;: 1914,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: &quot;testingDone.html&quot;\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 16:04:47",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176345348078842",
@@ -1021,9 +1168,12 @@
         "routeResponse": "{\n  &quot;responseResult&quot;: &quot;Package installation completed successfully.&quot;,\n  &quot;responseCode&quot;: 3311,\n  &quot;responseCategory&quot;: 200,\n  &quot;responseData&quot;: {\n    &quot;ltId&quot;: &quot;177125170486498&quot;,\n    &quot;packageName&quot;: &quot;mdGradyRoss&quot;,\n    &quot;packageType&quot;: &quot;module&quot;,\n    &quot;version&quot;: &quot;30&quot;,\n    &quot;dependsOn&quot;: &quot;Mollit numquam eiusm&quot;,\n    &quot;isPublished&quot;: &quot;0&quot;,\n    &quot;readme&quot;: &quot;Pariatur Incidunt&quot;,\n    &quot;languageUsed&quot;: &quot;Nostrum aliqua Adip&quot;\n  }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 15:37:28",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176365749180958",
@@ -1039,9 +1189,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Registration successful&quot;,\n    &quot;responseCode&quot;: &quot;2006&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;177125468838599&quot;,\n        &quot;isEnabled&quot;: &quot;1&quot;,\n        &quot;responseResult&quot;: &quot;Quaerat pariatur Qu&quot;,\n        &quot;responseCode&quot;: &quot;4025&quot;,\n        &quot;responseCategory&quot;: &quot;100&quot;,\n        &quot;responseData&quot;: &quot;Dolor sint omnis du&quot;,\n        &quot;responseSolution&quot;: &quot;Nulla nesciunt impe&quot;,\n        &quot;responseGroup&quot;: &quot;4000-5999&quot;,\n        &quot;responseGroupName&quot;: &quot;customized&quot;,\n        &quot;packageName&quot;: &quot;mdAlikaSilva&quot;,\n        &quot;contentName&quot;: &quot;HaleeAnthony.html&quot;,\n        &quot;description&quot;: &quot;Quisquam ea qui dese&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-26 10:51:59",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176365846433930",
@@ -1057,9 +1210,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Data Fetched&quot;,\n    &quot;responseCode&quot;: &quot;2009&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: [\n        {\n            &quot;ltId&quot;: 176371944861046,\n            &quot;isEnabled&quot;: 1,\n            &quot;responseResult&quot;: &quot;Base path does not exist.&quot;,\n            &quot;responseCode&quot;: &quot;1901&quot;,\n            &quot;responseCategory&quot;: &quot;100&quot;,\n            &quot;responseData&quot;: &quot;&quot;,\n            &quot;responseSolution&quot;: &quot;Input the correct base path&quot;,\n            &quot;responseGroup&quot;: &quot;1900-1999&quot;,\n            &quot;responseGroupName&quot;: &quot;file&quot;,\n            &quot;packageName&quot;: &quot;mdLt&quot;,\n            &quot;contentName&quot;: &quot;LtFile.php&quot;,\n            &quot;description&quot;: &quot;&quot;\n        },\n        {\n            &quot;ltId&quot;: 176371952939791,\n            &quot;isEnabled&quot;: 1,\n            &quot;responseResult&quot;: &quot;No valid file uploaded.&quot;,\n            &quot;responseCode&quot;: &quot;1902&quot;,\n            &quot;responseCategory&quot;: &quot;100&quot;,\n            &quot;responseData&quot;: &quot;&quot;,\n            &quot;responseSolution&quot;: &quot;please upload a valid file&quot;,\n            &quot;responseGroup&quot;: &quot;1900-1999&quot;,\n            &quot;responseGroupName&quot;: &quot;file&quot;,\n            &quot;packageName&quot;: &quot;mdLt&quot;,\n            &quot;contentName&quot;: &quot;LtFile.php&quot;,\n            &quot;description&quot;: &quot;&quot;\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 16:10:10",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176366034753394",
@@ -1075,9 +1231,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Record Updated&quot;,\n    &quot;responseCode&quot;: &quot;2007&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;177125468838599&quot;,\n        &quot;responseResult&quot;: &quot;Quaerat pariatur Qu&quot;,\n        &quot;responseCode&quot;: &quot;4022&quot;,\n        &quot;responseCategory&quot;: &quot;200&quot;,\n        &quot;responseData&quot;: &quot;Dolor sint omnis du&quot;,\n        &quot;responseSolution&quot;: &quot;Nulla nesciunt impe&quot;,\n        &quot;responseGroup&quot;: &quot;4000-5999&quot;,\n        &quot;responseGroupName&quot;: &quot;customized&quot;,\n        &quot;packageName&quot;: &quot;mdAlikaSilva&quot;,\n        &quot;contentName&quot;: &quot;HaleeAnthony.html&quot;,\n        &quot;description&quot;: &quot;Quisquam ea qui dese&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-26 10:38:41",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176366809531113",
@@ -1093,9 +1252,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Deleted Successfully&quot;,\n    &quot;responseCode&quot;: &quot;2008&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;177125468838599&quot;,\n        &quot;responseResult&quot;: &quot;success&quot;\n        &quot;responseCode&quot;: &quot;2005&quot;,\n        &quot;responseCategory&quot;: &quot;200&quot;,\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-26 10:32:17",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176366862436397",
@@ -1111,9 +1273,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Record Updated&quot;,\n    &quot;responseCode&quot;: &quot;2007&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;isEnabled&quot;: 0,\n        &quot;responseResult&quot;: &quot;Success&quot;,\n        &quot;responseCode&quot;: &quot;2005&quot;,\n        &quot;responseCategory&quot;: &quot;200&quot;,\n        &quot;responseData&quot;: &quot;success&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 16:15:02",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176372615319892",
@@ -1129,9 +1294,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Login Succesful&quot;,\n    &quot;responseCode&quot;: &quot;1002&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;173164610729251&quot;,\n        &quot;roleId&quot;: &quot;accbc87e4b5ce2&quot;,\n        &quot;email&quot;: &quot;tunjiadedayo@gmail.com&quot;,\n        &quot;username&quot;: &quot;developer&quot;,\n        &quot;password&quot;: &quot;d55cf14415cbb34a3&quot;,\n        &quot;salt&quot;: &quot;7bb24ebee19&quot;,\n        &quot;firstName&quot;: &quot;Adetunji&quot;,\n        &quot;otherName&quot;: &quot;Isiaq&quot;,\n        &quot;surname&quot;: &quot;Adedayo&quot;,\n        &quot;phoneNumber&quot;: &quot;07064249739&quot;,\n        &quot;isEnabled&quot;: 1,\n        &quot;formType&quot;: &quot;userForm&quot;,\n        &quot;createdAt&quot;: &quot;2025-11-17 15:02:06&quot;,\n        &quot;updatedAt&quot;: &quot;2026-01-24 21:40:21&quot;,\n        &quot;updatedBy&quot;: &quot;173164610729251&quot;,\n        &quot;tunjiToken&quot;: &quot;7368e07e2b9196264977b83888b068be&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 13:25:04",
+        "c81e728d9d4c2f": 1,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176372664743946",
@@ -1147,9 +1315,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Registration successful&quot;,\n    &quot;responseCode&quot;: &quot;2006&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;177124296586842&quot;,\n        &quot;roleId&quot;: &quot;c81e728d9d4c2f&quot;,\n        &quot;email&quot;: &quot;tumulahep@mailinator.com&quot;,\n        &quot;username&quot;: &quot;qiwyhobype&quot;,\n        &quot;password&quot;: &quot;29cc4eeb4de8395146a7ec27e345cae23f768facb15f4a94b5c93e2137feebdb&quot;,\n        &quot;salt&quot;: &quot;dabbe09852a37f4aa0f1fcf7882ab256&quot;,\n        &quot;firstName&quot;: &quot;Hayfa&quot;,\n        &quot;otherName&quot;: &quot;Brendan Dennis&quot;,\n        &quot;surname&quot;: &quot;Waters&quot;,\n        &quot;phoneNumber&quot;: &quot;+1 (507) 395-1494&quot;,\n        &quot;isEnabled&quot;: &quot;0&quot;,\n        &quot;formType&quot;: &quot;userForm&quot;,\n        &quot;createdAt&quot;: &quot;2026-02-16 12:56:05&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-16 12:56:05&quot;,\n        &quot;updatedBy&quot;: &quot;173164610729251&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-27 15:26:51",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176382247799526",
@@ -1165,9 +1336,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;content moved successfully&quot;,\n    &quot;responseCode&quot;: &quot;3501&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-17 01:30:43",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176382365312581",
@@ -1183,9 +1357,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Page content moved successfully&quot;,\n    &quot;responseCode&quot;: &quot;3401&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 21:32:14",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176397260349034",
@@ -1201,9 +1378,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Data Fetched&quot;,\n    &quot;responseCode&quot;: &quot;2009&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: [\n        {\n            &quot;sn&quot;: 1,\n            &quot;siteName&quot;: &quot;LIFETECH CMS&quot;,\n            &quot;subtit&quot;: &quot;Lifetech&quot;,\n            &quot;siteAlias&quot;: &quot;demo app&quot;,\n            &quot;siteCopyright&quot;: &quot;Lifetech OCMS | 2024 \u00c2\u00a9 &amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;Abolore Ajayi&amp;lt;\/a&amp;gt;&quot;,\n            &quot;emailAdd&quot;: &quot;info@lifetech.host&quot;,\n            &quot;dbName&quot;: &quot;lifetechocms&quot;,\n            &quot;phoneNo&quot;: &quot;+2347 2 .8&quot;,\n            &quot;phoneNo2&quot;: &quot;&quot;,\n            &quot;emailAdd2&quot;: &quot;complaint@lifetech.host&quot;,\n            &quot;address1&quot;: &quot;Lifetech Community Portal&quot;,\n            &quot;address2&quot;: &quot;&quot;,\n            &quot;logo&quot;: &quot;lifetech_logo.png&quot;,\n            &quot;favicon&quot;: &quot;lifetech_favicon.png&quot;,\n            &quot;openHour&quot;: &quot;8:00am&quot;,\n            &quot;closedHour&quot;: &quot;4:00pm&quot;,\n            &quot;linkedin&quot;: &quot;https:\/\/www.linkedin.com\/company\/lifetechocms\/&quot;,\n            &quot;instagram&quot;: &quot;https:\/\/www.instagram.com\/lifetech_ocms\/&quot;,\n            &quot;facebook&quot;: &quot;https:\/\/www.facebook.com\/lifetechocms&quot;,\n            &quot;twitter&quot;: &quot;https:\/\/twitter.com\/lifetechocms&quot;,\n            &quot;youtube&quot;: &quot;&quot;,\n            &quot;siteHostAddress&quot;: &quot;\/demo&quot;,\n            &quot;updatedBy&quot;: null\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-17 01:56:22",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176408041453952",
@@ -1219,9 +1399,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Region content moved successfully&quot;,\n    &quot;responseCode&quot;: &quot;3401&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 21:32:36",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176427295797341",
@@ -1237,27 +1420,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Record Updated&quot;,\n    &quot;responseCode&quot;: &quot;2007&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;176039490585625&quot;,\n        &quot;routePath&quot;: &quot;\/CarolynBowen\/new&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-16 21:34:23&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
-    },
-    {
-        "ltId": "176518582615912",
-        "packageName": "MdLt",
-        "pageName": "Admin-pages.publish-to-region",
-        "pageType": "router",
-        "routeContent": "",
-        "routeFileName": "MdLtRoute.php",
-        "routeHandler": "MdLt@TbPageController@publishToRegion",
-        "routeMethod": "post",
-        "routePath": "\/pages\/published\/region",
-        "routePayload": "{\n    &quot;themeId&quot;: &quot;176544232338318&quot;,\n    &quot;selected&quot;: [\n        {\n            &quot;id&quot;: &quot;176039490585625&quot;,\n            &quot;pageType&quot;: &quot;theme&quot;,\n            &quot;packageName&quot;: &quot;mdLt&quot;,\n            &quot;type&quot;: &quot;page&quot;\n        }\n    ],\n    &quot;publishSource&quot;: &quot;region&quot;,\n    &quot;publishType&quot;: &quot;page\/package&quot;\n}",
-        "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Page(s) successfully published for the selected theme.&quot;,\n    &quot;responseCode&quot;: 3411,\n    &quot;responseCategory&quot;: 200\n}",
-        "routeUpdateStatus": 1,
-        "apiToAllowRouters": "",
-        "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 21:35:08",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176552342998772",
@@ -1273,9 +1441,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Record Updated&quot;,\n    &quot;responseCode&quot;: &quot;2007&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;176039490585625&quot;,\n        &quot;isPublished&quot;: 0,\n        &quot;updatedBy&quot;: &quot;173164610729251&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-16 21:33:39&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 21:34:08",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176556045799116",
@@ -1291,9 +1462,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Data Fetched&quot;,\n    &quot;responseCode&quot;: &quot;2009&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: [\n        {\n            &quot;ltId&quot;: &quot;176544243960536&quot;,\n            &quot;contentName&quot;: &quot;header.html&quot;,\n            &quot;packageName&quot;: &quot;themeCharity&quot;,\n            &quot;contentType&quot;: &quot;theme&quot;,\n            &quot;contentBody&quot;: &quot;&quot;,\n            &quot;description&quot;: &quot;theme header&quot;,\n            &quot;contentSource&quot;: &quot;user&quot;,\n            &quot;isPublished&quot;: 1,\n            &quot;publishedAt&quot;: null,\n            &quot;isProtected&quot;: 0,\n            &quot;mvcType&quot;: null,\n            &quot;storeType&quot;: &quot;folder&quot;,\n            &quot;useLiferazor&quot;: 1,\n            &quot;useDdm&quot;: 0,\n            &quot;contentCategory&quot;: &quot;&quot;,\n            &quot;contentWidth&quot;: 0,\n            &quot;pageType&quot;: null,\n            &quot;sortOrder&quot;: 8,\n            &quot;isThemeDefault&quot;: 1,\n            &quot;ccname&quot;: &quot;149e9677a5989fd342ae44213df68868&quot;,\n            &quot;ccurrent&quot;: &quot;a84dd63d2e937f557b6e1caa52f44070&quot;,\n            &quot;updatedBy&quot;: &quot;173164610729251&quot;,\n            &quot;createdAt&quot;: &quot;2025-12-11 09:40:39&quot;,\n            &quot;updatedAt&quot;: &quot;2025-12-11 10:39:07&quot;,\n            &quot;accbc87e4b5ce2&quot;: 0,\n            &quot;c81e728d9d4c2f&quot;: 0,\n            &quot;ri3wqzb4sc1v&quot;: 0\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-17 01:01:58",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176574526376980",
@@ -1309,9 +1483,12 @@
         "routeResponse": "",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2025-12-14 14:47:43",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176575676963963",
@@ -1327,9 +1504,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Publish Successfully&quot;,\n    &quot;responseCode&quot;: 803,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: {\n        &quot;pageId&quot;: &quot;176572277651869&quot;,\n        &quot;routeId&quot;: &quot;176496923528364&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-18 14:33:45",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176597720311312",
@@ -1345,9 +1525,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Role successfully published for the selected&quot;,\n    &quot;responseCode&quot;: 3204,\n    &quot;responseCategory&quot;: 200\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-17 02:03:37",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176623964237771",
@@ -1363,9 +1546,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Tables Fetched successfully&quot;,\n    &quot;responseCode&quot;: &quot;3309&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: [\n        {\n            &quot;id&quot;: &quot;177126385213421&quot;,\n            &quot;tableName&quot;: &quot;tb_api_route&quot;,\n            &quot;recordCount&quot;: 2,\n            &quot;size&quot;: &quot;0.02 MB&quot;,\n            &quot;engine&quot;: &quot;InnoDB&quot;,\n            &quot;collation&quot;: &quot;utf8_unicode_ci&quot;,\n            &quot;created_at&quot;: &quot;2026-01-08 15:48:59&quot;,\n            &quot;updated_at&quot;: &quot;2026-02-03 05:05:54&quot;\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 18:45:29",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176624834151344",
@@ -1381,9 +1567,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Tables successfully&quot;,\n    &quot;responseCode&quot;: &quot;3309&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: [\n        {\n            &quot;lt_id&quot;: 177011673967821,\n            &quot;api_id&quot;: 177011663227288,\n            &quot;route_id&quot;: 176694443850816,\n            &quot;publish_date&quot;: null,\n            &quot;updated_by&quot;: 173164610729251,\n            &quot;created_at&quot;: &quot;2026-02-03 12:05:39&quot;,\n            &quot;updated_at&quot;: &quot;2026-02-03 12:05:39&quot;\n        },\n        {\n            &quot;lt_id&quot;: 177011675492391,\n            &quot;api_id&quot;: 177011663227288,\n            &quot;route_id&quot;: 176700327179068,\n            &quot;publish_date&quot;: null,\n            &quot;updated_by&quot;: 173164610729251,\n            &quot;created_at&quot;: &quot;2026-02-03 12:05:54&quot;,\n            &quot;updated_at&quot;: &quot;2026-02-03 12:05:54&quot;\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 18:46:11",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176625236511190",
@@ -1399,9 +1588,12 @@
         "routeResponse": "",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-01-01 11:03:03",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176626437416538",
@@ -1417,9 +1609,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Fetched successfully&quot;,\n    &quot;responseCode&quot;: &quot;3309&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: [\n        {\n            &quot;Field&quot;: &quot;lt_id&quot;,\n            &quot;Type&quot;: &quot;bigint(20)&quot;,\n            &quot;Null&quot;: &quot;NO&quot;,\n            &quot;Key&quot;: &quot;PRI&quot;,\n            &quot;Default&quot;: null,\n            &quot;Extra&quot;: &quot;&quot;\n        },\n        {\n            &quot;Field&quot;: &quot;route_id&quot;,\n            &quot;Type&quot;: &quot;bigint(20)&quot;,\n            &quot;Null&quot;: &quot;NO&quot;,\n            &quot;Key&quot;: &quot;&quot;,\n            &quot;Default&quot;: null,\n            &quot;Extra&quot;: &quot;&quot;\n        },\n        {\n            &quot;Field&quot;: &quot;publish_date&quot;,\n            &quot;Type&quot;: &quot;date&quot;,\n            &quot;Null&quot;: &quot;YES&quot;,\n            &quot;Key&quot;: &quot;&quot;,\n            &quot;Default&quot;: null,\n            &quot;Extra&quot;: &quot;&quot;\n        },\n        {\n            &quot;Field&quot;: &quot;updated_by&quot;,\n            &quot;Type&quot;: &quot;bigint(20)&quot;,\n            &quot;Null&quot;: &quot;YES&quot;,\n            &quot;Key&quot;: &quot;&quot;,\n            &quot;Default&quot;: null,\n            &quot;Extra&quot;: &quot;&quot;\n        },\n        {\n            &quot;Field&quot;: &quot;created_at&quot;,\n            &quot;Type&quot;: &quot;datetime&quot;,\n            &quot;Null&quot;: &quot;YES&quot;,\n            &quot;Key&quot;: &quot;&quot;,\n            &quot;Default&quot;: null,\n            &quot;Extra&quot;: &quot;&quot;\n        },\n        {\n            &quot;Field&quot;: &quot;updated_at&quot;,\n            &quot;Type&quot;: &quot;timestamp&quot;,\n            &quot;Null&quot;: &quot;NO&quot;,\n            &quot;Key&quot;: &quot;&quot;,\n            &quot;Default&quot;: &quot;CURRENT_TIMESTAMP&quot;,\n            &quot;Extra&quot;: &quot;on update CURRENT_TIMESTAMP&quot;\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 18:47:18",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176626578447776",
@@ -1435,9 +1630,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Table tb_testing truncated successfully&quot;,\n    &quot;responseCode&quot;: &quot;3309&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 18:50:47",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176629806357435",
@@ -1453,9 +1651,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Table tb_testing dropped successfully&quot;,\n    &quot;responseCode&quot;: 3309,\n    &quot;responseCategory&quot;: 200\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 18:51:11",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176638274047196",
@@ -1471,9 +1672,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;You have Successfully Logout&quot;,\n    &quot;responseCode&quot;: 3006,\n    &quot;responseCategory&quot;: 200\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-05-30 18:04:59",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 1
     },
     {
         "ltId": "176644108346918",
@@ -1489,9 +1693,12 @@
         "routeResponse": "",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2025-12-22 16:04:43",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176649808268292",
@@ -1507,9 +1714,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Record Updated&quot;,\n    &quot;responseCode&quot;: &quot;2007&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;sn&quot;: &quot;1&quot;,\n        &quot;siteName&quot;: &quot;LIFETECH CMS&quot;,\n        &quot;subtit&quot;: &quot;Lifetech&quot;,\n        &quot;siteAlias&quot;: &quot;demo app&quot;,\n        &quot;siteCopyright&quot;: &quot;Lifetech OCMS | 2024 \u00c2\u00a9 Abolore Ajayi&quot;,\n        &quot;emailAdd&quot;: &quot;info@lifetech.host&quot;,\n        &quot;dbName&quot;: &quot;lifetechocms&quot;,\n        &quot;phoneNo&quot;: &quot;+2347 2 .8&quot;,\n        &quot;phoneNo2&quot;: &quot;&quot;,\n        &quot;emailAdd2&quot;: &quot;complaint@lifetech.host&quot;,\n        &quot;address1&quot;: &quot;Lifetech Community Portal&quot;,\n        &quot;address2&quot;: &quot;&quot;,\n        &quot;openHour&quot;: &quot;8:00am&quot;,\n        &quot;closedHour&quot;: &quot;4:00pm&quot;,\n        &quot;instagram&quot;: &quot;https:\/\/www.instagram.com\/lifetech_ocms\/&quot;,\n        &quot;facebook&quot;: &quot;https:\/\/www.facebook.com\/lifetechocms&quot;,\n        &quot;twitter&quot;: &quot;https:\/\/twitter.com\/lifetechocms&quot;,\n        &quot;youtube&quot;: &quot;&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-26 10:39:11",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176652274885564",
@@ -1525,9 +1735,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Record Updated&quot;,\n    &quot;responseCode&quot;: &quot;2007&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;ltId&quot;: &quot;177073092838821&quot;,\n        &quot;password&quot;: &quot;88fa9b0d34b40902e781d6c&quot;,\n        &quot;salt&quot;: &quot;030198150444967b65&quot;,\n        &quot;updatedAt&quot;: &quot;2026-02-16 15:00:40&quot;,\n        &quot;updatedBy&quot;: &quot;177073092838821&quot;\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-27 15:27:20",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176657336231254",
@@ -1543,9 +1756,12 @@
         "routeResponse": "{}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-17 01:31:37",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176657679375076",
@@ -1561,9 +1777,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;success&quot;,\n    &quot;responseCode&quot;: &quot;2050&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-17 01:33:28",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176688056838986",
@@ -1579,9 +1798,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;\/software\/5920113d3182f87b2b10f6a5b6f8bf75\/update Route Not Found&quot;,\n    &quot;responseCode&quot;: &quot;1218&quot;,\n    &quot;responseCategory&quot;: &quot;100&quot;\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-26 10:39:25",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176688056891591",
@@ -1597,9 +1819,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: {\n        &quot;mvcType&quot;: &quot;controller&quot;,\n        &quot;content_width&quot;: 0,\n        &quot;packageName&quot;: &quot;mdLt&quot;,\n        &quot;contentName&quot;: &quot;MdLtRoute.php&quot;,\n        &quot;storeType&quot;: &quot;folder&quot;,\n        &quot;contentBody&quot;: &quot;Hello world&quot;    \n    },\n    &quot;responseCode&quot;: &quot;2050&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-26 10:39:44",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176691136635775",
@@ -1615,9 +1840,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;success&quot;,\n    &quot;responseCode&quot;: &quot;2050&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: &quot;Hello world&quot;\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-26 10:42:16",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176691404749692",
@@ -1633,9 +1861,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Record Updated&quot;,\n    &quot;responseCode&quot;: &quot;2007&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;lastupdate&quot;: &quot;2026-02-17 02:07:44&quot;,\n        &quot;downloadStatus&quot;: 1\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-26 10:42:25",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176694443850816",
@@ -1651,9 +1882,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;success&quot;,\n    &quot;responseCode&quot;: 205,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: [\n        {\n            &quot;lastupdate&quot;: &quot;2026-02-17 02:07:44&quot;,\n            &quot;contentName&quot;: &quot;5920113d3182f87b2b10f6a5b6f8bf75&quot;,\n            &quot;content&quot;: &quot;hello world&quot;\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-26 10:42:37",
+        "c81e728d9d4c2f": 1,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176700327179068",
@@ -1669,9 +1903,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;success&quot;,\n    &quot;responseCode&quot;: 205,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: [\n        {\n            &quot;lastupdate&quot;: &quot;2025-04-03 12:51:30&quot;,\n            &quot;contentName&quot;: &quot;Role_To_Login_121&quot;,\n            &quot;downloadStatus&quot;: 1\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-26 10:42:48",
+        "c81e728d9d4c2f": 1,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176743396211899",
@@ -1687,9 +1924,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Data Fetched&quot;,\n    &quot;responseCode&quot;: &quot;2009&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: [\n        {\n            &quot;contentName&quot;: &quot;Role_To_Login_121&quot;,\n            &quot;contentWork&quot;: &quot;Role To Login&quot;,\n            &quot;accbc87e4b5ce2&quot;: 0,\n            &quot;c81e728d9d4c2f&quot;: 0,\n            &quot;ri3wqzb4sc1v&quot;: 0\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-17 02:31:50",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176743816116841",
@@ -1705,9 +1945,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Record Updated&quot;,\n    &quot;responseCode&quot;: &quot;2007&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;contentName&quot;: &quot;891a17880c886b3c&quot;,\n        &quot;updatedBy&quot;: &quot;173164610729251&quot;,\n        &quot;ri3wqzb4sc1v&quot;: 1\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-17 02:34:26",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176968335943426",
@@ -1723,9 +1966,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Data Fetched&quot;,\n    &quot;responseCode&quot;: 2009,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: [\n        {\n            &quot;menu_name&quot;: &quot;User&quot;,\n            &quot;target&quot;: &quot;_blank&quot;,\n            &quot;route_path&quot;: &quot;\/mdLtTheme\/LtUser&quot;\n        },\n        {\n            &quot;menu_name&quot;: &quot;Module&quot;,\n            &quot;target&quot;: &quot;_blank&quot;,\n            &quot;route_path&quot;: &quot;\/mdLtTheme\/LtModule&quot;\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 12:49:18",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176968335965832",
@@ -1741,9 +1987,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Data Fetched&quot;,\n    &quot;responseCode&quot;: 2009,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: [\n        {\n            &quot;menu_name&quot;: &quot;Login&quot;,\n            &quot;target&quot;: &quot;_blank&quot;,\n            &quot;route_path&quot;: &quot;\/LtThemeLogin&quot;\n        },\n        {\n            &quot;menu_name&quot;: &quot;Backend Switching&quot;,\n            &quot;target&quot;: &quot;_blank&quot;,\n            &quot;route_path&quot;: &quot;\/admin-front\/account\/switch&quot;\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 12:48:32",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "176968509174218",
@@ -1759,9 +2008,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Data Fetched&quot;,\n    &quot;responseCode&quot;: 2009,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: [\n        {\n            &quot;ltId&quot;: &quot;1230373735&quot;,\n            &quot;menuName&quot;: &quot;Backend Dashboard&quot;,\n            &quot;slug&quot;: null,\n            &quot;routePath&quot;: &quot;\/admin-end\/Dashboard&quot;,\n            &quot;target&quot;: &quot;_self&quot;,\n            &quot;isExternal&quot;: 0,\n            &quot;parentMenuId&quot;: &quot;&quot;,\n            &quot;menuLevel&quot;: 1,\n            &quot;icon&quot;: &quot;fas fa-service&quot;\n        },\n        {\n            &quot;ltId&quot;: &quot;177090615953465&quot;,\n            &quot;menuName&quot;: &quot;mdPayment&quot;,\n            &quot;slug&quot;: null,\n            &quot;routePath&quot;: &quot;#&quot;,\n            &quot;target&quot;: &quot;self&quot;,\n            &quot;isExternal&quot;: 0,\n            &quot;parentMenuId&quot;: null,\n            &quot;menuLevel&quot;: 1,\n            &quot;icon&quot;: null,\n            &quot;children&quot;: [\n                {\n                    &quot;ltId&quot;: &quot;177090626617165&quot;,\n                    &quot;menuName&quot;: &quot;Category&quot;,\n                    &quot;slug&quot;: null,\n                    &quot;routePath&quot;: &quot;\/mdPayment\/category&quot;,\n                    &quot;target&quot;: &quot;_self&quot;,\n                    &quot;isExternal&quot;: 0,\n                    &quot;parentMenuId&quot;: &quot;177090615953465&quot;,\n                    &quot;menuLevel&quot;: 2,\n                    &quot;icon&quot;: &quot;&quot;\n                },\n     \n            ]\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-05-30 17:19:15",
+        "c81e728d9d4c2f": 1,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "177012940329220",
@@ -1777,9 +2029,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;success&quot;,\n    &quot;responseCode&quot;: 200,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: [\n        {\n            &quot;editorId&quot;: 4,\n            &quot;contentName&quot;: &quot;Role_To_Login_121&quot;,\n            &quot;lastupdate&quot;: &quot;2025-04-03 12:51:30&quot;,\n            &quot;contentWork&quot;: &quot;Role To Login&quot;,\n            &quot;updateStatus&quot;: 1,\n            &quot;onlineUpdate&quot;: &quot;2025-04-03 12:51:30&quot;\n        },\n        {\n            &quot;editorId&quot;: 6,\n            &quot;contentName&quot;: &quot;73d0822e6143682d58e7f4b&quot;,\n            &quot;lastupdate&quot;: &quot;2026-02-04 14:27:11&quot;,\n            &quot;contentWork&quot;: &quot;Login Page&quot;,\n            &quot;updateStatus&quot;: 1,\n            &quot;onlineUpdate&quot;: &quot;2026-02-04 14:27:11&quot;\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-04-26 10:42:59",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "177023963271373",
@@ -1795,9 +2050,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;success&quot;,\n    &quot;responseCode&quot;: 200,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: [\n        {\n            &quot;responseResult&quot;: &quot;Registration successful&quot;,\n            &quot;responseCode&quot;: &quot;2006&quot;,\n            &quot;responseCategory&quot;: &quot;200&quot;,\n            &quot;responseData&quot;: {\n                &quot;ltId&quot;: &quot;177128848634721&quot;,\n                &quot;contentName&quot;: &quot;TbApiRoute.php&quot;,\n                &quot;packageName&quot;: &quot;mdAlikaSilva&quot;,\n                &quot;contentType&quot;: &quot;module&quot;,\n                &quot;mvcType&quot;: &quot;model&quot;,\n                &quot;storeType&quot;: &quot;folder&quot;,\n                &quot;sortOrder&quot;: 80,\n                &quot;updatedBy&quot;: &quot;173164610729251&quot;,\n                &quot;createdAt&quot;: &quot;2026-02-17 01:34:46&quot;,\n                &quot;updatedAt&quot;: &quot;2026-02-17 01:34:46&quot;\n            }\n        }\n    ]\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-17 01:36:27",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "177062558772964",
@@ -1813,9 +2071,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;success&quot;,\n    &quot;responseCode&quot;: 3309,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: {\n        &quot;affectedRows&quot;: 0\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 18:49:48",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "177089928741447",
@@ -1831,9 +2092,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;Record Fetched Successfully&quot;,\n    &quot;responseCode&quot;: 201,\n    &quot;responseCategory&quot;: 200,\n    &quot;responseData&quot;: {\n        &quot;pages&quot;: {\n            &quot;Theme&quot;: 49,\n            &quot;Routes&quot;: 148,\n            &quot;Report&quot;: 2,\n            &quot;Api&quot;: 3,\n            &quot;totalPages&quot;: 202\n        },\n        &quot;packages&quot;: {\n            &quot;theme&quot;: 4,\n            &quot;module&quot;: 6,\n            &quot;totalPackages&quot;: 10\n        }\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-17 02:05:47",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "177089997761626",
@@ -1849,9 +2113,12 @@
         "routeResponse": "",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-17 00:54:55",
+        "c81e728d9d4c2f": 1,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "177125381470871",
@@ -1867,9 +2134,12 @@
         "routeResponse": "{\n    &quot;responseResult&quot;: &quot;File uploaded successfully.&quot;,\n    &quot;responseCode&quot;: &quot;1991&quot;,\n    &quot;responseCategory&quot;: &quot;200&quot;,\n    &quot;responseData&quot;: {\n        &quot;file_path&quot;: &quot;assets\/tunji\/mdGradyRoss.zip&quot;,\n        &quot;file_name&quot;: &quot;mdGradyRoss.zip&quot;,\n        &quot;ext&quot;: &quot;zip&quot;,\n        &quot;size&quot;: 3672\n    }\n}",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-02-16 16:01:06",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "177833751230017",
@@ -1885,9 +2155,12 @@
         "routeResponse": "",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-05-09 15:43:31",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "178254077984911",
@@ -1903,9 +2176,12 @@
         "routeResponse": "",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-06-27 07:13:54",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "178359125185251",
@@ -1921,9 +2197,12 @@
         "routeResponse": "",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-07-09 11:13:15",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 0,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "178663125365174",
@@ -1939,9 +2218,12 @@
         "routeResponse": "",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-08-13 15:28:03",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "178705095749189",
@@ -1957,9 +2239,12 @@
         "routeResponse": "",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-08-18 12:03:01",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "178731433038595",
@@ -1975,9 +2260,12 @@
         "routeResponse": "",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-08-21 13:12:24",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "178733145534375",
@@ -1993,9 +2281,12 @@
         "routeResponse": "",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-08-21 17:57:59",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "178940582159456",
@@ -2011,9 +2302,12 @@
         "routeResponse": "",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-09-14 18:10:43",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "178955324276120",
@@ -2029,9 +2323,12 @@
         "routeResponse": "",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-09-16 11:07:33",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "178966768497625",
@@ -2047,9 +2344,12 @@
         "routeResponse": "",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-09-17 18:54:56",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "179011277920217",
@@ -2065,9 +2365,12 @@
         "routeResponse": "",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-09-22 22:33:40",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "179011764851761",
@@ -2083,9 +2386,12 @@
         "routeResponse": "",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-09-22 23:54:26",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "179130186120699",
@@ -2101,9 +2407,12 @@
         "routeResponse": "",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-10-06 17:12:53",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "179187922845012",
@@ -2119,9 +2428,12 @@
         "routeResponse": "",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-10-13 09:15:18",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "179242067025511",
@@ -2137,9 +2449,12 @@
         "routeResponse": "",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-10-19 09:37:50",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 0,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "179242067041488",
@@ -2155,9 +2470,12 @@
         "routeResponse": "",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-10-19 09:37:50",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 0,
+        "ri3wqzb4sc1v": 0
     },
     {
         "ltId": "179242067066234",
@@ -2173,8 +2491,95 @@
         "routeResponse": "",
         "routeUpdateStatus": 1,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-10-19 09:37:50",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 0,
+        "ri3wqzb4sc1v": 0
+    },
+    {
+        "ltId": "179309860532983",
+        "packageName": "MdLt",
+        "pageName": "Admin-roles.form-roles-update",
+        "pageType": "router",
+        "routeContent": null,
+        "routeFileName": "MdLtRoute.php",
+        "routeHandler": "MdLt@TbRoleController@updateFormRoles",
+        "routeMethod": "patch",
+        "routePath": "\/roles\/update-form-roles",
+        "routePayload": null,
+        "routeResponse": null,
+        "routeUpdateStatus": 1,
+        "apiToAllowRouters": null,
+        "createdFrom": "module",
+        "description": null,
+        "updatedAt": "2026-10-27 11:57:15",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
+    },
+    {
+        "ltId": "179321709152198",
+        "packageName": "MdLt",
+        "pageName": "Admin-pages.publish-to-default",
+        "pageType": "router",
+        "routeContent": null,
+        "routeFileName": "MdLtRoute.php",
+        "routeHandler": "MdLt@TbPageController@publishedToDefault",
+        "routeMethod": "post",
+        "routePath": "\/pages\/published\/default",
+        "routePayload": null,
+        "routeResponse": null,
+        "routeUpdateStatus": 1,
+        "apiToAllowRouters": null,
+        "createdFrom": "module",
+        "description": null,
+        "updatedAt": "2026-10-28 20:57:46",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
+    },
+    {
+        "ltId": "179378554585366",
+        "packageName": "MdLt",
+        "pageName": "Admin-roles.form-roles-get",
+        "pageType": "router",
+        "routeContent": null,
+        "routeFileName": "MdLtRoute.php",
+        "routeHandler": "MdLt@TbRoleController@getFormRoles",
+        "routeMethod": "get",
+        "routePath": "\/roles\/form-roles\/list",
+        "routePayload": null,
+        "routeResponse": null,
+        "routeUpdateStatus": 1,
+        "apiToAllowRouters": null,
+        "createdFrom": "lifepage",
+        "description": null,
+        "updatedAt": "2026-11-04 11:54:24",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
+    },
+    {
+        "ltId": "179378707489028",
+        "packageName": "MdLt",
+        "pageName": "Admin-packages.export-tables",
+        "pageType": "router",
+        "routeContent": null,
+        "routeFileName": "MdLtRoute.php",
+        "routeHandler": "MdLt@TbPackageController@exportTables",
+        "routeMethod": "get",
+        "routePath": "\/packages\/export-tables",
+        "routePayload": null,
+        "routeResponse": null,
+        "routeUpdateStatus": 1,
+        "apiToAllowRouters": null,
+        "createdFrom": "lifepage",
+        "description": null,
+        "updatedAt": "2026-11-04 11:13:07",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0
     }
 ]

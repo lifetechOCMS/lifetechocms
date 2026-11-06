@@ -13,6 +13,9 @@ use Lt\Modules\MdLt\Services\TbContentService;
 use DbConnect;
 //  to be leave
 
+/**
+ *  RESPONSE CODE 3500 - 3599
+ */ 
 
 class TbContentController
 {
@@ -92,14 +95,12 @@ class TbContentController
     }
     
     public function update(){
-        $contentModel = new TbContent();
+        $dataModelService = new TbContentService();
+        $response = $dataModelService->update();
         
-        $contentModel->processRequest(); 
-        $contentModel->updatedBy = LtSession::get('ltUid');
-        // $contentModel->sort_order = 32;
-        $contentModel->update('ltId', '=', $contentModel->ltId);
-        return $contentModel->responseJson(); 
+        return $response;
     }
+
     
     public function destroy(){
         

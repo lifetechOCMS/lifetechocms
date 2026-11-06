@@ -1,7 +1,7 @@
 <?php
 namespace Lt\Plugins\PlgMail\Controllers;
 
-// use Lt\Plugins\PlgMail\Services\PlgMailService;       
+use Lt\Plugins\PlgMail\Services\PlgMailService;       
            
 class PlgMailController
 {
@@ -9,7 +9,7 @@ class PlgMailController
  public function test()
     {
         
-        return "connect";
+        //return "connect";
         
         $mail = new PlgMailService();
 //adedayoadetunji7@gmail.com 

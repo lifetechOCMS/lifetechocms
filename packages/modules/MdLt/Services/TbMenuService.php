@@ -6,6 +6,10 @@ use Lt\Modules\MdLt\Services\LtResponse;
 use Lt\Modules\MdLt\Services\LtRequest;
 use Lt\Modules\MdLt\Services\LtSession;
 
+/**
+ *  RESPONSE CODE 1500 - 1599
+ */ 
+
 class TbMenuService
 {
         protected $menuModel;
