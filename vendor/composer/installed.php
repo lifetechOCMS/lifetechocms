@@ -1,8 +1,8 @@
 <?php return array(
     'root' => array(
         'name' => 'lifetechocms/lifetechocms',
-        'pretty_version' => '2.7.9',
-        'version' => '2.7.9.0',
+        'pretty_version' => '2.8.0',
+        'version' => '2.8.0.0',
         'reference' => null,
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
@@ -20,8 +20,8 @@
             'dev_requirement' => true,
         ),
         'lifetechocms/lifetechocms' => array(
-            'pretty_version' => '2.7.9',
-            'version' => '2.7.9.0',
+            'pretty_version' => '2.8.0',
+            'version' => '2.8.0.0',
             'reference' => null,
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
@@ -65,9 +65,9 @@
             'dev_requirement' => true,
         ),
         'phpmailer/phpmailer' => array(
-            'pretty_version' => 'v7.1.1',
-            'version' => '7.1.1.0',
-            'reference' => '1bc1716a507a65e039d4ac9d9adebbbd0d346e15',
+            'pretty_version' => 'v7.2.0',
+            'version' => '7.2.0.0',
+            'reference' => 'f5eb50148734d03bbbb81825c722c1889636d51a',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpmailer/phpmailer',
             'aliases' => array(),

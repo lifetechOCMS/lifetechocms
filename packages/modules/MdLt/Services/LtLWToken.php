@@ -4,7 +4,7 @@ namespace Lt\Modules\MdLt\Services;
 use Lt\Modules\MdLt\Models\TbLwtTokenization;
 use Lt\Modules\MdLt\Services\LtResponse;
 use Lt\Modules\MdLt\Services\LtSession;
-
+use ApiTokenDetails;
 // RESPONSE CODE 1100 - 1199
 
 
@@ -12,6 +12,11 @@ class LtLWToken
 {
   public static function insertLwtToken($userId, $user_role = "", $expireTime = "1100")
     {
+        //just to check if expireTime is passed IN
+        if ($expireTime == 1100 && class_exists('ApiTokenDetails') && is_callable(['ApiTokenDetails', 'apiTokenExpiredTimeOut'])) 
+        {
+            $expireTime = ApiTokenDetails::apiTokenExpiredTimeOut();
+        }
         $token = bin2hex(random_bytes(16));
 
         $tokenModel = new TbLwtTokenization;
@@ -31,6 +36,12 @@ class LtLWToken
 
     public static function isValid($token, $expireTime = "1100")
     { 
+        //just to check if expireTime is passed IN
+        if ($expireTime == 1100 && class_exists('ApiTokenDetails') && is_callable(['ApiTokenDetails', 'apiTokenExpiredTimeOut'])) 
+        {
+            $expireTime = ApiTokenDetails::apiTokenExpiredTimeOut();
+        }
+        
         if(empty($token)) return LtResponse::json("Token must not be empty", "1105", "100");
         $tokenization_instance = new TbLwtTokenization;
     

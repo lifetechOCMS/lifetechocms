@@ -13,9 +13,14 @@
         "routeResponse": "",
         "routeUpdateStatus": 0,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-11-08 22:08:24",
+        "c81e728d9d4c2f": 1,
+        "accbc87e4b5ce2": 0,
+        "ri3wqzb4sc1v": 0,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "177788172677046",
@@ -31,9 +36,14 @@
         "routeResponse": "",
         "routeUpdateStatus": 0,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-11-08 22:08:24",
+        "c81e728d9d4c2f": 1,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "177788187315226",
@@ -49,9 +59,14 @@
         "routeResponse": "",
         "routeUpdateStatus": 0,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-11-08 22:08:24",
+        "c81e728d9d4c2f": 1,
+        "accbc87e4b5ce2": 0,
+        "ri3wqzb4sc1v": 0,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "177788220118238",
@@ -67,9 +82,14 @@
         "routeResponse": "",
         "routeUpdateStatus": 0,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-11-08 22:08:24",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 1,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "177801602778134",
@@ -85,8 +105,36 @@
         "routeResponse": "",
         "routeUpdateStatus": 0,
         "apiToAllowRouters": "",
+        "createdFrom": "module",
         "description": "",
-        "themeLayout": null,
-        "themeLayoutPackage": null
+        "updatedAt": "2026-11-08 22:08:24",
+        "c81e728d9d4c2f": 1,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
+    },
+    {
+        "ltId": "179413560018071",
+        "packageName": "MdUserLogin",
+        "pageName": "UserDashboard.html",
+        "pageType": "theme",
+        "routeContent": null,
+        "routeFileName": null,
+        "routeHandler": null,
+        "routeMethod": null,
+        "routePath": "\/MdUserLogin\/UserDashboard",
+        "routePayload": null,
+        "routeResponse": null,
+        "routeUpdateStatus": 0,
+        "apiToAllowRouters": null,
+        "createdFrom": "module",
+        "description": null,
+        "updatedAt": "2026-11-08 22:08:24",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     }
 ]

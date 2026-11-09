@@ -1,10 +1,22 @@
 
-<?php ltImport('mdLtTheme','LtThemeService.js') ?>
+<?php ltImport('ThemeLifeTech', 'Script.js') ?>
   <script>
  
      function init() {
         
         async function logout(){
+            const userDetails = <?= 
+                class_exists('ApiTokenDetails') && method_exists('ApiTokenDetails', 'appId')
+                    ? json_encode(ApiTokenDetails::appId().'_userDetails')
+                    :  json_encode('userDetails');
+            ?>;
+            const siteInfo = <?= 
+                class_exists('ApiTokenDetails') && method_exists('ApiTokenDetails', 'appId')
+                    ? json_encode(ApiTokenDetails::appId().'_siteInfo')
+                    :  json_encode('siteInfo');
+            ?>;
+            
+            const getTokenNameNew = "<?= ApiTokenDetails::tokenName(); ?>";
               
             try{
 
@@ -13,9 +25,11 @@
                 const { responseData, responseResult, responseCategory } = responseRecord;
                  
                  if(responseCategory === 200){
-                     localStorage.clear();
+                     localStorage.removeItem(`${getTokenNameNew}`);
+                     localStorage.removeItem(`${userDetails}`);
+                     localStorage.removeItem(`${siteInfo}`);
                     Swal.fire('Bravo!!', `${responseResult}`, 'success').then(function(){
-                        window.location.href = `${siteHostAddress}/`;
+                        window.location.href = `${siteHostAddress}/admin`;
                     })
         
                  }else{
@@ -27,7 +41,7 @@
                  console.log(error);
             }
              
-         }
+        }
          // Un-commenting this will logout when preview 
         logout();    
 

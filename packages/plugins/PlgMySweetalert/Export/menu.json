@@ -4,11 +4,17 @@
         "packageName": "PlgMySweetalert",
         "menuLevel": 1,
         "menuName": "PlgMySweetalert",
-        "contentName": null,
-        "parentMenuId": null,
+        "contentName": "",
+        "parentMenuId": "",
         "routePath": "#",
-        "slug": null,
+        "slug": "",
         "target": "self",
-        "sortOrder": 8
+        "sortOrder": 8,
+        "updatedAt": "2026-10-02 22:58:14",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 0,
+        "ri3wqzb4sc1v": 0,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     }
 ]

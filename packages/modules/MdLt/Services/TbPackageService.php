@@ -471,6 +471,7 @@ LICENSE;
                     'type'              => $remotePkg['packageType'] ?? 'module',
                     'approvalStatus'    => $remotePkg['approvalStatus'] ?? 'review',
                     'payment'           => $remotePkg['paymentCategory'] ?? 'free',
+                    'downloadCount'     => $remotePkg['totalDownload'] ?? 0,
                     'price'             => $remotePkg['productPrice'] ?? 0, // depends on if payment is free or paid if is paid it will display the price tag else free
                     'dependency'        => json_decode($remotePkg['dependency']) ?? [], // depends on array with e.g [packageName => 'name', version => '1.12.3']
                     'latestVersion'     => $remoteVersion,
@@ -702,7 +703,10 @@ LICENSE;
             
             if(class_exists('\ImportLtClass')) {
                 $instance = new \ImportLtClass();
-                $instance->exportPackageAbstract($packageName, $packageType, $useSourceCode, $exportAction, $selectedTables, $bumpVersion);
+               $response = $instance->exportPackageAbstract($packageName, $packageType, $useSourceCode, $exportAction, $selectedTables, $bumpVersion);
+               if($response){
+                   return $response;
+               }
             } else {
                 $msg =  LtResponse::json("ImportLtClass does not exist", '3322', '100');
                 return $msg;
@@ -997,7 +1001,8 @@ LICENSE;
                     ':contentType'   => 'theme',
                     ':publishSource' => 'region'
                 ]);
-        
+                
+                
                 // 6. Apply 'Default.html' and package name to non-theme pages and to only page type theme
                 $stmtUpdatePages = $this->sqlConnect->prepare("
                     UPDATE tb_page 

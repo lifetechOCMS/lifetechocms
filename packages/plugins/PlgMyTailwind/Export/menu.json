@@ -4,23 +4,35 @@
         "packageName": "PlgMyTailwind",
         "menuLevel": 1,
         "menuName": "PlgMyTailwind",
-        "contentName": null,
-        "parentMenuId": null,
+        "contentName": "",
+        "parentMenuId": "",
         "routePath": "#",
-        "slug": null,
+        "slug": "",
         "target": "self",
-        "sortOrder": 8
+        "sortOrder": 8,
+        "updatedAt": "2026-10-02 22:58:05",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 0,
+        "ri3wqzb4sc1v": 0,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "178896646199638",
         "packageName": "PlgMyTailwind",
         "menuLevel": 1,
         "menuName": "Cassady Waller",
-        "contentName": null,
+        "contentName": "",
         "parentMenuId": "",
         "routePath": "#",
-        "slug": null,
+        "slug": "",
         "target": "_self",
-        "sortOrder": null
+        "sortOrder": 0,
+        "updatedAt": "2026-10-02 22:58:05",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 0,
+        "ri3wqzb4sc1v": 0,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     }
 ]

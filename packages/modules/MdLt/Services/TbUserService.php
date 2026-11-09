@@ -6,6 +6,7 @@ use Lt\Modules\MdLt\Services\LtResponse;
 use Lt\Modules\MdLt\Services\LtRequest;
 use Lt\Modules\MdLt\Services\LtSession;
 use Lt\Modules\MdLt\Services\LtAuth;
+use Lt\Plugins\PlgMail\Services\PlgMailService;
 use LtDdm;
 
 /**

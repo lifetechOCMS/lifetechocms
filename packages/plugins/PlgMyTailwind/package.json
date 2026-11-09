@@ -2,11 +2,11 @@
     "ltId": "178887701877152",
     "packageName": "PlgMyTailwind",
     "packageType": "plugin",
-    "version": "4",
+    "version": "4.0.2",
     "dependsOn": [],
     "isPublished": null,
     "readme": "Tailwind Cdn",
     "languageUsed": "tailwind\/css",
-    "description": "Taillwind",
-    "ltVersion": null
+    "description": "Taillwind cdn for lifetechocms developers",
+    "ltVersion": "2.7.4"
 }

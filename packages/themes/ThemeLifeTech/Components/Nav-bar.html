@@ -14,8 +14,8 @@
                <?=  ltSiteName()  ?>
             </a>
             
-            <button id="mobileMenuBtn" class="lg:hidden text-white p-2">
-                <i class="bi bi-list text-2xl"></i>
+            <button id="mobileMenuBtn" class="lg:hidden text-white p-2"> 
+                <i class="fa-solid fa-bars text-2xl"></i>
             </button>
 
             <div id="desktop-nav" class="hidden lg:flex lg:items-center lg:space-x-8">
@@ -81,7 +81,7 @@
             
             return `
                 <div class="relative group">
-                    <a href="${url}" class="nav-link text-white ${item.menuName == 'Documentation' ? 'bg-[#08cf72] py-2 px-3 rounded-md hover:bg-[white]': ''} hover:text-primary transition-colors duration-200 font-medium" ${item.menuName == 'Documentation' ? "target = '_blank'": `target='${target}'`}>
+                    <a href="${item.menuName == 'Documentation' ?'https://www.lifetech.host/hubs/docs':url}" class="nav-link text-white ${item.menuName == 'Documentation' ? 'bg-[#08cf72] py-2 px-3 rounded-md hover:bg-[white]': ''} hover:text-primary transition-colors duration-200 font-medium" ${item.menuName == 'Documentation' ? "target = '_blank'": `target='${target}'`}>
                         ${item.menuName}
                     </a>
                     ${hasChildren ? `
@@ -133,7 +133,7 @@
         }
 
         // Default single link if no children
-        return `<a href="${url}" class="block text-white hover:text-primary transition-colors font-medium">${item.menuName}</a>`;
+        return `<a href="${item.menuName == 'Documentation' ?'https://www.lifetech.host/hubs/docs':url}"  target="${item.menuName == 'Documentation' ?'_blank':item.target}" class="block text-white hover:text-primary transition-colors font-medium">${item.menuName}</a>`;
     }).join('');
 }
 
@@ -149,7 +149,7 @@
                 navLinks = [
                     { menuName: 'Home', routePath: `` },
                     ...responseData,
-                    { menuName: 'Documentation', routePath: `/Docs` }
+                    { menuName: 'Documentation', routePath: `https://www.lifetech.host/hubs/Docs` }
                 ];
                 renderNav();
             }

@@ -2,11 +2,11 @@
     "ltId": "178887873388388",
     "packageName": "PlgMySweetalert",
     "packageType": "plugin",
-    "version": "2.0",
+    "version": "2.0.2",
     "dependsOn": [],
     "isPublished": null,
     "readme": "",
     "languageUsed": "javascript",
-    "description": "",
-    "ltVersion": null
+    "description": "my sweetalert js for theme developers",
+    "ltVersion": "2.7.4"
 }

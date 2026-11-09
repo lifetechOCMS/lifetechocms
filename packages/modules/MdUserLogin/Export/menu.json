@@ -9,7 +9,13 @@
         "routePath": "#",
         "slug": null,
         "target": "self",
-        "sortOrder": 8
+        "sortOrder": 8,
+        "updatedAt": "2026-05-04 08:00:50",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 0,
+        "ri3wqzb4sc1v": 0,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "177801602740586",
@@ -17,11 +23,17 @@
         "menuLevel": 1,
         "menuName": "About-us",
         "contentName": "About-us.html",
-        "parentMenuId": null,
+        "parentMenuId": "",
         "routePath": "\/about-us",
         "slug": null,
-        "target": "_blank",
-        "sortOrder": null
+        "target": "_self",
+        "sortOrder": null,
+        "updatedAt": "2026-11-08 05:30:35",
+        "c81e728d9d4c2f": 1,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "177788166514437",
@@ -33,7 +45,13 @@
         "routePath": "\/sign-in",
         "slug": null,
         "target": "_blank",
-        "sortOrder": null
+        "sortOrder": null,
+        "updatedAt": "2026-05-04 12:21:17",
+        "c81e728d9d4c2f": 1,
+        "accbc87e4b5ce2": 0,
+        "ri3wqzb4sc1v": 0,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "177788172660811",
@@ -45,7 +63,13 @@
         "routePath": "\/sign-up",
         "slug": null,
         "target": "_blank",
-        "sortOrder": null
+        "sortOrder": null,
+        "updatedAt": "2026-05-04 12:21:18",
+        "c81e728d9d4c2f": 1,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "177788220117642",
@@ -57,7 +81,13 @@
         "routePath": "\/logout",
         "slug": null,
         "target": "_blank",
-        "sortOrder": null
+        "sortOrder": null,
+        "updatedAt": "2026-09-08 01:34:50",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 1,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "177788187318772",
@@ -69,6 +99,30 @@
         "routePath": "\/forgot-password",
         "slug": null,
         "target": "_blank",
-        "sortOrder": null
+        "sortOrder": null,
+        "updatedAt": "2026-05-04 09:21:07",
+        "c81e728d9d4c2f": 1,
+        "accbc87e4b5ce2": 0,
+        "ri3wqzb4sc1v": 0,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
+    },
+    {
+        "ltId": "179413560038259",
+        "packageName": "MdUserLogin",
+        "menuLevel": 2,
+        "menuName": "UserDashboard.html",
+        "contentName": "UserDashboard.html",
+        "parentMenuId": "177787805076525",
+        "routePath": "\/MdUserLogin\/UserDashboard",
+        "slug": null,
+        "target": "_blank",
+        "sortOrder": null,
+        "updatedAt": "2026-11-08 12:00:00",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 0,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     }
 ]

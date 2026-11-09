@@ -2,11 +2,11 @@
     "ltId": "178888011625012",
     "packageName": "PlgMyFontAwesome",
     "packageType": "plugin",
-    "version": "2.0",
+    "version": "2.0.2",
     "dependsOn": [],
     "isPublished": null,
     "readme": "",
     "languageUsed": "css",
-    "description": "",
-    "ltVersion": null
+    "description": "this is font-awesome plugin for lifetechocms",
+    "ltVersion": "2.7.4"
 }

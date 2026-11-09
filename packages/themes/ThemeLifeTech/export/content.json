@@ -17,7 +17,13 @@
         "sortOrder": 8,
         "description": "Page",
         "themeResourceType": "Component",
-        "additionalPath": "\/"
+        "additionalPath": "\/",
+        "updatedAt": "2026-09-12 00:51:00",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 0,
+        "ri3wqzb4sc1v": 0,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "178665891823727",
@@ -32,12 +38,18 @@
         "contentName": "Nav-bar.html",
         "contentCategory": "",
         "contentBody": "",
-        "ccurrent": "20f50d3b4479c7a6e04ec24811109680",
-        "ccname": "1141938ba2c2b13f5505d7c424ebae5f",
+        "ccurrent": "688cfdaef69c99073293c18c477b6353",
+        "ccname": "013a006f03dbc5392effeb8f18fda755",
         "sortOrder": 16,
         "description": "navigation bar",
         "themeResourceType": "Component",
-        "additionalPath": "\/"
+        "additionalPath": "\/",
+        "updatedAt": "2026-11-08 05:51:58",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 0,
+        "ri3wqzb4sc1v": 0,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "178665901689867",
@@ -57,7 +69,13 @@
         "sortOrder": 24,
         "description": "content section",
         "themeResourceType": "Component",
-        "additionalPath": "\/"
+        "additionalPath": "\/",
+        "updatedAt": "2026-09-12 00:51:00",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 0,
+        "ri3wqzb4sc1v": 0,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "178669097020840",
@@ -77,7 +95,13 @@
         "sortOrder": 32,
         "description": "lifetech theme hero section",
         "themeResourceType": "View",
-        "additionalPath": "\/"
+        "additionalPath": "\/",
+        "updatedAt": "2026-09-12 00:51:00",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 1,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "178669156186391",
@@ -97,7 +121,13 @@
         "sortOrder": 40,
         "description": "about-us",
         "themeResourceType": "View",
-        "additionalPath": "\/"
+        "additionalPath": "\/",
+        "updatedAt": "2026-09-12 00:51:00",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 1,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "178669165332281",
@@ -117,7 +147,13 @@
         "sortOrder": 48,
         "description": "Why Us",
         "themeResourceType": "View",
-        "additionalPath": "\/"
+        "additionalPath": "\/",
+        "updatedAt": "2026-09-12 00:51:00",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 1,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "178669256076595",
@@ -137,7 +173,13 @@
         "sortOrder": 56,
         "description": "Features",
         "themeResourceType": "View",
-        "additionalPath": "\/"
+        "additionalPath": "\/",
+        "updatedAt": "2026-09-12 00:51:00",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 1,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "178669357383316",
@@ -157,7 +199,13 @@
         "sortOrder": 64,
         "description": "Servces",
         "themeResourceType": "View",
-        "additionalPath": "\/"
+        "additionalPath": "\/",
+        "updatedAt": "2026-09-12 00:51:00",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 1,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "178669359287433",
@@ -177,7 +225,13 @@
         "sortOrder": 72,
         "description": "team",
         "themeResourceType": "View",
-        "additionalPath": "\/"
+        "additionalPath": "\/",
+        "updatedAt": "2026-09-12 00:51:00",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 1,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "178669365369991",
@@ -197,7 +251,13 @@
         "sortOrder": 80,
         "description": "Api-doc",
         "themeResourceType": "View",
-        "additionalPath": "\/"
+        "additionalPath": "\/",
+        "updatedAt": "2026-09-12 00:51:00",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 1,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "178669379763885",
@@ -217,7 +277,13 @@
         "sortOrder": 88,
         "description": "Forum",
         "themeResourceType": "View",
-        "additionalPath": "\/"
+        "additionalPath": "\/",
+        "updatedAt": "2026-09-12 00:51:00",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 1,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "178669389435097",
@@ -237,7 +303,13 @@
         "sortOrder": 96,
         "description": "Javascript File",
         "themeResourceType": "Asset",
-        "additionalPath": "\/js"
+        "additionalPath": "\/js",
+        "updatedAt": "2026-09-12 00:51:00",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 0,
+        "ri3wqzb4sc1v": 0,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "178669395186749",
@@ -257,7 +329,13 @@
         "sortOrder": 112,
         "description": "Registration Content",
         "themeResourceType": "View",
-        "additionalPath": "\/"
+        "additionalPath": "\/",
+        "updatedAt": "2026-09-12 00:51:00",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 1,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "178669404266238",
@@ -277,7 +355,13 @@
         "sortOrder": 136,
         "description": "Logout Content",
         "themeResourceType": "View",
-        "additionalPath": "\/"
+        "additionalPath": "\/",
+        "updatedAt": "2026-09-12 00:51:00",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 1,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "178669424778626",
@@ -292,12 +376,18 @@
         "contentName": "Footer.html",
         "contentCategory": "",
         "contentBody": "",
-        "ccurrent": "14b2e2749e44401cd4c236cf262fca82",
+        "ccurrent": "214851cfd0fc537334d8076561db414d",
         "ccname": "cfee398643cbc3dc5eefc89334cacdc1",
         "sortOrder": 144,
         "description": "Components",
         "themeResourceType": "Component",
-        "additionalPath": "\/"
+        "additionalPath": "\/",
+        "updatedAt": "2026-11-08 11:47:02",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 0,
+        "ri3wqzb4sc1v": 0,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "178670665739081",
@@ -317,7 +407,13 @@
         "sortOrder": 152,
         "description": "Login Content",
         "themeResourceType": "View",
-        "additionalPath": "\/"
+        "additionalPath": "\/",
+        "updatedAt": "2026-09-12 00:51:00",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 1,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     },
     {
         "ltId": "178670675547473",
@@ -337,6 +433,38 @@
         "sortOrder": 160,
         "description": "Forgot Password Content",
         "themeResourceType": "View",
-        "additionalPath": "\/"
+        "additionalPath": "\/",
+        "updatedAt": "2026-09-12 00:51:00",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 1,
+        "ri3wqzb4sc1v": 1,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
+    },
+    {
+        "ltId": "179408958857596",
+        "packageName": "ThemeLifeTech",
+        "pageType": null,
+        "useLiferazor": 0,
+        "storeType": "folder",
+        "mvcType": null,
+        "isThemeDefault": 0,
+        "contentType": "theme",
+        "contentSource": "user",
+        "contentName": "Default.html",
+        "contentCategory": "",
+        "contentBody": "",
+        "ccurrent": "7b0081e9153a5522cee451121f1b42dc",
+        "ccname": "4e732ced3463d06de0ca9a15b6153677",
+        "sortOrder": 168,
+        "description": "this is the default layout for this theme",
+        "themeResourceType": "Layout",
+        "additionalPath": "\/",
+        "updatedAt": "2026-11-07 23:13:27",
+        "c81e728d9d4c2f": 0,
+        "accbc87e4b5ce2": 0,
+        "ri3wqzb4sc1v": 0,
+        "w0srn68uzbap": 0,
+        "20dou7ay4gfp": 0
     }
 ]
