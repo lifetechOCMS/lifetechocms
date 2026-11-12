@@ -1,9 +1,15 @@
 <?php ltImport('ThemeLifeTech', 'Layout.html'); ?>
-<?php ltImport('ThemeLifeTech', 'Nav-bar.html'); ?>
+<!-- Body is a flex column spanning the full screen height -->
+<body class="flex flex-col min-h-screen bg-gray-50 overflow-x-hidden">
 
-<div>
-    <!-- dynamic content injected here --> 
-         <?php dddm::loadDynamicContent(); ?>
-</div>
+    <?php ltImport('ThemeLifeTech', 'Nav-bar.html'); ?>
 
-<?php ltImport('ThemeLifeTech', 'Footer.html'); ?>
+    <!-- Main wrapper flex-grow ensures it pushes the footer to the bottom -->
+    <main class="flex-grow w-full">
+        <!-- Dynamic content injected here will flow naturally as block elements --> 
+        <?php dddm::loadDynamicContent(); ?>
+    </main>
+
+    <?php ltImport('ThemeLifeTech', 'Footer.html'); ?>
+
+</body>

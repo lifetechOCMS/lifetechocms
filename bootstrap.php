@@ -56,7 +56,7 @@
     } 
     
     //preparing the current version of the framework
-    $GLOBALS['appcoreVersion'] = '2.8.0';
+    $GLOBALS['appcoreVersion'] = '2.8.1';
     if (!function_exists('getAppcoreVersion')) {
         function getAppcoreVersion(): string
         {

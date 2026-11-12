@@ -11,9 +11,9 @@
 ![GitHub Stars](https://img.shields.io/github/stars/lifetechocms/lifetechocms?style=social)
  
 
-> <b>Lifetech OCMS</b> is a modern PHP backend framework designed for building secure, scalable, and modular applications. It incorporates innovative features that differentiate it from traditional **PHP frameworks**. Here's an overview:
-Key Features:<br><br>
+> **LifeTechOCMS [Frameless]: A Framework Without Boundaries.** A modern, open-source PHP framework and content management system for building secure, scalable, and modular web applications. With built-in RBAC, dynamic content management, and multi-site connectivity, LifeTechOCMS empowers developers to build and manage applications with greater flexibility and and efficiency.
 
+Here's an overview: Key Features:
 **Model-View-Controller (MVC) Architecture:**<br>
  &ensp; Promotes a clear separation of concerns for efficient development.
   
@@ -51,7 +51,7 @@ Key Features:<br><br>
         &ensp;Provides a response() function with a structured json() method for clear API responses.
 
 **Site Connect:**<br>
-        &ensp;Provides connection to many applications from one dev enviroment.
+        &ensp;Connect and manage hundreds of remote LifeTechOCMS installations from a single development environment. Seamlessly switch between connected sites, access their resources, and manage multiple applications without switching installations, simplifying multi-site development and administration.
 
 
 ## Notable Origins and Dedication:<br>
@@ -59,7 +59,39 @@ Key Features:<br><br>
     Lifetech OCMS was created in the Computer Science Department of Ogun State Institute of Technology (OGITECH), Igbesa.
     It is dedicated to a lecturer at OGITECH, the late Mr. Aluko Temitope.
     The framework was innovated by Mr. Ajayi Abolore Abdulgafaru.
-    
+
+## Download
+### with Composer
+ 
+Run the following command in your terminal:
+
+composer create-project lifetechocms/lifetechocms my-project
+
+### From portal
+
+https://www.lifetech.host/hubs/download?release=software
+
+### Other Download Options
+For additional download methods and setup requirements
+https://github.com/lifetechOCMS/docs/blob/master/get-started/downloading-and-running-lifetech-ocms.md
+
+## Installation Process
+The installation wizard of Non-Docker and Docker can be found at  https://github.com/lifetechOCMS/docs/blob/master/get-started/installation-process.md
+
+
+## First Run, Administratior Access
+can be found here
+https://github.com/lifetechOCMS/docs/blob/master/get-started/first-run-administration-and-next-steps.md
+
+## Framework Documentation
+Access the official LifeTechOCMS documentation for installation, configuration, development, and framework features.
+
+### GitHub Documentation
+[![GitHub Docs](https://img.shields.io/badge/GitHub-Documentation-blue?logo=github)](https://github.com/lifetechOCMS/docs)
+
+### Documentation Portal
+[![Documentation](https://img.shields.io/badge/Documentation-LifeTechOCMS-blue)](https://www.lifetech.host/hubs/docs)
+
 ## Security Vulnerabilities
 
 For any security loopholes in **LifetechOCMS**, please kindly mail Ajayi Abolore through [abolorea@lifetech.host](mailto:abolorea@lifetech.host). We keep our security challenges to the high esteem.

@@ -51,6 +51,82 @@ class TbPackageService
             $this->sqlConnect = DbConnect::dbDriver();
         }
         
+        
+        public function index($data){
+            
+            $this->packageModel->select();
+            $packageName = $data['packageName'];
+            $packageType = $data['packageType'];
+            $isPublished = $data['isPublished'];
+            
+            // Build conditions dynamically
+            $hasCondition = false;
+
+            if (!empty($packageName)) {
+                $this->packageModel->where('package_name', '=', $packageName);
+                $hasCondition = true;
+            }
+    
+            if (!empty($packageType)) {
+                // if there was a previous where, use andWhere
+                if ($hasCondition) {
+                    $this->packageModel->andWhere('package_type', '=', $packageType);
+                } else {
+                    $this->packageModel->where('package_type', '=', $packageType);
+                    $hasCondition = true;
+                }
+            }
+    
+            if ($isPublished !== null) {
+                if ($hasCondition) {
+                    $this->packageModel->andWhere('is_published', '=', $isPublished);
+                } else {
+                    $this->packageModel->where('is_published', '=', $isPublished);
+                    $hasCondition = true;
+                }
+            }
+    
+            // Default ordering
+            $this->packageModel->orderBy('package_name', 'ASC');
+    
+            // Execute query
+            $this->packageModel->get();
+            ob_end_clean();
+            
+            // Assuming $packages is your array of returned objects/arrays from the query
+            $packages = $this->packageModel->responseData;
+            foreach ($packages as &$package) {
+                // Standardize object or array access
+                $isObject = is_object($package);
+                $rawDependsOn = $package->dependsOn ?? '[]';
+            
+                // Default status
+                $dependencyStatus = 'pass';
+            
+                // // Decode dependsOn JSON
+                $dependencies = is_string($rawDependsOn) ? json_decode($rawDependsOn, true) : $rawDependsOn;
+            
+                // Check if dependencies exist and is not empty
+                if (!empty($dependencies) && is_array($dependencies)) {
+                    // Call checkDependencyRequirement
+                    $result = $this->checkDependencyRequirement($dependencies);
+                    $check = is_array($result) ? $result : json_decode($result, true);
+                    
+                    // If responseCategory is 100, at least one dependency failed requirements
+                    if (isset($check['responseCategory']) && (int)$check['responseCategory'] === 100) {
+                        $dependencyStatus = 'failed';
+                    }
+                }
+            
+                // // Attach status and details to the package
+                    $package->dependencyStatus = $dependencyStatus;       // 'pass' or 'failed'
+            }
+            // unset($package); // Break reference
+            
+            return LtResponse()::json('success', 3301, 200, $packages);
+            
+        }
+        
 
         public function store($model) {
             $packageName = trim($model->packageName ?? '');
@@ -195,7 +271,7 @@ class TbPackageService
         
             // Initialize Export JSON files with valid empty JSON array '[]'
             $exportPath  = "{$pkgRoot}Export";
-            $exportFiles = ['page.json', 'content.json', 'menu.json', 'table.json', 'pageContent.json'];
+            $exportFiles = ['page.json', 'content.json', 'menu.json', 'table.json', 'pageContent.json', 'availableRoles.json'];
             foreach ($exportFiles as $file) {
                 LtFile::path($exportPath)->createFile($file, '[]');
             }
@@ -488,6 +564,7 @@ LICENSE;
         public function installFromMarketplace() {
             $packageName = $this->request->packageName;
             $state = $this->request->state ?? 'download'; // Default to download if not provided
+            $installWithRoles = $this->request->installWithRoles ?? null; // user permission state
             $path = "storage/tmp/import/";
             
             // Define the tag name at the top so it is available for validation
@@ -634,7 +711,7 @@ LICENSE;
  
                 if(class_exists('\ImportLtClass')) {
                     $instance = new \ImportLtClass();
-                    $result = $instance->importPackageAbstract($path);
+                    $result = $instance->importPackageAbstract($path, $installWithRoles);
                 } else {
                     return LtResponse::json("ImportLtClass does not exist", '3322', '100');
                 }
@@ -683,15 +760,10 @@ LICENSE;
             $packageName    = $this->request->packageName ?? null;
             $packageType    = $this->request->packageType ?? null;
             $bumpVersion    = filter_var($this->request->bumpVersion ?? false, FILTER_VALIDATE_BOOLEAN);
+            $exportWithRoles = filter_var($this->request->exportWithRoles ?? false, FILTER_VALIDATE_BOOLEAN);
             $useSourceCode  = filter_var($this->request->useSourceCode ?? true, FILTER_VALIDATE_BOOLEAN);
             $exportAction   = $this->request->exportAction ?? 'download';
             $selectedTables = !empty($this->request->selectedTables) ? json_decode($this->request->selectedTables, true) : [];
-        
-            $pageJsonArr        = [];
-            $contentJsonArr     = [];
-            $menuJsonArr        = [];
-            $pageContentJsonArr = [];
-            $tableJsonArr       = [];
         
             if (empty($packageName) || empty($packageType)) {
                 return LtResponse::json('PackageName and PackageType is required', 3010, 100);
@@ -703,7 +775,7 @@ LICENSE;
             
             if(class_exists('\ImportLtClass')) {
                 $instance = new \ImportLtClass();
-               $response = $instance->exportPackageAbstract($packageName, $packageType, $useSourceCode, $exportAction, $selectedTables, $bumpVersion);
+               $response = $instance->exportPackageAbstract($packageName, $packageType, $useSourceCode, $exportAction, $selectedTables, $bumpVersion, $exportWithRoles);
                if($response){
                    return $response;
                }
@@ -793,36 +865,43 @@ LICENSE;
             
                 
         //     }
-            
-        public function importPackage(){
-            $tmp_name = $_FILES['file']['tmp_name'];
-            $path="storage/tmp/"; 
-             
-            $result = LtFile::path($path)->unlink('import', 'no');   // to clean import folder before extracting inside
-            $path="storage/tmp/import/";
-             
-            if(!class_exists('ZipArchive')){
-                return LtResponse::json('ZipArchive is not Activated on your PhP Configuration. You need to Activate ZipArchive! on your PhP Configuration!!!  RETRY', 1999, 100);
+        
+        public function importPackage() {
+            $installWithRoles = $this->request->installWithRoles ?? null; // user permission state
+            $path = "storage/tmp/import/";
+        
+            // If file is provided, this is the initial upload, to avoid cleaning import folder when requesting confirmation from user
+            if (isset($_FILES['file']['tmp_name'])) {
+                $tmp_name = $_FILES['file']['tmp_name'];
+                $cleanPath = "storage/tmp/"; 
+                 
+                LtFile::path($cleanPath)->unlink('import', 'no');
+                 
+                if (!class_exists('ZipArchive')) {
+                    return LtResponse::json('ZipArchive is not Activated on your PHP Configuration.', 1999, 100);
+                }
+                 
+                $zip = new ZipArchive;
+                $res = $zip->open($tmp_name); 
+                 
+                if ($res === TRUE) { 
+                    $zip->extractTo($path);
+                    $zip->close();
+                } else {
+                    return LtResponse::json('Failed to extract package archive.', 1998, 100);
+                }
             }
-             
-            $zip = new ZipArchive;
-            $res = $zip->open($tmp_name); 
-             
-            if ($res === TRUE) { 
-            
-                $zip->extractTo($path);
-                $zip->close();
-                        
-            }
-
-            if(class_exists('\ImportLtClass')) {
+        
+            if (class_exists('\ImportLtClass')) {
                 $instance = new \ImportLtClass();
-                $result = $instance->importPackageAbstract($path);
+                $result = $instance->importPackageAbstract($path, $installWithRoles);
             } else {
                 return LtResponse::json("ImportLtClass does not exist", '3322', '100');
             } 
+        
             return $result;
-        }    
+        } 
+
         
         public function togglePublish($model) {
             $sqlConnect = DbConnect::dbDriver();

@@ -5,32 +5,49 @@
     visibility: visible !important;
     transform: translateY(0) !important;
 }
+/* Hide scrollbar for horizontal scrolling containers */
+.hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+}
+
 </style>
-<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm shadow-lg">
+<nav id="navbar" class="sticky top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm shadow-lg">
     <div class="container mx-auto px-4">
-        <div class="flex items-center justify-between h-20">
-            <a href="#home" class="flex items-center text-2xl font-bold text-primary">
-                <img src="<?=  ltSiteHostAddress()  ?>/storage/media/<?=  ltSiteLogo()  ?>" class="rounded-md w-10 h-10 mr-1" />
-               <?=  ltSiteName()  ?>
+        <div class="flex items-center justify-between min-h-[5rem] py-2">
+            <a href="<?= ltSiteUrl() ?>" class="flex items-center text-2xl font-bold text-primary shrink-0">
+                <img src="<?= ltSiteHostAddress() ?>/storage/media/<?= ltSiteLogo() ?>" class="rounded-md w-10 h-10 mr-2" />
+                <?= ltSiteName() ?>
             </a>
             
-            <button id="mobileMenuBtn" class="lg:hidden text-white p-2"> 
+            <button id="mobileMenuBtn" class="lg:hidden text-white p-2 focus:outline-none"> 
                 <i class="fa-solid fa-bars text-2xl"></i>
             </button>
-
-            <div id="desktop-nav" class="hidden lg:flex lg:items-center lg:space-x-8">
+           <div class="hidden lg:block flex-1 min-w-0 px-6 border-r border-gray-700 mx-4">
+                <div id="desktop-nav" class="flex items-center justify-start gap-x-6 flex-nowrap overflow-x-auto hide-scrollbar w-full py-1">
+                    <!-- Dynamic menus injected here -->
                 </div>
+            </div>
+                        <!-- 3. NEW Static Right: Action Buttons -->
+            <div class="hidden lg:flex items-center shrink-0 gap-3">
+                <a href="https://www.lifetech.host/hubs/docs" target="_blank" class="bg-[#08cf72] text-white py-2 px-4 rounded-md hover:bg-white hover:text-[#08cf72] font-medium transition-colors">
+                    Documentation
+                </a>
+            </div>
         </div>
     </div>
     
     <div id="mobileMenuDropdown" class="hidden lg:hidden bg-gray-900 border-t border-gray-800">
         <div class="container mx-auto px-6 py-6 flex flex-col space-y-4" id="mobile-nav-container">
-            </div>
+        </div>
     </div>
-
 </nav>
 
-<?php ltImport('ThemeLifeTech', 'Script.js') ?>;
+
+<?php ltImport('ThemeLifeTech', 'Script.js') ?>
 <script>
 (function() {
     'use strict';
@@ -59,35 +76,29 @@
             desktopContainer.innerHTML = renderDesktopMenu(navLinks, currentPath);
         }
         if (mobileContainer) {
-            mobileContainer.innerHTML = renderMobileMenu(navLinks, currentPath);
+            let menuWithDocs = [...navLinks, { menuName: 'Documentation', routePath: `https://www.lifetech.host/hubs/Docs` }];
+            mobileContainer.innerHTML = renderMobileMenu(menuWithDocs, currentPath);
         }
         
         // Re-init smooth scroll for newly injected anchors
         initSmoothScrolling();
         initDropdownClick();
     }
-
     function renderDesktopMenu(items, currentPage) {
         return items.map(item => {
-
             const hasChildren = item.children && item.children.length > 0;
-            let url = '';
-            let target = item.target;
-            if(item.isExternal){
-                url = item.routePath;
-            }else{
-                url = item.routePath.startsWith('#') ? item.routePath : `${siteHostAddress}${item.routePath}`;
-            }
+            let url = item.isExternal ? item.routePath : (item.routePath.startsWith('#') ? item.routePath : `${siteHostAddress}${item.routePath}`);
             
             return `
-                <div class="relative group">
-                    <a href="${item.menuName == 'Documentation' ?'https://www.lifetech.host/hubs/docs':url}" class="nav-link text-white ${item.menuName == 'Documentation' ? 'bg-[#08cf72] py-2 px-3 rounded-md hover:bg-[white]': ''} hover:text-primary transition-colors duration-200 font-medium" ${item.menuName == 'Documentation' ? "target = '_blank'": `target='${target}'`}>
+                <div class="relative group shrink-0"> <!-- shrink-0 prevents items from squishing -->
+                    <a href="${url}" class="nav-link text-white hover:text-primary transition-colors duration-200 font-medium" target="${item.target}">
                         ${item.menuName}
                     </a>
                     ${hasChildren ? `
-                        <div class="dropdown-menu absolute mt-3 left-0 top-full bg-white shadow-lg min-w-48 py-2 opacity-0 invisible translate-y-2 transition-all duration-200 z-50 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0">
+                        <!-- Removed absolute, top-full, left-0, and group-hover classes. Added fixed and fixed-dropdown -->
+                        <div class="dropdown-menu fixed-dropdown fixed bg-white shadow-xl min-w-48 py-2 opacity-0 invisible translate-y-2 transition-all duration-200 z-50 rounded-b-lg">
                             ${item.children.map(child => `
-                                <a href="${siteHostAddress}${child.routePath}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:text-primary text-sm" target="${target}">
+                                <a href="${siteHostAddress}${child.routePath}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:text-primary text-sm" target="${item.target}">
                                     ${child.menuName}
                                 </a>
                             `).join('')}
@@ -97,13 +108,6 @@
         }).join('');
     }
 
-    // function renderMobileMenu(items, currentPage) {
-    //     return items.map(item => {
-    //         const url = item.routePath.startsWith('#') ? item.routePath : `${siteHostAddress}${item.routePath}`;
-    //         return `<a href="${url}" class="block text-white hover:text-primary transition-colors">${item.menuName}</a>`;
-    //     }).join('');
-    // }
-    
     function renderMobileMenu(items, currentPage) {
     return items.map((item, index) => {
         const hasChildren = item.children && item.children.length > 0;
@@ -133,7 +137,7 @@
         }
 
         // Default single link if no children
-        return `<a href="${item.menuName == 'Documentation' ?'https://www.lifetech.host/hubs/docs':url}"  target="${item.menuName == 'Documentation' ?'_blank':item.target}" class="block text-white hover:text-primary transition-colors font-medium">${item.menuName}</a>`;
+        return `<a href="${item.menuName == 'Documentation' ?'https://www.lifetech.host/hubs/docs':url}"  target="${item.menuName == 'Documentation' ?'_blank':item.target}" class="${item.menuName == 'Documentation' ? 'bg-[#08cf72] py-2 px-3 rounded-md hover:bg-[white]' : ''}block text-white hover:text-primary transition-colors font-medium ">${item.menuName}</a>`;
     }).join('');
 }
 
@@ -148,8 +152,7 @@
                 // Combine default links with API links
                 navLinks = [
                     { menuName: 'Home', routePath: `` },
-                    ...responseData,
-                    { menuName: 'Documentation', routePath: `https://www.lifetech.host/hubs/Docs` }
+                    ...responseData
                 ];
                 renderNav();
             }
@@ -185,8 +188,17 @@
     }
     
     function initDropdownClick() {
-        // Target all navigation items that have children
         const dropdownParents = document.querySelectorAll('.group');
+        const navContainer = document.getElementById('desktop-nav');
+    
+        // 1. Close menus if the user scrolls the nav horizontally to prevent detached floating menus
+        if (navContainer) {
+            navContainer.addEventListener('scroll', () => {
+                document.querySelectorAll('.dropdown-menu').forEach(m => {
+                    m.classList.remove('is-active', 'opacity-100', 'visible', 'translate-y-0');
+                });
+            }, { passive: true });
+        }
     
         dropdownParents.forEach(parent => {
             const link = parent.querySelector('a');
@@ -194,8 +206,6 @@
     
             if (menu) {
                 link.addEventListener('click', function(e) {
-                    // If it's a touch device or we want click-to-open
-                    // Prevent navigation if the menu isn't open yet
                     if (!menu.classList.contains('is-active')) {
                         e.preventDefault();
                         
@@ -204,24 +214,30 @@
                             if (m !== menu) m.classList.remove('is-active', 'opacity-100', 'visible', 'translate-y-0');
                         });
     
+                        // Calculate the exact position of the parent link on the screen
+                        const rect = parent.getBoundingClientRect();
+                        
+                        // Apply coordinates dynamically so it escapes the overflow: hidden trap
+                        menu.style.top = `${rect.bottom + 12}px`; // 12px adds a nice gap
+                        menu.style.left = `${rect.left}px`;
+    
                         // Open this menu
                         menu.classList.add('is-active', 'opacity-100', 'visible', 'translate-y-0');
                     }
                 });
             }
         });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.group')) {
-            document.querySelectorAll('.dropdown-menu').forEach(m => {
-                m.classList.remove('is-active', 'opacity-100', 'visible', 'translate-y-0');
-            });
-        }
-    });
-}
     
-
+        // 2. Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.group')) {
+                document.querySelectorAll('.dropdown-menu').forEach(m => {
+                    m.classList.remove('is-active', 'opacity-100', 'visible', 'translate-y-0');
+                });
+            }
+        });
+    }
+    
     function initSmoothScrolling() {
         const anchors = document.querySelectorAll('a[href^="#"]');
         anchors.forEach(anchor => {

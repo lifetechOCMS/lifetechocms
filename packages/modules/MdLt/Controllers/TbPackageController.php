@@ -21,53 +21,23 @@ class TbPackageController
     
     public function index(){
         
-        
-        $packageModel = new TbPackage();
-        $packageModel->select();
-
         $request = new LtRequest();
 
         // Collect query parameters
-        $packageName = $request->package_name ?? null;
-        $packageType = $request->package_type ?? null;
+        $packageName = trim($request->package_name) ?? null;
+        $packageType = strtolower(trim($request->package_type)) ?? null;
         
         
         $isPublished = LtService::getIsValue($request->is_published ?? null);
-
-        // Build conditions dynamically
-        $hasCondition = false;
-
-        if (!empty($packageName)) {
-            $packageModel->where('package_name', '=', $packageName);
-            $hasCondition = true;
-        }
-
-        if (!empty($packageType)) {
-            // if there was a previous where, use andWhere
-            if ($hasCondition) {
-                $packageModel->andWhere('package_type', '=', $packageType);
-            } else {
-                $packageModel->where('package_type', '=', $packageType);
-                $hasCondition = true;
-            }
-        }
-
-        if ($isPublished !== null) {
-            if ($hasCondition) {
-                $packageModel->andWhere('is_published', '=', $isPublished);
-            } else {
-                $packageModel->where('is_published', '=', $isPublished);
-                $hasCondition = true;
-            }
-        }
-
-        // Default ordering
-        $packageModel->orderBy('package_name', 'ASC');
-
-        // Execute query
-        $packageModel->get();
-        ob_end_clean();
-        return LtResponse()::json('success', 3301, 200, $packageModel->responseData);
+        
+        $dataModelService = new TbPackageService();
+        $response = $dataModelService->index([
+                'packageName' => (string) $packageName,
+                'packageType'       => (string) $packageType,
+                'isPublished'     => $isPublished
+            ]);
+        return $response;
+        
     }
 
     public function store(){

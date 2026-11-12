@@ -18,10 +18,7 @@
         "description": "the model for page content",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-11-04 01:11:25",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-11-04 01:11:25"
     },
     {
         "ltId": "176061785182083",
@@ -42,10 +39,7 @@
         "description": "the controller for page content",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-11-04 01:11:20",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-11-04 01:11:20"
     },
     {
         "ltId": "176061788783418",
@@ -66,10 +60,7 @@
         "description": "the service for page content",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-11-04 01:11:16",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-11-04 01:11:16"
     },
     {
         "ltId": "176061794614266",
@@ -90,10 +81,7 @@
         "description": "this the model for packages",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-11-04 01:11:06",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-11-04 01:11:06"
     },
     {
         "ltId": "176061798213241",
@@ -108,16 +96,13 @@
         "contentName": "TbPackageController.php",
         "contentCategory": null,
         "contentBody": "",
-        "ccurrent": "c51a20be9bdbee7d61950b84bf46ba7b",
-        "ccname": "7d04bbbe5494ae9d2f5a76aa1c00fa2f",
+        "ccurrent": "06c7eeca1daf707b2e6564ae25dea1ee",
+        "ccname": "17d63b1625c816c22647a73e1482372b",
         "sortOrder": 1,
         "description": "this is the controller for packages",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-11-04 01:11:03",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-11-09 10:02:00"
     },
     {
         "ltId": "176061802931586",
@@ -132,16 +117,13 @@
         "contentName": "TbPackageService.php",
         "contentCategory": null,
         "contentBody": "",
-        "ccurrent": "f3ba36827b1534682585863edd526238",
-        "ccname": "5a9d8bf5b7a4b35f3110dde8673bdda2",
+        "ccurrent": "25342166df80b69cef258beb94af2072",
+        "ccname": "d3614f463b2d42aba2700556d42740d0",
         "sortOrder": 1,
         "description": "this is the services for packages",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-11-08 00:22:29",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-11-09 22:44:11"
     },
     {
         "ltId": "176185671216041",
@@ -162,10 +144,7 @@
         "description": "Lifetech File Management",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-11-04 01:10:54",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-11-04 01:10:54"
     },
     {
         "ltId": "176233562358052",
@@ -186,10 +165,7 @@
         "description": "Form Role Model",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-04-01 06:55:44",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-04-01 06:55:44"
     },
     {
         "ltId": "176365649263789",
@@ -210,10 +186,7 @@
         "description": "Lifetech Response model content",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-10-29 22:44:23",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-10-29 22:44:23"
     },
     {
         "ltId": "176365672549553",
@@ -234,10 +207,7 @@
         "description": "Lifetech Response Controller",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-10-29 22:44:37",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-10-29 22:44:37"
     },
     {
         "ltId": "176365692666944",
@@ -258,10 +228,7 @@
         "description": "Response Service",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-10-29 22:44:48",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-10-29 22:44:48"
     },
     {
         "ltId": "176397271726674",
@@ -276,16 +243,13 @@
         "contentName": "TbPageService.php",
         "contentCategory": "",
         "contentBody": "",
-        "ccurrent": "87f6b4f138a4b0e51fffdfb2da2dba32",
-        "ccname": "fc6709bfdf0572f183c1a84ce5276e96",
+        "ccurrent": "41295ced541eeac566b91dbc3b6dd3cc",
+        "ccname": "8b5700012be65c9da25f49408d959ca0",
         "sortOrder": 9,
         "description": "Lifetech Page Service",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-10-29 22:53:43",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-11-10 18:34:51"
     },
     {
         "ltId": "176397285497814",
@@ -306,10 +270,7 @@
         "description": "Lifetech Site Info Model",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-04-01 06:55:44",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-04-01 06:55:44"
     },
     {
         "ltId": "176397288464074",
@@ -330,10 +291,7 @@
         "description": "Lifetech Site Info Controller",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-08-06 14:06:24",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-08-06 14:06:24"
     },
     {
         "ltId": "176574704484767",
@@ -354,10 +312,7 @@
         "description": "Api Route Model",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-04-01 06:55:44",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-04-01 06:55:44"
     },
     {
         "ltId": "176615934654953",
@@ -378,10 +333,7 @@
         "description": "Software update model",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-04-01 06:55:44",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-04-01 06:55:44"
     },
     {
         "ltId": "176615953650722",
@@ -402,10 +354,7 @@
         "description": "Software Update Controller",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-10-05 10:42:20",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-10-05 10:42:20"
     },
     {
         "ltId": "176623934090712",
@@ -426,10 +375,7 @@
         "description": "Table Management Controller",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-04-01 06:55:44",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-04-01 06:55:44"
     },
     {
         "ltId": "176624840530112",
@@ -450,10 +396,7 @@
         "description": "Table Management Service",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-08-07 21:42:08",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-08-07 21:42:08"
     },
     {
         "ltId": "176685324782787",
@@ -474,10 +417,7 @@
         "description": "Dashboard Controller",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-04-01 06:55:44",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-04-01 06:55:44"
     },
     {
         "ltId": "177090119625427",
@@ -498,10 +438,7 @@
         "description": "AiChatController",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-08-08 08:58:03",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-08-08 08:58:03"
     },
     {
         "ltId": "177227525174364",
@@ -522,10 +459,28 @@
         "description": "display error",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-11-04 10:57:42",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-11-04 10:57:42"
+    },
+    {
+        "ltId": "177927424714930",
+        "packageName": "MdLt",
+        "pageType": "theme",
+        "useLiferazor": 0,
+        "storeType": "folder",
+        "mvcType": "View",
+        "isThemeDefault": 0,
+        "contentType": "module",
+        "contentSource": "user",
+        "contentName": "Dashboard.html",
+        "contentCategory": "",
+        "contentBody": "",
+        "ccurrent": "b5f8dbe31a8e7c0d7af7646408baa68f",
+        "ccname": "ac627ab1ccbdb62ec96e702f07f6425b",
+        "sortOrder": 121,
+        "description": "Dashboard Content",
+        "themeResourceType": null,
+        "additionalPath": null,
+        "updatedAt": "2026-06-01 06:40:52"
     },
     {
         "ltId": "178618982727580",
@@ -546,10 +501,7 @@
         "description": null,
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-08-08 19:47:00",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-08-08 19:47:00"
     },
     {
         "ltId": "178618982771265",
@@ -570,10 +522,7 @@
         "description": null,
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-08-08 12:50:27",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-08-08 12:50:27"
     },
     {
         "ltId": "179394880642616",
@@ -594,10 +543,28 @@
         "description": "LtCsrf is a LifeTechOCMS core security service that generates and validates Cross-Site Request Forgery (CSRF) tokens. It helps protect authenticated and anonymous web forms from unauthorized cross-site submissions by ensuring that state-changing requests contain a valid session-associated token.",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-11-07 21:07:28",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-11-07 21:07:28"
+    },
+    {
+        "ltId": "179430017489814",
+        "packageName": "MdLt",
+        "pageType": null,
+        "useLiferazor": 0,
+        "storeType": "folder",
+        "mvcType": "Service",
+        "isThemeDefault": 0,
+        "contentType": "module",
+        "contentSource": "user",
+        "contentName": "LtGlobalConfig.js",
+        "contentCategory": "",
+        "contentBody": "",
+        "ccurrent": "05e53670ccd18b02864abd590ebfebfe",
+        "ccname": "8e296a067a37563370ded05f5a3bf3ec",
+        "sortOrder": 145,
+        "description": "Lt Global Configuration Script",
+        "themeResourceType": null,
+        "additionalPath": null,
+        "updatedAt": "2026-11-10 09:48:06"
     },
     {
         "ltId": "804",
@@ -618,10 +585,7 @@
         "description": "Route for this module..Autmotically all your View will use this router to determine the controllers to invoke",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-11-04 11:53:41",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-11-04 11:53:41"
     },
     {
         "ltId": "805",
@@ -642,10 +606,7 @@
         "description": "this is going to implement the convention name cases",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-04-01 07:02:36",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-04-01 07:02:36"
     },
     {
         "ltId": "806",
@@ -666,10 +627,7 @@
         "description": "this is component manager for separating task for user roles",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-04-01 06:55:44",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-04-01 06:55:44"
     },
     {
         "ltId": "807",
@@ -690,10 +648,7 @@
         "description": "This is the service that handle navigation between two or more pages",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-04-01 06:55:44",
-        "c81e728d9d4c2f": 1,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-04-01 06:55:44"
     },
     {
         "ltId": "808",
@@ -714,10 +669,7 @@
         "description": "this is the route services",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-10-29 22:39:12",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-10-29 22:39:12"
     },
     {
         "ltId": "809",
@@ -738,10 +690,7 @@
         "description": "this is the site information service for your website",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-09-10 06:22:04",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-09-10 06:22:04"
     },
     {
         "ltId": "810",
@@ -762,10 +711,7 @@
         "description": "This is the services for responses on the framework",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-10-29 22:44:08",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-10-29 22:44:08"
     },
     {
         "ltId": "811",
@@ -786,10 +732,7 @@
         "description": "this is the url request services from the framework",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-04-01 06:55:44",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-04-01 06:55:44"
     },
     {
         "ltId": "812",
@@ -810,10 +753,7 @@
         "description": "this is the session services for the framework",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-04-01 06:55:44",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-04-01 06:55:44"
     },
     {
         "ltId": "813",
@@ -834,10 +774,7 @@
         "description": "This is the validator services for input and the rest",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-04-01 06:55:44",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-04-01 06:55:44"
     },
     {
         "ltId": "814",
@@ -858,10 +795,7 @@
         "description": "this is the user authentication services on the framework",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-10-29 22:31:43",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-10-29 22:31:43"
     },
     {
         "ltId": "815",
@@ -882,10 +816,7 @@
         "description": "this is the Maplite ORM for the database interaction",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-04-01 06:55:44",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-04-01 06:55:44"
     },
     {
         "ltId": "816",
@@ -906,10 +837,7 @@
         "description": "this is lifetech Web Token service",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-11-08 21:42:16",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-11-08 21:42:16"
     },
     {
         "ltId": "817",
@@ -930,10 +858,7 @@
         "description": "this is the service for date settings",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-04-01 06:55:44",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-04-01 06:55:44"
     },
     {
         "ltId": "818",
@@ -954,10 +879,7 @@
         "description": "this is the mail configuration setting",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-04-01 06:55:44",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-04-01 06:55:44"
     },
     {
         "ltId": "819",
@@ -978,10 +900,7 @@
         "description": "this is the file management service",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-11-04 12:23:33",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-11-04 12:23:33"
     },
     {
         "ltId": "820",
@@ -1002,10 +921,7 @@
         "description": "this is the model for tb users",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-10-29 22:42:47",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-10-29 22:42:47"
     },
     {
         "ltId": "821",
@@ -1026,10 +942,7 @@
         "description": "this is the user model controller",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-10-29 22:43:07",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-10-29 22:43:07"
     },
     {
         "ltId": "822",
@@ -1050,10 +963,7 @@
         "description": "this is the user model services",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-11-07 23:05:06",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-11-07 23:05:06"
     },
     {
         "ltId": "823",
@@ -1074,10 +984,7 @@
         "description": "this is the general service functions for the module",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-08-07 21:34:51",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-08-07 21:34:51"
     },
     {
         "ltId": "824",
@@ -1098,10 +1005,7 @@
         "description": "this is the model to role",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-10-29 22:45:20",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-10-29 22:45:20"
     },
     {
         "ltId": "825",
@@ -1122,10 +1026,7 @@
         "description": "this is the controller for tb role",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-11-04 11:53:16",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-11-04 11:53:16"
     },
     {
         "ltId": "826",
@@ -1146,10 +1047,7 @@
         "description": "this is the service",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-10-29 22:46:12",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-10-29 22:46:12"
     },
     {
         "ltId": "830",
@@ -1170,10 +1068,7 @@
         "description": "Module Content model",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-10-29 22:54:26",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-10-29 22:54:26"
     },
     {
         "ltId": "831",
@@ -1194,10 +1089,7 @@
         "description": "Module content controller",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-11-02 09:31:03",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-11-02 09:31:03"
     },
     {
         "ltId": "832",
@@ -1218,10 +1110,7 @@
         "description": "Module Content Services",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-11-02 11:05:37",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-11-02 11:05:37"
     },
     {
         "ltId": "836",
@@ -1242,10 +1131,7 @@
         "description": "lifetech menu model",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-10-29 22:41:04",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-10-29 22:41:04"
     },
     {
         "ltId": "837",
@@ -1266,10 +1152,7 @@
         "description": "Lifetech Menu Controller",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-10-29 22:40:18",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-10-29 22:40:18"
     },
     {
         "ltId": "838",
@@ -1290,10 +1173,7 @@
         "description": "Lifetech Menu Services",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-10-29 22:40:33",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-10-29 22:40:33"
     },
     {
         "ltId": "839",
@@ -1314,10 +1194,7 @@
         "description": "Page Model",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-10-29 22:52:57",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-10-29 22:52:57"
     },
     {
         "ltId": "840",
@@ -1338,9 +1215,6 @@
         "description": "Lifetech page Controller",
         "themeResourceType": null,
         "additionalPath": null,
-        "updatedAt": "2026-10-29 22:53:11",
-        "c81e728d9d4c2f": 0,
-        "accbc87e4b5ce2": 0,
-        "ri3wqzb4sc1v": 0
+        "updatedAt": "2026-10-29 22:53:11"
     }
 ]

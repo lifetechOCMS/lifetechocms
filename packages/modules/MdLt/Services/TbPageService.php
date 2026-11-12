@@ -477,18 +477,18 @@ class TbPageService
         }
         
         public function togglePublished($packageName= null, $isPublished){
+            
             $publish = false;
             $this->pageModel->updatedBy = LtSession::get('ltUid');
-                $this->pageModel->isPublished = $isPublished;
+            $this->pageModel->isPublished = $isPublished;
             if($packageName !== null){
                 $this->pageModel->update('packageName', '=', $packageName);
                 $publish =true;
             }else{
                 $modelRequest = $this->pageModel->processRequest(); 
-                $ltId = $modelRequest->ltId;
-                return $ltId;
+                $ltId = $this->request->ltId;
                 $this->pageModel->update('ltId', '=', $ltId); 
-                $publish =true;
+                $publish = true;
             }
             if($publish){
                 return $this->pageModel->responseJson(); 
