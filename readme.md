@@ -14,6 +14,7 @@
 > **LifeTechOCMS [Frameless]: A Framework Without Boundaries.** A modern, open-source PHP framework and content management system for building secure, scalable, and modular web applications. With built-in RBAC, dynamic content management, and multi-site connectivity, LifeTechOCMS empowers developers to build and manage applications with greater flexibility and and efficiency.
 
 Here's an overview: Key Features:
+
 **Model-View-Controller (MVC) Architecture:**<br>
  &ensp; Promotes a clear separation of concerns for efficient development.
   
@@ -67,30 +68,38 @@ Run the following command in your terminal:
 
 composer create-project lifetechocms/lifetechocms my-project
 
-### From portal
+### From Portal
 
-https://www.lifetech.host/hubs/download?release=software
+[Click to Download LifeTechOCMS from the Official Portal](https://www.lifetech.host/hubs/download?release=software)
 
 ### Other Download Options
-For additional download methods and setup requirements
-https://github.com/lifetechOCMS/docs/blob/master/get-started/downloading-and-running-lifetech-ocms.md
+
+Explore additional download methods, installation options, and setup requirements for LifeTechOCMS.
+
+[Click to View Other LifeTechOCMS Download Options](https://github.com/lifetechOCMS/docs/blob/master/get-started/downloading-and-running-lifetech-ocms.md)
 
 ## Installation Process
-The installation wizard of Non-Docker and Docker can be found at  https://github.com/lifetechOCMS/docs/blob/master/get-started/installation-process.md
 
+Follow the official LifeTechOCMS installation guide for step-by-step instructions on setting up the framework in both Docker and non-Docker environments.
 
-## First Run, Administratior Access
-can be found here
-https://github.com/lifetechOCMS/docs/blob/master/get-started/first-run-administration-and-next-steps.md
+[Click to Access the LifeTechOCMS Installation Guide](https://github.com/lifetechOCMS/docs/blob/master/get-started/installation-process.md)
+
+## First Run and Administrator Access
+
+Follow the official LifeTechOCMS guide to complete the initial setup, access the administrator dashboard, and explore the next steps after installation.
+
+[Click to Access the LifeTechOCMS First Run and Administrator Guide](https://github.com/lifetechOCMS/docs/blob/master/get-started/first-run-administration-and-next-steps.md)
 
 ## Framework Documentation
 Access the official LifeTechOCMS documentation for installation, configuration, development, and framework features.
 
 ### GitHub Documentation
-[![GitHub Docs](https://img.shields.io/badge/GitHub-Documentation-blue?logo=github)](https://github.com/lifetechOCMS/docs)
+
+[Click to Access LifeTechOCMS GitHub Documentation](https://github.com/lifetechOCMS/docs)
 
 ### Documentation Portal
-[![Documentation](https://img.shields.io/badge/Documentation-LifeTechOCMS-blue)](https://www.lifetech.host/hubs/docs)
+
+[Click to Access LifeTechOCMS Official Documentation Portal](https://www.lifetech.host/hubs/docs)
 
 ## Security Vulnerabilities
 
