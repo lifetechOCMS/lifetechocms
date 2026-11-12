@@ -44,6 +44,7 @@ body:
         - "adedayoAdetunji/MdBlog"
         - "adedayoAdetunji/mdLtLogin"
         - "adedayoAdetunji/ThemeBrainDump"
+        - "ajayi-abolore/MdUserLogin"
         - "ajayi-abolore/pgsql_lifetechocms"
         - "ajayi-abolore/PlgMyFontAwesome"
         - "ajayi-abolore/PlgMyQuill"
